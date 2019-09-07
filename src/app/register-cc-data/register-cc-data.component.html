@@ -1,0 +1,69 @@
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header">Credit Card Data</h4>
+        <div class="card-body">
+            <form [formGroup]="SignUpForm">
+                <div class="form-group">
+                    <label for="email">Credit Card</label>
+                    <input type="text" formControlName="cc" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">compañia is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Credit Card Holder Name</label>
+                    <input type="text" formControlName="card_holder_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">compañia is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Credit Card Expired</label>
+                    <input type="text" formControlName="cc_expired_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">email is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Street 1</label>
+                    <input type="text" formControlName="ba_street" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">email is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Street 2</label>
+                    <input type="text" formControlName="ba_street2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">email is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">City</label>
+                    <input type="text" formControlName="ba_city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">email is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">State</label>
+                    <input type="text" formControlName="ba_state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">email is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Zip Code</label>
+                    <input type="text" formControlName="ba_zip_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">email is required</div>
+                    </div>
+                </div>
+                <button type="button" (click)="next()" class="btn btn-primary">
+                    Next
+                </button>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </form>
+        </div>
+    </div>
+  </div>

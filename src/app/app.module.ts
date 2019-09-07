@@ -11,8 +11,12 @@ import { appRoutingModule } from './app.routing';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
-import { LoginComponent } from './login';
-
+import { LoginComponent } from './login';;
+import { RegisterGeneralDataComponent } from './register-general-data/register-general-data.component';
+import { RegisterPlanDataComponent } from './register-plan-data/register-plan-data.component'
+;
+import { RegisterCcDataComponent } from './register-cc-data/register-cc-data.component';
+import { ActivateCompanyComponent } from './activate-company/activate-company.component'
 @NgModule({
     imports: [
         BrowserModule,
@@ -23,8 +27,12 @@ import { LoginComponent } from './login';
     declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent
-    ],
+        LoginComponent,
+        RegisterGeneralDataComponent
+,
+        RegisterPlanDataComponent ,
+        RegisterCcDataComponent ,
+        ActivateCompanyComponent  ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
