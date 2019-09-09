@@ -13,6 +13,12 @@ import { appRoutingModule } from './app.routing';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';;
+import { StoreListComponent } from './storecrud/store-list/store-list.component'
+;
+import { CreateStoreComponent } from './storecrud/create-store/create-store.component'
+;
+import { EditStoreComponent } from './storecrud/edit-store/edit-store.component'
+import { LoginComponent } from './login';;
 import { RegisterGeneralDataComponent } from './register-general-data/register-general-data.component'
 ;
 import { RegisterPlanDataComponent } from './register-plan-data/register-plan-data.component'
@@ -33,6 +39,11 @@ import { ActivateCompanyComponent } from './activate-company/activate-company.co
         AppComponent,
         HomeComponent,
         LoginComponent
+,
+        StoreListComponent
+,
+        CreateStoreComponent ,
+        EditStoreComponent   ],
 ,
         RegisterGeneralDataComponent
 ,

@@ -21,10 +21,12 @@ export class AuthenticationService {
     }
 
     login(email: string, password: string) {
+        // return this.http.get<any>(`${environment.apiUrl}/store/all`);
         /*console.log(`${environment.apiUrl}/users/authenticate`);*/
         return this.http.post<any>(`${environment.apiUrl}/auth/login`, { email, password })
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user));
+                console.log(localStorage.getItem('currentUser'));
                 this.currentUserSubject.next(user);
                 return user;
             }));

@@ -1,0 +1,54 @@
+<div class="col-md-6 offset-md-3 mt-5">
+  <!--<div class="alert alert-info">
+      email: test<br />
+      Password: test
+  </div>-->
+  <div class="card m-4">
+    <h4 class="card-header">Create Store</h4>
+    <div class="card-body">
+      <form [formGroup]="storeform" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="store_name">Name</label>
+          <!--store_name, contact_email, contact_phone, zip_code, address-->
+          <input type="text" formControlName="store_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.store_name.errors }" />
+          <div *ngIf="submitted && f.store_name.errors" class="invalid-feedback">
+            <div *ngIf="f.store_name.errors.required">Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contact_email">Contact Email</label>
+          <input type="text" formControlName="contact_email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contact_email.errors}" />
+          <div *ngIf="submitted && f.contact_email.errors" class="invalid-feedback">
+            <div *ngIf="f.contact_email.errors.required">Contact Email should be a valid email</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contact_phone">Contact Phone</label>
+          <input type="text" formControlName="contact_phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
+          <div *ngIf="submitted && f.contact_phone.errors" class="invalid-feedback">
+            <div *ngIf="f.contact_phone.errors.required">Contact Phone is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="zip_code">ZipCode</label>
+          <input type="text" formControlName="zip_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" />
+          <div *ngIf="submitted && f.zip_code.errors" class="invalid-feedback">
+            <div *ngIf="f.zip_code.errors.required">ZipCode is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+          <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required">Address is required</div>
+          </div>
+        </div>
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Create
+        </button>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+      </form>
+    </div>
+  </div>
+</div>
