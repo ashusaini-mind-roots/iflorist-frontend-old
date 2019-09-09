@@ -11,13 +11,11 @@ export class CompanyService {
     constructor(private http: HttpClient) { }
 
     create(data:any):Observable<any>{
-        return this.http.post<any>(`${environment.apiUrl}/company/create`,data)
-        /*.pipe(
-            retry(1),
-            catchError(err => {
-                console.log(err)
-            })
-        )*/
+        return this.http.post<any>(`${environment.apiUrl}/company/create`,data);
+    }
+
+    existUser(data:any):Observable<any>{
+        return this.http.post<any>(`${environment.apiUrl}/auth/exis_user`,data);
     }
 
     

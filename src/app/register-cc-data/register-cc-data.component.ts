@@ -38,7 +38,7 @@ export class RegisterCcDataComponent implements OnInit {
       ba_street2 : ['', Validators.required],
       ba_city : ['', Validators.required],
       ba_state : ['', Validators.required],
-      ba_zip_code : ['', [Validators.required,,Validators.maxLength(5)]],
+      ba_zip_code : ['', [Validators.required,Validators.maxLength(5),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       card_holder_name : ['', Validators.required],
     });
 
@@ -87,10 +87,10 @@ export class RegisterCcDataComponent implements OnInit {
     .subscribe((data: any) =>{
       console.log(data.plans);
       this.router.navigate(['activate-company'])
-  },
-  error => {
-    console.log(error)
-})
+    },
+    error => {
+      console.log(error)
+    });
   }
 
 }

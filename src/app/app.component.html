@@ -2,12 +2,13 @@
 <nav class="navbar flex-column navbar-dark bg-dark" *ngIf="currentUser">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/">Home</a>
+        <a class="nav-item nav-link" routerLink="/stores">Stores</a>
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
         <!--<a class="nav-item nav-link" (click)="cancelCompany()">Cancel Company</a>-->
     </div>
 </nav>
 
-<div class="nav-side-menu">
+<!--<div class="nav-side-menu">
     <div class="brand">Press Curing Control</div>
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
@@ -66,7 +67,7 @@
 
         </ul>
     </div>
-</div>
+</div>-->
 
 <!-- main app container -->
 <div class="container">

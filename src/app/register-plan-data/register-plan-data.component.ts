@@ -19,6 +19,7 @@ export class RegisterPlanDataComponent implements OnInit {
   plans:any;
   loaded:boolean = true;
   error: boolean;
+  plan_cost:string = '';
 
   constructor(private activateRoute: ActivatedRoute, private planService:PlanService, private router: Router) { }
 
@@ -42,7 +43,13 @@ export class RegisterPlanDataComponent implements OnInit {
   }
 
   next(){
-    if(this.id_plans.length==0)
+
+    if(this.plan_cost!='')
+    {
+       this.id_plans.push(this.plan_cost);
+    }
+
+    if(this.id_plans.length==0 || this.plan_cost=='')
     {
         this.error = true;
         console.log(this.id_plans.length);
@@ -50,6 +57,12 @@ export class RegisterPlanDataComponent implements OnInit {
     }
 
     this.router.navigate(['register-cc-data', { name: this.name, password: this.password, email: this.email, id_plans: this.id_plans }  ])
+  }
+
+  changePlansCost(id:string)
+  {
+      console.log(id);
+      this.plan_cost = id;
   }
 
   changePlans(id:string, isChecked: boolean)
@@ -64,7 +77,7 @@ export class RegisterPlanDataComponent implements OnInit {
         this.id_plans.splice(index,1);
       }
     }
-      
+
     console.log(this.id_plans);
   }
 
