@@ -11,13 +11,12 @@
     <router-outlet></router-outlet>
 </div>-->
 
-<div class="d-flex" id="wrapper" *ngIf="currentUser">
+<div class="d-flex" id="wrapper" [ngClass]="{ 'toggled': toggled }" *ngIf="currentUser">
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">Cost Off Good </div>
       <div class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action bg-light" routerLink="/">Home</a>
         <a class="list-group-item list-group-item-action bg-light" routerLink="/stores">Stores</a>
         <a class="list-group-item list-group-item-action bg-light"  routerLink="#" (click)="logout()">Logout</a>
         <!--<a class="nav-item nav-link" (click)="cancelCompany()">Cancel Company</a>-->
@@ -29,7 +28,7 @@
     <div id="page-content-wrapper">
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+        <button class="btn btn-primary" (click)="toggleMenu()" id="menu-toggle">Toggle Menu</button>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
