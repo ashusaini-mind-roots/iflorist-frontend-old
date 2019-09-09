@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log("init")
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],
             password: ['', Validators.required]
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
 
         // stop here if form is invalid
         if (this.loginForm.invalid) {
+            this.loading = false;
             return;
         }
 

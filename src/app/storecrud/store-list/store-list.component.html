@@ -1,0 +1,38 @@
+<div class="panel panel-primary">
+  <!--<div class="panel-heading">-->
+    <!--<h2>Store List</h2>-->
+  <!--</div>-->
+  <div class="panel-body">
+    <div class="card m-4">
+      <h5 class="card-header">Store list</h5>
+      <ul class="nav nav-pills ml-auto p-2">
+        <li class="nav-item">
+          <a class="nav-link active" href="/storecreate" data-toggle="tab" >Add Store</a>
+        </li>
+      </ul>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Contact phone</th>
+          <th>Email</th>
+          <th>ZipCode</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let store of stores">
+          <td>{{store.store_name}}</td>
+          <td>{{store.contact_phone}}</td>
+          <td>{{store.contact_email}}</td>
+          <td>{{store.zip_code}}</td>
+          <td>{{store.address}}</td>
+          <td>
+            <button [routerLink]="['/storeedit', store.id]" class="btn btn-success">Edit</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
