@@ -5,9 +5,13 @@ potential customers with this Bootstrap example. It's built with default
 Bootstrap components and utilities with little customization.</p>
 </div>
 
+<div [hidden]="!error" class="alert alert-danger pricing-header px-3 py-3 pt-md-1 pb-md-1 mx-auto text-center">
+    Select plans !
+</div>
+
 <div class="container">
   <div class="row">
-    <div [hidden]="loaded" class="card-deck mb-3 text-center">
+    <div class="card-deck mb-3 text-center">
       <div *ngFor = "let plan of plans" class="card mb-4 box-shadow">
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">{{plan.plan.name}}</h4>
@@ -23,7 +27,7 @@ Bootstrap components and utilities with little customization.</p>
       </div>
     </div>
   </div>
-  <div [hidden]="loaded" class="text-center">
+  <div [hidden]="loaded" class="">
       <button type="button" (click)="next()" class="btn btn-primary">
         Next
       </button>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,8 +10,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterGeneralDataComponent implements OnInit {
 
   SignUpForm: FormGroup;
+  returnUrl: string;
+  submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute,) { }
 
   get formField() { return this.SignUpForm.controls; }
 
@@ -21,9 +23,21 @@ export class RegisterGeneralDataComponent implements OnInit {
       password: ['', Validators.required],
       name: ['', Validators.required]
     });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  get f() { return this.SignUpForm.controls; }
+
+
   next(){
+
+    this.submitted = true;
+
+    if (this.SignUpForm.invalid) {
+      return;
+    }
+
     this.router.navigate(['register-plan-data', { name: this.formField.name.value, password: this.formField.password.value, email: this.formField.email.value }  ])
   }
 

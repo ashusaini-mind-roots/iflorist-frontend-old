@@ -18,6 +18,7 @@ export class RegisterPlanDataComponent implements OnInit {
   private id_plans: Array<string> = [];
   plans:any;
   loaded:boolean = true;
+  error: boolean;
 
   constructor(private activateRoute: ActivatedRoute, private planService:PlanService, private router: Router) { }
 
@@ -41,6 +42,13 @@ export class RegisterPlanDataComponent implements OnInit {
   }
 
   next(){
+    if(this.id_plans.length==0)
+    {
+        this.error = true;
+        console.log(this.id_plans.length);
+        return;
+    }
+
     this.router.navigate(['register-cc-data', { name: this.name, password: this.password, email: this.email, id_plans: this.id_plans }  ])
   }
 
