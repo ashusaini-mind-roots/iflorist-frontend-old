@@ -25,13 +25,12 @@ export class AuthenticationService {
         /*console.log(`${environment.apiUrl}/users/authenticate`);*/
         return this.http.post<any>(`${environment.apiUrl}/auth/login`, { email, password })
             .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                //console.log(user);
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 console.log(localStorage.getItem('currentUser'));
                 this.currentUserSubject.next(user);
                 return user;
             }));
+            /*return this.http.get<any>('http://localhost:8000/api/store/all');*/
     }
 
     logout() {
