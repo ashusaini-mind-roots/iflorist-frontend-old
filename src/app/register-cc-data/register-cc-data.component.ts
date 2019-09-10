@@ -25,6 +25,10 @@ export class RegisterCcDataComponent implements OnInit {
   cc_expired_date: NgbDateStruct;
   cc_expired_date_error : boolean = false;
   loading : boolean = false;
+  error_bool:boolean = false;
+  error_form:boolean = false;
+  error_msg:string;
+
   
   constructor(private calendar: NgbCalendar,private formBuilder: FormBuilder, private companyService:CompanyService,private route: ActivatedRoute, private router: Router) { }
 
@@ -65,33 +69,59 @@ export class RegisterCcDataComponent implements OnInit {
       return;
     }
 
-    //console.log(`${this.cc_expired_date.year}-${this.cc_expired_date.month}-${this.cc_expired_date.day}`);
-    //return;
-
-    console.log(this.formField.card_holder_name);
-      this.data = {
-       'name':this.name,
-       'email':this.email, 
-       'password':this.password,
-       'cc': this.formField.cc.value,
-       'cc_expired_date': `${this.cc_expired_date.year}-${this.cc_expired_date.month}-${this.cc_expired_date.day}`,
-       'ba_street': this.formField.ba_street.value,
-       'ba_street2': this.formField.ba_street2.value,
-       'ba_city': this.formField.ba_city.value,
-       'ba_state': this.formField.ba_state.value,
-       'ba_zip_code': this.formField.ba_zip_code.value,
-       'card_holder_name': this.formField.card_holder_name.value,
-       'plans':this.id_plans.split(',')
+    this.data = {
+      'card_number':this.formField.card_number.value,
+      'cc':this.formField.cc.value,
+      'card_holder_name':this.formField.card_holder_name.value,
+      'ba_zip_code':this.formField.ba_zip_code.value,
     };
-    this.loading = true;
-    return this.companyService.create(this.data)
+    
+    this.companyService.validateCard(this.data)
     .subscribe((data: any) =>{
-      console.log(data.plans);
-      this.router.navigate(['activate-company'])
+      console.log(data);
+      if(data.error=='1')
+      {
+        this.error_bool = true
+        this.loading = false;
+        this.error_msg = data.msg;
+      }
+      else
+      {
+        this.data = {
+          'name':this.name,
+          'email':this.email, 
+          'password':this.password,
+          'cc': this.formField.cc.value,
+          'card_number':this.formField.card_number.value,
+          'cc_expired_date': `${this.cc_expired_date.year}-${this.cc_expired_date.month}-${this.cc_expired_date.day}`,
+          'ba_street': this.formField.ba_street.value,
+          'ba_street2': this.formField.ba_street2.value,
+          'ba_city': this.formField.ba_city.value,
+          'ba_state': this.formField.ba_state.value,
+          'ba_zip_code': this.formField.ba_zip_code.value,
+          'card_holder_name': this.formField.card_holder_name.value,
+          'plans':this.id_plans.split(',')
+        };
+        this.loading = true;
+        this.companyService.create(this.data)
+        .subscribe((data: any) =>{
+          //console.log(data.plans);
+          this.router.navigate(['activate-company'])
+        },
+        error => {
+          console.log(error)
+        });  
+      }
     },
     error => {
-      console.log(error)
+        console.log(error);
+        this.loading = false;
+        this.error_bool = true
+        this.error_msg = error;
     });
+    console.log(this.error_bool);
+    //return;
+    //console.log(`${this.cc_expired_date.year}-${this.cc_expired_date.month}-${this.cc_expired_date.day}`);
   }
 
 }

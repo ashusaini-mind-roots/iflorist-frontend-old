@@ -18,5 +18,9 @@ export class CompanyService {
         return this.http.post<any>(`${environment.apiUrl}/auth/exis_user`,data);
     }
 
+    validateCard(data:any):Observable<any>{
+        return this.http.post<any>(`${environment.apiUrl}/company/valid_card`,data);
+    }
+
     
 }
