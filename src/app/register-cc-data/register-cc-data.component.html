@@ -48,7 +48,18 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="cc">Credit Card</label>
+                        <label for="email">Card Number</label>
+                        <input type="text" formControlName="card_number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.card_number.errors }" />
+                        <div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">
+                            <div *ngIf="f.card_number.errors.required">Card Number is required</div>
+                            <div *ngIf="f.card_number.errors.maxlength">Card Number max length is 16</div>
+                            <div *ngIf="f.card_number.errors.pattern">Card Number only number</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="cc">Security Code(CC)</label>
                         <input type="text" formControlName="cc" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cc.errors }" />
                         <div *ngIf="submitted && f.cc.errors" class="invalid-feedback">
                             <div *ngIf="f.cc.errors.required">Credit Card is required</div>

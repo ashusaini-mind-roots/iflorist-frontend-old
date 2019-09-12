@@ -43,10 +43,11 @@ export class RegisterGeneralDataComponent implements OnInit {
     this.submitted = true;
 
     if (this.SignUpForm.invalid) {
+      this.loading = false;
       return;
     }
 
-    this.loading = true;
+    //this.loading = true;
 
     this.data = {
       'email':this.formField.email.value,
@@ -59,7 +60,7 @@ export class RegisterGeneralDataComponent implements OnInit {
       {
         this.error_bool = true
         this.loading = false;
-        this.error_msg = 'The Company already exist !';
+        this.error_msg = 'The Company already exist, change your email!';
       }
       else{
         this.router.navigate(['register-plan-data', { name: this.formField.name.value, password: this.formField.password.value, email: this.formField.email.value }  ]);

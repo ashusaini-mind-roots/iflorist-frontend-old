@@ -4,7 +4,7 @@
       <div class="card-body">
           <form [formGroup]="SignUpForm">
               <div class="form-group">
-                  <label for="name">Company</label>
+                  <label for="name">Company name</label>
                   <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
                   <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                       <div *ngIf="f.name.errors.required">Company is required</div>

@@ -16,10 +16,10 @@ export class StoreService {
 
   getStoreList(): Observable<any> {
     // console.log(`${environment.apiUrl}/store/all`);
-     return this.http.get(`${environment.apiUrl}/store/all`)
-         .pipe(
-             retry(1),
-         );
+     return this.http.get(`${environment.apiUrl}/store/all`);
+         // .pipe(
+         //     retry(1),
+         // );
   }
 
     createStore(store_name,contact_email,contact_phone,zip_code,address) {
