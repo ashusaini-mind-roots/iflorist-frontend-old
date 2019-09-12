@@ -4,7 +4,9 @@
 
 2 - npm install on iflower project
 
-3 - php artisan migrate on laravel project
+3 - git pull on laravel project
+
+3.1 - php artisan migrate on laravel project
 
 4 - Run seeders on laravel project:
 
