@@ -4,51 +4,17 @@
         <div class="card-body">
             <form [formGroup]="SignUpForm">
                 <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="email">Street 1</label>
-                        <input type="text" formControlName="ba_street" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_street.errors }" />
-                        <div *ngIf="submitted && f.ba_street.errors" class="invalid-feedback">
-                            <div *ngIf="f.ba_street.errors.required">Street 1 is required</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="email">Street 2</label>
-                        <input type="text" formControlName="ba_street2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_street2.errors }" />
-                        <div *ngIf="submitted && f.ba_street2.errors" class="invalid-feedback">
-                            <div *ngIf="f.ba_street2.errors.required">Street 2 is required</div>
+                    <div class="col-sm-12">
+                        <label for="card_holder_name">Credit Card Holder Name</label>
+                        <input type="text" formControlName="card_holder_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.card_holder_name.errors }" />
+                        <div *ngIf="submitted && f.card_holder_name.errors" class="invalid-feedback">
+                            <div *ngIf="f.card_holder_name.errors.required">Credit Card Holder Name is required</div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="email">City</label>
-                        <input type="text" formControlName="ba_city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_city.errors }" />
-                        <div *ngIf="submitted && f.ba_city.errors" class="invalid-feedback">
-                            <div *ngIf="f.ba_city.errors.required">City is required</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="email">State</label>
-                        <input type="text" formControlName="ba_state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_state.errors }" />
-                        <div *ngIf="submitted && f.ba_state.errors" class="invalid-feedback">
-                            <div *ngIf="f.ba_state.errors.required">State is required</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="email">Zip Code</label>
-                        <input type="text" formControlName="ba_zip_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_zip_code.errors }" />
-                        <div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">
-                            <div *ngIf="f.ba_zip_code.errors.required">Zip Code is required</div>
-                            <div *ngIf="f.ba_zip_code.errors.maxlength">Zip Code  max length is 5</div>
-                            <div *ngIf="f.ba_zip_code.errors.pattern">Zip Code only number</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="email">Card Number</label>
+                        <label for="card_number">Card Number</label>
                         <input type="text" formControlName="card_number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.card_number.errors }" />
                         <div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">
                             <div *ngIf="f.card_number.errors.required">Card Number is required</div>
@@ -56,8 +22,6 @@
                             <div *ngIf="f.card_number.errors.pattern">Card Number only number</div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="cc">Security Code(CC)</label>
                         <input type="text" formControlName="cc" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cc.errors }" />
@@ -66,18 +30,57 @@
                             <div *ngIf="f.cc.errors.maxlength">Credit Card  max length is 4</div>
                         </div>
                     </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-7">
+                        <label>Credit Card Expired</label>
+                        <ngb-datepicker [ngModelOptions]="{standalone: true}" [(ngModel)]="cc_expired_date" #dp (navigate)="date = $event.next"></ngb-datepicker>
+                    </div>
+                </div>
+                <div class="row">
+                    <h5 class="m-3">Billing Address</h5>
+                </div>
+                <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="email">Credit Card Holder Name</label>
-                        <input type="text" formControlName="card_holder_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.card_holder_name.errors }" />
-                        <div *ngIf="submitted && f.card_holder_name.errors" class="invalid-feedback">
-                            <div *ngIf="f.card_holder_name.errors.required">Credit Card Holder Name is required</div>
+                        <label for="ba_street">Street 1</label>
+                        <input type="text" formControlName="ba_street" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_street.errors }" />
+                        <div *ngIf="submitted && f.ba_street.errors" class="invalid-feedback">
+                            <div *ngIf="f.ba_street.errors.required">Street 1 is required</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="ba_street2">Street 2</label>
+                        <input type="text" formControlName="ba_street2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_street2.errors }" />
+                        <div *ngIf="submitted && f.ba_street2.errors" class="invalid-feedback">
+                            <div *ngIf="f.ba_street2.errors.required">Street 2 is required</div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-7">
-                        <label for="email">Credit Card Expired</label>
-                        <ngb-datepicker [ngModelOptions]="{standalone: true}" [(ngModel)]="cc_expired_date" #dp (navigate)="date = $event.next"></ngb-datepicker>
+                    <div class="col-sm-6">
+                        <label for="ba_city">City</label>
+                        <input type="text" formControlName="ba_city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_city.errors }" />
+                        <div *ngIf="submitted && f.ba_city.errors" class="invalid-feedback">
+                            <div *ngIf="f.ba_city.errors.required">City is required</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="ba_state">State</label>
+                        <input type="text" formControlName="ba_state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_state.errors }" />
+                        <div *ngIf="submitted && f.ba_state.errors" class="invalid-feedback">
+                            <div *ngIf="f.ba_state.errors.required">State is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="ba_zip_code">Zip Code</label>
+                        <input type="text" formControlName="ba_zip_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_zip_code.errors }" />
+                        <div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">
+                            <div *ngIf="f.ba_zip_code.errors.required">Zip Code is required</div>
+                            <div *ngIf="f.ba_zip_code.errors.maxlength">Zip Code  max length is 5</div>
+                            <div *ngIf="f.ba_zip_code.errors.pattern">Zip Code only number</div>
+                        </div>
                     </div>
                 </div>
                 <button [disabled]="loading" type="button" (click)="next()" class="btn btn-primary">
