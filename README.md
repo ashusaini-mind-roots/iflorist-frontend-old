@@ -10,7 +10,7 @@
 
 4 - Run seeders on laravel project:
 
-    php artisan db:seed --class=ModulesTableSeeder
+    php artisan db:seed --class=PlansModulesTableSeeder
     php artisan db:seed --class=PlansTableSeeder
     php artisan db:seed --class=PlanModuleTableSeeder
     
