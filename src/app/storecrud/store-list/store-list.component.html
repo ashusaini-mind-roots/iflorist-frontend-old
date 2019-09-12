@@ -23,13 +23,13 @@
         </thead>
         <tbody>
         <tr *ngFor="let store of stores">
-          <td>{{store.store_name}}</td>
-          <td>{{store.contact_phone}}</td>
-          <td>{{store.contact_email}}</td>
-          <td>{{store.zip_code}}</td>
-          <td>{{store.address}}</td>
+          <td>{{store.store.store_name}}</td>
+          <td>{{store.store.contact_phone}}</td>
+          <td>{{store.store.contact_email}}</td>
+          <td>{{store.store.zip_code}}</td>
+          <td>{{store.store.address}}</td>
           <td>
-            <button [routerLink]="['/storeedit', store.id]" class="btn btn-success">Edit</button>
+            <button [routerLink]="['/storeedit', store.store.id]" class="btn btn-success">Edit</button>
           </td>
         </tr>
         </tbody>
