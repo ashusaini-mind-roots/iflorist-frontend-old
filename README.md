@@ -18,4 +18,8 @@
 
 6 - php artisan serve on laravel project
 
+Note: Remember, sometimes you need to run composer dump-autoload on laravel project.
+
+
+
     
