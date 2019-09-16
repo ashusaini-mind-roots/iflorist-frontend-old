@@ -38,6 +38,8 @@ export class RegisterCcDataComponent implements OnInit {
 
     this.SignUpForm = this.formBuilder.group({
       cc: ['', [Validators.required,Validators.maxLength(4)]],
+      cc_year: ['2019', [Validators.required]],
+      cc_moth: ['', [Validators.required]],
       ba_street : ['', Validators.required],
       ba_street2 : ['', Validators.required],
       ba_city : ['', Validators.required],
@@ -93,7 +95,7 @@ export class RegisterCcDataComponent implements OnInit {
           'password':this.password,
           'cc': this.formField.cc.value,
           'card_number':this.formField.card_number.value,
-          'cc_expired_date': `${this.cc_expired_date.year}-${this.cc_expired_date.month}-${this.cc_expired_date.day}`,
+          'cc_expired_date': `${this.formField.cc_year.value}-${this.formField.cc_moth.value}-01}`,
           'ba_street': this.formField.ba_street.value,
           'ba_street2': this.formField.ba_street2.value,
           'ba_city': this.formField.ba_city.value,
