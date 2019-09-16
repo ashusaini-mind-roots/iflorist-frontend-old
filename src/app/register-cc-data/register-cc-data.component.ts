@@ -44,7 +44,7 @@ export class RegisterCcDataComponent implements OnInit {
       ba_state : ['', Validators.required],
       ba_zip_code : ['', [Validators.required,Validators.maxLength(5),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       card_holder_name : ['', Validators.required],
-      card_number : ['', [Validators.required,Validators.maxLength(16),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      card_number : ['', [Validators.required,Validators.maxLength(16),Validators.minLength(16),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
     });
 
     this.sub = this.route.params.subscribe(params=>{
@@ -79,7 +79,7 @@ export class RegisterCcDataComponent implements OnInit {
     this.companyService.validateCard(this.data)
     .subscribe((data: any) =>{
       console.log(data);
-      if(data.error=='1')
+      if(data.error==false)
       {
         this.error_bool = true
         this.loading = false;
@@ -106,7 +106,7 @@ export class RegisterCcDataComponent implements OnInit {
         this.companyService.create(this.data)
         .subscribe((data: any) =>{
           //console.log(data.plans);
-          this.router.navigate(['activate-company'])
+          this.router.navigate(['home'])
         },
         error => {
           console.log(error)

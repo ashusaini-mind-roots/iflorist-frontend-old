@@ -21,16 +21,23 @@ export class AuthenticationService {
     }
 
     login(email: string, password: string) {
-        // return this.http.get<any>(`${environment.apiUrl}/store/all`);
-        /*console.log(`${environment.apiUrl}/users/authenticate`);*/
         return this.http.post<any>(`${environment.apiUrl}/auth/login`, { email, password })
-            .pipe(map(user => {
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                console.log(localStorage.getItem('currentUser'));
-                this.currentUserSubject.next(user);
-                return user;
+            .pipe(map(data => {
+                if(data.error)
+                {
+                    return data;
+                }
+                else
+                {
+                    //console.log(data.error);
+                    //if(isset)
+                    localStorage.setItem('currentUser', JSON.stringify(data));
+                    console.log(localStorage.getItem('currentUser'));
+                    this.currentUserSubject.next(data);
+                    return data;
+                }
+                
             }));
-            /*return this.http.get<any>('http://localhost:8000/api/store/all');*/
     }
 
     logout() {

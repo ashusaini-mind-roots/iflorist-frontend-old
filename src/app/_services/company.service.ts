@@ -22,5 +22,9 @@ export class CompanyService {
         return this.http.post<any>(`${environment.apiUrl}/company/valid_card`,data);
     }
 
+    validateCompany(data:any):Observable<any>{
+        return this.http.post<any>(`${environment.apiUrl}/company/activate_company`,data);
+    }
+
     
 }
