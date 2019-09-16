@@ -1,5 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
+import {PlanService} from '../_services'
 
 import { User } from '@app/_models';
 import { UserService, AuthenticationService } from '@app/_services';
@@ -8,8 +9,12 @@ import { UserService, AuthenticationService } from '@app/_services';
 export class HomeComponent {
     loading = false;
     users: User[];
+    plans:any;
+    loaded:boolean = true;
+    error: boolean;
+    plan_cost:string = '';
 
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private planService:PlanService, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
         /*this.loading = true;
@@ -17,5 +22,16 @@ export class HomeComponent {
             this.loading = false;
             this.users = users;
         });*/
+        this.loadPlans();
     }
+
+    loadPlans(){
+        const currentUser = this.authenticationService.currentUserValue;
+        console.log(currentUser.user.id);
+        return this.planService.getByUser(currentUser.user.id).subscribe((data: any) =>{
+            this.plans = data.plans;
+            console.log(data.plans);
+            this.loaded = false;
+        })
+      }
 }

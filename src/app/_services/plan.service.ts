@@ -18,5 +18,13 @@ export class PlanService {
         )
     }
 
+    getByUser(userId: string):Observable<any>{
+        return this.http.get<any>(`${environment.apiUrl}/plan/plansbyuser/${userId}`)
+        .pipe(
+            retry(1),
+            /*catchError(this.handleError)*/
+        )
+    }
+
     
 }
