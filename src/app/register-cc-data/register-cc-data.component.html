@@ -16,9 +16,10 @@
                     <div class="col-sm-6">
                         <label for="card_number">Card Number</label>
                         <input type="text" formControlName="card_number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.card_number.errors }" />
-                        <div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">
+                        <div *ngIf="submitted && f.card_number.errors" class="invalid-feedback">
                             <div *ngIf="f.card_number.errors.required">Card Number is required</div>
                             <div *ngIf="f.card_number.errors.maxlength">Card Number max length is 16</div>
+                            <div *ngIf="f.card_number.errors.minlength">Card Number min length is 16</div>
                             <div *ngIf="f.card_number.errors.pattern">Card Number only number</div>
                         </div>
                     </div>

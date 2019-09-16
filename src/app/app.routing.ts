@@ -12,18 +12,18 @@ import {RegisterPlanDataComponent} from './register-plan-data/register-plan-data
 import {RegisterCcDataComponent} from './register-cc-data/register-cc-data.component';
 import {ActivateCompanyComponent} from './activate-company/activate-company.component';
 const routes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
-    { path: 'stores', component: StoreListComponent, canActivate: [AuthGuard] },
-    { path: 'storecreate', component: CreateStoreComponent, canActivate: [AuthGuard] },
+    { path: 'stores', component: StoreListComponent, canActivate: [AuthGuard]},
+    { path: 'storecreate', component: CreateStoreComponent, canActivate: [AuthGuard]},
     { path: 'storeedit/:id', component: EditStoreComponent, canActivate: [AuthGuard] },
     { path: 'register-general-data', component: RegisterGeneralDataComponent },
     { path: 'register-plan-data', component: RegisterPlanDataComponent },
     { path: 'register-cc-data', component: RegisterCcDataComponent },
-    { path: 'activate-company', component: ActivateCompanyComponent },
+    { path: 'activate-company/:id', component: ActivateCompanyComponent },
 
     // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: 'home' }
 ];
 
 export const appRoutingModule = RouterModule.forRoot(routes);

@@ -27,10 +27,20 @@ export class RegisterGeneralDataComponent implements OnInit {
     this.SignUpForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
-      name: ['', Validators.required]
-    });
+      name: ['', Validators.required],
+      confirm_password:['']
+    },
+    {validator: this.checkPassword});
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  checkPassword(group: FormGroup)
+  {
+    let password = group.get('password').value;
+    let confirm_password = group.get('confirm_password').value;
+
+    return password === confirm_password ? null : {notSame: true}
   }
 
   get f() { return this.SignUpForm.controls; }
