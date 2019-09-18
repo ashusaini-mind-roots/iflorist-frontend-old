@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from './_services';
+import { UserService, AuthenticationService, PlanService } from './_services';
+/*import {PlanService} from '../_services'*/
 import { User } from './_models';
 
 declare var $: any;
@@ -11,6 +12,8 @@ declare var $: any;
 export class AppComponent implements OnInit{
     currentUser: User;
     toggled: boolean = false;
+
+    modules: any;
 
     ngOnInit() {
         /*$(document).ready(() => {
@@ -28,8 +31,18 @@ export class AppComponent implements OnInit{
                 $("#wrapper").toggleClass("toggled");
             });
         })(jquery);*/
+        this.loadModules();
         
     }
+
+    loadModules(){
+        const currentUser = this.authenticationService.currentUserValue;
+        console.log(currentUser.user.id);
+        return this.planService.getByUser(currentUser.user.id).subscribe((data: any) =>{
+            this.modules = data.modules;
+            console.log(data.modules);
+        })
+      }
 
     loadComponents(component_id: string)
     {
@@ -47,6 +60,8 @@ export class AppComponent implements OnInit{
 
     constructor(
         private router: Router,
+        private userService: UserService, 
+        private planService:PlanService, 
         private authenticationService: AuthenticationService
     ) {
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
