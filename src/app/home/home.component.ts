@@ -14,6 +14,8 @@ export class HomeComponent {
     error: boolean;
     plan_cost:string = '';
 
+    modules: any;
+
     constructor(private userService: UserService, private planService:PlanService, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
@@ -22,14 +24,14 @@ export class HomeComponent {
             this.loading = false;
             this.users = users;
         });*/
-        this.loadPlans();
+        //this.loadPlans();
     }
 
     loadPlans(){
         const currentUser = this.authenticationService.currentUserValue;
         console.log(currentUser.user.id);
         return this.planService.getByUser(currentUser.user.id).subscribe((data: any) =>{
-            this.plans = data.plans;
+            this.modules = data.plans;
             console.log(data.plans);
             this.loaded = false;
         })
