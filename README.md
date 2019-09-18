@@ -10,12 +10,16 @@
 
 4 - Run seeders on laravel project:
 
-    php artisan db:seed --class=PlansModulesTableSeeder
+    php artisan db:seed --class=ModulesTableSeeder
     php artisan db:seed --class=PlansTableSeeder
     php artisan db:seed --class=PlanModuleTableSeeder
     
 5 - ng serve on angular project
 
 6 - php artisan serve on laravel project
+
+Note: Remember, sometimes you need to run composer dump-autoload on laravel project.
+
+
 
     
