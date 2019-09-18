@@ -37,11 +37,16 @@ export class AppComponent implements OnInit{
 
     loadModules(){
         const currentUser = this.authenticationService.currentUserValue;
-        console.log(currentUser.user.id);
-        return this.planService.getByUser(currentUser.user.id).subscribe((data: any) =>{
-            this.modules = data.modules;
-            console.log(data.modules);
-        })
+
+        if(currentUser)
+        {
+            console.log(currentUser.user.id);
+            return this.planService.getByUser(currentUser.user.id).subscribe((data: any) =>{
+                this.modules = data.modules;
+                console.log(data.modules);
+            });
+        }
+        
       }
 
     loadComponents(component_id: string)
