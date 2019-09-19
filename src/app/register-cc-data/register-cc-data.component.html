@@ -55,7 +55,10 @@
                     </div>
                     <div class="col-sm-6">
                         <label>Credit Card Expired Year</label>
-                        <input type="text" formControlName="cc_year" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cc_year.errors }" />
+                        <!--<input type="text" formControlName="cc_year" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cc_year.errors }" />-->
+                        <select class="form-control" formControlName="cc_year" [ngClass]="{ 'is-invalid': submitted && f.cc_year.errors }">
+                            <option *ngFor="let year of years_range" value="{{year}}">{{year}}</option>
+                        </select>
                         <div *ngIf="submitted && f.cc_year.errors" class="invalid-feedback">
                             <div *ngIf="f.cc_year.errors.required">Credit Card Expired Year is required</div>
                         </div>
