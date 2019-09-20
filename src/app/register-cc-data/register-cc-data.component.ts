@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {CompanyService} from '../_services/company.service'
 import {Observable, throwError} from 'rxjs';
 import {retry, catchError} from 'rxjs/operators';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap' 
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap' ;
+import {UtilsService} from '../_services/utils.service'
 
 @Component({
   selector: 'app-register-cc-data',
@@ -28,12 +29,15 @@ export class RegisterCcDataComponent implements OnInit {
   error_bool:boolean = false;
   error_form:boolean = false;
   error_msg:string;
+  //stores: Storage[] = [];
+  years_range: any[] = [];
 
   
-  constructor(private calendar: NgbCalendar,private formBuilder: FormBuilder, private companyService:CompanyService,private route: ActivatedRoute, private router: Router) { }
+  constructor(private calendar: NgbCalendar,private formBuilder: FormBuilder, private companyService:CompanyService,private route: ActivatedRoute, private router: Router, private utils: UtilsService) { }
 
   ngOnInit() {
 
+    this.years_range = this.yearsRange;
     this.cc_expired_date = this.calendar.getToday();
 
     this.SignUpForm = this.formBuilder.group({
@@ -56,6 +60,11 @@ export class RegisterCcDataComponent implements OnInit {
       this.id_plans = params.id_plans;
       
     });
+  }
+
+  get yearsRange(){
+    var current_year = this.utils.GetCurrentYear();
+    return this.utils.GetYears(current_year, current_year + 10);
   }
 
   get formField() { return this.SignUpForm.controls; }
