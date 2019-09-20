@@ -69,8 +69,6 @@ export class RegisterCcDataComponent implements OnInit {
 
   get formField() { return this.SignUpForm.controls; }
 
-  get f() { return this.SignUpForm.controls; }
-
   next(){
 
     this.submitted = true;
