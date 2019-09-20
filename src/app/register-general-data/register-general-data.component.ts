@@ -66,11 +66,11 @@ export class RegisterGeneralDataComponent implements OnInit {
     this.companyService.existUser(this.data)
     .subscribe((data: any) =>{
       console.log(data);
-      if(data.id)
+      if(data.error)
       {
         this.error_bool = true
         this.loading = false;
-        this.error_msg = 'The Company already exist, change your email!';
+        this.error_msg = data.error;
       }
       else{
         this.router.navigate(['register-plan-data', { name: this.formField.name.value, password: this.formField.password.value, email: this.formField.email.value }  ]);
