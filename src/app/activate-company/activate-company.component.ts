@@ -10,19 +10,27 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./activate-company.component.less']
 })
 export class ActivateCompanyComponent implements OnInit {
+  
+  private bool_error: boolean = false;
+  private error: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    
   ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const data = {'company_id':params['id']};
+      const data = {'activation_code':params['activation_code']};
       this.companyService.validateCompany(data).subscribe(res => {
         //this.store = res.store;
-        console.log(res);
+        if(res.error)
+        {
+            this.bool_error = true;
+            this.error = res.error;
+        }
       });
     });
   }

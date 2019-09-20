@@ -20,7 +20,7 @@ const routes: Routes = [
     { path: 'register-general-data', component: RegisterGeneralDataComponent },
     { path: 'register-plan-data', component: RegisterPlanDataComponent },
     { path: 'register-cc-data', component: RegisterCcDataComponent },
-    { path: 'activate-company/:id', component: ActivateCompanyComponent },
+    { path: 'activate-company/:activation_code', component: ActivateCompanyComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
