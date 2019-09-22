@@ -1,138 +1,119 @@
-<div class="col-md-8  mt-5">
-  <div class="card">
-    <h4 class="card-header">Card</h4>
-    <div class="card-body">
-      <div class="cell example example2">
-        <form [formGroup]="SignUpForm" id="payment-form">
-          <div class="row">
-            <div class="field">
-              <input id="example2-name" type="text"
-                     formControlName="card_holder_name"
-                     autocomplete="name"
-                     class="input empty"
-                     [ngClass]="{ 'is-invalid': submitted && f.card_holder_name.errors }"
-              />
-              <label for="card_holder_name">Credit Card Holder Name</label>
-              <div class="baseline"></div>
-            </div>
-          </div>
-          <div class="row">
-
-            <div class="field">
-              <div id="example2-card-number" class="input empty"></div>
-              <label for="example2-card-number">Card Number</label>
-              <div class="baseline"></div>
-            </div>
-
-          </div>
-
-          <div class="row">
-            <div class="field half-width">
-              <div id="example2-card-expiry" class="input empty"></div>
-              <label for="example2-card-expiry">Expiration</label>
-              <div class="baseline"></div>
-            </div>
-
-            <div class="field quarter-width">
-              <div id="example2-card-cvc" class="input empty"></div>
-              <label for="example2-card-cvc">CVC</label>
-              <div class="baseline"></div>
-            </div>
-          </div>
-
-          <div class="form-group row">
-
-            <!--                    <div class="col-sm-6">-->
-            <!--                        <label>Credit Card Expired Moth</label>-->
-            <!--                        <select class="form-control" formControlName="cc_moth" [ngClass]="{ 'is-invalid': submitted && f.cc_moth.errors }">-->
-            <!--                            <option value="01" selected>January</option>-->
-            <!--                            <option value="02">February</option>-->
-            <!--                            <option value="03">March</option>-->
-            <!--                            <option value="04">April</option>-->
-            <!--                            <option value="05">May</option>-->
-            <!--                            <option value="06">June</option>-->
-            <!--                            <option value="07">July</option>-->
-            <!--                            <option value="08">August</option>-->
-            <!--                            <option value="09">September</option>-->
-            <!--                            <option value="10">October</option>-->
-            <!--                            <option value="11">November</option>-->
-            <!--                            <option value="12">December</option>-->
-            <!--                        </select>-->
-            <!--                        <div *ngIf="submitted && f.cc_moth.errors" class="invalid-feedback">-->
-            <!--                            <div *ngIf="f.cc_moth.errors.required">Credit Card Expired Month is required</div>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                    <div class="col-sm-6">-->
-            <!--                        <label>Credit Card Expired Year</label>-->
-            <!--                        &lt;!&ndash;<input type="text" formControlName="cc_year" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cc_year.errors }" />&ndash;&gt;-->
-            <!--                        <select class="form-control" formControlName="cc_year" [ngClass]="{ 'is-invalid': submitted && f.cc_year.errors }">-->
-            <!--                            <option *ngFor="let year of years_range" value="{{year}}">{{year}}</option>-->
-            <!--                        </select>-->
-            <!--                        <div *ngIf="submitted && f.cc_year.errors" class="invalid-feedback">-->
-            <!--                            <div *ngIf="f.cc_year.errors.required">Credit Card Expired Year is required</div>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-          </div>
-
-          <div class="row">
-            <h5 class="m-3">Billing Address</h5>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label for="ba_street">Street 1</label>
-              <input type="text" formControlName="ba_street" class="form-control"
-                     [ngClass]="{ 'is-invalid': submitted && f.ba_street.errors }"/>
-              <div *ngIf="submitted && f.ba_street.errors" class="invalid-feedback">
-                <div *ngIf="f.ba_street.errors.required">Street 1 is required</div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <label for="ba_street2">Street 2</label>
-              <input type="text" formControlName="ba_street2" class="form-control"
-                     [ngClass]="{ 'is-invalid': submitted && f.ba_street2.errors }"/>
-              <div *ngIf="submitted && f.ba_street2.errors" class="invalid-feedback">
-                <div *ngIf="f.ba_street2.errors.required">Street 2 is required</div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label for="ba_city">City</label>
-              <input type="text" formControlName="ba_city" class="form-control"
-                     [ngClass]="{ 'is-invalid': submitted && f.ba_city.errors }"/>
-              <div *ngIf="submitted && f.ba_city.errors" class="invalid-feedback">
-                <div *ngIf="f.ba_city.errors.required">City is required</div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <label for="ba_state">State</label>
-              <input type="text" formControlName="ba_state" class="form-control"
-                     [ngClass]="{ 'is-invalid': submitted && f.ba_state.errors }"/>
-              <div *ngIf="submitted && f.ba_state.errors" class="invalid-feedback">
-                <div *ngIf="f.ba_state.errors.required">State is required</div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label for="ba_zip_code">Zip Code</label>
-              <input type="text" formControlName="ba_zip_code" class="form-control"
-                     [ngClass]="{ 'is-invalid': submitted && f.ba_zip_code.errors }"/>
-              <div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">
-                <div *ngIf="f.ba_zip_code.errors.required">Zip Code is required</div>
-                <div *ngIf="f.ba_zip_code.errors.maxlength">Zip Code max length is 5</div>
-                <div *ngIf="f.ba_zip_code.errors.pattern">Zip Code only number</div>
-              </div>
-            </div>
-          </div>
-          <button [disabled]="loading" type="button" (click)="next()" class="btn btn-primary">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Next
-          </button>
-          <div *ngIf="error_bool" class="alert alert-danger mt-3 mb-0">{{error_msg}}</div>
-          <div id="card-errors" role="alert"></div>
-        </form>
-      </div>
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header">Credit Card Data</h4>
+        <div class="card-body">
+            <form [formGroup]="SignUpForm">
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="card_holder_name">Credit Card Holder Name</label>
+                        <input type="text" formControlName="card_holder_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.card_holder_name.errors }" />
+                        <div *ngIf="submitted && f.card_holder_name.errors" class="invalid-feedback">
+                            <div *ngIf="f.card_holder_name.errors.required">Credit Card Holder Name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="card_number">Card Number</label>
+                        <input type="text" formControlName="card_number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.card_number.errors }" />
+                        <div *ngIf="submitted && f.card_number.errors" class="invalid-feedback">
+                            <div *ngIf="f.card_number.errors.required">Card Number is required</div>
+                            <div *ngIf="f.card_number.errors.maxlength">Card Number max length is 16</div>
+                            <div *ngIf="f.card_number.errors.minlength">Card Number min length is 16</div>
+                            <div *ngIf="f.card_number.errors.pattern">Card Number only number</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="cc">Security Code(CC)</label>
+                        <input type="text" formControlName="cc" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cc.errors }" />
+                        <div *ngIf="submitted && f.cc.errors" class="invalid-feedback">
+                            <div *ngIf="f.cc.errors.required">Credit Card is required</div>
+                            <div *ngIf="f.cc.errors.maxlength">Credit Card  max length is 4</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label>Credit Card Expired Moth</label>
+                        <select class="form-control" formControlName="cc_moth" [ngClass]="{ 'is-invalid': submitted && f.cc_moth.errors }">
+                            <option value="01" selected>January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <div *ngIf="submitted && f.cc_moth.errors" class="invalid-feedback">
+                            <div *ngIf="f.cc_moth.errors.required">Credit Card Expired Moth is required</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Credit Card Expired Year</label>
+                        <input type="text" formControlName="cc_year" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cc_year.errors }" />
+                        <div *ngIf="submitted && f.cc_year.errors" class="invalid-feedback">
+                            <div *ngIf="f.cc_year.errors.required">Credit Card Expired Year is required</div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <h5 class="m-3">Billing Address</h5>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="ba_street">Street 1</label>
+                        <input type="text" formControlName="ba_street" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_street.errors }" />
+                        <div *ngIf="submitted && f.ba_street.errors" class="invalid-feedback">
+                            <div *ngIf="f.ba_street.errors.required">Street 1 is required</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="ba_street2">Street 2</label>
+                        <input type="text" formControlName="ba_street2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_street2.errors }" />
+                        <div *ngIf="submitted && f.ba_street2.errors" class="invalid-feedback">
+                            <div *ngIf="f.ba_street2.errors.required">Street 2 is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="ba_city">City</label>
+                        <input type="text" formControlName="ba_city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_city.errors }" />
+                        <div *ngIf="submitted && f.ba_city.errors" class="invalid-feedback">
+                            <div *ngIf="f.ba_city.errors.required">City is required</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="ba_state">State</label>
+                        <input type="text" formControlName="ba_state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_state.errors }" />
+                        <div *ngIf="submitted && f.ba_state.errors" class="invalid-feedback">
+                            <div *ngIf="f.ba_state.errors.required">State is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="ba_zip_code">Zip Code</label>
+                        <input type="text" formControlName="ba_zip_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ba_zip_code.errors }" />
+                        <div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">
+                            <div *ngIf="f.ba_zip_code.errors.required">Zip Code is required</div>
+                            <div *ngIf="f.ba_zip_code.errors.maxlength">Zip Code  max length is 5</div>
+                            <div *ngIf="f.ba_zip_code.errors.pattern">Zip Code only number</div>
+                        </div>
+                    </div>
+                </div>
+                <button [disabled]="loading" type="button" (click)="next()" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Next
+                </button>
+                <div *ngIf="error_bool" class="alert alert-danger mt-3 mb-0">{{error_msg}}</div>
+            </form>
+        </div>
     </div>
   </div>
-</div>
