@@ -59,14 +59,14 @@ export class RegisterCcDataComponent implements OnInit {
 
     // Floating labels
     const inputs = document.querySelectorAll('.cell.example.example2 .input');
-    Array.prototype.forEach.call(inputs, function(input) {
-      input.addEventListener('focus', function() {
+    Array.prototype.forEach.call(inputs, function (input) {
+      input.addEventListener('focus', function () {
         input.classList.add('focused');
       });
-      input.addEventListener('blur', function() {
+      input.addEventListener('blur', function () {
         input.classList.remove('focused');
       });
-      input.addEventListener('keyup', function() {
+      input.addEventListener('keyup', function () {
         if (input.value.length === 0) {
           input.classList.add('empty');
         } else {
@@ -130,29 +130,33 @@ export class RegisterCcDataComponent implements OnInit {
     // Listen for form submission, process the form with Stripe,
     // and get the
     const paymentForm = document.getElementById('payment-form');
-    paymentForm.addEventListener('submit', event => {
-      event.preventDefault();
-      stripe.createToken(cardNumber).then(result => {
-        if (result.error) {
-          console.log('Error creating payment method.');
-          const errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-        } else {
-          // At this point, you should send the token ID
-          // to your server so it can attach
-          // the payment source to a customer
-          console.log('Token acquired!');
-          console.log(result.token);
-          console.log(result.token.id);
-        }
-      });
-    });
+
+    // paymentForm.addEventListener('submit', event => {
+    //   event.preventDefault();
+    //   return console.log('submit');
+    //   stripe.createToken(cardNumber).then(result => {
+    //     if (result.error) {
+    //       console.log('Error creating payment method.');
+    //       const errorElement = document.getElementById('card-errors');
+    //       errorElement.textContent = result.error.message;
+    //     } else {
+    //
+    //       // At this point, you should send the token ID
+    //       // to your server so it can attach
+    //       // the payment source to a customer
+    //       console.log('Token acquired!');
+    //       console.log(result.token);
+    //       console.log(result.token.id);
+    //     }
+    //   });
+    // });
 
     //--------------------------------------
     this.years_range = this.yearsRange;
     this.cc_expired_date = this.calendar.getToday();
 
     this.SignUpForm = this.formBuilder.group({
+
       cc: ['', [Validators.required, Validators.maxLength(4)]],
       cc_year: ['2019', [Validators.required]],
       cc_moth: ['', [Validators.required]],
@@ -262,5 +266,27 @@ export class RegisterCcDataComponent implements OnInit {
         displayError.textContent = '';
       }
     });
+  }
+
+  enableInputs() {
+    Array.prototype.forEach.call(
+      form.querySelectorAll(
+        "input[type='text'], input[type='email'], input[type='tel']"
+      ),
+      function(input) {
+        input.removeAttribute('disabled');
+      }
+    );
+  }
+
+  disableInputs() {
+    Array.prototype.forEach.call(
+      form.querySelectorAll(
+        "input[type='text'], input[type='email'], input[type='tel']"
+      ),
+      function(input) {
+        input.setAttribute('disabled', 'true');
+      }
+    );
   }
 }
