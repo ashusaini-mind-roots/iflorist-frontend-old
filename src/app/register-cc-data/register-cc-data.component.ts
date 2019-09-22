@@ -48,8 +48,7 @@ export class RegisterCcDataComponent implements OnInit {
   ngOnInit() {
     // https://stripe.com/docs/stripe-js/reference#elements-create
     const stripe = Stripe('pk_test_EIdZt3Y9gtHvtNEnRcRxcDWl');
-    // Create `card` element that will watch for updates
-    // and display error messages
+
     const elements = stripe.elements({
       fonts: [
         {
