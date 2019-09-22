@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
     modules: any;
 
     ngOnInit() {
-        /*$(document).ready(() => {
+       /*$(document).ready(() => {
             $("#menu-toggle").click(function(e) {
                 console.log('akiiii');
                 e.preventDefault();
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit{
             });
         })(jquery);*/
         this.loadModules();
-        
+
     }
 
     loadModules(){
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit{
                 console.log(data.modules);
             });
         }
-        
+
       }
 
     loadComponents(component_id: string)
@@ -65,8 +65,8 @@ export class AppComponent implements OnInit{
 
     constructor(
         private router: Router,
-        private userService: UserService, 
-        private planService:PlanService, 
+        private userService: UserService,
+        private planService:PlanService,
         private authenticationService: AuthenticationService
     ) {
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
@@ -81,4 +81,6 @@ export class AppComponent implements OnInit{
     {
 
     }*/
+
+
 }
