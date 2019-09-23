@@ -104,6 +104,7 @@ export class RegisterCcDataComponent implements OnInit {
     });
     cardExpiry.mount('#example2-card-expiry');
     this.validate(cardExpiry);
+    this.cc_expired_date = cardExpiry;
 
     const cardCvc = elements.create('cardCvc', {
       style: elementStyles,
@@ -133,18 +134,17 @@ export class RegisterCcDataComponent implements OnInit {
 
       event.preventDefault();
       let additionalData = this.getFormData();
-      console.log(additionalData);
+      // console.log(additionalData);
       // Use Stripe.js to create a token. We only need to pass in one Element
       // from the Element group in order to create a token. We can also pass
       // in the additional customer data we collected in our form.
       this.stripe.createToken(this.cardNumber, additionalData)
         .then((result) => {
           if (result.token) {
-            additionalData.stripe_token = result.token.id;
+        //    additionalData.stripe_token = result.token.id;
             this.saveCompanyData(additionalData);
             // If we received a token, show the token ID.
             console.log(result.token.id);
-
           } else {
             displayError.textContent = 'No token';
           }
@@ -246,7 +246,6 @@ export class RegisterCcDataComponent implements OnInit {
       this.password = params.password;
       this.email = params.email;
       this.id_plans = params.id_plans;
-
     });
   }
 
@@ -286,7 +285,7 @@ export class RegisterCcDataComponent implements OnInit {
   saveCompanyData(form_data) {
     this.loading = true;
     this.data = {
-      'card_token': form_data.stripe_token,
+     // 'card_token': form_data.stripe_token,
       'name': form_data.card_holder_name,
       'email': this.email,
       'password': this.password,
@@ -296,16 +295,20 @@ export class RegisterCcDataComponent implements OnInit {
       'ba_state': form_data.ba_state,
       'ba_zip_code': form_data.ba_zip_code,
       'card_holder_name': form_data.card_holder_name,
-      'plans': this.id_plans.split(',')
+      'plans': this.id_plans.split(','),
     };
-    this.companyService.validateCard(this.data)
-      .subscribe((data: any) => {
-        this.router.navigate(['home']);
-      }, error => {
-        console.log(error);
-        this.loading = false;
-        this.error_bool = true
-        this.error_msg = error;
-      });
+    console.log(this.data);
+    this.companyService.create(this.data)
+        .subscribe((data: any) => {
+            //console.log(data.plans);
+            this.router.navigate(['home'])
+          },
+          error => {
+            this.loading = false;
+            this.error_bool = true
+            this.error_msg = error;
+          }
+        )
+
   }
 }
