@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {CompanyService} from '../_services/company.service'
 import {Observable, throwError} from 'rxjs';
 import {retry, catchError} from 'rxjs/operators';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap' 
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-register-cc-data',
@@ -29,7 +29,7 @@ export class RegisterCcDataComponent implements OnInit {
   error_form:boolean = false;
   error_msg:string;
 
-  
+
   constructor(private calendar: NgbCalendar,private formBuilder: FormBuilder, private companyService:CompanyService,private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -54,13 +54,11 @@ export class RegisterCcDataComponent implements OnInit {
       this.password = params.password;
       this.email = params.email;
       this.id_plans = params.id_plans;
-      
+
     });
   }
 
   get formField() { return this.SignUpForm.controls; }
-
-  get f() { return this.SignUpForm.controls; }
 
   next(){
 
@@ -77,7 +75,7 @@ export class RegisterCcDataComponent implements OnInit {
       'card_holder_name':this.formField.card_holder_name.value,
       'ba_zip_code':this.formField.ba_zip_code.value,
     };
-    
+
     this.companyService.validateCard(this.data)
     .subscribe((data: any) =>{
       console.log(data);
@@ -91,7 +89,7 @@ export class RegisterCcDataComponent implements OnInit {
       {
         this.data = {
           'name':this.name,
-          'email':this.email, 
+          'email':this.email,
           'password':this.password,
           'cc': this.formField.cc.value,
           'card_number':this.formField.card_number.value,
@@ -112,7 +110,7 @@ export class RegisterCcDataComponent implements OnInit {
         },
         error => {
           console.log(error)
-        });  
+        });
       }
     },
     error => {
