@@ -140,6 +140,7 @@ export class RegisterCcDataComponent implements OnInit {
         if (result.token) {
           // If we received a token, show the token ID.
           console.log(result.token.id);
+
         } else {
           displayError.textContent = 'No token';
         }
@@ -275,5 +276,20 @@ export class RegisterCcDataComponent implements OnInit {
       address_zip: this.SignUpForm.value.ba_zip_code || undefined,
     };
     return additionalData;
+  }
+
+  saveCompanyData(form_data) {
+    this.loading = true;
+    this.data = {
+      'card_token': form_data.card_token,
+      'cc': form_data.cc.value,
+      'card_holder_name': form_data.card_holder_name,
+      'ba_zip_code': form_data.ba_zip_code,
+    };
+    // this.companyService.validateCard(form_data)
+    //   .subscribe(data:any)=>
+    // {
+    //
+    // }
   }
 }
