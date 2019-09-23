@@ -132,19 +132,23 @@ export class RegisterCcDataComponent implements OnInit {
       // Gather additional customer data we may have collected in our form.
 
       event.preventDefault();
-      let additional_data = this.getFormData();
+      let additionalData = this.getFormData();
+      console.log(additionalData);
       // Use Stripe.js to create a token. We only need to pass in one Element
       // from the Element group in order to create a token. We can also pass
       // in the additional customer data we collected in our form.
-      this.stripe.createToken(this.cardNumber, additional_data).then(function (result) {
-        if (result.token) {
-          // If we received a token, show the token ID.
-          console.log(result.token.id);
+      this.stripe.createToken(this.cardNumber, additionalData)
+        .then((result) => {
+          if (result.token) {
+            additionalData.stripe_token = result.token.id;
+            this.saveCompanyData(additionalData);
+            // If we received a token, show the token ID.
+            console.log(result.token.id);
 
-        } else {
-          displayError.textContent = 'No token';
-        }
-      })
+          } else {
+            displayError.textContent = 'No token';
+          }
+        })
       console.log('good');
     }
 
@@ -274,6 +278,7 @@ export class RegisterCcDataComponent implements OnInit {
       address_city: this.SignUpForm.value.ba_city || undefined,
       address_state: this.SignUpForm.value.ba_state || undefined,
       address_zip: this.SignUpForm.value.ba_zip_code || undefined,
+      stripe_token: undefined
     };
     return additionalData;
   }
@@ -281,15 +286,26 @@ export class RegisterCcDataComponent implements OnInit {
   saveCompanyData(form_data) {
     this.loading = true;
     this.data = {
-      'card_token': form_data.card_token,
-      'cc': form_data.cc.value,
-      'card_holder_name': form_data.card_holder_name,
+      'card_token': form_data.stripe_token,
+      'name': form_data.card_holder_name,
+      'email': this.email,
+      'password': this.password,
+      'ba_street': form_data.ba_street,
+      'ba_street2': form_data.ba_street2,
+      'ba_city': form_data.ba_city,
+      'ba_state': form_data.ba_state,
       'ba_zip_code': form_data.ba_zip_code,
+      'card_holder_name': form_data.card_holder_name,
+      'plans': this.id_plans.split(',')
     };
-    // this.companyService.validateCard(form_data)
-    //   .subscribe(data:any)=>
-    // {
-    //
-    // }
+    this.companyService.validateCard(this.data)
+      .subscribe((data: any) => {
+        this.router.navigate(['home']);
+      }, error => {
+        console.log(error);
+        this.loading = false;
+        this.error_bool = true
+        this.error_msg = error;
+      });
   }
 }

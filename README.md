@@ -20,6 +20,10 @@
 
 Note: Remember, sometimes you need to run composer dump-autoload on laravel project.
 
-
+#Stripe
+    
+   test card 4242424242424242
+   cc any 3 digits
+   expiration: any future date
 
     
