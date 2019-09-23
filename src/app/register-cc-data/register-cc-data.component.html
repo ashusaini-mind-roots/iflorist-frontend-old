@@ -5,13 +5,15 @@
       <h4 class="card-header">Card</h4>
       <div class="card-body">
         <div class="cell example example2">
-          <form [formGroup]="SignUpForm">
+          <form method="post" id="payment-form"
+               [formGroup]="SignUpForm">
             <div class="row">
               <div class="field">
                 <input type="text"
-                       formControlName="card_holder_name"
+                       name="card_holder_name" id="card_holder_name"
                        autocomplete="name"
                        class="input empty"
+                       formControlName="card_holder_name"
                        [ngClass]="{ 'is-invalid': submitted && f.card_holder_name.errors }"
                 />
                 <label for="card_holder_name">Credit Card Holder Name</label>
@@ -46,9 +48,10 @@
             <div class="row">
               <div class="field half-width">
                 <input id="example2-street1" type="text"
-                       formControlName="ba_street"
+                       name="ba_street"
                        autocomplete="address-line1"
                        class="input empty"
+                       formControlName="ba_street"
                        [ngClass]="{ 'is-invalid': submitted && f.ba_street.errors }"/>
                 <label for="ba_street">Street</label>
                 <div class="baseline"></div>
@@ -60,9 +63,10 @@
               <div class="field half-width">
 
                 <input type="text"
-                       formControlName="ba_street2"
+                       name="ba_street2"
                        autocomplete="address-line2"
                        class="input empty"
+                       formControlName="ba_street2"
                        [ngClass]="{ 'is-invalid': submitted && f.ba_street2.errors }"/>
                 <label for="ba_street2">Street 2</label>
                 <div class="baseline"></div>
@@ -78,7 +82,8 @@
 
                 <input type="text"
                        autocomplete="address-level2"
-                       formControlName="ba_city" class="input empty"
+                       name="ba_city" class="input empty"
+                       formControlName="ba_city"
                        [ngClass]="{ 'is-invalid': submitted && f.ba_city.errors }"/>
                 <label for="ba_city">City</label>
                 <div class="baseline"></div>
@@ -91,7 +96,8 @@
 
                 <input type="text"
                        autocomplete="address-level1"
-                       formControlName="ba_state" class="input empty"
+                       name="ba_state" class="input empty"
+                       formControlName="ba_state"
                        [ngClass]="{ 'is-invalid': submitted && f.ba_state.errors }"/>
                 <label for="ba_state">State</label>
                 <div class="baseline"></div>
@@ -103,7 +109,8 @@
 
                 <input type="text"
                        automcomplete="postal-code"
-                       formControlName="ba_zip_code" class="input empty"
+                       name="ba_zip_code" class="input empty"
+                       formControlName="ba_zip_code"
                        [ngClass]="{ 'is-invalid': submitted && f.ba_zip_code.errors }"/>
                 <label for="ba_zip_code">Zip Code</label>
                 <div class="baseline"></div>
@@ -117,7 +124,7 @@
             <div class="form-group row">
 
             </div>
-            <button [disabled]="loading" type="button" (click)="next()" class="btn btn-primary">
+            <button (click)="onSubmit()" [disabled]="loading" type="button" class="btn btn-primary">
               <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
               Next
             </button>
