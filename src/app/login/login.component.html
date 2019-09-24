@@ -1,17 +1,17 @@
 ﻿<div class="d-flex justify-content-center pt-lg-5 mt-5">
     <div class="card login-card p-lg-2 align-self-center">
         <div class="card-body mt-lg-4">
-            <h4 class="card-title text-center">Sign in</h4>
+            <h4 class="card-title text-center mb-4">Sign in</h4>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="email" class="font-light">Email</label>
+                    <label for="email" class="font-light txt-color-gray2">Email</label>
                     <input type="text" formControlName="email" class="imput-gray1" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                         <div *ngIf="f.email.errors.required">email is required</div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="font-light">Password</label>
+                    <label for="password" class="font-light txt-color-gray2">Password</label>
                     <input type="password" formControlName="password" class="imput-gray1" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Password is required</div>
@@ -23,7 +23,7 @@
                 </button>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
             </form>
-            <label class="font-medium font-size-08 txt-color-gray2 mt-5">Do not have an account?<span><a class="pl-2 txt-color-dark-blue" routerLink="/register-general-data">Sign Up</a></span></label>
+            <label class="text-center w-100 font-medium font-size-08 txt-color-gray2 mt-5 pt-3">Do not have an account?<span><a class="pl-2 txt-color-dark-blue" routerLink="/register-general-data">Sign Up</a></span></label>
         </div>
     </div>
 </div>
