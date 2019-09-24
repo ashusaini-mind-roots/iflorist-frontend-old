@@ -141,7 +141,7 @@ export class RegisterCcDataComponent implements OnInit {
       this.stripe.createToken(this.cardNumber, additionalData)
         .then((result) => {
           if (result.token) {
-        //    additionalData.stripe_token = result.token.id;
+            additionalData.stripe_token = result.token.id;
             this.saveCompanyData(additionalData);
             // If we received a token, show the token ID.
             console.log(result.token.id);
