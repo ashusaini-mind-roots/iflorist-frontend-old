@@ -142,10 +142,10 @@ export class RegisterCcDataComponent implements OnInit {
         .then((result) => {
           if (result.token) {
             additionalData.stripe_token = result.token.id;
-           // console.log(['onSubmit', additionalData]);
+            // console.log(['onSubmit', additionalData]);
             this.saveCompanyData(additionalData);
             // If we received a token, show the token ID.
-           // console.log(result.token.id);
+            // console.log(result.token.id);
           } else {
             displayError.textContent = 'No token';
           }
@@ -252,14 +252,14 @@ export class RegisterCcDataComponent implements OnInit {
   floatingLabels() {
     // Floating labels
     const inputs = document.querySelectorAll('.cell.example.example2 .input');
-    Array.prototype.forEach.call(inputs, function(input) {
-      input.addEventListener('focus', function() {
+    Array.prototype.forEach.call(inputs, function (input) {
+      input.addEventListener('focus', function () {
         input.classList.add('focused');
       });
-      input.addEventListener('blur', function() {
+      input.addEventListener('blur', function () {
         input.classList.remove('focused');
       });
-      input.addEventListener('keyup', function() {
+      input.addEventListener('keyup', function () {
         if (input.value.length === 0) {
           input.classList.add('empty');
         } else {
@@ -296,6 +296,8 @@ export class RegisterCcDataComponent implements OnInit {
       ba_state: formData.address_state,
       ba_zip_code: formData.address_zip,
       card_holder_name: formData.name,
+      company_nane: this.name,
+
       plans: this.id_plans.split(','),
     };
 
