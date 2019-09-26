@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CompanyService} from '../_services/company.service'
+import {CompanyService} from '../_services/company.service';
 import {Observable, throwError} from 'rxjs';
 import {retry, catchError} from 'rxjs/operators';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap' ;
-import {UtilsService} from '../_services/utils.service'
+import {UtilsService} from '../_services/utils.service';
 
 declare var Stripe: any;
 
@@ -34,7 +34,7 @@ export class RegisterCcDataComponent implements OnInit {
   //stores: Storage[] = [];
   years_range: any[] = [];
   private stripe: any;
-  private cardNumber: any
+  private cardNumber: any;
 
   constructor(
     private calendar: NgbCalendar,
@@ -104,6 +104,7 @@ export class RegisterCcDataComponent implements OnInit {
     });
     cardExpiry.mount('#example2-card-expiry');
     this.validate(cardExpiry);
+    this.cc_expired_date = cardExpiry;
 
     const cardCvc = elements.create('cardCvc', {
       style: elementStyles,
@@ -116,7 +117,7 @@ export class RegisterCcDataComponent implements OnInit {
 
     // Listen for form submission, process the form with Stripe,
     // and get the
-    //const paymentForm = document.getElementById('payment-form');
+    const paymentForm = document.getElementById('payment-form');
     //--------------------------------------
 
   }
@@ -128,12 +129,12 @@ export class RegisterCcDataComponent implements OnInit {
       return false;
     } else {
       displayError.textContent = '';
-     // const paymentForm = document.getElementById('payment-form');
+      const paymentForm = document.getElementById('payment-form');
       // Gather additional customer data we may have collected in our form.
 
       event.preventDefault();
-      let additionalData = this.getFormData();
-      //console.log(additionalData);
+      const additionalData = this.getFormData();
+      // console.log(additionalData);
       // Use Stripe.js to create a token. We only need to pass in one Element
       // from the Element group in order to create a token. We can also pass
       // in the additional customer data we collected in our form.
@@ -141,18 +142,80 @@ export class RegisterCcDataComponent implements OnInit {
         .then((result) => {
           if (result.token) {
             additionalData.stripe_token = result.token.id;
+           // console.log(['onSubmit', additionalData]);
             this.saveCompanyData(additionalData);
             // If we received a token, show the token ID.
-            console.log(result.token.id);
+           // console.log(result.token.id);
           } else {
             displayError.textContent = 'No token';
           }
-        })
-      console.log('good');
+        });
+      // console.log('good');
     }
 
-    console.log('Your form data : ', this.SignUpForm.value);
+    // console.log('Your form data : ', this.SignUpForm.value);
   }
+
+//   next() {
+// console.log('next');
+//     // this.submitted = true;
+//     //
+//     // if (this.SignUpForm.invalid) {
+//     //   //console.log('adad');
+//     //   return;
+//     // }
+//     //
+//     // this.data = {
+//     //   'card_number': this.formField.card_number.value,
+//     //   'cc': this.formField.cc.value,
+//     //   'card_holder_name': this.formField.card_holder_name.value,
+//     //   'ba_zip_code': this.formField.ba_zip_code.value,
+//     // };
+//
+//     this.companyService.validateCard(this.data)
+//       .subscribe((data: any) => {
+//
+//           if (data.error == false) {
+//             this.error_bool = true
+//             this.loading = false;
+//             this.error_msg = data.msg;
+//           } else {
+//             this.data = {
+//               // 'name': this.name,
+//               // 'email': this.email,
+//               // 'password': this.password,
+//               // 'cc': this.formField.cc.value,
+//               // 'card_number': this.formField.card_number.value,
+//               // 'cc_expired_date': `${this.formField.cc_year.value}-${this.formField.cc_moth.value}-01}`,
+//               // 'ba_street': this.formField.ba_street.value,
+//               // 'ba_street2': this.formField.ba_street2.value,
+//               // 'ba_city': this.formField.ba_city.value,
+//               // 'ba_state': this.formField.ba_state.value,
+//               // 'ba_zip_code': this.formField.ba_zip_code.value,
+//               // 'card_holder_name': this.formField.card_holder_name.value,
+//               // 'plans': this.id_plans.split(',')
+//             };
+//             this.loading = true;
+//             this.companyService.create(this.data)
+//               .subscribe((data: any) => {
+//                   //console.log(data.plans);
+//                   this.router.navigate(['home'])
+//                 },
+//                 error => {
+//                   console.log(error)
+//                 });
+//           }
+//         },
+//         error => {
+//           console.log(error);
+//           this.loading = false;
+//           this.error_bool = true
+//           this.error_msg = error;
+//         });
+//     console.log(this.error_bool);
+//     //return;
+//     //console.log(`${this.cc_expired_date.year}-${this.cc_expired_date.month}-${this.cc_expired_date.day}`);
+//   }
 
   validate(element) {
     element.addEventListener('change', event => {
@@ -176,7 +239,6 @@ export class RegisterCcDataComponent implements OnInit {
       ba_state: ['', Validators.required],
       ba_zip_code: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       card_holder_name: ['', Validators.required],
-      // card_number: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(16), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
     });
 
     this.sub = this.route.params.subscribe(params => {
@@ -190,14 +252,14 @@ export class RegisterCcDataComponent implements OnInit {
   floatingLabels() {
     // Floating labels
     const inputs = document.querySelectorAll('.cell.example.example2 .input');
-    Array.prototype.forEach.call(inputs, function (input) {
-      input.addEventListener('focus', function () {
+    Array.prototype.forEach.call(inputs, function(input) {
+      input.addEventListener('focus', function() {
         input.classList.add('focused');
       });
-      input.addEventListener('blur', function () {
+      input.addEventListener('blur', function() {
         input.classList.remove('focused');
       });
-      input.addEventListener('keyup', function () {
+      input.addEventListener('keyup', function() {
         if (input.value.length === 0) {
           input.classList.add('empty');
         } else {
@@ -208,7 +270,7 @@ export class RegisterCcDataComponent implements OnInit {
   }
 
   getFormData() {
-    let additionalData = {
+    const additionalData = {
       name: this.SignUpForm.value.card_holder_name || undefined,
       address_line1: this.SignUpForm.value.ba_street || undefined,
       address_line2: this.SignUpForm.value.ba_street2 || undefined,
@@ -220,29 +282,35 @@ export class RegisterCcDataComponent implements OnInit {
     return additionalData;
   }
 
-  saveCompanyData(form_data) {
+  saveCompanyData(formData) {
     this.loading = true;
+    // console.log(['formData', formData]);
     this.data = {
-     // 'card_token': form_data.stripe_token,
-      'name': form_data.card_holder_name,
-      'email': this.email,
-      'password': this.password,
-      'ba_street': form_data.ba_street,
-      'ba_street2': form_data.ba_street2,
-      'ba_city': form_data.ba_city,
-      'ba_state': form_data.ba_state,
-      'ba_zip_code': form_data.ba_zip_code,
-      'card_holder_name': form_data.card_holder_name,
-      'plans': this.id_plans.split(',')
+      card_token: formData.stripe_token,
+      name: formData.name,
+      email: this.email,
+      password: this.password,
+      ba_street: formData.address_line1,
+      ba_street2: formData.address_line2,
+      ba_city: formData.address_city,
+      ba_state: formData.address_state,
+      ba_zip_code: formData.address_zip,
+      card_holder_name: formData.name,
+      plans: this.id_plans.split(','),
     };
-    this.companyService.validateCard(this.data)
+
+    // console.log(this.data);
+    this.companyService.create(this.data)
       .subscribe((data: any) => {
-        this.router.navigate(['home']);
-      }, error => {
-        console.log(error);
-        this.loading = false;
-        this.error_bool = true
-        this.error_msg = error;
-      });
+          // console.log(data.plans);
+          this.router.navigate(['home']);
+        },
+        error => {
+          this.loading = false;
+          this.error_bool = true;
+          this.error_msg = error;
+        }
+      );
+
   }
 }
