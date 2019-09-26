@@ -5,7 +5,10 @@ import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '@app/_services';
 
-@Component({ templateUrl: 'login.component.html' })
+@Component({
+    templateUrl: 'login.component.html',
+    styleUrls: ['./login.component.less']
+})
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
@@ -26,6 +29,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        document.body.classList.add('bg-login-img');
         console.log("init")
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],

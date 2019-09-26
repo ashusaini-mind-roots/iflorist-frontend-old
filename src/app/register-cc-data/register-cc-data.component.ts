@@ -144,7 +144,6 @@ export class RegisterCcDataComponent implements OnInit {
             this.saveCompanyData(additionalData);
             // If we received a token, show the token ID.
             console.log(result.token.id);
-
           } else {
             displayError.textContent = 'No token';
           }
@@ -185,7 +184,6 @@ export class RegisterCcDataComponent implements OnInit {
       this.password = params.password;
       this.email = params.email;
       this.id_plans = params.id_plans;
-
     });
   }
 
@@ -225,7 +223,7 @@ export class RegisterCcDataComponent implements OnInit {
   saveCompanyData(form_data) {
     this.loading = true;
     this.data = {
-      'card_token': form_data.stripe_token,
+     // 'card_token': form_data.stripe_token,
       'name': form_data.card_holder_name,
       'email': this.email,
       'password': this.password,
