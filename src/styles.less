@@ -1,8 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-a { cursor: pointer }
+a {
+  cursor: pointer
+}
 
-.sign-up{
-    margin-top: 20px;
+.sign-up {
+  margin-top: 20px;
 }
 
 .bg-login-img {
@@ -18,69 +20,74 @@ a { cursor: pointer }
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
- body {
-    overflow-x: hidden;
-    font-family: "Roboto" !important;
-    font-size: 0.9rem !important;
-  }
-  
+body {
+  overflow-x: hidden;
+  font-family: "Roboto" !important;
+  font-size: 0.9rem !important;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
   #sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -15rem;
-    -webkit-transition: margin .25s ease-out;
-    -moz-transition: margin .25s ease-out;
-    -o-transition: margin .25s ease-out;
-    transition: margin .25s ease-out;
-  }
-  
-  #sidebar-wrapper .sidebar-heading {
-    padding: 0.875rem 1.25rem;
-    font-size: 1.2rem;
-  }
-  
-  #sidebar-wrapper .list-group {
-    width: 15rem;
-  }
-  
-  #page-content-wrapper {
-    min-width: 100vw;
-  }
-  
-  #wrapper.toggled #sidebar-wrapper {
     margin-left: 0;
   }
-  
-  @media (min-width: 768px) {
-    #sidebar-wrapper {
-      margin-left: 0;
-    }
-  
-    #page-content-wrapper {
-      min-width: 0;
-      width: 100%;
-    }
-  
-    #wrapper.toggled #sidebar-wrapper {
-      margin-left: -15rem;
-    }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
   }
 
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+
 //**///
-.font-bold{
+.font-bold {
   font-weight: 700;
 }
-.font-medium{
+
+.font-medium {
   font-weight: 500;
 }
-.font-regular{
+
+.font-regular {
   font-weight: 400;
 }
-.font-light{
+
+.font-light {
   font-weight: 300;
 }
-.font-thin{
+
+.font-thin {
   font-weight: 100;
 }
+
 .btn-dark-blue {
   -webkit-border-radius: 3;
   -moz-border-radius: 3;
@@ -97,18 +104,23 @@ a { cursor: pointer }
   background: #1cab9f;
   text-decoration: none;
 }
-.txt-color-gray1{
+
+.txt-color-gray1 {
   color: #D5DCE3;
 }
-.txt-color-gray2{
+
+.txt-color-gray2 {
   color: #8996A3;
 }
-.txt-color-dark-blue{
+
+.txt-color-dark-blue {
   color: #242E42;
 }
-.font-size-08{
+
+.font-size-08 {
   font-family: 0.8rem !important;
 }
+
 .imput-gray1 {
   display: block;
   //-webkit-box-sizing: content-box;
@@ -123,9 +135,9 @@ a { cursor: pointer }
   -o-text-overflow: clip;
   text-overflow: clip;
   //background: rgba(220,220,220,1);
-  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0.2) inset;
-  box-shadow: 0 0 0 0 rgba(0,0,0,0.2) inset;
-  text-shadow: 0 0 0 rgba(255,255,255,0.66) ;
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2) inset;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2) inset;
+  text-shadow: 0 0 0 rgba(255, 255, 255, 0.66);
   -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
   -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
   -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
@@ -141,3 +153,69 @@ a { cursor: pointer }
   -webkit-border-radius: 1px;
   border-radius: 1px;
 }
+
+h1 {
+  font-size: 60px !important;
+}
+
+h2 {
+  font-size: 30px !important;
+}
+
+h3 {
+  font-size: 21px !important;
+}
+
+h4 {
+  font-size: 30px !important;
+}
+
+txt-body1 {
+  font-size: 22px;
+}
+
+txt-body2 {
+  font-size: 17px;
+}
+
+.caption {
+  color: #70889E;
+  font-size: 10px;
+}
+
+.ebony-clay {
+  color: #242e42;
+}
+
+.darker-ebony-clay {
+  color: #20293c;
+}
+
+.easter-blue {
+  color: #1caba0
+}
+
+.ebony-clay {
+  color: #242e42;
+}
+
+.darker-ebony-clay {
+  color: #20293c;
+}
+
+.easter-blue {
+  color: #1caba0
+}
+
+label {
+  color: #70889E !important;
+}
+
+bg-state-blue-default{
+  background-color: #242E42;
+}
+bg-state-blue-active{
+  background-color: #242E42;
+}
+
+
