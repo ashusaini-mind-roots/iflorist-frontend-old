@@ -1,0 +1,13 @@
+<svg width="14px" height="13px" viewBox="0 0 14 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Top-Bar-" transform="translate(-18.000000, -18.000000)" stroke="#242E42">
+            <g id="Group" transform="translate(19.000000, 19.000000)">
+                <path d="M0,0.375 L12,0.375" id="Path-2"></path>
+                <path d="M6.75,4.125 L12,4.125" id="Path-2"></path>
+                <path d="M0,7.875 L3.75,4.125" id="Path-2"></path>
+                <path d="M0,11.625 L3.75,7.875" id="Path-2" transform="translate(1.875000, 9.750000) scale(-1, 1) translate(-1.875000, -9.750000) "></path>
+                <path d="M0,7.875 L12,7.875" id="Path-2"></path>
+            </g>
+        </g>
+    </g>
+</svg>
