@@ -1,42 +1,88 @@
-<div class="col-md-6 offset-md-3 mt-5">
-  <div class="card">
-      <h4 class="card-header">General Data</h4>
-      <div class="card-body">
-          <form [formGroup]="SignUpForm">
-              <div class="form-group">
-                  <label for="name">Company name</label>
-                  <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
-                  <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                      <div *ngIf="f.name.errors.required">Company is required</div>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                      <div *ngIf="f.email.errors.required">Email is required</div>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                      <div *ngIf="f.password.errors.required">Password is required</div>
-                  </div>
-              </div>
-              <div class="form-group">
-                    <label for="password">Confirm Password</label>
-                    <input type="password" formControlName="confirm_password" class="form-control" [ngClass]="{ 'is-invalid': submitted && SignUpForm.hasError('notSame') }" />
+<div class="d-flex justify-content-center pt-lg-5 mt-3 mt-xl-5">
+    <div class="card login-loginup-card p-lg-2 align-self-center">
+        <div class="card-body mt-lg-4">
+            <h4 class="card-title text-center mb-4">Sign up</h4>
+
+            <form [formGroup]="SignUpForm">
+                <div class="form-group">
+                    <label for="name" class="font-light txt-color-gray2">Company name</label>
+                    <input type="text" formControlName="name" class="imput-gray1" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Company is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="font-light txt-color-gray2">Email</label>
+                    <input type="text" formControlName="email" class="imput-gray1" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="font-light txt-color-gray2">Password</label>
+                    <input type="password" formControlName="password" class="imput-gray1" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="font-light txt-color-gray2">Confirm Password</label>
+                    <input type="password" formControlName="confirm_password" class="imput-gray1" [ngClass]="{ 'is-invalid': submitted && SignUpForm.hasError('notSame') }" />
                     <div *ngIf="submitted && SignUpForm.hasError('notSame')" class="invalid-feedback">
                         <div *ngIf="SignUpForm.hasError('notSame')">Password do not match</div>
                     </div>
                 </div>
-              <button [disabled]="loading" type="button" (click)="next()" class="btn btn-primary">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                Next
-              </button>
-              <div *ngIf="error_bool" class="alert alert-danger mt-3 mb-0">{{error_msg}}, <a class="" routerLink="">go to Login</a></div>
-          </form>
-      </div>
-  </div>
+                <button [disabled]="loading" type="button" (click)="next()" class="btn-dark-blue w-100 mt-4">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Next
+                </button>
+                <div *ngIf="error_bool" class="alert alert-danger mt-3 mb-0">{{error_msg}}, <a class="font-medium txt-color-dark-blue" routerLink="">go to Login</a></div>
+            </form>
+        </div>
+    </div>
 </div>
+
+
+
+<!--<div class="col-md-6 offset-md-3 mt-5">-->
+  <!--<div class="card">-->
+      <!--<h4 class="card-header">General Data</h4>-->
+      <!--<div class="card-body">-->
+          <!--<form [formGroup]="SignUpForm">-->
+              <!--<div class="form-group">-->
+                  <!--<label for="name">Company name</label>-->
+                  <!--<input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />-->
+                  <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
+                      <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
+                  <!--</div>-->
+              <!--</div>-->
+              <!--<div class="form-group">-->
+                  <!--<label for="email">Email</label>-->
+                  <!--<input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />-->
+                  <!--<div *ngIf="submitted && f.email.errors" class="invalid-feedback">-->
+                      <!--<div *ngIf="f.email.errors.required">Email is required</div>-->
+                  <!--</div>-->
+              <!--</div>-->
+              <!--<div class="form-group">-->
+                  <!--<label for="password">Password</label>-->
+                  <!--<input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />-->
+                  <!--<div *ngIf="submitted && f.password.errors" class="invalid-feedback">-->
+                      <!--<div *ngIf="f.password.errors.required">Password is required</div>-->
+                  <!--</div>-->
+              <!--</div>-->
+              <!--<div class="form-group">-->
+                    <!--<label for="password">Confirm Password</label>-->
+                    <!--<input type="password" formControlName="confirm_password" class="form-control" [ngClass]="{ 'is-invalid': submitted && SignUpForm.hasError('notSame') }" />-->
+                    <!--<div *ngIf="submitted && SignUpForm.hasError('notSame')" class="invalid-feedback">-->
+                        <!--<div *ngIf="SignUpForm.hasError('notSame')">Password do not match</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+              <!--<button [disabled]="loading" type="button" (click)="next()" class="btn btn-primary">-->
+                <!--<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>-->
+                <!--Next-->
+              <!--</button>-->
+              <!--<div *ngIf="error_bool" class="alert alert-danger mt-3 mb-0">{{error_msg}}, <a class="" routerLink="">go to Login</a></div>-->
+          <!--</form>-->
+      <!--</div>-->
+  <!--</div>-->
+<!--</div>-->

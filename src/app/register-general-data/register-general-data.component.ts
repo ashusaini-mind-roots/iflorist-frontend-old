@@ -24,6 +24,7 @@ export class RegisterGeneralDataComponent implements OnInit {
   get formField() { return this.SignUpForm.controls; }
 
   ngOnInit() {
+    document.body.classList.add('bg-login-img');
     this.SignUpForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
