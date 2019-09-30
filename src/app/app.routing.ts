@@ -11,6 +11,8 @@ import {RegisterGeneralDataComponent} from './register-general-data/register-gen
 import {RegisterPlanDataComponent} from './register-plan-data/register-plan-data.component';
 import {RegisterCcDataComponent} from './register-cc-data/register-cc-data.component';
 import {ActivateCompanyComponent} from './activate-company/activate-company.component';
+import {RegisterCheckEmailMessageComponent} from './register-check-email-message/register-check-email-message.component';
+
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
@@ -21,6 +23,7 @@ const routes: Routes = [
     { path: 'register-plan-data', component: RegisterPlanDataComponent },
     { path: 'register-cc-data', component: RegisterCcDataComponent },
     { path: 'activate-company/:activation_code', component: ActivateCompanyComponent },
+    { path: 'check-email-message', component: RegisterCheckEmailMessageComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }

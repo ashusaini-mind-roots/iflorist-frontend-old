@@ -48,9 +48,7 @@ export class RegisterGeneralDataComponent implements OnInit {
 
 
   next(){
-
     this.loading = true;
-
     this.submitted = true;
 
     if (this.SignUpForm.invalid) {
@@ -85,8 +83,6 @@ export class RegisterGeneralDataComponent implements OnInit {
     });
 
     return;
-
-    
   }
 
 }

@@ -20,7 +20,8 @@ import { EditStoreComponent } from './storecrud/edit-store/edit-store.component'
 import { RegisterGeneralDataComponent } from './register-general-data/register-general-data.component';
 import { RegisterPlanDataComponent } from './register-plan-data/register-plan-data.component';
 import { RegisterCcDataComponent } from './register-cc-data/register-cc-data.component';
-import { ActivateCompanyComponent } from './activate-company/activate-company.component'
+import { ActivateCompanyComponent } from './activate-company/activate-company.component';
+import { RegisterCheckEmailMessageComponent } from './register-check-email-message/register-check-email-message.component'
 @NgModule({
     imports: [
         BrowserModule,
@@ -40,7 +41,8 @@ import { ActivateCompanyComponent } from './activate-company/activate-company.co
         RegisterGeneralDataComponent,
         RegisterPlanDataComponent ,
         RegisterCcDataComponent ,
-        ActivateCompanyComponent
+        ActivateCompanyComponent,
+        RegisterCheckEmailMessageComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

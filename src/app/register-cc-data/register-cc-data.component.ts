@@ -134,26 +134,23 @@ export class RegisterCcDataComponent implements OnInit {
 
       event.preventDefault();
       const additionalData = this.getFormData();
-      // console.log(additionalData);
-      // Use Stripe.js to create a token. We only need to pass in one Element
-      // from the Element group in order to create a token. We can also pass
-      // in the additional customer data we collected in our form.
-      this.stripe.createToken(this.cardNumber, additionalData)
-        .then((result) => {
-          if (result.token) {
-            additionalData.stripe_token = result.token.id;
-            // console.log(['onSubmit', additionalData]);
-            this.saveCompanyData(additionalData);
-            // If we received a token, show the token ID.
-            // console.log(result.token.id);
-          } else {
-            displayError.textContent = 'No token';
-          }
-        });
-      // console.log('good');
-    }
 
-    // console.log('Your form data : ', this.SignUpForm.value);
+      additionalData.stripe_token = "pepetokensoloparalocal";
+      this.saveCompanyData(additionalData);
+      //codigo funcionando correctamente, descomentariar para subir al repo
+      // this.stripe.createToken(this.cardNumber, additionalData)
+      //   .then((result) => {
+      //     if (result.token) {
+      //       additionalData.stripe_token = result.token.id;
+      //       // console.log(['onSubmit', additionalData]);
+      //       this.saveCompanyData(additionalData);
+      //       // If we received a token, show the token ID.
+      //       // console.log(result.token.id);
+      //     } else {
+      //       displayError.textContent = 'No token';
+      //     }
+      //   });
+    }
   }
 
 //   next() {
@@ -304,8 +301,11 @@ export class RegisterCcDataComponent implements OnInit {
     // console.log(this.data);
     this.companyService.create(this.data)
       .subscribe((data: any) => {
+      console.log(this.data);
           // console.log(data.plans);
-          this.router.navigate(['home']);
+         // this.router.navigate(['home']);
+            this.router.navigate(['check-email-message', { email: this.data.email }]);
+            this.loading = false;
         },
         error => {
           this.loading = false;
