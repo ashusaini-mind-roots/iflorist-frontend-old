@@ -20,10 +20,20 @@
         <a class="d-inline-flex py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/home">
           <div class="icon dashboard-icon ml-4 mr-4"></div>Dashboard
         </a>
-        <a class="d-inline-flex py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/stores">
-          <div class="icon dashboard-icon ml-4 mr-4"></div>Stores
+
+        <a class="d-inline-flex dropdown-btn py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular">
+          <div class="icon-14 setting-icon ml-4 mr-4"></div>Modules
+
         </a>
-        <a class="py-3 pl-4 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="#" *ngFor = "let module of modules">{{module.name}}</a>
+        <div class="dropdown-container">
+          <a class="py-3 pl-6 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="#" *ngFor = "let module of modules">{{module.name}}</a>
+        </div>
+
+
+        <a class="d-inline-flex py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/stores">
+          <div class="icon-14 setting-icon ml-4 mr-4"></div>Stores
+        </a>
+
         <a class="d-inline-flex py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/home" (click)="logout()">
           <div class="icon-14 logout-icon ml-4 mr-4"></div>Log out
         </a>

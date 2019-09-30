@@ -13,6 +13,25 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
   <!-- bootstrap css -->
   <!--<link href="//netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />-->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+        });
+      }
+    });
+  </script>
 </head>
 <body>
 <app>Loading...</app>
