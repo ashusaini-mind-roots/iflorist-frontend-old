@@ -49,6 +49,7 @@ export class RegisterCcDataComponent implements OnInit {
   }
 
   ngOnInit() {
+    document.body.classList.add('bg-login-img');
     this.createSignUpForm();
     // https://stripe.com/docs/stripe-js/reference#elements-create
     const elements = this.stripe.elements({
@@ -140,10 +141,11 @@ export class RegisterCcDataComponent implements OnInit {
       //codigo funcionando correctamente, descomentariar para subir al repo
       // this.stripe.createToken(this.cardNumber, additionalData)
       //   .then((result) => {
+      //     console.log(result)
       //     if (result.token) {
       //       additionalData.stripe_token = result.token.id;
       //       // console.log(['onSubmit', additionalData]);
-      //       this.saveCompanyData(additionalData);
+      //      // this.saveCompanyData(additionalData);
       //       // If we received a token, show the token ID.
       //       // console.log(result.token.id);
       //     } else {

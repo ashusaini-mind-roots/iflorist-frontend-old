@@ -1,143 +1,379 @@
-<div class="row justify-content-center" >
+<div class="d-flex justify-content-center pt-lg-5 mt-2 mt-xl-4 ">
+  <div class="card login-loginup-card p-lg-2 align-self-center max-w-600">
+    <div class="card-body mt-lg-4">
+      <h4 class="card-title text-center mb-4">Sign up</h4>
+      <form method="post" id="payment-form"
+            [formGroup]="SignUpForm">
+        <div class="row">
+<div class="col">
+          <div class="form-group">
+            <label for="name" class="font-light txt-color-gray2">Credit Card Holder Name</label>
+            <input type="text"
+            name="card_holder_name" id="card_holder_name"
+            autocomplete="name"
+            class="input empty imput-gray1"
+            formControlName="card_holder_name"
+            [ngClass]="{ 'is-invalid': submitted && f.card_holder_name.errors }"/>
+            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
+              <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
+            <!--</div>-->
+          </div>
+</div>
 
-  <div class="col-md-6  mt-5">
-    <div class="card">
-      <h4 class="card-header">Card</h4>
-      <div class="card-body">
-        <div class="cell example example2">
-          <form method="post" id="payment-form"
-               [formGroup]="SignUpForm">
-            <div class="row">
-              <div class="field">
-                <input type="text"
-                       name="card_holder_name" id="card_holder_name"
-                       autocomplete="name"
-                       class="input empty"
-                       formControlName="card_holder_name"
-                       [ngClass]="{ 'is-invalid': submitted && f.card_holder_name.errors }"
-                />
-                <label for="card_holder_name">Credit Card Holder Name</label>
-                <div class="baseline"></div>
-              </div>
-            </div>
+          <!--<div class="field">-->
+            <!--<input type="text"-->
+                   <!--name="card_holder_name" id="card_holder_name"-->
+                   <!--autocomplete="name"-->
+                   <!--class="input empty"-->
+                   <!--formControlName="card_holder_name"-->
+                   <!--[ngClass]="{ 'is-invalid': submitted && f.card_holder_name.errors }"-->
+            <!--/>-->
+            <!--<label for="card_holder_name">Credit Card Holder Name</label>-->
+            <!--<div class="baseline"></div>-->
+          <!--</div>-->
 
-            <div class="row">
-
-              <div class="field">
-                <div id="example2-card-number" class="input empty"></div>
-                <label for="example2-card-number">Card Number</label>
-                <div class="baseline"></div>
-              </div>
-
-            </div>
-
-            <div class="row">
-              <div class="field half-width">
-                <div id="example2-card-expiry" class="input empty"></div>
-                <label for="example2-card-expiry">Expiration</label>
-                <div class="baseline"></div>
-              </div>
-
-              <div class="field half-width">
-                <div id="example2-card-cvc" class="input empty"></div>
-                <label for="example2-card-cvc">CVC</label>
-                <div class="baseline"></div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="field half-width">
-                <input id="example2-street1" type="text"
-                       name="ba_street"
-                       autocomplete="address-line1"
-                       class="input empty"
-                       formControlName="ba_street"
-                       [ngClass]="{ 'is-invalid': submitted && f.ba_street.errors }"/>
-                <label for="ba_street">Street</label>
-                <div class="baseline"></div>
-                <div *ngIf="submitted && f.ba_street.errors" class="invalid-feedback">
-                  <div *ngIf="f.ba_street.errors.required">Street 1 is required</div>
-                </div>
-              </div>
-
-              <div class="field half-width">
-
-                <input type="text"
-                       name="ba_street2"
-                       autocomplete="address-line2"
-                       class="input empty"
-                       formControlName="ba_street2"
-                       [ngClass]="{ 'is-invalid': submitted && f.ba_street2.errors }"/>
-                <label for="ba_street2">Street 2</label>
-                <div class="baseline"></div>
-                <div *ngIf="submitted && f.ba_street2.errors" class="invalid-feedback">
-                  <div *ngIf="f.ba_street2.errors.required">Street 2 is required</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="field quarter-width">
-
-
-                <input type="text"
-                       autocomplete="address-level2"
-                       name="ba_city" class="input empty"
-                       formControlName="ba_city"
-                       [ngClass]="{ 'is-invalid': submitted && f.ba_city.errors }"/>
-                <label for="ba_city">City</label>
-                <div class="baseline"></div>
-                <div *ngIf="submitted && f.ba_city.errors" class="invalid-feedback">
-                  <div *ngIf="f.ba_city.errors.required">City is required</div>
-                </div>
-              </div>
-
-              <div class="field quarter-width">
-
-                <input type="text"
-                       autocomplete="address-level1"
-                       name="ba_state" class="input empty"
-                       formControlName="ba_state"
-                       [ngClass]="{ 'is-invalid': submitted && f.ba_state.errors }"/>
-                <label for="ba_state">State</label>
-                <div class="baseline"></div>
-                <div *ngIf="submitted && f.ba_state.errors" class="invalid-feedback">
-                  <div *ngIf="f.ba_state.errors.required">State is required</div>
-                </div>
-              </div>
-              <div class="field quarter-width">
-
-                <input type="text"
-                       automcomplete="postal-code"
-                       name="ba_zip_code" class="input empty"
-                       formControlName="ba_zip_code"
-                       [ngClass]="{ 'is-invalid': submitted && f.ba_zip_code.errors }"/>
-                <label for="ba_zip_code">Zip Code</label>
-                <div class="baseline"></div>
-                <div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">
-                  <div *ngIf="f.ba_zip_code.errors.required">Zip Code is required</div>
-                  <div *ngIf="f.ba_zip_code.errors.maxlength">Zip Code max length is 5</div>
-                  <div *ngIf="f.ba_zip_code.errors.pattern">Zip Code only number</div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-
-            </div>
-            <button (click)="onSubmit()" [disabled]="loading" type="button" class="btn btn-primary">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-              Next
-            </button>
-            <div class="row">
-              <div class="col-12">
-                <div *ngIf="error_bool" class="alert alert-danger mt-3 mb-0">{{error_msg}}</div>
-                <div id="card-errors" class="error mt-3" role="alert"></div>
-              </div>
-            </div>
-
-          </form>
         </div>
-      </div>
+
+        <div class="row">
+        <div class="col">
+          <div class="field">
+            <label for="example2-card-number" class="font-light txt-color-gray2">Card Number</label>
+            <div id="example2-card-number" class="input empty"></div>
+            <!--<label for="example2-card-number">Card Number</label>-->
+            <div class="baseline"></div>
+          </div>
+
+        </div>
+        </div>
+        <div class="row">
+          <div class="col">
+          <div class="field half-width">
+            <label for="example2-card-expiry" class="font-light txt-color-gray2">Expiration</label>
+            <div id="example2-card-expiry" class="input empty"></div>
+            <!--<label for="example2-card-expiry">Expiration</label>-->
+            <div class="baseline"></div>
+          </div>
+          </div>
+          <div class="col">
+          <div class="field half-width">
+              <label for="example2-card-cvc" class="font-light txt-color-gray2">CVC</label>
+            <div id="example2-card-cvc" class="input empty"></div>
+            <!--<label for="example2-card-cvc">CVC</label>-->
+            <div class="baseline"></div>
+          </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+          <div class="form-group">
+            <label for="ba_street" class="font-light txt-color-gray2">Street</label>
+            <input type="text"
+                   name="ba_street" id="ba_street"
+                   autocomplete="address-line1"
+                   class="input empty imput-gray1"
+                   formControlName="ba_street"
+                   [ngClass]="{ 'is-invalid': submitted && f.ba_street.errors }"/>
+            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
+            <!--</div>-->
+          </div>
+          </div>
+
+          <!--<div class="field half-width">-->
+            <!--<input id="example2-street1" type="text"-->
+                   <!--name="ba_street"-->
+                   <!--autocomplete="address-line1"-->
+                   <!--class="input empty"-->
+                   <!--formControlName="ba_street"-->
+                   <!--[ngClass]="{ 'is-invalid': submitted && f.ba_street.errors }"/>-->
+            <!--<label for="ba_street">Street</label>-->
+            <!--<div class="baseline"></div>-->
+            <!--<div *ngIf="submitted && f.ba_street.errors" class="invalid-feedback">-->
+              <!--<div *ngIf="f.ba_street.errors.required">Street 1 is required</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <div class="col">
+          <div class="form-group">
+            <label for="ba_street2" class="font-light txt-color-gray2">Street 2</label>
+            <input type="text"
+                   name="ba_street2" id="ba_street2"
+                   autocomplete="address-line2"
+                   class="input empty imput-gray1"
+                   formControlName="ba_street2"
+                   [ngClass]="{ 'is-invalid': submitted && f.ba_street2.errors }"/>
+            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
+            <!--</div>-->
+          </div>
+          </div>
+          <!--<div class="field half-width">-->
+
+            <!--<input type="text"-->
+                   <!--name="ba_street2"-->
+                   <!--autocomplete="address-line2"-->
+                   <!--class="input empty"-->
+                   <!--formControlName="ba_street2"-->
+                   <!--[ngClass]="{ 'is-invalid': submitted && f.ba_street2.errors }"/>-->
+            <!--<label for="ba_street2">Street 2</label>-->
+            <!--<div class="baseline"></div>-->
+            <!--<div *ngIf="submitted && f.ba_street2.errors" class="invalid-feedback">-->
+              <!--<div *ngIf="f.ba_street2.errors.required">Street 2 is required</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+
+        <div class="row">
+          <div class="col">
+          <div class="form-group ">
+            <label for="ba_city" class="font-light txt-color-gray2">City</label>
+            <input type="text"
+                   name="ba_city" id="ba_city"
+                   autocomplete="address-level2"
+                   class="input empty imput-gray1"
+                   formControlName="ba_city"
+                   [ngClass]="{ 'is-invalid': submitted && f.ba_city.errors }"/>
+            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
+            <!--</div>-->
+          </div>
+          </div>
+
+          <!--<div class="field quarter-width">-->
+
+
+            <!--<input type="text"-->
+                   <!--autocomplete="address-level2"-->
+                   <!--name="ba_city" class="input empty"-->
+                   <!--formControlName="ba_city"-->
+                   <!--[ngClass]="{ 'is-invalid': submitted && f.ba_city.errors }"/>-->
+            <!--<label for="ba_city">City</label>-->
+            <!--<div class="baseline"></div>-->
+            <!--<div *ngIf="submitted && f.ba_city.errors" class="invalid-feedback">-->
+              <!--<div *ngIf="f.ba_city.errors.required">City is required</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <div class="col">
+          <div class="form-group">
+            <label for="ba_state" class="font-light txt-color-gray2">State</label>
+            <input type="text"
+                   name="ba_state" id="ba_state"
+                   autocomplete="address-level1"
+                   class="input empty imput-gray1"
+                   formControlName="ba_state"
+                   [ngClass]="{ 'is-invalid': submitted && f.ba_state.errors }"/>
+            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
+            <!--</div>-->
+          </div>
+          </div>
+          <!--<div class="field quarter-width">-->
+
+            <!--<input type="text"-->
+                   <!--autocomplete="address-level1"-->
+                   <!--name="ba_state" class="input empty"-->
+                   <!--formControlName="ba_state"-->
+                   <!--[ngClass]="{ 'is-invalid': submitted && f.ba_state.errors }"/>-->
+            <!--<label for="ba_state">State</label>-->
+            <!--<div class="baseline"></div>-->
+            <!--<div *ngIf="submitted && f.ba_state.errors" class="invalid-feedback">-->
+              <!--<div *ngIf="f.ba_state.errors.required">State is required</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <div class="col">
+          <div class="form-group">
+            <label for="ba_zip_code" class="font-light txt-color-gray2">City</label>
+            <input type="text"
+                   name="ba_zip_code" id="ba_zip_code"
+                   autocomplete="postal-code"
+                   class="input empty imput-gray1"
+                   formControlName="ba_zip_code"
+                   [ngClass]="{ 'is-invalid': submitted && f.ba_zip_code.errors }"/>
+            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
+            <!--</div>-->
+          </div>
+          </div>
+          <!--<div class="field quarter-width">-->
+
+            <!--<input type="text"-->
+                   <!--automcomplete="postal-code"-->
+                   <!--name="ba_zip_code" class="input empty"-->
+                   <!--formControlName="ba_zip_code"-->
+                   <!--[ngClass]="{ 'is-invalid': submitted && f.ba_zip_code.errors }"/>-->
+            <!--<label for="ba_zip_code">Zip Code</label>-->
+            <!--<div class="baseline"></div>-->
+            <!--<div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">-->
+              <!--<div *ngIf="f.ba_zip_code.errors.required">Zip Code is required</div>-->
+              <!--<div *ngIf="f.ba_zip_code.errors.maxlength">Zip Code max length is 5</div>-->
+              <!--<div *ngIf="f.ba_zip_code.errors.pattern">Zip Code only number</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+        <!--<div class="form-group row">-->
+
+        <!--</div>-->
+        <button (click)="onSubmit()" [disabled]="loading" type="button" class="btn-dark-blue">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Next
+        </button>
+        <div class="row">
+          <div class="col-12">
+            <div *ngIf="error_bool" class="alert alert-danger mt-3 mb-0">{{error_msg}}</div>
+            <div id="card-errors" class="error mt-3" role="alert"></div>
+          </div>
+        </div>
+
+      </form>
     </div>
   </div>
 </div>
+
+
+
+<!--<div class="row justify-content-center" >-->
+
+  <!--<div class="col-md-6  mt-5">-->
+    <!--<div class="card">-->
+      <!--<h4 class="card-header">Card</h4>-->
+      <!--<div class="card-body">-->
+        <!--<div class="cell example example2">-->
+          <!--<form method="post" id="payment-form"-->
+               <!--[formGroup]="SignUpForm">-->
+            <!--<div class="row">-->
+
+              <!--<div class="field">-->
+                <!--<input type="text"-->
+                       <!--name="card_holder_name" id="card_holder_name"-->
+                       <!--autocomplete="name"-->
+                       <!--class="input empty"-->
+                       <!--formControlName="card_holder_name"-->
+                       <!--[ngClass]="{ 'is-invalid': submitted && f.card_holder_name.errors }"-->
+                <!--/>-->
+                <!--<label for="card_holder_name">Credit Card Holder Name</label>-->
+                <!--<div class="baseline"></div>-->
+              <!--</div>-->
+
+            <!--</div>-->
+
+            <!--<div class="row">-->
+
+              <!--<div class="field">-->
+                <!--<div id="example2-card-number" class="input empty"></div>-->
+                <!--<label for="example2-card-number">Card Number</label>-->
+                <!--<div class="baseline"></div>-->
+              <!--</div>-->
+
+            <!--</div>-->
+
+            <!--<div class="row">-->
+              <!--<div class="field half-width">-->
+                <!--<div id="example2-card-expiry" class="input empty"></div>-->
+                <!--<label for="example2-card-expiry">Expiration</label>-->
+                <!--<div class="baseline"></div>-->
+              <!--</div>-->
+
+              <!--<div class="field half-width">-->
+                <!--<div id="example2-card-cvc" class="input empty"></div>-->
+                <!--<label for="example2-card-cvc">CVC</label>-->
+                <!--<div class="baseline"></div>-->
+              <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="row">-->
+              <!--<div class="field half-width">-->
+                <!--<input id="example2-street1" type="text"-->
+                       <!--name="ba_street"-->
+                       <!--autocomplete="address-line1"-->
+                       <!--class="input empty"-->
+                       <!--formControlName="ba_street"-->
+                       <!--[ngClass]="{ 'is-invalid': submitted && f.ba_street.errors }"/>-->
+                <!--<label for="ba_street">Street</label>-->
+                <!--<div class="baseline"></div>-->
+                <!--<div *ngIf="submitted && f.ba_street.errors" class="invalid-feedback">-->
+                  <!--<div *ngIf="f.ba_street.errors.required">Street 1 is required</div>-->
+                <!--</div>-->
+              <!--</div>-->
+
+              <!--<div class="field half-width">-->
+
+                <!--<input type="text"-->
+                       <!--name="ba_street2"-->
+                       <!--autocomplete="address-line2"-->
+                       <!--class="input empty"-->
+                       <!--formControlName="ba_street2"-->
+                       <!--[ngClass]="{ 'is-invalid': submitted && f.ba_street2.errors }"/>-->
+                <!--<label for="ba_street2">Street 2</label>-->
+                <!--<div class="baseline"></div>-->
+                <!--<div *ngIf="submitted && f.ba_street2.errors" class="invalid-feedback">-->
+                  <!--<div *ngIf="f.ba_street2.errors.required">Street 2 is required</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="row">-->
+              <!--<div class="field quarter-width">-->
+
+
+                <!--<input type="text"-->
+                       <!--autocomplete="address-level2"-->
+                       <!--name="ba_city" class="input empty"-->
+                       <!--formControlName="ba_city"-->
+                       <!--[ngClass]="{ 'is-invalid': submitted && f.ba_city.errors }"/>-->
+                <!--<label for="ba_city">City</label>-->
+                <!--<div class="baseline"></div>-->
+                <!--<div *ngIf="submitted && f.ba_city.errors" class="invalid-feedback">-->
+                  <!--<div *ngIf="f.ba_city.errors.required">City is required</div>-->
+                <!--</div>-->
+              <!--</div>-->
+
+              <!--<div class="field quarter-width">-->
+
+                <!--<input type="text"-->
+                       <!--autocomplete="address-level1"-->
+                       <!--name="ba_state" class="input empty"-->
+                       <!--formControlName="ba_state"-->
+                       <!--[ngClass]="{ 'is-invalid': submitted && f.ba_state.errors }"/>-->
+                <!--<label for="ba_state">State</label>-->
+                <!--<div class="baseline"></div>-->
+                <!--<div *ngIf="submitted && f.ba_state.errors" class="invalid-feedback">-->
+                  <!--<div *ngIf="f.ba_state.errors.required">State is required</div>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="field quarter-width">-->
+
+                <!--<input type="text"-->
+                       <!--automcomplete="postal-code"-->
+                       <!--name="ba_zip_code" class="input empty"-->
+                       <!--formControlName="ba_zip_code"-->
+                       <!--[ngClass]="{ 'is-invalid': submitted && f.ba_zip_code.errors }"/>-->
+                <!--<label for="ba_zip_code">Zip Code</label>-->
+                <!--<div class="baseline"></div>-->
+                <!--<div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">-->
+                  <!--<div *ngIf="f.ba_zip_code.errors.required">Zip Code is required</div>-->
+                  <!--<div *ngIf="f.ba_zip_code.errors.maxlength">Zip Code max length is 5</div>-->
+                  <!--<div *ngIf="f.ba_zip_code.errors.pattern">Zip Code only number</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group row">-->
+
+            <!--</div>-->
+            <!--<button (click)="onSubmit()" [disabled]="loading" type="button" class="btn btn-primary">-->
+              <!--<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>-->
+              <!--Next-->
+            <!--</button>-->
+            <!--<div class="row">-->
+              <!--<div class="col-12">-->
+                <!--<div *ngIf="error_bool" class="alert alert-danger mt-3 mb-0">{{error_msg}}</div>-->
+                <!--<div id="card-errors" class="error mt-3" role="alert"></div>-->
+              <!--</div>-->
+            <!--</div>-->
+
+          <!--</form>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
