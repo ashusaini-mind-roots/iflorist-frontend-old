@@ -23,7 +23,7 @@ export class StoreService {
   }
 
     createStore(store_name,contact_email,contact_phone,zip_code,address) {
-        // store_name: $scope.store.store_name, contact_email: $scope.store.contact_email,
+        /// store_name: $scope.store.store_name, contact_email: $scope.store.contact_email,
         // contact_phone: $scope.store.contact_phone, zip_code: $scope.store.zip_code,
         // address: $scope.store.address},
         return this.http.post(`${environment.apiUrl}/store/create`, {store_name, contact_email, contact_phone, zip_code, address} );
