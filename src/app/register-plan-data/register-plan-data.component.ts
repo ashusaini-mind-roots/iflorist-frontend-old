@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import {PlanService} from '../_services'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {RouterService} from '../_services/router.service';
 
 @Component({
   selector: 'app-register-plan-data',
@@ -21,14 +22,21 @@ export class RegisterPlanDataComponent implements OnInit {
   error: boolean;
   plan_cost:string = '';
 
-  constructor(private activateRoute: ActivatedRoute, private planService:PlanService, private router: Router) { }
+  constructor(private activateRoute: ActivatedRoute, private planService:PlanService, private router: Router,  private routerService: RouterService) { }
 
   ngOnInit() {
-    this.sub = this.activateRoute.params.subscribe(params=>{
+    /*this.sub = this.activateRoute.params.subscribe(params=>{
         this.name = params.name;
         this.password = params.password;
         this.email = params.email;
-    });
+    });*/
+    if(this.routerService.getRouterData()!=undefined)
+    {
+        this.name = this.routerService.getRouterData()[0]['name'];
+        this.password = this.routerService.getRouterData()[0]['password'];
+        this.email = this.routerService.getRouterData()[0]['email'];
+        //this.routerService.setRouterData(undefined);
+    }
     console.log(this.password);
     this.loaded = true;
     this.loadPlans();
@@ -44,6 +52,11 @@ export class RegisterPlanDataComponent implements OnInit {
 
   next(){
 
+    if(this.routerService.getRouterData()==undefined)
+    {
+      return;
+    }
+
     if(this.plan_cost!='')
     {
        this.id_plans.push(this.plan_cost);
@@ -56,7 +69,15 @@ export class RegisterPlanDataComponent implements OnInit {
         return;
     }
 
-    this.router.navigate(['register-cc-data', { name: this.name, password: this.password, email: this.email, id_plans: this.id_plans }  ])
+    type type = Array <{name:string,password:any,email:any,id_plans:any}>;
+    const data: type = [
+        {name:this.name,password:this.password,email:this.email,id_plans: this.id_plans}
+    ];
+    this.routerService.setRouterData(undefined);
+    this.routerService.setRouterData(data);
+
+    //this.router.navigate(['register-cc-data', { name: this.name, password: this.password, email: this.email, id_plans: this.id_plans }  ])
+    this.router.navigate(['register-cc-data']);
   }
 
   changePlansCost(id:string)

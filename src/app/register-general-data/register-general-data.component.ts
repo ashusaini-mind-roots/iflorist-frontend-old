@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {CompanyService} from '../_services/company.service'
+import {CompanyService} from '../_services/company.service';
+import {RouterService} from '../_services/router.service';
 
 @Component({
   /*selector: 'app-register-general-data',*/
@@ -19,7 +20,7 @@ export class RegisterGeneralDataComponent implements OnInit {
   private data: any;
   
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private companyService:CompanyService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private companyService:CompanyService, private routerService: RouterService) { }
 
   get formField() { return this.SignUpForm.controls; }
 
@@ -72,7 +73,13 @@ export class RegisterGeneralDataComponent implements OnInit {
         this.error_msg = data.error;
       }
       else{
-        this.router.navigate(['register-plan-data', { name: this.formField.name.value, password: this.formField.password.value, email: this.formField.email.value }  ]);
+        type type = Array <{name:string,password:any,email:any}>;
+        const data: type = [
+            {name:this.formField.name.value,password:this.formField.password.value,email:this.formField.email.value}
+        ];
+        this.routerService.setRouterData(data);
+        //this.router.navigate(['register-plan-data', { name: this.formField.name.value, password: this.formField.password.value, email: this.formField.email.value }  ]);
+        this.router.navigate(['register-plan-data']);
       }
     },
     error => {

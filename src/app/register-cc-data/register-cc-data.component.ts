@@ -6,6 +6,7 @@ import {Observable, throwError} from 'rxjs';
 import {retry, catchError} from 'rxjs/operators';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap' ;
 import {UtilsService} from '../_services/utils.service';
+import {RouterService} from '../_services/router.service';
 
 declare var Stripe: any;
 
@@ -43,6 +44,7 @@ export class RegisterCcDataComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private utils: UtilsService,
+    private routerService: RouterService
   ) {
     this.stripe = Stripe('pk_test_EIdZt3Y9gtHvtNEnRcRxcDWl');
 
@@ -240,12 +242,21 @@ export class RegisterCcDataComponent implements OnInit {
       card_holder_name: ['', Validators.required],
     });
 
-    this.sub = this.route.params.subscribe(params => {
+    /*this.sub = this.route.params.subscribe(params => {
       this.name = params.name;
       this.password = params.password;
       this.email = params.email;
       this.id_plans = params.id_plans;
-    });
+    });*/
+    if(this.routerService.getRouterData()!=undefined)
+    {
+        console.log(this.routerService.getRouterData());
+        this.name = this.routerService.getRouterData()[0]['name'];
+        this.password = this.routerService.getRouterData()[0]['password'];
+        this.email = this.routerService.getRouterData()[0]['email'];
+        this.id_plans = this.routerService.getRouterData()[0]['id_plans'];
+        
+    }
   }
 
   floatingLabels() {
@@ -284,6 +295,10 @@ export class RegisterCcDataComponent implements OnInit {
   saveCompanyData(formData) {
     this.loading = true;
     // console.log(['formData', formData]);
+    if(this.routerService.getRouterData()==undefined)
+    {
+      return;
+    }
     this.data = {
       card_token: formData.stripe_token,
       name: formData.name,
@@ -297,7 +312,7 @@ export class RegisterCcDataComponent implements OnInit {
       card_holder_name: formData.name,
       company_nane: this.name,
 
-      plans: this.id_plans.split(','),
+      plans: this.id_plans,
     };
 
     // console.log(this.data);
@@ -306,6 +321,7 @@ export class RegisterCcDataComponent implements OnInit {
       console.log(this.data);
           // console.log(data.plans);
          // this.router.navigate(['home']);
+            this.routerService.setRouterData(undefined);
             this.router.navigate(['check-email-message', { email: this.data.email }]);
             this.loading = false;
         },
