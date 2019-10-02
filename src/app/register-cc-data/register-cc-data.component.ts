@@ -64,10 +64,10 @@ export class RegisterCcDataComponent implements OnInit {
 
     const elementStyles = {
       base: {
-        color: '#32325D',
+        color: '#333333',
         fontWeight: 500,
-        fontFamily: 'Source Code Pro, Consolas, Menlo, monospace',
-        fontSize: '16px',
+        //fontFamily: 'Source Code Pro, Consolas, Menlo, monospace',
+        //fontSize: '16px',
         fontSmoothing: 'antialiased',
 
         '::placeholder': {
