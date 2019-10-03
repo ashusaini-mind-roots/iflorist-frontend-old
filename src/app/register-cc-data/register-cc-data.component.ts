@@ -66,18 +66,18 @@ export class RegisterCcDataComponent implements OnInit {
 
     const elementStyles = {
       base: {
-        color: '#333333',
-        fontWeight: 500,
-        //fontFamily: 'Source Code Pro, Consolas, Menlo, monospace',
-        //fontSize: '16px',
-        fontSmoothing: 'antialiased',
+         color: '#8996A3',
+        // fontWeight: 500,
+        // //fontFamily: 'Source Code Pro, Consolas, Menlo, monospace',
+        fontSize: '12px',
+        // fontSmoothing: 'antialiased',
 
         '::placeholder': {
-          color: '#CFD7DF',
+          color: '#D5DCE3',
         },
-        ':-webkit-autofill': {
-          color: '#e39f48',
-        },
+        // ':-webkit-autofill': {
+        //   color: '#e39f48',
+        // },
       },
       invalid: {
         color: '#E25950',
@@ -87,23 +87,45 @@ export class RegisterCcDataComponent implements OnInit {
         },
       },
     };
+    const expirationElementStyles = {
+      base: {
+        color: '#8996A3',
+        // fontWeight: 500,
+        // //fontFamily: 'Source Code Pro, Consolas, Menlo, monospace',
+        fontSize: '12px',
+        // fontSmoothing: 'antialiased',
 
-    const elementClasses = {
-      focus: 'focused',
-      empty: 'empty',
-      invalid: 'invalid',
+        '::placeholder': {
+          color: '#999999',
+        },
+        // ':-webkit-autofill': {
+        //   color: '#e39f48',
+        // },
+      },
+      invalid: {
+        color: '#E25950',
+
+        '::placeholder': {
+          color: '#FFCCA5',
+        },
+      },
     };
+    // const elementClasses = {
+    //   focus: 'focused',
+    //   empty: 'empty',
+    //   invalid: 'invalid',
+    // };
     this.cardNumber = elements.create('cardNumber', {
       style: elementStyles,
-      classes: elementClasses,
+      // classes: elementClasses,
     });
 
     this.cardNumber.mount('#example2-card-number');
     this.validate(this.cardNumber);
 
     const cardExpiry = elements.create('cardExpiry', {
-      style: elementStyles,
-      classes: elementClasses,
+      style: expirationElementStyles,
+      // classes: elementClasses,
     });
     cardExpiry.mount('#example2-card-expiry');
     this.validate(cardExpiry);
@@ -111,7 +133,7 @@ export class RegisterCcDataComponent implements OnInit {
 
     const cardCvc = elements.create('cardCvc', {
       style: elementStyles,
-      classes: elementClasses,
+      // classes: elementClasses,
     });
     cardCvc.mount('#example2-card-cvc');
     this.validate(cardCvc);
@@ -126,9 +148,10 @@ export class RegisterCcDataComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
     const displayError = document.getElementById('card-errors');
     if (this.SignUpForm.invalid) {
-      displayError.textContent = 'Form invalid';
+      displayError.textContent = 'Form fields are invalid';
       return false;
     } else {
       displayError.textContent = '';
@@ -255,7 +278,6 @@ export class RegisterCcDataComponent implements OnInit {
         this.password = this.routerService.getRouterData()[0]['password'];
         this.email = this.routerService.getRouterData()[0]['email'];
         this.id_plans = this.routerService.getRouterData()[0]['id_plans'];
-        
     }
   }
 
@@ -279,6 +301,8 @@ export class RegisterCcDataComponent implements OnInit {
     });
   }
 
+  // used for validations on html file
+  get f() { return this.SignUpForm.controls; }
   getFormData() {
     const additionalData = {
       name: this.SignUpForm.value.card_holder_name || undefined,

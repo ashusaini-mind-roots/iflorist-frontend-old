@@ -15,7 +15,7 @@ export class RegisterCheckEmailMessageComponent implements OnInit {
     document.body.classList.add('bg-login-img');
 
     this.activateRoute.params.subscribe(params=>{
-      console.log("ke pinga e: "+ params.email)
+      // console.log("params.email)
       this.email = params.email;
     });
   }

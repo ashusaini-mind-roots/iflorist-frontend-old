@@ -36,9 +36,9 @@
 
         <div class="row">
         <div class="col">
-          <div class="field">
+          <div class="field form-group">
             <label for="example2-card-number" class="font-light txt-color-gray2">Card Number</label>
-            <div id="example2-card-number" class="input empty"></div>
+            <div id="example2-card-number" class="imput-gray1"></div>
             <!--<label for="example2-card-number">Card Number</label>-->
             <div class="baseline"></div>
           </div>
@@ -47,17 +47,17 @@
         </div>
         <div class="row">
           <div class="col">
-          <div class="field half-width">
+          <div class="field half-width form-group">
             <label for="example2-card-expiry" class="font-light txt-color-gray2">Expiration</label>
-            <div id="example2-card-expiry" class="input empty"></div>
+            <div id="example2-card-expiry" class="imput-gray1"></div>
             <!--<label for="example2-card-expiry">Expiration</label>-->
             <div class="baseline"></div>
           </div>
           </div>
           <div class="col">
-          <div class="field half-width">
+          <div class="field half-width form-group" >
               <label for="example2-card-cvc" class="font-light txt-color-gray2">CVC</label>
-            <div id="example2-card-cvc" class="input empty"></div>
+            <div id="example2-card-cvc" class="imput-gray1"></div>
             <!--<label for="example2-card-cvc">CVC</label>-->
             <div class="baseline"></div>
           </div>
@@ -183,16 +183,19 @@
           <!--</div>-->
           <div class="col">
           <div class="form-group">
-            <label for="ba_zip_code" class="font-light txt-color-gray2">City</label>
+            <label for="ba_zip_code" class="font-light txt-color-gray2">Zip Code</label>
             <input type="text"
                    name="ba_zip_code" id="ba_zip_code"
                    autocomplete="postal-code"
                    class="input empty imput-gray1"
                    formControlName="ba_zip_code"
                    [ngClass]="{ 'is-invalid': submitted && f.ba_zip_code.errors }"/>
-            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
-            <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
-            <!--</div>-->
+              <div class="baseline"></div>
+              <div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">
+                  <div *ngIf="f.ba_zip_code.errors.required">Zip Code is required</div>
+                  <div *ngIf="f.ba_zip_code.errors.maxlength">Zip Code max length is 5</div>
+                  <div *ngIf="f.ba_zip_code.errors.pattern">Zip Code only number</div>
+              </div>
           </div>
           </div>
           <!--<div class="field quarter-width">-->
