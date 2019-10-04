@@ -14,9 +14,9 @@
             class="input empty imput-gray1"
             formControlName="card_holder_name"
             [ngClass]="{ 'is-invalid': submitted && f.card_holder_name.errors }"/>
-            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
-              <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
-            <!--</div>-->
+            <div *ngIf="submitted && f.card_holder_name.errors" class="invalid-feedback">
+              <div *ngIf="f.card_holder_name.errors.required">Company is required</div>
+            </div>
           </div>
 </div>
 
@@ -74,9 +74,9 @@
                    class="input empty imput-gray1"
                    formControlName="ba_street"
                    [ngClass]="{ 'is-invalid': submitted && f.ba_street.errors }"/>
-            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
-            <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
-            <!--</div>-->
+            <div *ngIf="submitted && f.ba_street.errors" class="invalid-feedback">
+            <div *ngIf="f.ba_street.errors.required">Street is required</div>
+            </div>
           </div>
           </div>
 
@@ -102,9 +102,9 @@
                    class="input empty imput-gray1"
                    formControlName="ba_street2"
                    [ngClass]="{ 'is-invalid': submitted && f.ba_street2.errors }"/>
-            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
-            <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
-            <!--</div>-->
+            <div *ngIf="submitted && f.ba_street2.errors" class="invalid-feedback">
+            <div *ngIf="f.ba_street2.errors.required">Street 2 is required</div>
+            </div>
           </div>
           </div>
           <!--<div class="field half-width">-->
@@ -133,9 +133,9 @@
                    class="input empty imput-gray1"
                    formControlName="ba_city"
                    [ngClass]="{ 'is-invalid': submitted && f.ba_city.errors }"/>
-            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
-            <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
-            <!--</div>-->
+            <div *ngIf="submitted && f.ba_city.errors" class="invalid-feedback">
+            <div *ngIf="f.ba_city.errors.required">City is required</div>
+            </div>
           </div>
           </div>
 
@@ -163,9 +163,9 @@
                    class="input empty imput-gray1"
                    formControlName="ba_state"
                    [ngClass]="{ 'is-invalid': submitted && f.ba_state.errors }"/>
-            <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
-            <!--<div *ngIf="f.name.errors.required">Company is required</div>-->
-            <!--</div>-->
+            <div *ngIf="submitted && f.ba_state.errors" class="invalid-feedback">
+            <div *ngIf="f.ba_state.errors.required">State is required</div>
+            </div>
           </div>
           </div>
           <!--<div class="field quarter-width">-->
@@ -193,8 +193,8 @@
               <div class="baseline"></div>
               <div *ngIf="submitted && f.ba_zip_code.errors" class="invalid-feedback">
                   <div *ngIf="f.ba_zip_code.errors.required">Zip Code is required</div>
-                  <div *ngIf="f.ba_zip_code.errors.maxlength">Zip Code max length is 5</div>
-                  <div *ngIf="f.ba_zip_code.errors.pattern">Zip Code only number</div>
+                  <div *ngIf="f.ba_zip_code.errors.maxlength">Zip Code max length should be 5</div>
+                  <div *ngIf="f.ba_zip_code.errors.pattern">Zip Code should be only numbers</div>
               </div>
           </div>
           </div>

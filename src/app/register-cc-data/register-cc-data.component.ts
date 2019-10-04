@@ -142,20 +142,22 @@ export class RegisterCcDataComponent implements OnInit {
 
     // Listen for form submission, process the form with Stripe,
     // and get the
-    const paymentForm = document.getElementById('payment-form');
+   // const paymentForm = document.getElementById('payment-form');
     //--------------------------------------
 
   }
 
   onSubmit() {
     this.submitted = true;
-    const displayError = document.getElementById('card-errors');
+   // const displayError = document.getElementById('card-errors');
     if (this.SignUpForm.invalid) {
-      displayError.textContent = 'Form fields are invalid';
+      this.error_msg = 'Form fields are invalid';
+     // displayError.textContent = 'Form fields are invalid';
       return false;
     } else {
-      displayError.textContent = '';
-      const paymentForm = document.getElementById('payment-form');
+      this.error_msg = '';
+     // displayError.textContent = '';
+     // const paymentForm = document.getElementById('payment-form');
       // Gather additional customer data we may have collected in our form.
 
       event.preventDefault();
@@ -301,8 +303,9 @@ export class RegisterCcDataComponent implements OnInit {
     });
   }
 
-  // used for validations on html file
+  // used for showing validations on html file
   get f() { return this.SignUpForm.controls; }
+
   getFormData() {
     const additionalData = {
       name: this.SignUpForm.value.card_holder_name || undefined,
