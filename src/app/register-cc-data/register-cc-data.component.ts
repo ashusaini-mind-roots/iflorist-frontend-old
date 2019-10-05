@@ -260,7 +260,7 @@ export class RegisterCcDataComponent implements OnInit {
       // cc_year: ['2019', [Validators.required]],
       // cc_moth: ['', [Validators.required]],
       ba_street: ['', Validators.required],
-      ba_street2: ['', Validators.required],
+      ba_street2: ['', ],
       ba_city: ['', Validators.required],
       ba_state: ['', Validators.required],
       ba_zip_code: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
