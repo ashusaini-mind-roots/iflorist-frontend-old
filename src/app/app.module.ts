@@ -20,10 +20,10 @@ import { EditStoreComponent } from './storecrud/edit-store/edit-store.component'
 import { RegisterGeneralDataComponent } from './register-general-data/register-general-data.component';
 import { RegisterPlanDataComponent } from './register-plan-data/register-plan-data.component';
 import { RegisterCcDataComponent } from './register-cc-data/register-cc-data.component';
-import { ActivateCompanyComponent } from './activate-company/activate-company.component'
-;
-import { RegisterCheckEmailMessageComponent } from './register-check-email-message/register-check-email-message.component';
-import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-combo.component'
+import { ActivateCompanyComponent } from './activate-company/activate-company.component';
+import { RegisterCheckEmailMessageComponent } from './register-check-email-message/register-check-email-message.component';
+import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-combo.component';
+import { CostOfFreshComponent } from './cost-of-fresh/cost-of-fresh.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -45,9 +45,11 @@ import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-com
         RegisterCcDataComponent ,
         ActivateCompanyComponent
 ,
-        RegisterCheckEmailMessageComponent,
+        RegisterCheckEmailMessageComponent
+,
         StoresComboComponent
-    ],
+,
+        CostOfFreshComponent    ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

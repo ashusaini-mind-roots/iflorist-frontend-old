@@ -1,3 +1,6 @@
-<p>
-  stores-combo works!
-</p>
+<select class="float-right" id="select-stores-general" [(ngModel)]="storeSelected" (change)="onStoreSelected(storeSelected)">
+  <option *ngFor="let store of stores" value="{{store.id}}">
+    {{store.store_name}}
+  </option>
+</select>
+
