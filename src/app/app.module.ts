@@ -24,6 +24,9 @@ import { ActivateCompanyComponent } from './activate-company/activate-company.co
 import { RegisterCheckEmailMessageComponent } from './register-check-email-message/register-check-email-message.component';
 import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-combo.component';
 import { CostOfFreshComponent } from './cost-of-fresh/cost-of-fresh.component';
+import { YearQuarterComponent } from './year-quarter/year-quarter.component';
+import { MessageService } from './_services/message.service';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -49,10 +52,12 @@ import { CostOfFreshComponent } from './cost-of-fresh/cost-of-fresh.component';
 ,
         StoresComboComponent
 ,
-        CostOfFreshComponent    ],
+        CostOfFreshComponent ,
+        YearQuarterComponent   ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        MessageService,
         // provider used to create fake backend
         /*fakeBackendProvider*/
     ],

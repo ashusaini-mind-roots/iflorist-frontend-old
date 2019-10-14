@@ -1,5 +1,5 @@
-<select class="float-right" id="select-stores-general" [(ngModel)]="storeSelected" (change)="onStoreSelected(storeSelected)">
-  <option *ngFor="let store of stores" value="{{store.id}}">
+<select class="" id="select-stores-general" [(ngModel)]="storeIndexSelected" (change)="onStoreSelected(storeIndexSelected)">
+  <option *ngFor="let store of stores; index as i" value="{{i}}">
     {{store.store_name}}
   </option>
 </select>

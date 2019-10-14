@@ -10,7 +10,7 @@ import { MessageService } from "../../_services/message.service";
 export class StoresComboComponent implements OnInit {
 
   stores: Storage[] = [];
-  storeSelected: number;
+  storeIndexSelected: number;
 
   constructor(
       private storeService: StoreService,
@@ -24,19 +24,26 @@ export class StoresComboComponent implements OnInit {
   reloadData(){
     this.storeService.getStoreList().subscribe((data: any) =>{
       this.stores = data.stores;
-      if(this.stores.length > 0)
-        this.storeSelected = this.stores[0].id;
+      if(this.stores.length > 0){
+        this.storeIndexSelected = 0;
+      }
       console.log(this.stores)
     })
   }
 
-  onStoreSelected(value:String){
-    console.log(value);
-    this.sendMessage(value);
+  onStoreSelected(value){
+    //console.log(value);
+    //console.log(this.stores[value]);
+    this.populateSelectedStorage(this.stores[value]);
+    this.sendMessage(this.stores[value]);
   }
 
   sendMessage(value): void {
     // send message to subscribers via observable subject
     this.messageService.sendMessage(value);
+  }
+
+  populateSelectedStorage(storage){
+    localStorage.setItem('selectedStorage', JSON.stringify(storage));
   }
 }

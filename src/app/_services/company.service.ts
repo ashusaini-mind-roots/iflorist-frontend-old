@@ -26,5 +26,17 @@ export class CompanyService {
         return this.http.post<any>(`${environment.apiUrl}/company/activate_company`,data);
     }
 
+    /*storesByCompany(data:any):Observable<any>{
+        return this.http.post<any>(`${environment.apiUrl}/company/stores_by_company`,data);
+    }*/
+
+    storesByCompany():Observable<any>{
+        return this.http.get<any>(`${environment.apiUrl}/company/stores_by_company`)
+        .pipe(
+            retry(1),
+            /*catchError(this.handleError)*/
+        )
+    }
+
     
 }
