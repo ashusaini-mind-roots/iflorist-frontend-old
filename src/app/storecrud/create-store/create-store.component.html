@@ -19,21 +19,19 @@
           <label for="contact_email">Contact Email</label>
           <input type="text" formControlName="contact_email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contact_email.errors}" />
           <div *ngIf="submitted && f.contact_email.errors" class="invalid-feedback">
-            <div *ngIf="f.contact_email.errors.required">Contact Email should be a valid email</div>
+            <div *ngIf="f.contact_email.errors.email">Contact Email should be a valid email</div>
           </div>
         </div>
         <div class="form-group">
           <label for="contact_phone">Contact Phone</label>
           <input type="text" formControlName="contact_phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
-          <div *ngIf="submitted && f.contact_phone.errors" class="invalid-feedback">
-            <div *ngIf="f.contact_phone.errors.required">Contact Phone is required</div>
-          </div>
         </div>
         <div class="form-group">
           <label for="zip_code">ZipCode</label>
           <input type="text" formControlName="zip_code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" />
           <div *ngIf="submitted && f.zip_code.errors" class="invalid-feedback">
-            <div *ngIf="f.zip_code.errors.required">ZipCode is required</div>
+            <div *ngIf="f.zip_code.errors.minlength">Zip Code min lenght is 5</div>
+            <div *ngIf="f.zip_code.errors.maxlength">Zip Code max lenght is 6</div>
           </div>
         </div>
         <div class="form-group">
@@ -48,6 +46,7 @@
           Create
         </button>
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
       </form>
     </div>
   </div>

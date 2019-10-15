@@ -3,6 +3,7 @@ import { StoreService } from "../../_services/store.service";
 import { Store } from "../../_models/store";
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
+import {TableModule} from 'primeng/table';
 
 
 @Component({
@@ -13,6 +14,8 @@ import { Router } from '@angular/router';
 export class StoreListComponent implements OnInit {
   stores: Storage[] = [];
 
+  cols: any[];
+
   constructor(
       private storeService: StoreService,
       private router: Router
@@ -22,6 +25,7 @@ export class StoreListComponent implements OnInit {
 
   ngOnInit() {
    this.reloadData();
+   this.loadHeaders();
   }
 
   reloadData(){
@@ -29,4 +33,17 @@ export class StoreListComponent implements OnInit {
       this.stores = data.stores;
     })
   }
+
+  loadHeaders(){
+    this.cols = [
+      { field: 'store_name', header: 'Name' },
+      { field: 'contact_phone', header: 'Contact phone' },
+      { field: 'contact_email', header: 'Email' },
+      { field: 'zip_code', header: 'ZipCode' },
+      { field: 'address', header: 'Address' },
+      { field: 'actions', header: 'Actions' }
+    ];
+    
+  }
+
 }

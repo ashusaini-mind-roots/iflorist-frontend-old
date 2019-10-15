@@ -22,8 +22,13 @@ import { RegisterPlanDataComponent } from './register-plan-data/register-plan-da
 import { RegisterCcDataComponent } from './register-cc-data/register-cc-data.component';
 import { ActivateCompanyComponent } from './activate-company/activate-company.component'
 ;
-import { RegisterCheckEmailMessageComponent } from './register-check-email-message/register-check-email-message.component';
-import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-combo.component'
+import { RegisterCheckEmailMessageComponent } from './register-check-email-message/register-check-email-message.component'
+;
+import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-combo.component';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {TableModule} from 'primeng/table';
 @NgModule({
     imports: [
         BrowserModule,
@@ -31,7 +36,9 @@ import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-com
         FormsModule,
         NgbModule,
         HttpClientModule,
-        appRoutingModule
+        appRoutingModule,
+        BrowserAnimationsModule,
+        TableModule
     ],
     declarations: [
         AppComponent,
@@ -45,7 +52,8 @@ import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-com
         RegisterCcDataComponent ,
         ActivateCompanyComponent
 ,
-        RegisterCheckEmailMessageComponent,
+        RegisterCheckEmailMessageComponent
+,
         StoresComboComponent
     ],
     providers: [

@@ -16,6 +16,7 @@ export class EditStoreComponent implements OnInit {
   submitted = false;
   // returnUrl: string;
   error = '';
+  success = '';
   loading = false;
 
   constructor(
@@ -33,7 +34,7 @@ export class EditStoreComponent implements OnInit {
       store_name: ['', Validators.required],
       contact_email: ['',  Validators.email],
       contact_phone: [''],
-      zip_code: ['', Validators.minLength(5)],
+      zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
       address: ['']
     });
     //console.log("pepitotey");
@@ -51,6 +52,8 @@ export class EditStoreComponent implements OnInit {
       this.loading = false;
       return;
     }
+    this.error = '';
+    this.success = '';
     this.loading = true;
     this.route.params.subscribe(params => {
       console.log("pepe"+params['id'])
@@ -59,6 +62,7 @@ export class EditStoreComponent implements OnInit {
           this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value).subscribe(
               response=> {
                 this.loading = false;
+                this.success = 'Store updated succefull !';
                // console.log(response)
               },
               error => {
