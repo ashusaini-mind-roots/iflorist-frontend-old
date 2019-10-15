@@ -17,6 +17,7 @@ export class CreateStoreComponent implements OnInit {
   submitted = false;
   // returnUrl: string;
   error = '';
+  success = '';
 
   constructor(
       private formBuilder: FormBuilder,
@@ -49,7 +50,8 @@ export class CreateStoreComponent implements OnInit {
       this.loading = false;
       return;
     }
-
+    this.error = '';
+    this.success = '';
     this.loading = true;
     // store_name,contact_email,contact_phone,zip_code,address
     this.storeService.createStore(this.f.store_name.value, this.f.contact_email.value, this.f.contact_phone.value,
@@ -59,6 +61,8 @@ export class CreateStoreComponent implements OnInit {
             data => {
               //console.log(data);
               this.loading = false;
+              this.success = 'Store added succefull !';
+              this.clean();
               //this.router.navigate([this.returnUrl]);
             },
             error => {
@@ -67,4 +71,13 @@ export class CreateStoreComponent implements OnInit {
               this.loading = false;
             });
   }
+
+  clean(){
+     this.f.store_name.setValue('');
+     this.f.contact_email.setValue('');
+     this.f.contact_phone.setValue('');
+     this.f.zip_code.setValue('');
+     this.f.address.setValue('');
+  }
+
 }

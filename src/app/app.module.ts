@@ -20,6 +20,15 @@ import { EditStoreComponent } from './storecrud/edit-store/edit-store.component'
 import { RegisterGeneralDataComponent } from './register-general-data/register-general-data.component';
 import { RegisterPlanDataComponent } from './register-plan-data/register-plan-data.component';
 import { RegisterCcDataComponent } from './register-cc-data/register-cc-data.component';
+import { ActivateCompanyComponent } from './activate-company/activate-company.component'
+;
+import { RegisterCheckEmailMessageComponent } from './register-check-email-message/register-check-email-message.component'
+;
+import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-combo.component';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {TableModule} from 'primeng/table';
 import { ActivateCompanyComponent } from './activate-company/activate-company.component';
 import { RegisterCheckEmailMessageComponent } from './register-check-email-message/register-check-email-message.component';
 import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-combo.component';
@@ -34,7 +43,9 @@ import { MessageService } from './_services/message.service';
         FormsModule,
         NgbModule,
         HttpClientModule,
-        appRoutingModule
+        appRoutingModule,
+        BrowserAnimationsModule,
+        TableModule
     ],
     declarations: [
         AppComponent,
