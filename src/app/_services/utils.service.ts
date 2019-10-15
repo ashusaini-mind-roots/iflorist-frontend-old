@@ -9,7 +9,7 @@ export class UtilsService {
     private init_year = 2019;
     constructor() { }
 
-    GetYears(initial_year, end_year) {
+    GetYears(initial_year = undefined, end_year = undefined) {
         if (typeof initial_year === 'undefined') {
             initial_year = this.init_year;
         }

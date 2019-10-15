@@ -8,7 +8,7 @@ import { User } from './_models';
 declare var $: any;
 /*declare var jquery: any*/
 
-@Component({ selector: 'app', templateUrl: 'app.component.html' })
+@Component({ selector: 'app', templateUrl: 'app.component.html'})
 export class AppComponent implements OnInit{
     currentUser: User;
     toggled: boolean = false;
