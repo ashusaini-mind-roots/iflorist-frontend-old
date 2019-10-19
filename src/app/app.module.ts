@@ -31,7 +31,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
 import { CostOfFreshComponent } from './cost-of-fresh/cost-of-fresh.component';
 import { YearQuarterComponent } from './year-quarter/year-quarter.component';
-import { MessageService } from './_services/message.service';
+import { MessageService } from './_services/message.service';;
+import { WeekPanelComponent } from './week-panel/week-panel.component'
 
 @NgModule({
     imports: [
@@ -61,7 +62,8 @@ import { MessageService } from './_services/message.service';
         StoresComboComponent
 ,
         CostOfFreshComponent ,
-        YearQuarterComponent   ],
+        YearQuarterComponent ,
+        WeekPanelComponent  ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -12,7 +12,7 @@ import {UtilsService} from "../_services/utils.service";
   styleUrls: ['./cost-of-fresh.component.less']
 })
 export class CostOfFreshComponent implements OnInit {
-  selectedStorage: String;
+  selectedStorage: any;
   weeks: any[] = [];
   yearQuarter: any;
 
