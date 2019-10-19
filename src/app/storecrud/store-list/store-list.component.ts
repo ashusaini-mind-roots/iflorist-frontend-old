@@ -43,7 +43,6 @@ export class StoreListComponent implements OnInit {
       { field: 'address', header: 'Address' },
       { field: 'actions', header: 'Actions' }
     ];
-    
   }
 
 }

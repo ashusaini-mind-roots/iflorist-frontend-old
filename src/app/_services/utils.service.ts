@@ -16,7 +16,7 @@ export class UtilsService {
         if (typeof end_year === 'undefined') {
             end_year = this.GetCurrentYear();
         }
-        console.dir([initial_year, end_year]);
+        // console.dir([initial_year, end_year]);
         return this.ArrayRange(initial_year, end_year);
     }
 

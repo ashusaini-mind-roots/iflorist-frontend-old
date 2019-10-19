@@ -27,7 +27,7 @@ export class StoresComboComponent implements OnInit {
       if(this.stores.length > 0){
         this.storeIndexSelected = 0;
       }
-      console.log(this.stores)
+      //console.log(this.stores)
     })
   }
 

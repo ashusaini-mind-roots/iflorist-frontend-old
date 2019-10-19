@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 // import { MessageService } from "../_services/message.service";
 import { StoreSubscriberService } from "../_services/storeSubscriber.service";
 import { CostOfFreshService } from "../_services/costOfFresh.service";
+import {utils} from "protractor";
+import {UtilsService} from "../_services/utils.service";
 
 @Component({
   selector: 'app-cost-of-fresh',
@@ -14,10 +16,13 @@ export class CostOfFreshComponent implements OnInit {
   weeks: any[] = [];
   yearQuarter: any;
 
+  cols: any[];
+
   constructor(
       private costOfFreshService: CostOfFreshService,
       private storeSubscriberService: StoreSubscriberService,//service used to receive store from top bar stores combobox
-      )
+      private utilService: UtilsService,
+  )
   {
     storeSubscriberService.subscribe(this,function (ref,store) {
       ref.receiveStorage(store);
@@ -27,29 +32,46 @@ export class CostOfFreshComponent implements OnInit {
       //     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
       //     this.receiveStorage(this.selectedStorage);
       // }});
+    this.yearQuarter = {year : this.utilService.GetCurrentYear(), quarter: 1};
   }
 
   ngOnInit() {
     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
     // console.log(this.selectedStorage)
     this.reloadData();
+    this.loadHeaders();
   }
 
   reloadData(){
-    this.costOfFreshService.getMasterOverviewWeekly(1,2019).subscribe((data: any) =>{
+     console.log(this.selectedStorage.id + "-" +this.yearQuarter.year);
+    this.costOfFreshService.getMasterOverviewWeekly(this.selectedStorage.id,this.yearQuarter.year).subscribe((data: any) =>{
       this.weeks = data.master_overview_weekly;
-      // console.log(data);
+      // console.log(this.weeks);
     })
   }
 
   receiveYearQuarter($event){
     this.yearQuarter = $event;
-    console.log(this.yearQuarter);
-    console.log(this.selectedStorage);
+    this.reloadData();
+    // console.log(this.yearQuarter);
+    // console.log(this.selectedStorage);
   }
   receiveStorage(storage){
     this.selectedStorage = storage;
-    console.log(this.yearQuarter);
-    console.log(this.selectedStorage);
+    this.reloadData();
+    // console.log(this.yearQuarter);
+    // console.log(this.selectedStorage);
   }
+
+  loadHeaders(){
+    this.cols = [
+      { field: 'week_number', header: 'Week' },
+      { field: 'week_ending', header: 'Week Ending' },
+      { field: 'week_ending_date', header: 'Ending Date' },
+      { field: 'projected_weekly_revenue', header: 'Projected Revenue' },
+      { field: 'actual_weekly_revenue', header: 'Actual Sales' },
+      { field: 'actions', header: 'Actions' }
+    ];
+  }
+
 }
