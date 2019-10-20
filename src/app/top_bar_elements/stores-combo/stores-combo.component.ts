@@ -26,6 +26,7 @@ export class StoresComboComponent implements OnInit {
       this.stores = data.stores;
       if(this.stores.length > 0){
         this.storeIndexSelected = 0;
+        this.populateSelectedStorage(this.stores[0]);
       }
       //console.log(this.stores)
     })

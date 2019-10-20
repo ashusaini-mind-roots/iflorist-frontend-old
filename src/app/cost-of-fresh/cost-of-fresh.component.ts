@@ -24,15 +24,16 @@ export class CostOfFreshComponent implements OnInit {
       private utilService: UtilsService,
   )
   {
-    storeSubscriberService.subscribe(this,function (ref,store) {
-      ref.receiveStorage(store);
-    })
-      // this.subscription = this.messageService.getMessage().subscribe(message => {
-      //   if (message) {
-      //     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
-      //     this.receiveStorage(this.selectedStorage);
-      // }});
-    this.yearQuarter = {year : this.utilService.GetCurrentYear(), quarter: 1};
+      storeSubscriberService.subscribe(this,function (ref,store) {
+        ref.receiveStorage(store);
+      });
+      this.yearQuarter = {year : this.utilService.GetCurrentYear(), quarter: 1};
+
+        // this.subscription = this.messageService.getMessage().subscribe(message => {
+        //   if (message) {
+        //     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
+        //     this.receiveStorage(this.selectedStorage);
+        // }});
   }
 
   ngOnInit() {
