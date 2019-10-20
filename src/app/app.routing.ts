@@ -27,7 +27,7 @@ const routes: Routes = [
     { path: 'activate-company/:activation_code', component: ActivateCompanyComponent },
     { path: 'check-email-message', component: RegisterCheckEmailMessageComponent },
     { path: 'cost-of-fresh', component: CostOfFreshComponent },
-    { path: 'week-panel', component: WeekPanelComponent },
+    { path: 'week-panel/:id', component: WeekPanelComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }

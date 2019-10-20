@@ -29,7 +29,6 @@ export class AuthenticationService {
                 }
                 else
                 {
-                    //console.log(data.error);
                     //if(isset)
                     localStorage.setItem('currentUser', JSON.stringify(data));
                     console.log(localStorage.getItem('currentUser'));

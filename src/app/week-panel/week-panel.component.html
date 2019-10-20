@@ -1,0 +1,111 @@
+<app-year-quarter (yearQuarterOutput) = "receiveYearQuarter($event)"></app-year-quarter>
+
+
+<select class="" id="select-quarter" [(ngModel)]="selectedWeekItem" (change)="getWeekDataFromServer()">
+    <option *ngFor="let week of weekList" value="{{week.id}}">
+        {{week.number+"-"+week.week_end_day}}
+    </option>
+</select>
+
+
+<div class="ng-cloak font-weight-bold text-right">Current Week Sales: {{calcDailyTotal()|currency}}</div>
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card mt-5 ">
+            <div class="card-body">
+                <h5 class="card-title">Actual daily revenue</h5>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group text-center">
+                            <span class="ng-cloak">{{monday.dates_dim_date | date:'MM/dd/yyyy'}}</span><br>
+                            <label for="inputMonday">Monday</label>
+                            <input type="text"
+                                   class="form-control form-control-plaintext text-center font-weight-bold"
+                                   id="inputMonday" [(ngModel)]="monday.amt_formatted"
+                                   data-type="currency"
+                            >
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group text-center">
+                            <span class="ng-cloak">{{tuesday.dates_dim_date | date:'MM/dd/yyyy'}}</span><br>
+                            <label for="inputTuesday">Tuesday</label>
+                            <input type="text"
+                                   class="form-control form-control-plaintext text-center font-weight-bold"
+                                   id="inputTuesday" [(ngModel)]="tuesday.amt_formatted"
+                                   data-type="currency"
+                            >
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group text-center">
+                            <span class="ng-cloak">{{wednesday.dates_dim_date | date:'MM/dd/yyyy'}}</span><br>
+                            <label for="inputWednesday">Wednesday </label>
+                            <input type="text"
+                                   class="form-control form-control-plaintext text-center font-weight-bold"
+                                   id="inputWednesday" [(ngModel)]="wednesday.amt_formatted"
+                                   data-type="currency">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group text-center">
+                            <span class="ng-cloak">{{thursday.dates_dim_date | date:'MM/dd/yyyy'}}</span><br>
+                            <label for="inputThursday">Thursday </label>
+                            <input type="text"
+                                   class="form-control form-control-plaintext text-center font-weight-bold"
+                                   id="inputThursday" [(ngModel)]="thursday.amt_formatted"
+                                   data-type="currency"
+                            >
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group text-center">
+                            <span class="ng-cloak">{{friday.dates_dim_date | date:'MM/dd/yyyy'}}</span><br>
+                            <label for="inputFriday">Friday </label>
+                            <input type="text"
+                                   class="form-control form-control-plaintext text-center font-weight-bold"
+                                   id="inputFriday" [(ngModel)]="friday.amt_formatted"
+                                   data-type="currency">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group text-center">
+                            <span class="ng-cloak">{{saturday.dates_dim_date | date:'MM/dd/yyyy'}}</span><br>
+                            <label for="inputSaturday">Saturday </label>
+                            <input type="text"
+                                   class="form-control form-control-plaintext text-center font-weight-bold"
+                                   id="inputSaturday" [(ngModel)]="saturday.amt_formatted"
+                                   data-type="currency"
+                            >
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group text-center">
+                            <span class="ng-cloak">{{sunday.dates_dim_date | date:'MM/dd/yyyy'}}</span><br>
+                            <label for="inputSunday">Sunday</label>
+                            <input type="text"
+                                   class="form-control form-control-plaintext text-center font-weight-bold"
+                                   id="inputSunday" [(ngModel)]="sunday.amt_formatted"
+                                   data-type="currency">
+                        </div>
+                    </div>
+<!--                    <div class="col">-->
+<!--                        <div class="form-group text-center">-->
+<!--                            <label for="inputTotal">Total </label>-->
+<!--&lt;!&ndash;                            {{&#45;&#45;<input hidden type="text" class="form-control" id="inputTotal" [(ngModel)]="dailyRevenueTotal" value = {{calcDailyTotal()}} >&#45;&#45;}}&ndash;&gt;-->
+<!--                            <div class="ng-cloak font-weight-bold text-center">{{calcDailyTotal()|currency}}</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+            </div>
+            <div class="card-footer text-right">
+                <button type="button" class="btn btn-primary" ng-click="updateDaysAmtValues()"
+                        ng-disabled="saveDays_btnDisable">Save Changes
+                </button>
+<!--                {{&#45;&#45;<a href="#" class="btn btn-primary" ng-click="updateDaysAmtValues()">Save changes</a>&#45;&#45;}}-->
+
+            </div>
+
+        </div>
+    </div>
+</div>
