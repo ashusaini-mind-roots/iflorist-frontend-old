@@ -1,0 +1,11 @@
+<select class="" id="select-year" [(ngModel)]="yearSelected" (change)="onYearOrQuarterChange()">
+  <option *ngFor="let year of years" value="{{year}}">
+    {{year}}
+  </option>
+</select>
+
+<select class="" id="select-quarter" [(ngModel)]="quarterSelected" (change)="onYearOrQuarterChange()">
+  <option *ngFor="let quarter of quarters" value="{{quarter}}">
+    {{quarter}}
+  </option>
+</select>

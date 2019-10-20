@@ -13,6 +13,7 @@ import {RegisterCcDataComponent} from './register-cc-data/register-cc-data.compo
 import {ActivateCompanyComponent} from './activate-company/activate-company.component';
 import {RegisterCheckEmailMessageComponent} from './register-check-email-message/register-check-email-message.component';
 import {CostOfFreshComponent} from "@app/cost-of-fresh/cost-of-fresh.component";
+import {WeekPanelComponent} from "@app/week-panel/week-panel.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -26,6 +27,7 @@ const routes: Routes = [
     { path: 'activate-company/:activation_code', component: ActivateCompanyComponent },
     { path: 'check-email-message', component: RegisterCheckEmailMessageComponent },
     { path: 'cost-of-fresh', component: CostOfFreshComponent },
+    { path: 'week-panel', component: WeekPanelComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
