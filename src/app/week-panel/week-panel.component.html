@@ -1,4 +1,4 @@
-<app-year-quarter (yearQuarterOutput) = "receiveYearQuarter($event)"></app-year-quarter>
+<app-year-quarter (yearQuarterOutput) = "receiveYearQuarter($event)" [showQuarter] = false></app-year-quarter>
 
 
 <select class="" id="select-quarter" [(ngModel)]="selectedWeekItem" (change)="getWeekDataFromServer()">

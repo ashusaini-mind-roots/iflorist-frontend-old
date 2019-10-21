@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
 import {UtilsService} from "@app/_services/utils.service";
 
 @Component({
@@ -14,6 +14,8 @@ export class YearQuarterComponent implements OnInit {
   quarterSelected: any;
 
   @Output() yearQuarterOutput = new EventEmitter<any>();
+
+  @Input() showQuarter:boolean = true;
 
   constructor(
       private utilService: UtilsService,

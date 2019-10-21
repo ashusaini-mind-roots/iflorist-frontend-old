@@ -61,8 +61,6 @@ export class WeekPanelComponent implements OnInit {
   }
 
   receiveYearQuarter($event){
-    console.log("pingaaaaaaaaaaaaaaaaa")
-    console.log($event)
     this.yearQuarter = $event;
     this.getWeekDataFromServer();
    // this.reloadData();

@@ -4,7 +4,7 @@
   </option>
 </select>
 
-<select class="" id="select-quarter" [(ngModel)]="quarterSelected" (change)="onYearOrQuarterChange()">
+<select *ngIf="showQuarter" class="" id="select-quarter" [(ngModel)]="quarterSelected" (change)="onYearOrQuarterChange()">
   <option *ngFor="let quarter of quarters" value="{{quarter}}">
     {{quarter}}
   </option>
