@@ -3,6 +3,7 @@ import { StoreSubscriberService } from "../_services/storeSubscriber.service";
 import { UtilsService } from "../_services/utils.service";
 import { WeekPanelService } from "../_services/weekPanel.service";
 import { ActivatedRoute } from '@angular/router';
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-week-panel',
@@ -12,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 export class WeekPanelComponent implements OnInit {
   selectedStorage: any;
   yearQuarter: any;
-
   monday: any;
   tuesday: any;
   wednesday: any;
@@ -20,11 +20,23 @@ export class WeekPanelComponent implements OnInit {
   friday: any;
   saturday: any;
   sunday: any;
-
   dailyRevenueTotal: any;
-
   weekList: any[];
   selectedWeekItem: any;
+  costOf: string;
+
+  //------invoices
+  invoices: any[];
+  invoiceTotal: number;
+  invoicesTableCols: any[];
+  invoiceNumber_add : any;
+  invoiceName_add : string;
+  invoiceTotal_add : any;
+
+  //------week resume
+  projWeeklyRev: number;
+  target: number;
+
 
   constructor(
       private storeSubscriberService: StoreSubscriberService,//service used to receive store from top bar stores combobox
@@ -48,6 +60,9 @@ export class WeekPanelComponent implements OnInit {
       this.sunday = {'id': -1, 'amt': 0.00};
       this.dailyRevenueTotal = 0.00;
       this.selectedWeekItem = "3";
+      this.invoiceTotal = 0.00;
+      this.projWeeklyRev = 0.00;
+      this.target = 0.00;
   }
 
   ngOnInit() {
@@ -55,26 +70,22 @@ export class WeekPanelComponent implements OnInit {
     this.route.params.subscribe(params => {
         this.selectedWeekItem = params['id'];
     });
-
+    this.route.params.subscribe(params => {
+      this.costOf = params['cost_of'];
+      console.log("costOf:" + this.costOf);
+    });
 
     this.getWeeks();
+    this.loadInvoicesTableHeaders();
   }
 
   receiveYearQuarter($event){
     this.yearQuarter = $event;
     this.getWeekDataFromServer();
-   // this.reloadData();
-    // console.log(this.yearQuarter);
-    // console.log(this.selectedStorage);
   }
   receiveStorage(storage){
     this.selectedStorage = storage;
     this.getWeekDataFromServer();
-    console.log("storage");
-    console.log(this.selectedStorage)
-    //this.reloadData();
-    // console.log(this.yearQuarter);
-    // console.log(this.selectedStorage);
   }
 
   calcDailyTotal = function () {
@@ -146,12 +157,25 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getWeeks = function () {
-    console.log(this.yearQuarter.year);
-
       this.weekPanelService.getWeeks(this.yearQuarter.year).subscribe((response: any) =>{
         this.weekList = response.weeks;
+        this.getWeekDataFromServer();
       });
-      this.getWeekDataFromServer();
+  }
+
+  getInvoices = function(){
+      this.weekPanelService.getInvoices(this.costOf,this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
+        this.invoices = response.invoices;
+        this.calcInvoiceTotal();
+      });
+  }
+
+  calcInvoiceTotal = function () {
+    this.invoiceTotal = 0.00;
+    for (var i = 0; i < this.invoices.length; i++) {
+      this.invoiceTotal += parseFloat(this.invoices[i].total);
+    }
+    return this.invoiceTotal;
   }
 
   formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
@@ -184,12 +208,57 @@ export class WeekPanelComponent implements OnInit {
 
   getWeekDataFromServer() {
     this.getSevenDays();
-    // this.getProjWeeklyRev();
-    // this.getInvoices();
-    // this.getTargetCOG();
+    this.getProjWeeklyRev();
+    this.getInvoices();
+    this.getTarget();
     // this.calcCostDifference();
     // this.getNotes();
   }
 
+  loadInvoicesTableHeaders(){
+    this.invoicesTableCols = [
+      { field: 'invoice_name', header: 'Invoice Name' },
+      { field: 'invoice_number', header: 'Invoice Number' },
+      { field: 'total', header: 'Total' },
+      { field: 'actions', header: 'Actions' }
+    ];
+  }
+
+  createInvoice = function () {
+    this.weekPanelService.createInvoice(this.costOf, this.invoiceNumber_add,this.invoiceName_add,
+        this.invoiceTotal_add,this.selectedStorage.id,this.selectedWeekItem)
+        .pipe(first())
+        .subscribe(
+            data => {
+              //console.log(data);
+              // this.loading = false;
+              // this.success = 'Store added succefull !';
+              // this.clean();
+              //this.router.navigate([this.returnUrl]);
+              this.getInvoices();
+              this.calcInvoiceTotal();
+            },
+            error => {
+              console.log(error)
+              // this.error = error;
+              // this.loading = false;
+            });
+  }
+
+  getProjWeeklyRev = function () {
+    this.weekPanelService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
+      this.projWeeklyRev = response.proj_weekly_rev;
+    });
+  }
+  getTarget = function () {
+    this.weekPanelService.getTarget(this.costOf).subscribe((response: any) =>{
+
+      this.target = (this.costOf == 'fresh') ? response['target_cof'] : ((this.costOf == 'goods') ? response['target_cog'] : 0.00) ;
+    });
+  }
+
+  getTargetInMoney = function () {
+    return this.calcDailyTotal() * (this.target / 100);
+  }
 
 }

@@ -5,6 +5,7 @@ import { StoreSubscriberService } from "../_services/storeSubscriber.service";
 import { CostOfFreshService } from "../_services/costOfFresh.service";
 import {utils} from "protractor";
 import {UtilsService} from "../_services/utils.service";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cost-of-fresh',
@@ -15,14 +16,16 @@ export class CostOfFreshComponent implements OnInit {
   selectedStorage: any;
   weeks: any[] = [];
   yearQuarter: any;
-
+  costOf: string;
+  target: any;
   cols: any[];
 
   constructor(
       private costOfFreshService: CostOfFreshService,
       private storeSubscriberService: StoreSubscriberService,//service used to receive store from top bar stores combobox
       private utilService: UtilsService,
-  )
+      private route: ActivatedRoute,
+      )
   {
       storeSubscriberService.subscribe(this,function (ref,store) {
         ref.receiveStorage(store);
@@ -37,17 +40,27 @@ export class CostOfFreshComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
-    // console.log(this.selectedStorage)
-    this.reloadData();
-    this.loadHeaders();
+    this.route.params.subscribe(params => {
+      this.costOf = params['what'];
+      console.log("costOf:" + this.costOf);
+      this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
+      this.reloadData();
+      this.loadHeaders();
+    });
+
+    // this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
+    // // console.log(this.selectedStorage)
+    // this.reloadData();
+    // this.loadHeaders();
   }
 
   reloadData(){
      console.log(this.selectedStorage.id + "-" +this.yearQuarter.year);
-    this.costOfFreshService.getMasterOverviewWeekly(this.selectedStorage.id,this.yearQuarter.year).subscribe((data: any) =>{
+    this.costOfFreshService.getMasterOverviewWeekly(this.costOf,this.selectedStorage.id,this.yearQuarter.year).subscribe((data: any) =>{
       this.weeks = data.master_overview_weekly;
-      // console.log(this.weeks);
+      if(this.weeks.length > 0)
+        this.target = this.weeks[0].target;
+      console.log(this.weeks);
     })
   }
 

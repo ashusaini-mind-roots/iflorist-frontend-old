@@ -164,6 +164,7 @@ export class RegisterCcDataComponent implements OnInit {
       const additionalData = this.getFormData();
 
       additionalData.stripe_token = "pepetokensoloparalocal";
+      console.log(additionalData.stripe_token);
       this.saveCompanyData(additionalData);
       //codigo funcionando correctamente, descomentariar para subir al repo
       // this.stripe.createToken(this.cardNumber, additionalData)
@@ -321,9 +322,10 @@ export class RegisterCcDataComponent implements OnInit {
 
   saveCompanyData(formData) {
     this.loading = true;
-    // console.log(['formData', formData]);
+     // console.log(this.routerService.getRouterData());
     if(this.routerService.getRouterData()==undefined)
     {
+      this.loading = false;
       return;
     }
     this.data = {
@@ -342,11 +344,11 @@ export class RegisterCcDataComponent implements OnInit {
       plans: this.id_plans,
     };
 
-    // console.log(this.data);
+     // console.log(this.data);
     this.companyService.create(this.data)
       .subscribe((data: any) => {
-      console.log(this.data);
-          // console.log(data.plans);
+      // console.log(this.data);
+
          // this.router.navigate(['home']);
             this.routerService.setRouterData(undefined);
             this.router.navigate(['check-email-message', { email: this.data.email }]);
