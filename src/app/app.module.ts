@@ -32,7 +32,8 @@ import {TableModule} from 'primeng/table';
 import { CostOfFreshComponent } from './cost-of-fresh/cost-of-fresh.component';
 import { YearQuarterComponent } from './year-quarter/year-quarter.component';
 import { MessageService } from './_services/message.service';;
-import { WeekPanelComponent } from './week-panel/week-panel.component'
+import { WeekPanelComponent } from './week-panel/week-panel.component';
+import { ProjectionComponent } from './projection/projection.component'
 
 @NgModule({
     imports: [
@@ -63,7 +64,8 @@ import { WeekPanelComponent } from './week-panel/week-panel.component'
 ,
         CostOfFreshComponent ,
         YearQuarterComponent ,
-        WeekPanelComponent  ],
+        WeekPanelComponent ,
+        ProjectionComponent ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
