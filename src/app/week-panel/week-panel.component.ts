@@ -158,9 +158,9 @@ export class WeekPanelComponent implements OnInit {
 
   getWeeks = function () {
       this.weekPanelService.getWeeks(this.yearQuarter.year).subscribe((response: any) =>{
-        this.weekList = response.weeks;
-        this.getWeekDataFromServer();
-      });
+      this.weekList = response.weeks;
+      this.getWeekDataFromServer();
+    });
   }
 
   getInvoices = function(){

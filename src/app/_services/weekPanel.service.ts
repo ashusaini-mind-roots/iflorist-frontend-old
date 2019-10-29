@@ -35,6 +35,7 @@ export class WeekPanelService{
           "week_id": week_id,
           "cost_of": cost_of,
         });
+
   }
   getProjWeeklyRev(store_id, week_id) : Observable<any> {
     return this.http.get(`${environment.apiUrl}/weekly_projection_percent_revenue/proj_weekly_revenue/${store_id}/${week_id}`);
