@@ -17,7 +17,7 @@
           </select>
         </li>
       </ul>
-      <p-table #dt [columns]="cols" [value]="proyections" [paginator]="true" [rows]="10">
+      <p-table #dt [columns]="cols" [value]="proyections" [paginator]="true" [rows]="10" dataKey="id" editMode="row" [lazy]="true" [loading]="loading">
         <ng-template pTemplate="caption">
           <div style="text-align: right">        
               <i class="icon-14 setting-icon" style="margin:4px 4px 0 0"></i>
@@ -26,18 +26,43 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
           <tr>
-              <th *ngFor="let col of columns">
+              <th class="{{col.header}}" *ngFor="let col of columns">
                   {{col.header}}
               </th>
+              <th style="width:8em"></th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-projection>
-            <tr>
+        <ng-template pTemplate="body" let-projection let-rowData let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="rowData">
+              <td class="No">{{projection.id}}</td>
               <td>{{projection.week}}</td>
               <td>{{projection.reference_amt_total}}</td>
-              <td>{{projection.adjust}}</td>
-              <td>{{projection.amt_total}}</td>
+              <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.adjust" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{projection.adjust}}
+                    </ng-template>
+                </p-cellEditor>
+              </td>
+              <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.amt_total" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{projection.amt_total}}
+                    </ng-template>
+                </p-cellEditor>
+              </td>
               <td></td>
+              <td style="text-align:center">
+                  <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info" (click)="onRowEditInit(rowData)" >Edit</button>
+                  <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData, ri)">Save</button>
+                  <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)">Cancel</button>
+              </td>
             </tr>
         </ng-template>
         <!--<ng-template pTemplate="body" let-rowData let-columns="columns">

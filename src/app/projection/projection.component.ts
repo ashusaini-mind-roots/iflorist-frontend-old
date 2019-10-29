@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { ViewEncapsulation, Component, OnInit } from '@angular/core';
 import { StoreSubscriberService } from "../_services/storeSubscriber.service";
 import {TableModule} from 'primeng/table';
 import {ProjectionService} from "../_services/projection.service";
 
+
 @Component({
   selector: 'app-projection',
   templateUrl: './projection.component.html',
-  styleUrls: ['./projection.component.less']
+  styleUrls: ['./projection.component.less'],
+  /*encapsulation: ViewEncapsulation.None*/
 })
 export class ProjectionComponent implements OnInit {
 
@@ -14,7 +16,9 @@ export class ProjectionComponent implements OnInit {
   yearIndexSelected:number;
   selectedStorage: any;
   proyections:any[];
-  //store_id:number;
+  loading: boolean;
+
+  clonedProjections: { [s: string]: any; } = {};
 
   constructor(
     private storeSubscriberService: StoreSubscriberService,
@@ -27,6 +31,7 @@ export class ProjectionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.yearIndexSelected = 2019;
     this.loadHeaders();
     this.loadProjection();
@@ -34,6 +39,7 @@ export class ProjectionComponent implements OnInit {
 
   loadHeaders(){
     this.cols = [
+      { field: 'id', header: 'No' },
       { field: 'week', header: 'Week' },
       { field: this.yearIndexSelected - 1, header: this.yearIndexSelected - 1 },
       { field: 'adjust', header: 'Adjust' },
@@ -47,6 +53,7 @@ export class ProjectionComponent implements OnInit {
       console.log(yearIndexSelected);
       this.yearIndexSelected = yearIndexSelected;
       this.loadHeaders();
+      this.loadProjection();
   }
 
   receiveStorage(storage){
@@ -59,10 +66,50 @@ export class ProjectionComponent implements OnInit {
 
   loadProjection()
   {
+    this.proyections = [];
+    this.loading = true;
     this.projectionService.getProjectionList(1,this.yearIndexSelected).subscribe((data: any) =>{
       console.log(data.projections);
       this.proyections = data.projections;
+      this.loading = false;
     });
+  }
+
+
+  onRowEditInit(projections: any) {
+    this.clonedProjections[projections.id] = {...projections};
+    console.log(this.clonedProjections[projections.id]);
+  }
+
+  onRowEditSave(projections: any, index: number) {
+      if (projections.amt_total >= 0) {
+        
+        this.loading = true;
+        
+        this.projectionService.updateProyection(projections.id,projections.amt_total,projections.adjust).subscribe(
+              response=> {
+                this.loading = false;
+                delete this.clonedProjections[projections.id];
+               // console.log(response)
+              },
+              error => {
+                this.proyections[index] = this.clonedProjections[projections.id];
+                delete this.clonedProjections[projections.id];
+                console.log(error)
+                this.loading = false;
+              }
+        );
+              
+      }
+      else {
+        this.proyections[index] = this.clonedProjections[projections.id];
+        delete this.clonedProjections[projections.id];
+      }
+  }
+
+  onRowEditCancel(projections: any, index: number) {
+      this.proyections[index] = this.clonedProjections[projections.id];
+      delete this.clonedProjections[projections.id];
   }
 
 }
