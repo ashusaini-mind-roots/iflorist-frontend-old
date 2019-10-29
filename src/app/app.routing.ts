@@ -14,6 +14,7 @@ import {ActivateCompanyComponent} from './activate-company/activate-company.comp
 import {RegisterCheckEmailMessageComponent} from './register-check-email-message/register-check-email-message.component';
 import {CostOfFreshComponent} from "@app/cost-of-fresh/cost-of-fresh.component";
 import {WeekPanelComponent} from "@app/week-panel/week-panel.component";
+import {ProjectionComponent} from './projection/projection.component'
 import {SalesComponent} from "@app/sales/sales.component";
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
     { path: 'cost-of/:what', component: CostOfFreshComponent },
     { path: 'week-panel/:cost_of/:id', component: WeekPanelComponent },
     { path: 'sales', component: SalesComponent },
+    { path: 'projections', component: ProjectionComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
