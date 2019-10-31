@@ -48,6 +48,8 @@ export class ProjectionComponent implements OnInit {
     ];
   }
 
+  
+
   onYearSelected(yearIndexSelected:number)
   {
       console.log(yearIndexSelected);

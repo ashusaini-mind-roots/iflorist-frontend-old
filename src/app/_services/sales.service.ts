@@ -17,7 +17,10 @@ export class SalesService {
   getSales(store_id, year, quarter): Observable<any> {
       console.log(`${environment.apiUrl}/daily_revenue/sales/${store_id}/${year}/${quarter}`)
       return this.http.get(`${environment.apiUrl}/daily_revenue/sales/${store_id}/${year}/${quarter}`);
-      console.log("cojone")
+  }
+
+  updateDay(id,merchandise,wire,delivery){
+    return this.http.put(`${environment.apiUrl}/daily_revenue/update/${id}`, {merchandise,wire,delivery} );
   }
 
   // getStoreList(): Observable<any> {
