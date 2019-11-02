@@ -44,7 +44,7 @@ export class CostOfFreshComponent implements OnInit {
       this.costOf = params['what'];
       console.log("costOf:" + this.costOf);
       this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
-      this.reloadData();
+      //this.reloadData();
       this.loadHeaders();
     });
 
@@ -55,8 +55,8 @@ export class CostOfFreshComponent implements OnInit {
   }
 
   reloadData(){
-     console.log(this.selectedStorage.id + "-" +this.yearQuarter.year);
-    this.costOfFreshService.getMasterOverviewWeekly(this.costOf,this.selectedStorage.id,this.yearQuarter.year).subscribe((data: any) =>{
+    // console.log(this.selectedStorage.id + "-" +this.yearQuarter.year);
+    this.costOfFreshService.getMasterOverviewWeekly(this.costOf,this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
       this.weeks = data.master_overview_weekly;
       if(this.weeks.length > 0)
         this.target = this.weeks[0].target;
@@ -84,6 +84,8 @@ export class CostOfFreshComponent implements OnInit {
       { field: 'week_ending_date', header: 'Ending Date' },
       { field: 'projected_weekly_revenue', header: 'Projected Revenue' },
       { field: 'actual_weekly_revenue', header: 'Actual Sales' },
+      { field: 'weekly_cog_total', header: 'Costs' },
+      { field: 'difference', header: 'Difference' },
       { field: 'actions', header: 'Actions' }
     ];
   }

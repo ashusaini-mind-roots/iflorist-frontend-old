@@ -14,9 +14,9 @@ export class CostOfFreshService{
       private http: HttpClient
   ) { }
 
-  getMasterOverviewWeekly(cosf_of, store, year): Observable<any> {
+  getMasterOverviewWeekly(cosf_of, store, year, quarter): Observable<any> {
     // console.log(`${environment.apiUrl}/store/all`);
-     return this.http.get(`${environment.apiUrl}/master_overview_weekly/master_overview_weekly_of/${cosf_of}/${store}/${year}`);
+     return this.http.get(`${environment.apiUrl}/master_overview_weekly/master_overview_weekly_of/${cosf_of}/${store}/${year}/${quarter}`);
   }
 
 }
