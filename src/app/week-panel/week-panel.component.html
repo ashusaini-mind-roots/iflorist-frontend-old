@@ -6,8 +6,6 @@
         {{week.number+"-"+week.week_end_day}}
     </option>
 </select>
-
-    this.visible = true;
 <p-dialog header="Edit {{title}}" [(visible)]="visible" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
       <form [formGroup]="dayform" (ngSubmit)="updateDay()">
         <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
