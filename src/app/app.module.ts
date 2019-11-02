@@ -29,7 +29,7 @@ import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-com
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {TableModule} from 'primeng/table';
-
+import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
 import { CostOfFreshComponent } from './cost-of-fresh/cost-of-fresh.component';
 import { YearQuarterComponent } from './year-quarter/year-quarter.component';
@@ -39,6 +39,8 @@ import { WeekPanelComponent } from './week-panel/week-panel.component'
 import { ProjectionComponent } from './projection/projection.component'
 ;
 import { SalesComponent } from './sales/sales.component'
+;
+import { MessageComponent } from './message/message.component'
 
 @NgModule({
     imports: [
@@ -50,7 +52,8 @@ import { SalesComponent } from './sales/sales.component'
         appRoutingModule,
         BrowserAnimationsModule,
         TableModule,
-        DialogModule
+        DialogModule,
+        ToastModule
     ],
     declarations: [
         AppComponent,
@@ -72,7 +75,8 @@ import { SalesComponent } from './sales/sales.component'
         YearQuarterComponent ,
         WeekPanelComponent ,
         SalesComponent ,
-        ProjectionComponent ],
+        ProjectionComponent ,
+        MessageComponent],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
