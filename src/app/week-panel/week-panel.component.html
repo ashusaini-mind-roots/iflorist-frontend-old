@@ -7,7 +7,37 @@
     </option>
 </select>
 
-
+    this.visible = true;
+<p-dialog header="Edit {{title}}" [(visible)]="visible" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
+      <form [formGroup]="dayform" (ngSubmit)="updateDay()">
+        <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
+        <div class="form-group">
+            <label for="merchandise">Merchandise</label>
+            <input type="text" formControlName="merchandise" [(ngModel)]="dialogValues.merchandise" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
+            <div *ngIf="submitted && f.merchandise.errors" class="invalid-feedback">
+                <div *ngIf="f.merchandise.errors.required">Merchandise is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="merchandise">Wire</label>
+            <input type="text" formControlName="wire" [(ngModel)]="dialogValues.wire" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
+            <div *ngIf="submitted && f.wire.errors" class="invalid-feedback">
+                <div *ngIf="f.wire.errors.required">Wire is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="delivery">Delivery</label>
+            <input type="text" formControlName="delivery" [(ngModel)]="dialogValues.delivery" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
+            <div *ngIf="submitted && f.delivery.errors" class="invalid-feedback">
+                <div *ngIf="f.delivery.errors.required">Delivery is required</div>
+            </div>
+        </div>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-close" (click)="visible=false" label="No" class="ui-button-secondary">Cancel</button>
+        <button pButton icon="pi pi-check" label="Yes">Update</button>
+    </p-footer>
+    </form>
+</p-dialog>
 <div class="ng-cloak font-weight-bold text-right">
     Current Week Sales: {{calcDailyTotal()|currency}}
     Target: {{target}}%
@@ -27,6 +57,7 @@
                                    id="inputMonday" [(ngModel)]="monday.amt_formatted"
                                    data-type="currency"
                             >
+                            <button type="button" (click)="showEditDay('Monday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>
                         </div>
                     </div>
                     <div class="col">
@@ -38,6 +69,7 @@
                                    id="inputTuesday" [(ngModel)]="tuesday.amt_formatted"
                                    data-type="currency"
                             >
+                            <button type="button" (click)="showEditDay('Tuesday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>
                         </div>
                     </div>
                     <div class="col">
@@ -47,7 +79,9 @@
                             <input type="text"
                                    class="form-control form-control-plaintext text-center font-weight-bold"
                                    id="inputWednesday" [(ngModel)]="wednesday.amt_formatted"
-                                   data-type="currency">
+                                   data-type="currency"
+                            >
+                            <button type="button" (click)="showEditDay('Wednesday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>
                         </div>
                     </div>
                     <div class="col">
@@ -59,6 +93,7 @@
                                    id="inputThursday" [(ngModel)]="thursday.amt_formatted"
                                    data-type="currency"
                             >
+                            <button type="button" (click)="showEditDay('Thursday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>
                         </div>
                     </div>
                     <div class="col">
@@ -68,7 +103,9 @@
                             <input type="text"
                                    class="form-control form-control-plaintext text-center font-weight-bold"
                                    id="inputFriday" [(ngModel)]="friday.amt_formatted"
-                                   data-type="currency">
+                                   data-type="currency"
+                            >
+                            <button type="button" (click)="showEditDay('Friday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>
                         </div>
                     </div>
                     <div class="col">
@@ -80,6 +117,7 @@
                                    id="inputSaturday" [(ngModel)]="saturday.amt_formatted"
                                    data-type="currency"
                             >
+                            <button type="button" (click)="showEditDay('Saturday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>
                         </div>
                     </div>
                     <div class="col">
@@ -89,7 +127,9 @@
                             <input type="text"
                                    class="form-control form-control-plaintext text-center font-weight-bold"
                                    id="inputSunday" [(ngModel)]="sunday.amt_formatted"
-                                   data-type="currency">
+                                   data-type="currency"
+                            >
+                            <button type="button" (click)="showEditDay('Sunday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>
                         </div>
                     </div>
 <!--                    <div class="col">-->
