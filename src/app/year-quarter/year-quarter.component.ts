@@ -23,7 +23,7 @@ export class YearQuarterComponent implements OnInit {
 
   ngOnInit() {
     let currentYear = this.utilService.GetCurrentYear();
-    this.years = this.utilService.GetYears(currentYear - 1, currentYear + 1 );
+    this.years = this.utilService.GetYears(currentYear - 1, currentYear  );
     this.yearSelected = currentYear;
 
     this.quarters = this.utilService.GetYears(1, 4);

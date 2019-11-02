@@ -44,7 +44,7 @@
     <div class="col-12">
         <div class="card mt-5 ">
             <div class="card-body">
-                <h5 class="card-title">Actual daily revenue</h5>
+<!--                <h5 class="card-title">Actual daily revenue</h5>-->
                 <div class="row">
                     <div class="col">
                         <div class="form-group text-center">
@@ -140,9 +140,9 @@
                 </div>
             </div>
             <div class="card-footer text-right">
-                <button type="button" class="btn btn-primary" ng-click="updateDaysAmtValues()"
-                        ng-disabled="saveDays_btnDisable">Save Changes
-                </button>
+<!--                <button type="button" class="btn btn-primary" ng-click="updateDaysAmtValues()"-->
+<!--                        ng-disabled="saveDays_btnDisable">Save Changes-->
+<!--                </button>-->
 <!--                {{&#45;&#45;<a href="#" class="btn btn-primary" ng-click="updateDaysAmtValues()">Save changes</a>&#45;&#45;}}-->
 
             </div>
@@ -256,6 +256,18 @@
                         <h6 class="card-subtitle mb-2 text-muted">Total Cost</h6>
                         <h5 class="card-title ng-cloak">
                             {{invoiceTotal|currency}}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Budget Remaining</h6>
+                        <h5 class="card-title ng-cloak">
+                            {{getTargetInMoney() - invoiceTotal|currency}}
                         </h5>
                     </div>
                 </div>
