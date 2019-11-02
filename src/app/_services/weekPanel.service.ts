@@ -44,4 +44,8 @@ export class WeekPanelService{
     return this.http.get(`${environment.apiUrl}/weekly_projection_percent_costs/target/${cost_of}`);
   }
 
+  updateDay(id,merchandise,wire,delivery){
+      return this.http.put(`${environment.apiUrl}/daily_revenue/update/${id}`, {merchandise,wire,delivery} );
+  }
+
 }

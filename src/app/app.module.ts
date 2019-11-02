@@ -29,6 +29,8 @@ import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-com
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {TableModule} from 'primeng/table';
+
+import {DialogModule} from 'primeng/dialog';
 import { CostOfFreshComponent } from './cost-of-fresh/cost-of-fresh.component';
 import { YearQuarterComponent } from './year-quarter/year-quarter.component';
 import { MessageService } from './_services/message.service';;
@@ -47,7 +49,8 @@ import { SalesComponent } from './sales/sales.component'
         HttpClientModule,
         appRoutingModule,
         BrowserAnimationsModule,
-        TableModule
+        TableModule,
+        DialogModule
     ],
     declarations: [
         AppComponent,
