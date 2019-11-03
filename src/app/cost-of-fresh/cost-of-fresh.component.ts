@@ -44,7 +44,7 @@ export class CostOfFreshComponent implements OnInit {
       this.costOf = params['what'];
       console.log("costOf:" + this.costOf);
       this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
-      //this.reloadData();
+      this.reloadData();
       this.loadHeaders();
     });
 
@@ -55,7 +55,7 @@ export class CostOfFreshComponent implements OnInit {
   }
 
   reloadData(){
-    // console.log(this.selectedStorage.id + "-" +this.yearQuarter.year);
+     console.log(this.selectedStorage.id + "-" +this.yearQuarter.quarter);
     this.costOfFreshService.getMasterOverviewWeekly(this.costOf,this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
       this.weeks = data.master_overview_weekly;
       if(this.weeks.length > 0)
