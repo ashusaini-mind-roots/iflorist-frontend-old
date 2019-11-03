@@ -10,7 +10,7 @@
 <div class="container">
     <router-outlet></router-outlet>
 </div>-->
-
+<app-message></app-message>
 <div class="d-flex" id="wrapper" [ngClass]="{ 'toggled': toggled }" *ngIf="currentUser">
 <!--<div class="d-flex" id="wrapper" [ngClass]="{ 'toggled': toggled }" >-->
     <!-- Sidebar -->
@@ -71,7 +71,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
+        
         <app-stores-combo></app-stores-combo>
         <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">

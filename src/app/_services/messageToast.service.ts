@@ -2,15 +2,11 @@
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class MessageService {
+export class MessageToastService {
     private subject = new Subject<any>();
 
-    sendMessage(message: string) {
-        this.subject.next( message );
-    }
-
-    sendMessageToast(variant:string ,message: string) {
-        let messageData = {'variant':variant,'message':message};
+    sendMessage(severity:string ,summary: string, detail:string) {
+        let messageData = {'severity':severity,'summary':summary,'detail':detail};
         this.subject.next( messageData );
     }
 
@@ -19,10 +15,6 @@ export class MessageService {
     }
 
     getMessage(): Observable<any> {
-        return this.subject.asObservable();
-    }
-
-    getMessageToast(): Observable<any> {
         return this.subject.asObservable();
     }
 }

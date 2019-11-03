@@ -2,6 +2,7 @@ import { ViewEncapsulation, Component, OnInit } from '@angular/core';
 import { StoreSubscriberService } from "../_services/storeSubscriber.service";
 import {TableModule} from 'primeng/table';
 import {ProjectionService} from "../_services/projection.service";
+import { MessageToastService } from "../_services/messageToast.service";
 
 
 @Component({
@@ -22,7 +23,8 @@ export class ProjectionComponent implements OnInit {
 
   constructor(
     private storeSubscriberService: StoreSubscriberService,
-    private projectionService: ProjectionService
+    private projectionService: ProjectionService,
+    private messageToastService: MessageToastService
   ) 
   {
     storeSubscriberService.subscribe(this,function (ref,store) {
@@ -92,6 +94,7 @@ export class ProjectionComponent implements OnInit {
               response=> {
                 this.loading = false;
                 delete this.clonedProjections[projections.id];
+                this.messageToastService.sendMessage('success','Projection Message','Projection updated succefully !');
                // console.log(response)
               },
               error => {
