@@ -53,7 +53,7 @@ export class AppComponent implements OnInit{
         const currentUser = this.authenticationService.currentUserValue;
         if(currentUser)
         {
-            console.log(currentUser.user.id);
+            //console.log(currentUser.user.id);
             return this.companyService.storesByCompany().subscribe((data: any) =>{
                 this.stores = data.stores;
                 console.log(this.stores);

@@ -25,6 +25,9 @@ export class WeekPanelService{
   getInvoices(cost_of,store_id, week_id): Observable<any> {
     return this.http.get(`${environment.apiUrl}/invoice/all/${cost_of}/${store_id}/${week_id}`);
   }
+  getNotes(store_id, week_id, year): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/note/all/${store_id}/${week_id}/${year}`);
+  }
   createInvoice(cost_of, invoice_number,invoice_name,total,store_id,week_id) {
     return this.http.post(`${environment.apiUrl}/invoice/create`,
         {
@@ -46,6 +49,22 @@ export class WeekPanelService{
 
   updateDay(id,merchandise,wire,delivery){
       return this.http.put(`${environment.apiUrl}/daily_revenue/update/${id}`, {merchandise,wire,delivery} );
+  }
+
+  deleteNote(id)
+  {
+    return this.http.delete(`${environment.apiUrl}/note/delete/${id}`);
+  }
+
+  createNote(store_id,week_id,year,text)
+  {
+    return this.http.post(`${environment.apiUrl}/note/create`,
+        {
+          "store_id": store_id,
+          "week_id": week_id,
+          "year": year,
+          "text":text
+        });
   }
 
 }

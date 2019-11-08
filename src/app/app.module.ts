@@ -31,6 +31,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 import { CostOfFreshComponent } from './cost-of-fresh/cost-of-fresh.component';
 import { YearQuarterComponent } from './year-quarter/year-quarter.component';
 import { MessageService } from './_services/message.service';;
@@ -53,7 +55,8 @@ import { MessageComponent } from './message/message.component'
         BrowserAnimationsModule,
         TableModule,
         DialogModule,
-        ToastModule
+        ToastModule,
+        ConfirmDialogModule
     ],
     declarations: [
         AppComponent,
@@ -81,6 +84,7 @@ import { MessageComponent } from './message/message.component'
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         MessageService,
+        ConfirmationService
         // provider used to create fake backend
         /*fakeBackendProvider*/
     ],
