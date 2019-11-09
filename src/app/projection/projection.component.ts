@@ -37,6 +37,7 @@ export class ProjectionComponent implements OnInit {
     this.yearIndexSelected = 2019;
     this.loadHeaders();
     this.loadProjection();
+    
   }
 
   loadHeaders(){
@@ -65,14 +66,14 @@ export class ProjectionComponent implements OnInit {
     this.loadProjection();
     //this.reloadData();
     // console.log(this.yearQuarter);
-    console.log(this.selectedStorage);
+    console.log('akiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
   }
 
   loadProjection()
   {
     this.proyections = [];
     this.loading = true;
-    this.projectionService.getProjectionList(1,this.yearIndexSelected).subscribe((data: any) =>{
+    this.projectionService.getProjectionList(this.selectedStorage,this.yearIndexSelected).subscribe((data: any) =>{
       console.log(data.projections);
       this.proyections = data.projections;
       this.loading = false;

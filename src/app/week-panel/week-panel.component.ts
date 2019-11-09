@@ -6,11 +6,15 @@ import { ActivatedRoute } from '@angular/router';
 import {first} from "rxjs/operators";
 // import {DialogModule} from 'primeng/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {ConfirmationService} from 'primeng/api';
+
+import { MessageToastService } from "../_services/messageToast.service";
 
 @Component({
   selector: 'app-week-panel',
   templateUrl: './week-panel.component.html',
-  styleUrls: ['./week-panel.component.less']
+  styleUrls: ['./week-panel.component.less'],
+  providers: [ConfirmationService]
 })
 export class WeekPanelComponent implements OnInit {
   selectedStorage: any;
@@ -27,11 +31,19 @@ export class WeekPanelComponent implements OnInit {
   selectedWeekItem: any;
   costOf: string;
   visible:boolean = false;
+  visibleDialogNote: boolean = false;
   title:string;
   dialogValues : any;
   dayform: FormGroup;
+  noteform: FormGroup;
   submitted = false;
+  submittedFormNote: boolean = false;
   error = '';
+  yearSelected: string;
+  notesYearSelected : any[];
+  oldNotes:any[];
+  cols : any[];
+  noteDelete : string = '';
 
   //------invoices
   invoices: any[];
@@ -52,6 +64,8 @@ export class WeekPanelComponent implements OnInit {
       private utilService: UtilsService,
       private weekPanelService: WeekPanelService,
       private route: ActivatedRoute,
+      private messageToastService: MessageToastService,
+      private confirmationService: ConfirmationService
   )
   {
       storeSubscriberService.subscribe(this,function (ref,store) {
@@ -59,6 +73,7 @@ export class WeekPanelComponent implements OnInit {
       });
       let currentYear = this.utilService.GetCurrentYear();
       this.yearQuarter = {year : currentYear, quarter: 1};
+      this.yearSelected = this.yearQuarter.year;
 
       this.monday = {'id': -1, 'amt': 0.00};
       this.tuesday = {'id': -1, 'amt': 0.00};
@@ -83,6 +98,11 @@ export class WeekPanelComponent implements OnInit {
       wire: ['',  Validators.required],
       delivery: ['',Validators.required],
     });
+
+    this.noteform = this.formBuilder.group({
+      text: ['', Validators.required],
+    });
+
     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
     this.route.params.subscribe(params => {
         this.selectedWeekItem = params['id'];
@@ -94,10 +114,53 @@ export class WeekPanelComponent implements OnInit {
 
     this.getWeeks();
     this.loadInvoicesTableHeaders();
+    this.loadHeaders();
+  }
+
+  onRowNoteSelect(event) {
+    //console.log(event.data.id);
+    this.noteDelete = event.data.id;
+  }
+
+  onRowNoteUnselect(event)
+  {
+     this.noteDelete = '';
+  }
+
+  deleteNote()
+  {
+    if(this.noteDelete=='')
+      this.messageToastService.sendMessage('error','Note Message','Select one note by delete !');
+    else
+    {
+       this.confirm();
+    }
+     
+      
+  }
+
+  confirm() {
+    this.confirmationService.confirm({
+        message: 'Are you sure that you want to delete the note ?',
+        accept: () => {
+          this.weekPanelService.deleteNote(this.noteDelete).subscribe((response: any) =>{
+            this.messageToastService.sendMessage('success','Note Message','One note was deleted !');
+            this.getNotes();
+          });
+        }
+    });
+  }
+
+  loadHeaders(){
+    this.cols = [
+      { field: 'id', header: 'asd' },
+      { field: 'text', header: 'asdsa' },
+    ];
   }
 
   receiveYearQuarter($event){
     this.yearQuarter = $event;
+    this.yearSelected = this.yearQuarter.year;
     this.getWeekDataFromServer();
   }
   receiveStorage(storage){
@@ -208,6 +271,14 @@ export class WeekPanelComponent implements OnInit {
       });
   }
 
+  getNotes = function(){
+    this.weekPanelService.getNotes(this.selectedStorage.id,this.selectedWeekItem,this.yearSelected).subscribe((response: any) =>{
+      this.notesYearSelected = response.result.noteYearSelected;
+      this.oldNotes = response.result.oldNotes;
+      console.log('oldNotes '+this.oldNotes);
+    });
+  }
+
   calcInvoiceTotal = function () {
     this.invoiceTotal = 0.00;
     for (var i = 0; i < this.invoices.length; i++) {
@@ -249,6 +320,7 @@ export class WeekPanelComponent implements OnInit {
     this.getProjWeeklyRev();
     this.getInvoices();
     this.getTarget();
+    this.getNotes();
     // this.calcCostDifference();
     // this.getNotes();
   }
@@ -355,18 +427,18 @@ export class WeekPanelComponent implements OnInit {
 
   get f() { return this.dayform.controls; }
 
+  get n() { return this.noteform.controls; }
+
   updateDay(){
     this.submitted = true;
 
-    // stop here if form is invalid
+    
     if (this.dayform.invalid) {
       //this.loading = false;
       return;
     }
     this.error = '';
-    /*this.success = '';
-    this.loading = true;*/
-    // store_name,contact_email,contact_phone,zip_code,address
+    
     this.weekPanelService.updateDay(this.f.id.value, this.f.merchandise.value, this.f.wire.value,
         this.f.delivery.value)
         .pipe(first())
@@ -383,6 +455,33 @@ export class WeekPanelComponent implements OnInit {
               /*this.error = error;
               this.loading = false;*/
             });
+  }
+
+  createNote(){
+    this.submittedFormNote = true;
+
+    
+    if (this.noteform.invalid) {
+      //this.loading = false;
+      return;
+    }
+    
+    
+    this.weekPanelService.createNote(this.selectedStorage.id,this.selectedWeekItem,this.yearSelected,this.n.text.value)
+        .pipe(first())
+        .subscribe(
+            data => {
+              //console.log(data);
+              this.getNotes();
+              this.visibleDialogNote = false;
+              //this.router.navigate([this.returnUrl]);
+            },
+            error => {
+              this.visibleDialogNote = false;
+              console.log(error)
+              /*this.error = error;
+              this.loading = false;*/
+        });
   }
 
 }
