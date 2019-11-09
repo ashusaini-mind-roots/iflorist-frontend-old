@@ -1,0 +1,70 @@
+<app-year-quarter (yearQuarterOutput) = "receiveYearQuarter($event)" [showQuarter] = false></app-year-quarter>
+
+
+<select class="" id="select-quarter" [(ngModel)]="selectedWeekItem" >
+  <option *ngFor="let week of weekList" value="{{week.id}}">
+    {{week.number+"-"+week.week_end_day}}
+  </option>
+</select>
+
+<div class="row mt-5">
+  <div class="col-3">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Sales Projections:</h6>
+        <h5 class="card-title ng-cloak">{{projWeeklyRev | currency}}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Projected Budget:</h6>
+        <h5 class="card-title  ng-cloak">{{calcProjectedPayRol()|currency}}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Scheduled Labor:</h6>
+        <h5 class="card-title ng-cloak">{{scheduledPayroll | currency}}</h5>
+      </div>
+    </div>
+  </div>
+<!--  <div class="col-2">-->
+<!--    <div class="card">-->
+<!--      <div class="card-body">-->
+<!--        <h6 class="card-subtitle mb-2 text-muted">Target COL's.</h6>-->
+<!--        <h5 class="card-title ng-cloak">@{{targetCOL | number:2}} %-->
+<!--          {{&#45;&#45;<hr>&#45;&#45;}}-->
+<!--          {{&#45;&#45;@{{ getTargetCOGInMoney() | currency }}&#45;&#45;}}-->
+<!--        </h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+  <div class="col-3">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Remaining Budget:</h6>
+        <h5 class="card-title ng-cloak">
+          {{differenceCol | currency }}
+        </h5>
+      </div>
+    </div>
+  </div>
+<!--  <div class="col-2">-->
+<!--    <div class="card">-->
+<!--      <div class="card-body">-->
+<!--        <h6 class="card-subtitle mb-2 text-muted">Difference</h6>-->
+<!--        <h5 class="card-title ng-cloak" ng-class="(calcCostDifference())<0?'text-danger':''">-->
+<!--          @{{calcCostDifference() | number:2}}%-->
+<!--          {{&#45;&#45;<hr>&#45;&#45;}}-->
+<!--          {{&#45;&#45;@{{getTargetCOGInMoney() - invoiceTotal | currency}}&#45;&#45;}}-->
+<!--        </h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>
+
+<app-finance-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem ></app-finance-view>

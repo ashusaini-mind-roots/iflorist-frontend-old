@@ -1,0 +1,99 @@
+<!--<table class="table">-->
+  <!--&lt;!&ndash;Table head&ndash;&gt;-->
+  <!--<thead>-->
+  <!--<tr>-->
+    <!--<th *ngFor="let col of cols">-->
+      <!--{{col.header}}-->
+    <!--</th>-->
+  <!--</tr>-->
+  <!--</thead>-->
+  <!--<tbody>-->
+  <!--<tr *ngFor="let employee of employeesScheduleList.employees">-->
+    <!--<td>{{employee.name}}</td>-->
+    <!--<td>{{employeesScheduleList.category_name}}</td>-->
+    <!--<td>{{employee.total_minutes_at_week}}</td>-->
+    <!--<td>{{employee.hourly_pay_rate}}</td>-->
+    <!--<td>{{25}}</td>-->
+  <!--</tr>-->
+  <!--</tbody>-->
+<!--</table>-->
+
+
+<p-table #dt [columns]="cols" dataKey="id" [value]="employeesScheduleList" [lazy]="true" [loading]="loading">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th class="{{col.header}}" *ngFor="let col of columns">
+        {{col.header}}
+      </th>
+      <th class="toggle"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-employeesScheduleList let-expanded="expanded" let-columns="columns">
+    <tr *ngFor="let employee of employeesScheduleList.employees">
+      <td>{{employee.name}}</td>
+      <td>{{employee.category_name}}</td>
+      <td>{{employee.total_minutes_at_week}}</td>
+      <td>{{employee.hourly_pay_rate}}</td>
+      <td>{{25}}</td>
+
+      <!--<td>{{week.totalMerchandise | number: '1.2-2'}}</td>-->
+      <!--<td>{{week.totalWire | number: '1.2-2'}}</td>-->
+      <!--<td>{{week.totalDelivery | number: '1.2-2'}}</td>-->
+      <!--<td>{{week.totalDelivery+week.totalWire+week.totalMerchandise | number: '1.2-2'}}</td>-->
+      <td>
+        <a href="#" [pRowToggler]="employeesScheduleList">
+          <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+        </a>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+    <tr>
+      <td class="sub-table" [attr.colspan]="columns.length + 1">
+        <p-table #dt  [value]="rowData.employees" dataKey="id" editMode="row">
+          <ng-template pTemplate="body" let-employee let-columns="columns" let-rowData let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="rowData">
+              <td >{{employee.name}}</td>
+      <!--<td>{{day.day_of_week}}</td>-->
+      <!--<td>-->
+        <!--<p-cellEditor>-->
+          <!--<ng-template pTemplate="input">-->
+            <!--<input pInputText type="text" [(ngModel)]="rowData.merchandise" required>-->
+          <!--</ng-template>-->
+          <!--<ng-template pTemplate="output">-->
+            <!--{{day.merchandise}}-->
+          <!--</ng-template>-->
+        <!--</p-cellEditor>-->
+      <!--</td>-->
+      <!--<td>-->
+        <!--<p-cellEditor>-->
+          <!--<ng-template pTemplate="input">-->
+            <!--<input pInputText type="text" [(ngModel)]="rowData.wire" required>-->
+          <!--</ng-template>-->
+          <!--<ng-template pTemplate="output">-->
+            <!--{{day.wire}}-->
+          <!--</ng-template>-->
+        <!--</p-cellEditor>-->
+      <!--</td>-->
+      <!--<td>-->
+        <!--<p-cellEditor>-->
+          <!--<ng-template pTemplate="input">-->
+            <!--<input pInputText type="text" [(ngModel)]="rowData.delivery" required>-->
+          <!--</ng-template>-->
+          <!--<ng-template pTemplate="output">-->
+            <!--{{day.delivery}}-->
+          <!--</ng-template>-->
+        <!--</p-cellEditor>-->
+      <!--</td>-->
+      <!--<td>-->
+        <!--{{day.total}}-->
+      <!--</td>-->
+      <!--<td class="toggle" style="text-align:center">-->
+        <!--<button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="btn btn-success" (click)="onRowEditInit(rowData)" >Edit</button>-->
+        <!--<button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData, ri)">Save</button>-->
+        <!--<button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)">Cancel</button>-->
+      <!--</td>-->
+    </tr>
+  </ng-template>
+
+</p-table>

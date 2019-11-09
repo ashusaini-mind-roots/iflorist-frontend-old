@@ -4,7 +4,7 @@ import { UtilsService } from "../_services/utils.service";
 import { WeekPanelService } from "../_services/weekPanel.service";
 import { ActivatedRoute } from '@angular/router';
 import {first} from "rxjs/operators";
-import {DialogModule} from 'primeng/dialog';
+// import {DialogModule} from 'primeng/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({

@@ -41,6 +41,10 @@ import { ProjectionComponent } from './projection/projection.component'
 import { SalesComponent } from './sales/sales.component'
 ;
 import { MessageComponent } from './message/message.component'
+;
+import { SchedulerComponent } from './scheduler_elements/scheduler/scheduler.component'
+;
+import { FinanceViewComponent } from './scheduler_elements/finance-view/finance-view.component'
 
 @NgModule({
     imports: [
@@ -76,7 +80,9 @@ import { MessageComponent } from './message/message.component'
         WeekPanelComponent ,
         SalesComponent ,
         ProjectionComponent ,
-        MessageComponent],
+        MessageComponent,
+        SchedulerComponent,
+        FinanceViewComponent],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -16,6 +16,7 @@ import {CostOfFreshComponent} from "@app/cost-of-fresh/cost-of-fresh.component";
 import {WeekPanelComponent} from "@app/week-panel/week-panel.component";
 import {ProjectionComponent} from './projection/projection.component'
 import {SalesComponent} from "@app/sales/sales.component";
+import { SchedulerComponent } from './scheduler_elements/scheduler/scheduler.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: 'week-panel/:cost_of/:id', component: WeekPanelComponent },
     { path: 'sales', component: SalesComponent },
     { path: 'projections', component: ProjectionComponent },
+    { path: 'scheduler', component: SchedulerComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }

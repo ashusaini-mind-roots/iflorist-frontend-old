@@ -106,4 +106,5 @@ export class SalesComponent implements OnInit {
     this.getSales();
   }
 
+
 }
