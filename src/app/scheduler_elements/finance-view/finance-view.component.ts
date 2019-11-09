@@ -43,22 +43,6 @@ export class FinanceViewComponent implements OnInit {
     });
   }
 
-  parseScheduleInformationResponse = function(categories_schedules){
-    for(var i = 0 ; i < categories_schedules.length ; i++){
-      for(var j = 0 ; j < categories_schedules[i].employees.length ; j++){
-        for(var k = 0 ; k < categories_schedules[i].employees[j].schedule_days.length ; k++){
-          categories_schedules[i].employees[j].total_hours = this.utilService.ParseMinutesToHoursFormat(categories_schedules[i].employees[j].total_minutes_at_week);
-          var schedul = categories_schedules[i].employees[j].schedule_days[k];
-          if(schedul.time_in != undefined)
-            schedul.time_in = new Date(schedul.time_in);
-          if(schedul.time_out != undefined)
-            schedul.time_out = new Date(schedul.time_out);
-        }
-      }
-    }
-    return this.employeesScheduleList = categories_schedules;
-  }
-
   loadHeaders(){
     this.cols = [
       { field: 'name', header: 'Name' },
@@ -148,13 +132,18 @@ export class FinanceViewComponent implements OnInit {
     var secondsDiff = (obendDT.getTime() - obstartDT.getTime()) > 0 ? (obendDT.getTime() - obstartDT.getTime()) / 1000 :  (86400000 + obendDT.getTime() - obstartDT.getTime()) / 1000;
     secondsDiff = Math.abs(Math.floor(secondsDiff));
 
-    var oDiff = {};     // object that will store data returned by this function
+    var oDiff = {
 
-    oDiff.days = Math.floor(secondsDiff/86400);
-    oDiff.totalhours = Math.floor(secondsDiff/3600);      // total number of hours in difference
-    oDiff.totalmin = Math.floor(secondsDiff/60);      // total number of minutes in difference
-    oDiff.totalsec = secondsDiff;      // total number of seconds in difference
+         // object that will store data returned by this function
 
+      days : Math.floor(secondsDiff/86400),
+      totalhours : Math.floor(secondsDiff/3600),      // total number of hours in difference
+      totalmin : Math.floor(secondsDiff/60),    // total number of minutes in difference
+      totalsec : secondsDiff,      // total number of seconds in difference
+      hours : 0,
+      minutes: 0,
+      seconds: 0,
+    };
     secondsDiff -= oDiff.days*86400;
     oDiff.hours = Math.floor(secondsDiff/3600);     // number of hours after days
 
