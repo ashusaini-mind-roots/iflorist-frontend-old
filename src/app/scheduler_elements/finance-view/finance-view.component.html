@@ -50,10 +50,24 @@
   <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
     <tr>
       <td class="sub-table" [attr.colspan]="columns.length + 1">
-        <p-table #dt  [value]="rowData.employees" dataKey="id" editMode="row">
+        <div class="row">
+           <div class="col-12" *ngFor="let employee of rowData.employees">
+              <div class="row">
+                  <div class="col" *ngFor="let schedule_day of employee.schedule_days">
+                    <div>{{schedule_day.day_of_week}}</div>
+                    <div *ngIf="schedule_day.id == -1 && showToEdit != employee.id+schedule_day.day_of_week">Off</div>
+                    <div *ngIf="showToEdit == employee.id+schedule_day.day_of_week"><input type="text"></div>
+                    <div *ngIf="showToEdit != employee.id+schedule_day.day_of_week"><button type="button" pButton (click)="showToEdit=employee.id+schedule_day.day_of_week">Edit</button></div>
+                    <div *ngIf="showToEdit == employee.id+schedule_day.day_of_week"><button type="button" pButton (click)="saveEmployee(employee.id,schedule_day.day_of_week)">Save</button></div>
+                    <div *ngIf="showToEdit == employee.id+schedule_day.day_of_week"><button type="button" pButton (click)="showToEdit=''">Cancel</button></div>
+                  </div>
+               </div>  
+           </div>
+        </div>
+        <!---<p-table #dt  [value]="rowData.employees" dataKey="id" editMode="row">
           <ng-template pTemplate="body" let-employee let-columns="columns" let-rowData let-editing="editing" let-ri="rowIndex">
             <tr [pEditableRow]="rowData">
-              <td >{{employee.name}}</td>
+              <td >{{employee.name}}</td>-->
       <!--<td>{{day.day_of_week}}</td>-->
       <!--<td>-->
         <!--<p-cellEditor>-->

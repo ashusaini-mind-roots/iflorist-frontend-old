@@ -15,6 +15,7 @@ export class FinanceViewComponent implements OnInit {
   @Input() selectedWeekItem: any;
   employeeStoreWeekId: any;
   cols:any;
+  showToEdit:string = '';
 
   constructor(
       private schedulerService: SchedulerService,
