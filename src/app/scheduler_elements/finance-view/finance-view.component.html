@@ -19,7 +19,7 @@
 <!--</table>-->
 
 
-<p-table #dt [columns]="cols" dataKey="id" [value]="employeesScheduleList" [lazy]="true" [loading]="loading">
+<p-table #dt [columns]="cols" dataKey="id" [value]="employeesScheduleList" [lazy]="true">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th class="{{col.header}}" *ngFor="let col of columns">

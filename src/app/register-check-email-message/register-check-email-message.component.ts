@@ -8,7 +8,7 @@ import { Router, ActivatedRoute} from '@angular/router';
 })
 export class RegisterCheckEmailMessageComponent implements OnInit {
 
-  private email:string;
+  email:string;
   constructor(private activateRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {

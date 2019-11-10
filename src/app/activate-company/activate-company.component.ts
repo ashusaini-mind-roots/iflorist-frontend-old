@@ -11,8 +11,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ActivateCompanyComponent implements OnInit {
   
-  private bool_error: boolean = false;
-  private error: string;
+  bool_error: boolean = false;
+  error: string;
 
   constructor(
     private route: ActivatedRoute,

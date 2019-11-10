@@ -279,7 +279,7 @@
           <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
           <div class="form-group">
               <label for="merchandise">Text</label>
-              <textarea  formControlName="text" [(ngModel)]="text" class="form-control" [ngClass]="{ 'is-invalid': submittedFormNote && n.text.errors }" ></textarea>
+              <textarea  formControlName="text" class="form-control" [ngClass]="{ 'is-invalid': submittedFormNote && n.text.errors }" ></textarea>
               <div *ngIf="submittedFormNote && n.text.errors" class="invalid-feedback">
                   <div *ngIf="n.text.errors.required">Text is required</div>
               </div>
