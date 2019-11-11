@@ -1,0 +1,21 @@
+stages:
+  - deploy
+
+deploy-to-dev:
+  stage: deploy
+  image: daxter1987/ubuntu-deploy:1.0.8
+  cache:
+    key: node_modules_admin_portal
+    paths:
+      - node_modules/
+  script:
+    - npm install
+    - ng build --configuration=develop
+    - sed -i -e 's/AWS_ACCESS_KEY_ID/$AWS_ACCESS_KEY_ID/g' /root/.aws/credentials
+    - sed -i -e 's/AWS_SECRET_ACCESS_KEY/$AWS_SECRET_ACCESS_KEY/g' /root/.aws/credentials
+    - ~/.local/bin/aws s3 sync --acl public-read --delete dist/ s3://$S3_BUCKET_NAME --delete
+   # - ~/.local/bin/aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths '/*'
+  environment:
+    name: develop
+  only:
+    - develop
