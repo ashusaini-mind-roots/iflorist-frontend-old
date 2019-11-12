@@ -4,10 +4,10 @@ stages:
 deploy-to-dev:
   stage: deploy
   image: daxter1987/ubuntu-deploy:1.0.8
-  cache:
-    key: node_modules_admin_portal
-    paths:
-      - node_modules/
+#  cache:
+#    key: node_modules_admin_portal
+#    paths:
+#      - node_modules/
   script:
     - npm install
     - ng build --configuration=develop
