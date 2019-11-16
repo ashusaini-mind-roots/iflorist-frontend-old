@@ -65,9 +65,9 @@
                           {{day.total}}
                       </td>
                       <td class="toggle" style="text-align:center">
-                          <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="btn btn-success" (click)="onRowEditInit(rowData)" >Edit</button>
-                          <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData, ri)">Save</button>
-                          <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)">Cancel</button>
+                          <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="btn btn-success" (click)="onRowEditInit(rowData)" ></button>
+                          <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData, ri)"></button>
+                          <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)"></button>
                       </td>
                     </tr>
                 </ng-template>

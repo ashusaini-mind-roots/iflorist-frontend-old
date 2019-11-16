@@ -17,6 +17,8 @@ import {WeekPanelComponent} from "@app/week-panel/week-panel.component";
 import {ProjectionComponent} from './projection/projection.component'
 import {SalesComponent} from "@app/sales/sales.component";
 import { SchedulerComponent } from './scheduler_elements/scheduler/scheduler.component';
+import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
+import {EmployeeParentComponent} from "@app/employees/employee-parent/employee-parent.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -34,6 +36,8 @@ const routes: Routes = [
     { path: 'sales', component: SalesComponent },
     { path: 'projections', component: ProjectionComponent },
     { path: 'scheduler', component: SchedulerComponent },
+    { path: 'employees', component: EmployeeParentComponent },
+    { path: 'employees-list', component: EmployeeListComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }

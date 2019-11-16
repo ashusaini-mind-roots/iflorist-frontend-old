@@ -47,6 +47,10 @@ import { MessageComponent } from './message/message.component'
 import { SchedulerComponent } from './scheduler_elements/scheduler/scheduler.component'
 ;
 import { FinanceViewComponent } from './scheduler_elements/finance-view/finance-view.component'
+;
+import { EmployeeListComponent } from './employees/employee-list/employee-list.component'
+;
+import { EmployeeParentComponent } from './employees/employee-parent/employee-parent.component'
 
 @NgModule({
     imports: [
@@ -85,7 +89,11 @@ import { FinanceViewComponent } from './scheduler_elements/finance-view/finance-
         ProjectionComponent ,
         MessageComponent,
         SchedulerComponent,
-        FinanceViewComponent],
+        FinanceViewComponent,
+        EmployeeListComponent,
+        EmployeeParentComponent,
+    ],
+
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

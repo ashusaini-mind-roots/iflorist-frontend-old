@@ -58,6 +58,7 @@ export class SalesComponent implements OnInit {
         console.log(this.weeks);
         this.loading = false;
       });
+    this.loading = false;
   }
 
   loadHeaders(){

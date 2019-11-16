@@ -130,7 +130,7 @@ export class WeekPanelComponent implements OnInit {
   deleteNote()
   {
     if(this.noteDelete=='')
-      this.messageToastService.sendMessage('error','Note Message','Select one note by delete !');
+      this.messageToastService.sendMessage('error','Note Message','Select a note to delete !');
     else
     {
        this.confirm();
