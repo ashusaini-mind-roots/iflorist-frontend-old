@@ -30,7 +30,7 @@
                 <ng-template pTemplate="body" let-day let-columns="columns" let-rowData let-editing="editing" let-ri="rowIndex">
                     <tr [pEditableRow]="rowData">
                       <td class="No">{{day.id}}</td>
-                      <td>{{day.merchandise}}</td>
+                      <td>{{day.day_of_week}}</td>
                       <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
