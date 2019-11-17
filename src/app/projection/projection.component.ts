@@ -35,6 +35,7 @@ export class ProjectionComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.yearIndexSelected = 2019;
+    this.selectedStorage = 1;
     this.loadHeaders();
     this.loadProjection();
     
@@ -66,7 +67,7 @@ export class ProjectionComponent implements OnInit {
     this.loadProjection();
     //this.reloadData();
     // console.log(this.yearQuarter);
-    console.log('akiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+    //console.log('akiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
   }
 
   loadProjection()
