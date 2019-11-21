@@ -39,7 +39,8 @@
                           <input type="time" [(ngModel)]="employee.schedule_days[i].time_out" placeholder="HH:mm" >
                       </div>
                       Brake<input type="number" style="max-width:60px;" [(ngModel)]="employee.schedule_days[i].break_time" placeholder="min" >min
-                      {{calcTimesDifference(employee.schedule_days[i].time_in | date: "HH:mm:ss",employee.schedule_days[i].time_out|date:"HH:mm:ss",employee.schedule_days[i].break_time)}}
+<!--                      {{calcTimesDifference(employee.schedule_days[i].time_in | date: "HH:mm:ss",employee.schedule_days[i].time_out|date:"HH:mm:ss",employee.schedule_days[i].break_time)}}-->
+                    {{calcTimesDifference(employee.schedule_days[i].time_in,employee.schedule_days[i].time_out,employee.schedule_days[i].break_time)}}
 <!--                    <div *ngIf="schedule_day.id == -1 && showToEdit != employee.id+schedule_day.day_of_week">Off</div>-->
 <!--                    <div *ngIf="showToEdit == employee.id+schedule_day.day_of_week"><input type="text"></div>-->
 <!--                    <div *ngIf="showToEdit != employee.id+schedule_day.day_of_week"><button type="button" pButton (click)="showToEdit=employee.id+schedule_day.day_of_week">Edit</button></div>-->
