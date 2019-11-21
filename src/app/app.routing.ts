@@ -18,6 +18,8 @@ import {ProjectionComponent} from './projection/projection.component'
 import {SalesComponent} from "@app/sales/sales.component";
 import { SchedulerComponent } from './scheduler_elements/scheduler/scheduler.component';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
+import {CretateEmployeeComponent} from './employees/cretate-employee/cretate-employee.component';
+import {EditEmployeeComponent} from './employees/edit-employee/edit-employee.component';
 import {EmployeeParentComponent} from "@app/employees/employee-parent/employee-parent.component";
 
 const routes: Routes = [
@@ -38,6 +40,8 @@ const routes: Routes = [
     { path: 'scheduler', component: SchedulerComponent },
     { path: 'employees', component: EmployeeParentComponent },
     { path: 'employees-list', component: EmployeeListComponent },
+    { path: 'create-employee', component: CretateEmployeeComponent },
+    { path: 'edit-employee/:id', component: EditEmployeeComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
