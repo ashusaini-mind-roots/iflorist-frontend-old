@@ -173,6 +173,22 @@ export class FinanceViewComponent implements OnInit {
     }
     return totalTotal;
   }
+
+  calcTimesDifference = function (time_in, time_out, break_time) {
+console.log(time_in + "," + time_out + "," + break_time)
+    // if(time_in != undefined && time_out != undefined){
+    //   if(break_time == undefined)
+    //     break_time = 0;
+    //   var minutesTotal = (this.utilService.diffDateTime(time_in,time_out).totalmin - break_time);
+    //
+    //   var h = Math.floor(minutesTotal / 60);
+    //   var m = minutesTotal % 60;
+    //   var hh = h < 10 ? '0' + h : h;
+    //   var mm = m < 10 ? '0' + m : m;
+    //   return hh + ':' + mm;
+    // }
+    // return '00' + ':' + '00';
+  }
 }
 
 
