@@ -51,6 +51,9 @@ import { FinanceViewComponent } from './scheduler_elements/finance-view/finance-
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component'
 ;
 import { EmployeeParentComponent } from './employees/employee-parent/employee-parent.component'
+;
+import { CretateEmployeeComponent } from './employees/cretate-employee/cretate-employee.component';
+import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.component'
 
 @NgModule({
     imports: [
@@ -92,6 +95,8 @@ import { EmployeeParentComponent } from './employees/employee-parent/employee-pa
         FinanceViewComponent,
         EmployeeListComponent,
         EmployeeParentComponent,
+        CretateEmployeeComponent,
+        EditEmployeeComponent
     ],
 
     providers: [
