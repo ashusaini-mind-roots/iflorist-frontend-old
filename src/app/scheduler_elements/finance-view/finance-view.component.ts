@@ -78,84 +78,11 @@ export class FinanceViewComponent implements OnInit {
     var minutesTotal = 0;
     if(time_in != undefined && time_out != undefined){
       if(break_time == undefined) break_time = 0;
-      minutesTotal = (this.diffDateTime(time_in,time_out).totalmin - break_time);
+      minutesTotal = (this.utilService.diffDateTime(time_in,time_out).totalmin - break_time);
     }
     return minutesTotal;
   }
 
-  /* Function to calculate time difference between 2 datetimes (in Timestamp-milliseconds, or string English Date-Time)
-   It can also be used the words: NOW for current date-time, and TOMORROW for the next day (the 0:0:1 time)
-   Returns an object with this items {days, hours, minutes, seconds, totalhours, totalmin, totalsec}
-   */
-  diffDateTime = function(startDT, endDT){
-    // JavaScript & jQuery Course - https://coursesweb.net/javascript/
-    // if paramerer is string, only the time hh:mm:ss (with, or without AM/PM), create Date object for current date-time,
-    // and adds hour, minutes, seconds from paramerer
-    //else, if the paramerer is "now", sets Date object with current date-time
-    //else, if the paramerer is "tomorrow", sets Date object with current date, and the hour 24 + 1 second
-    // else create Date object with date time from startDT and endDT
-    if(typeof startDT == 'string' && startDT.match(/^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}[amp ]{0,3}$/i)){
-      startDT = startDT.match(/^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}/);
-      startDT = startDT.toString().split(':');
-      var obstartDT = new Date();
-      obstartDT.setHours(startDT[0]);
-      obstartDT.setMinutes(startDT[1]);
-      obstartDT.setSeconds(startDT[2]);
-    }
-    else if(typeof startDT == 'string' && startDT.match(/^now$/i)) var obstartDT = new Date();
-    else if(typeof startDT == 'string' && startDT.match(/^tomorrow$/i)){
-      var obstartDT = new Date();
-      obstartDT.setHours(24);
-      obstartDT.setMinutes(0);
-      obstartDT.setSeconds(1);
-    }
-    else var obstartDT = new Date(startDT);
-
-    if(typeof endDT == 'string' && endDT.match(/^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}[amp ]{0,3}$/i)){
-      endDT = endDT.match(/^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}/);
-      endDT = endDT.toString().split(':');
-      var obendDT = new Date();
-      obendDT.setHours(endDT[0]);
-      obendDT.setMinutes(endDT[1]);
-      obendDT.setSeconds(endDT[2]);
-    }
-    else if(typeof endDT == 'string' && endDT.match(/^now$/i)) var obendDT = new Date();
-    else if(typeof endDT == 'string' && endDT.match(/^tomorrow$/i)){
-      var obendDT = new Date();
-      obendDT.setHours(24);
-      obendDT.setMinutes(0);
-      obendDT.setSeconds(1);
-    }
-    else var obendDT = new Date(endDT);
-
-    // gets the difference in number of seconds
-    // if the difference is negative, the hours are from different days, and adds 1 day (in sec.)
-    var secondsDiff = (obendDT.getTime() - obstartDT.getTime()) > 0 ? (obendDT.getTime() - obstartDT.getTime()) / 1000 :  (86400000 + obendDT.getTime() - obstartDT.getTime()) / 1000;
-    secondsDiff = Math.abs(Math.floor(secondsDiff));
-
-    var oDiff = {
-
-         // object that will store data returned by this function
-
-      days : Math.floor(secondsDiff/86400),
-      totalhours : Math.floor(secondsDiff/3600),      // total number of hours in difference
-      totalmin : Math.floor(secondsDiff/60),    // total number of minutes in difference
-      totalsec : secondsDiff,      // total number of seconds in difference
-      hours : 0,
-      minutes: 0,
-      seconds: 0,
-    };
-    secondsDiff -= oDiff.days*86400;
-    oDiff.hours = Math.floor(secondsDiff/3600);     // number of hours after days
-
-    secondsDiff -= oDiff.hours*3600;
-    oDiff.minutes = Math.floor(secondsDiff/60);     // number of minutes after hours
-
-    secondsDiff -= oDiff.minutes*60;
-    oDiff.seconds = Math.floor(secondsDiff);     // number of seconds after minutes
-
-    return oDiff;
-  }
 
   calcEmployeesTotalHours = function (employees) {
     var totalhours = 0;
@@ -172,6 +99,36 @@ export class FinanceViewComponent implements OnInit {
       employees[i].total_hours = this.ParseMinutesToHoursFormat(employees[i].total_minutes_at_week);
     }
     return totalTotal;
+  }
+
+  calcTimesDifference = function (time_in, time_out, break_time) {
+//console.log(time_in + "," + time_out + "," + break_time)
+    if(time_in != undefined && time_out != undefined && time_in != time_out){
+      if(break_time == undefined)
+        break_time = 0;
+
+      var startDT = time_in.toString().split(':');
+      var obstartDT = new Date();
+      obstartDT.setHours(startDT[0]);
+      obstartDT.setMinutes(startDT[1]);
+      obstartDT.setSeconds(0);
+
+      var endDT = time_out.toString().split(':');
+      var obendDT = new Date();
+      obendDT.setHours(endDT[0]);
+      obendDT.setMinutes(endDT[1]);
+      obendDT.setSeconds(0);
+
+
+      var minutesTotal = (this.utilService.diffDateTime(obstartDT,obendDT).totalmin - break_time);
+console.log("totalmin:" + this.utilService.diffDateTime(obstartDT,obendDT).totalmin)
+      var h = Math.floor(minutesTotal / 60);
+      var m = minutesTotal % 60;
+      var hh = h < 10 ? '0' + h : h;
+      var mm = m < 10 ? '0' + m : m;
+      return hh + ':' + mm;
+    }
+    return '00' + ':' + '00';
   }
 }
 

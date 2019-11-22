@@ -27,14 +27,15 @@ export class StoresComboComponent implements OnInit {
       if(this.stores.length > 0){
         this.storeIndexSelected = 0;
         this.populateSelectedStorage(this.stores[0]);
+        console.log(this.stores[0])
       }
-      //console.log(this.stores)
+      console.log(this.stores)
     })
   }
 
   onStoreSelected(value){
-    //console.log(value);
-    //console.log(this.stores[value]);
+    console.log(value);
+    console.log(this.stores[value]);
     this.populateSelectedStorage(this.stores[value]);
     this.sendMessage(this.stores[value]);
   }
