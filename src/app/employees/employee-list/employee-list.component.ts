@@ -49,6 +49,7 @@ export class EmployeeListComponent implements OnInit {
       { field: 'phone', header: 'Phone Number' },
       { field: 'status_name', header: 'position' },
       { field: 'store', header: 'Store' },
+      { field: 'actions', header: 'Actions' },
     ];
   }
 }
