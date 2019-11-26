@@ -31,7 +31,8 @@ export class EmployeeListComponent implements OnInit {
   }
   receiveStorage(storage){
     this.selectedStorage = storage;
-    console.log(storage)
+    console.log(storage.id)
+    this.getEmployees();
   }
   getEmployees()
   {

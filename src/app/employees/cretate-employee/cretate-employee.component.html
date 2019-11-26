@@ -28,6 +28,28 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="category">Store</label>
+                  <select formControlName="store" class="form-control" id="select-store" [ngClass]="{ 'is-invalid': submitted && f.store.errors}">
+                    <option *ngFor="let store of stores" value="{{store.id}}">
+                      {{store.store_name}}
+                    </option>
+                    </select>
+                  <div *ngIf="submitted && f.store.errors" class="invalid-feedback">
+                    <div *ngIf="f.store.errors.required">Store is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="system_account">System User</label>
+                  <select formControlName="system_account" class="form-control" id="select-system-account" (change)="onChangeSysteAccount()">
+                    <option value='0'>
+                      No
+                    </option>
+                    <option value='1'>
+                      Yes
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group" [hidden]=!systemUser>
                   <label for="email">Email address</label>
                   <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
                   <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -74,10 +96,24 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
+                  <label for="year_pay">Year Pay</label>
+                  <select formControlName="year_pay" class="form-control" id="select-year-pay">
+                    <option value='0'>
+                      No
+                    </option>
+                    <option value='1'>
+                      Yes
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
                   <label for="hourlypayrate">Compensation</label>
-                  <input type="text" formControlName="hourlypayrate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.hourlypayrate.errors}" />
+                  <input type="text" formControlName="hourlypayrate" class="form-control" pattern="^[0-9]+([.][0-9]+)?$" [ngClass]="{ 'is-invalid': submitted && f.hourlypayrate.errors}" />
                   <div *ngIf="submitted && f.hourlypayrate.errors" class="invalid-feedback">
                     <div *ngIf="f.hourlypayrate.errors.required">Compensation is required</div>
+                  </div>
+                  <div *ngIf="submitted && f.hourlypayrate.errors" class="invalid-feedback">
+                    <div *ngIf="f.hourlypayrate.errors.pattern">Enter a valid number</div>
                   </div>
                 </div>
                 <div class="form-group">
