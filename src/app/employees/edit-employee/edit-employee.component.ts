@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { EmployeeService } from '../../_services/employee.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StatuService } from '../../_services/statu.service';
 import { CategoryService } from '../../_services/category.service';
-import { StoreService } from '../../_services/store.service';
 import { WorkmancombService } from '../../_services/workmancomb.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from '../../_services/employee.service';
 import { MessageToastService } from '../../_services/messageToast.service';
 import { StoreSubscriberService } from "../../_services/storeSubscriber.service";
 
@@ -16,19 +16,19 @@ class ImageSnippet {
 }
 
 @Component({
-  selector: 'app-cretate-employee',
-  templateUrl: './cretate-employee.component.html',
-  styleUrls: ['./cretate-employee.component.less']
+  selector: 'app-edit-employee',
+  templateUrl: './edit-employee.component.html',
+  styleUrls: ['./edit-employee.component.less']
 })
-export class CretateEmployeeComponent implements OnInit {
+export class EditEmployeeComponent implements OnInit {
 
+  employee : any;
+  selectedFile: ImageSnippet;
   status: any[];
   categories: any[];
-  stores: any[];
   workmancombs: any[];
   employeeform: FormGroup;
   submitted = false;
-  selectedFile: ImageSnippet;
   loading = false;
   error: string = '';
   selectedStorage: any;
@@ -36,18 +36,88 @@ export class CretateEmployeeComponent implements OnInit {
   email: string = '';
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute, 
+    private employeeService: EmployeeService,
     private statuService: StatuService,
     private categoryService: CategoryService,
-    private storeService: StoreService,
     private workmancombService: WorkmancombService,
     private formBuilder: FormBuilder,
-    private employeeService: EmployeeService,
     private message: MessageToastService,
-    private storeSubscriberService: StoreSubscriberService) {
+    private storeSubscriberService: StoreSubscriberService) 
+  {
     this.selectedFile = new ImageSnippet('', null);
     storeSubscriberService.subscribe(this,function (ref,store) {
       ref.receiveStorage(store);
     });
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.employeeService.getEmployee(params['id']).subscribe(res => {
+        this.employee = res.employee;
+        console.log(this.employee);
+
+        this.employeeService.getEmployeeImage(params['id']).subscribe(res => {
+          const file: File = res;
+          const reader = new FileReader();
+          reader.addEventListener('load', (event: any) => {
+            this.selectedFile = new ImageSnippet(event.target.result, file);
+            console.log(this.selectedFile.file);
+          });
+          reader.readAsDataURL(file);
+        });
+
+        this.initFormValue(this.employee);
+
+      });
+    });
+
+    this.employeeform = this.formBuilder.group({
+      name: ['', Validators.required],
+      status: ['', Validators.required],
+      category: ['', Validators.required],
+      phone_number: ['', Validators.required],
+      hourlypayrate: ['', Validators.required,Validators.pattern('^[0-9]+([.][0-9]+)?$')],
+      overtimeelegible: ['', Validators.required],
+      workmancomb: ['', Validators.required],
+      email: [''],
+      active: ['1'],
+      system_account: ['0'],
+      year_pay: ['0'],
+    });
+    this.getStatuList();
+    this.getCategoryList();
+    this.getWorkmancombList();
+  }
+
+  initFormValue(object: any)
+  {
+     this.f.name.setValue(object.employee.name);
+     this.f.year_pay.setValue(object.employee.year_pay);
+     this.f.system_account.setValue(object.employee.system_account);
+     this.f.hourlypayrate.setValue(object.employee.hourlypayrate);
+     this.f.status.setValue(object.employee.status_id);
+     this.f.overtimeelegible.setValue(object.employee.overtimeelegible);
+     this.f.category.setValue(object.employee.category_id);
+     this.f.active.setValue(object.employee.active);
+     this.f.phone_number.setValue(object.employee.phone_number);
+     this.f.workmancomb.setValue(object.employee.work_man_comp_id);
+
+     if(this.f.system_account.value=='1')
+     {
+       this.f.email.setValue(object.user.email);
+       this.f.email.setValidators([Validators.required, Validators.email]);
+       this.f.email.updateValueAndValidity();
+       this.systemUser = true;
+     }
+     else
+     {
+       this.f.email.setValidators(null);
+       this.f.email.updateValueAndValidity();
+       this.systemUser = false;
+     }
+     
   }
 
   onChangeSysteAccount()
@@ -68,40 +138,11 @@ export class CretateEmployeeComponent implements OnInit {
       
   }
 
-  ngOnInit() {
-    this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
-    //this.selectedStorage.id = 1;
-    this.employeeform = this.formBuilder.group({
-      name: ['', Validators.required],
-      status: ['', Validators.required],
-      category: ['', Validators.required],
-      store: ['', Validators.required],
-      phone_number: ['', Validators.required],
-      hourlypayrate: ['', Validators.required,Validators.pattern('^[0-9]+([.][0-9]+)?$')],
-      overtimeelegible: ['', Validators.required],
-      workmancomb: ['', Validators.required],
-      email: [''],
-      active: ['1'],
-      system_account: ['0'],
-      year_pay: ['0'],
-    });
-    this.getStatuList();
-    this.getStoreList();
-    this.getCategoryList();
-    this.getWorkmancombList();
-  }
-
-  receiveStorage(storage){
-    this.selectedStorage = storage;
-    console.log(storage)
-  }
-
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
-      console.log(this.selectedFile.file);
     });
     reader.readAsDataURL(file);
   }
@@ -110,13 +151,6 @@ export class CretateEmployeeComponent implements OnInit {
     this.statuService.getStatuList().subscribe((data: any) => {
       this.status = data.status;
       //console.log(this.stores)
-    });
-  }
-
-  getStoreList() {
-    this.storeService.getStoreList().subscribe((data: any) => {
-      this.stores = data.stores;
-      console.log(this.stores)
     });
   }
 
@@ -149,10 +183,9 @@ export class CretateEmployeeComponent implements OnInit {
     this.success = '';*/
     this.loading = true;
     // store_name,contact_email,contact_phone,zip_code,address
-    console.log('status' + ' ' + this.f.status.value);
     if(this.f.system_account.value=='1')
       this.email = this.f.email.value;
-    this.employeeService.createEmployee(this.f.name.value, this.email , this.f.category.value, this.f.status.value, this.f.workmancomb.value, this.f.phone_number.value, this.selectedFile.file, this.f.overtimeelegible.value, this.f.hourlypayrate.value, this.f.active.value, this.f.store.value, this.f.year_pay.value,this.f.system_account.value)
+    this.employeeService.updateEmployee(this.employee.employee.id,this.f.name.value, this.email , this.f.category.value, this.f.status.value, this.f.workmancomb.value, this.f.phone_number.value, this.selectedFile.file, this.f.overtimeelegible.value, this.f.hourlypayrate.value, this.f.active.value/*, this.selectedStorage.id*/, this.f.year_pay.value,this.f.system_account.value)
       .pipe()
       .subscribe(
         (data: any) => {
@@ -164,7 +197,6 @@ export class CretateEmployeeComponent implements OnInit {
             this.error = data.error;
           }
           else {
-            this.clean();
             this.message.sendMessage('success', 'Employee Message', 'Employee created succefully !');
           }
           //this.success = 'Store added succefull !';
@@ -177,29 +209,6 @@ export class CretateEmployeeComponent implements OnInit {
           this.loading = false;
           this.message.sendMessage('error', 'Employee Message', error);
         });
-  }
-
-  clean() {
-    this.selectedFile = new ImageSnippet('', null);
-    this.f.name.setValue('');
-    this.f.email.setValue('');
-    this.f.phone_number.setValue('');
-    this.f.category.setValue('');
-    this.f.status.setValue('');
-    this.f.hourlypayrate.setValue('');
-    this.f.overtimeelegible.setValue('');
-    this.f.active.setValue('1');
-    this.f.workmancomb.setValue('');
-    this.f.system_account.setValue('0');
-    this.systemUser = false;
-    this.f.email.setValidators(null);
-    this.f.email.updateValueAndValidity();
-    this.f.year_pay.setValue('0');
-    this.submitted = false;
-    this.error = '';
-    
-    //this.onChangeSysteAccount();
-
   }
 
 }

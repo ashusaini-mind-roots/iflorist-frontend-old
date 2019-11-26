@@ -1,0 +1,151 @@
+<div class="col-md-12 mt-5">
+  <!--<div class="alert alert-info">
+      email: test<br />
+      Password: test
+  </div>-->
+  <div class="card m-4">
+    <h4 class="card-header">Edit Employee</h4>
+    <div class="card-body">
+      <form [formGroup]="employeeform" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-4">
+              <div class="form-group">
+                <div style="width: 100px; height: 100px; background-color: gray;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
+                  <input #imageInput
+                  type="file"
+                  accept="image/*"
+                  (change)="processFile(imageInput)">
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors}" />
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                  <div *ngIf="f.name.errors.required">Name is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="system_account">System User</label>
+                <select formControlName="system_account" class="form-control" id="select-system-account" (change)="onChangeSysteAccount()">
+                  <option value='0'>
+                    No
+                  </option>
+                  <option value='1'>
+                    Yes
+                  </option>
+                </select>
+              </div>
+              <div class="form-group" [hidden]=!systemUser>
+                <label for="email">Email address</label>
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.email">Email address should be a valid email</div>
+                  <div *ngIf="f.email.errors.required">Email address is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="status">Status</label>
+                <select formControlName="status" class="form-control" id="select-status" [ngClass]="{ 'is-invalid': submitted && f.status.errors}">
+                  <option *ngFor="let statu of status" value="{{statu.id}}">
+                    {{statu.name}}
+                  </option>
+                  </select>
+                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                  <div *ngIf="f.status.errors.required">Status is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="category">Position</label>
+                <select formControlName="category" class="form-control" id="select-category" [ngClass]="{ 'is-invalid': submitted && f.category.errors}">
+                  <option *ngFor="let category of categories" value="{{category.id}}">
+                    {{category.name}}
+                  </option>
+                  </select>
+                <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                  <div *ngIf="f.category.errors.required">Category is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="overtimeelegible">Active</label>
+                <select formControlName="active" class="form-control" id="select-active">
+                  <option value='0'>
+                    No
+                  </option>
+                  <option value='1' selected>
+                    Yes
+                  </option>
+                </select>
+                <!--<div *ngIf="submitted && f.overtimeelegible.errors" class="invalid-feedback">
+                  <div *ngIf="f.overtimeelegible.errors.required">Over time elegible</div>
+                </div>-->
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group">
+                <label for="year_pay">Year Pay</label>
+                <select formControlName="year_pay" class="form-control" id="select-year-pay">
+                  <option value='0'>
+                    No
+                  </option>
+                  <option value='1'>
+                    Yes
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="hourlypayrate">Compensation</label>
+                <input type="text" formControlName="hourlypayrate" class="form-control" pattern="^[0-9]+([.][0-9]+)?$" [ngClass]="{ 'is-invalid': submitted && f.hourlypayrate.errors}" />
+                <div *ngIf="submitted && f.hourlypayrate.errors" class="invalid-feedback">
+                  <div *ngIf="f.hourlypayrate.errors.required">Compensation is required</div>
+                </div>
+                <div *ngIf="submitted && f.hourlypayrate.errors" class="invalid-feedback">
+                  <div *ngIf="f.hourlypayrate.errors.pattern">Enter a valid number</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="overtimeelegible">Over time elegible</label>
+                <select formControlName="overtimeelegible" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.overtimeelegible.errors}" id="select-overtimeelegible">
+                  <option value='0'>
+                    No
+                  </option>
+                  <option value='1'>
+                    Yes
+                  </option>
+                </select>
+                <div *ngIf="submitted && f.overtimeelegible.errors" class="invalid-feedback">
+                  <div *ngIf="f.overtimeelegible.errors.required">Over time elegible</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="text" formControlName="phone_number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors}" />
+                <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
+                  <div *ngIf="f.phone_number.errors.required">Phone number is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="workmancomb">Work man comb</label>
+                <select formControlName="workmancomb" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.workmancomb.errors}" id="select-position">
+                  <option *ngFor="let workmancomb of workmancombs" value="{{workmancomb.id}}">
+                    {{workmancomb.name}}
+                  </option>
+                  </select>
+                <div *ngIf="submitted && f.workmancomb.errors" class="invalid-feedback">
+                  <div *ngIf="f.workmancomb.errors.required">Work man comb is required</div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Create
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
