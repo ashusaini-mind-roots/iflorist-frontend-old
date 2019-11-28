@@ -78,7 +78,7 @@ export class EditEmployeeComponent implements OnInit {
       status: ['', Validators.required],
       category: ['', Validators.required],
       phone_number: ['', Validators.required],
-      hourlypayrate: ['', Validators.required,Validators.pattern('^[0-9]+([.][0-9]+)?$')],
+      hourlypayrate: ['', Validators.required/*,Validators.pattern('^[0-9]+([.][0-9]+)?$')*/],
       overtimeelegible: ['', Validators.required],
       workmancomb: ['', Validators.required],
       email: [''],
@@ -104,6 +104,9 @@ export class EditEmployeeComponent implements OnInit {
      this.f.phone_number.setValue(object.employee.phone_number);
      this.f.workmancomb.setValue(object.employee.work_man_comp_id);
 
+     this.f.hourlypayrate.setValidators([Validators.required,Validators.pattern('^[0-9]+([.][0-9]+)?$')]);
+     this.f.hourlypayrate.updateValueAndValidity();
+     
      if(this.f.system_account.value=='1')
      {
        this.f.email.setValue(object.user.email);
