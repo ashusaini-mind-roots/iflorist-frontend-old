@@ -78,7 +78,7 @@ export class CretateEmployeeComponent implements OnInit {
       store: ['', Validators.required],
       phone_number: ['', Validators.required],
       hourlypayrate: ['', Validators.required,Validators.pattern('^[0-9]+([.][0-9]+)?$')],
-      overtimeelegible: ['', Validators.required],
+      overtimeelegible: ['1', Validators.required],
       workmancomb: ['', Validators.required],
       email: [''],
       active: ['1'],
