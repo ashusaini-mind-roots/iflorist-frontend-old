@@ -15,7 +15,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-week let-expanded="expanded" let-columns="columns">
                     <tr>
-                      <td>{{week.week}}</td>
+                      <td><span class="circle-small mr-2">{{week.number}}</span>{{week.week}}</td>
                       <td>{{week.totalMerchandise | number: '1.2-2'}}</td>
                       <td>{{week.totalWire | number: '1.2-2'}}</td>
                       <td>{{week.totalDelivery | number: '1.2-2'}}</td>
