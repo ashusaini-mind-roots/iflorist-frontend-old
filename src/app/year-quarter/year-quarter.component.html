@@ -1,7 +1,7 @@
 <div class="d-flex align-content-center plr-08">
   <div class="mr-2 d-flex align-content-center ">
     <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectyear">Select Year:</div>
-    <div class="select ">
+    <div class="select mr-4">
       <select class="" id="select-year" [(ngModel)]="yearSelected" (change)="onYearOrQuarterChange()">
         <option *ngFor="let year of years" value="{{year}}">
           {{year}}

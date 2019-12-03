@@ -1,5 +1,5 @@
 <div class="d-flex">
-  <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectyear">Select a Store:</div>
+  <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectstore">Select a Store:</div>
   <div class="select ">
     <select class="" id="select-stores-general" [(ngModel)]="storeIndexSelected" (change)="onStoreSelected(storeIndexSelected)">
       <option *ngFor="let store of stores" value="{{store.id}}">
