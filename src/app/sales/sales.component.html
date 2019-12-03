@@ -38,7 +38,7 @@
                                   <td>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input pInputText type="text" [(ngModel)]="rowData.merchandise" required>
+                                            <input pInputText type="text" class="input-gray2" [(ngModel)]="rowData.merchandise" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
                                             {{day.merchandise}}
@@ -48,7 +48,7 @@
                                   <td>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input pInputText type="text" [(ngModel)]="rowData.wire" required>
+                                            <input pInputText type="text" class="input-gray2" [(ngModel)]="rowData.wire" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
                                             {{day.wire}}
@@ -58,7 +58,7 @@
                                   <td>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input pInputText type="text" [(ngModel)]="rowData.delivery" required>
+                                            <input pInputText type="text" class="input-gray2" [(ngModel)]="rowData.delivery" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
                                             {{day.delivery}}
@@ -69,9 +69,12 @@
                                       {{day.total}}
                                   </td>
                                   <td class="toggle" style="text-align:center">
-                                      <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="btn btn-success" (click)="onRowEditInit(rowData)" ></button>
-                                      <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData, ri)"></button>
-                                      <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)"></button>
+                                      <a *ngIf="!editing" pInitEditableRow class="itemaction edititem" (click)="onRowEditInit(rowData)">Edit</a>
+<!--                                      <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="btn btn-success" (click)="onRowEditInit(rowData)" ></button>-->
+<!--                                      <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData, ri)"></button>-->
+                                      <a *ngIf="editing" pSaveEditableRow class="itemaction saveitem" (click)="onRowEditSave(rowData, ri)">Save</a>
+                                      <a *ngIf="editing" pCancelEditableRow class="itemaction cancelitem" (click)="onRowEditCancel(rowData, ri)">Cancel</a>
+<!--                                      <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)"></button>-->
                                   </td>
                                 </tr>
                             </ng-template>

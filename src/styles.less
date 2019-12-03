@@ -4,7 +4,20 @@ a {
   color: #1CABA0 !important;
   font-weight: 700;
 }
-
+.itemaction{
+  cursor: pointer;
+  font-weight: 400;
+  padding: 5px;
+}
+.edititem{
+  color: #1CABA0 !important;
+}
+.saveitem{
+  color: #11645e !important;
+}
+.cancelitem{
+  color: #da4054 !important;
+}
 .login-loginup-card{
   border-radius: 20px 20px 20px 20px !important;
   -moz-border-radius: 20px 20px 20px 20px;
@@ -31,7 +44,6 @@ a {
 .card-header{
   background-color: #ffffff !important;
   padding:  1.50rem 0.8rem 0.5rem 0.8rem !important;
-
 }
 .card-header:first-child{
   border-radius: 7px 7px 7px 7px !important;
@@ -232,8 +244,35 @@ a {
   -webkit-text-fill-color: #8996A3 !important;
 }
 
+.input-gray2{
+  display: block;
+  //-webkit-box-sizing: content-box;
+  //-moz-box-sizing: content-box;
+  padding: 4px 10px;
+  border:1px solid #D5DCE3;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 12px !important;
+  //font: normal 12px/normal Verdana, Geneva, sans-serif;
+  color: #8996A3 !important;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  //background: rgba(220,220,220,1);
+  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0.2) inset;
+  box-shadow: 0 0 0 0 rgba(0,0,0,0.2) inset;
+  text-shadow: 0 0 0 rgba(255,255,255,0.66) ;
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  width: 100%;
+  background-color: #EEEEEE !important;
+  margin-right: 150px;
+  transition: background-color 5500s ease-in-out 0s;
+  -webkit-text-fill-color: #8996A3 !important;
+}
 
-.imput-gray1:focus{
+.imput-gray1:focus, .input-gray2:focus{
   -webkit-text-fill-color: #1CABA0 !important;
   outline: none !important;
   border:1px solid #1CABA0;
@@ -407,6 +446,13 @@ bg-state-blue-active{
   background-color: #ffffff !important;
   font-size: 13px !important;
 }
+.generic-table .ui-table .ui-table-tbody > tr > td.sub-table{
+  padding: 0 !important;
+}
+.generic-table .ui-table .ui-table-tbody > tr > td.sub-table td{
+  padding-left: 0.8rem !important;
+}
+
 .generic-table .ui-table .ui-table-tbody > tr > td{
   border: 0 !important;
   padding: 0.5rem 0.8rem !important;
@@ -421,9 +467,6 @@ bg-state-blue-active{
 .generic-table .ui-table .ui-table-tbody > tr {
   border: 1px solid #dddddd !important;
   border-left: 0 #ffffff !important;
-}
-.sub-table{
-  padding: 0 !important;
 }
 .circle-small{
   color: #ffffff;
@@ -505,4 +548,15 @@ bg-state-blue-active{
 .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active{
   background-color: #1cab9f !important;
   color: #ffffff !important;
+}
+
+.addbig{
+  font-size: 1rem;
+  color: #1cab9f;
+  font-weight: 500;
+}
+.generic-card-footer{
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 7px 7px 7px 7px !important;
 }
