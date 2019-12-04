@@ -12,7 +12,7 @@ import {TableModule} from 'primeng/table';
   styleUrls: ['./store-list.component.less']
 })
 export class StoreListComponent implements OnInit {
-  stores: Storage[] = [];
+  stores: any = [];
 
   cols: any[];
 
@@ -36,11 +36,11 @@ export class StoreListComponent implements OnInit {
 
   loadHeaders(){
     this.cols = [
-      { field: 'store_name', header: 'Name' },
-      { field: 'contact_phone', header: 'Contact phone' },
-      { field: 'contact_email', header: 'Email' },
-      { field: 'zip_code', header: 'ZipCode' },
+      { field: 'store_name', header: 'Store Name' },
+      { field: 'contact_email', header: 'Email Address' },
+      { field: 'contact_phone', header: 'Phone Number' },
       { field: 'address', header: 'Address' },
+      { field: 'zip_code', header: 'ZipCode' },
       { field: 'actions', header: 'Actions' }
     ];
   }
