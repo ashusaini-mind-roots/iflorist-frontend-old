@@ -48,7 +48,6 @@ export class SchedulerComponent implements OnInit {
   }
   receiveYearQuarter($event){
     this.yearQuarter = $event;
-    // this.getWeekDataFromServer();
   }
 
   getWeeks = function () {
