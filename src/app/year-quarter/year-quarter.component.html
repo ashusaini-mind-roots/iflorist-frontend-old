@@ -1,11 +1,25 @@
-<select class="" id="select-year" [(ngModel)]="yearSelected" (change)="onYearOrQuarterChange()">
-  <option *ngFor="let year of years" value="{{year}}">
-    {{year}}
-  </option>
-</select>
+<div class="d-flex align-content-center plr-08">
+  <div class="mr-2 d-flex align-content-center ">
+    <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectyear">Select Year:</div>
+    <div class="select mr-4">
+      <select class="" id="select-year" [(ngModel)]="yearSelected" (change)="onYearOrQuarterChange()">
+        <option *ngFor="let year of years" value="{{year}}">
+          {{year}}
+        </option>
+      </select>
+      <div class="select_arrow"></div>
+    </div>
+  </div>
+  <div class="mr-2 d-flex align-content-center ">
+    <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectquarter">Select Quarter:</div>
+      <div class="select ">
+        <select *ngIf="showQuarter" class="" id="select-quarter" [(ngModel)]="quarterSelected" (change)="onYearOrQuarterChange()">
+          <option *ngFor="let quarter of quarters" value="{{quarter}}">
+            {{quarter}}
+          </option>
+        </select>
+        <div class="select_arrow"></div>
+      </div>
+  </div>
+</div>
 
-<select *ngIf="showQuarter" class="" id="select-quarter" [(ngModel)]="quarterSelected" (change)="onYearOrQuarterChange()">
-  <option *ngFor="let quarter of quarters" value="{{quarter}}">
-    {{quarter}}
-  </option>
-</select>

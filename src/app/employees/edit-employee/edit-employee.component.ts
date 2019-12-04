@@ -106,7 +106,7 @@ export class EditEmployeeComponent implements OnInit {
 
      this.f.hourlypayrate.setValidators([Validators.required,Validators.pattern('^[0-9]+([.][0-9]+)?$')]);
      this.f.hourlypayrate.updateValueAndValidity();
-     
+
      if(this.f.system_account.value=='1')
      {
        this.f.email.setValue(object.user.email);
