@@ -2,34 +2,100 @@
     <app-year-quarter (yearQuarterOutput) = "receiveYearQuarter($event)"></app-year-quarter>
 </div>
 
-<div class="row pl-08">
+<div class="row p-08">
     <div class="col-lg-10">
         <div class="row">
             <div class="col-lg-6">
-                <div class="generic-card-1 mb-4">
+                <div class="generic-card-1 mb-4 p-3">
+                    <span class="">Sales</span>
                     <p-chart type="bar" [data]="lineChartData"></p-chart>
+                    <div class="p-2 pt-3 d-flex justify-content-between">
+                        <div class=""><span class="txt-size-12rem txt-color-gray4 font-medium pr-08">Actual</span>
+                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">$11,500</span>
+                        </div>
+                        <div class=""><span class="txt-size-12rem txt-color- font-medium pr-08">Projected</span>
+                            <span class="txt-color-red txt-size-12rem font-medium ">$15,700</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="generic-card-1 mb-4">
+                <div class="generic-card-1 mb-4 p-3">
+                    <span class="">Cost of Hard Goods</span>
                     <p-chart type="bar" [data]="lineChartData"></p-chart>
+                    <div class="p-2 pt-3 d-flex justify-content-between">
+                        <div class=""><span class="txt-size-12rem txt-color-gray4 font-medium pr-08">Actual</span>
+                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">$11,500</span>
+                        </div>
+                        <div class=""><span class="txt-size-12rem txt-color- font-medium pr-08">Projected</span>
+                            <span class="txt-color-red txt-size-12rem font-medium ">$15,700</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6">
-                <div class="generic-card-1 mb-4">
+                <div class="generic-card-1 mb-4 p-3">
+                    <span class="">Cost of Fresh</span>
                     <p-chart type="bar" [data]="lineChartData"></p-chart>
+                    <div class="p-2 pt-3 d-flex justify-content-between">
+                        <div class=""><span class="txt-size-12rem txt-color-gray4 font-medium pr-08">Actual</span>
+                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">$11,500</span>
+                        </div>
+                        <div class=""><span class="txt-size-12rem txt-color- font-medium pr-08">Projected</span>
+                            <span class="txt-color-red txt-size-12rem font-medium ">$15,700</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="generic-card-1 mb-4">
+                <div class="generic-card-1 mb-4 p-3">
+                    <span class="">Cost of Labor</span>
                     <p-chart type="bar" [data]="lineChartData"></p-chart>
+                    <div class="p-2 pt-3 d-flex justify-content-between">
+                        <div class=""><span class="txt-size-12rem txt-color-gray4 font-medium pr-08">Actual</span>
+                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">$11,500</span>
+                        </div>
+                        <div class=""><span class="txt-size-12rem txt-color- font-medium pr-08">Projected</span>
+                            <span class="txt-color-red txt-size-12rem font-medium ">$15,700</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-lg-2">
-        <div class="generic-card-1 h-100 mb-4"></div>
+        <div class="generic-card-1 mb-4 pt-3">
+            <span class="font-size-08 txt-color-gray3 font-medium pl-3">Social Media Stats</span>
+            <div class="row">
+                <div class="col d-flex flex-column align-items-center pt-3">
+                    <img src="../assets/image/instagram.svg" alt="Instagram" class="mt-5 mb-5">
+                    <span class="font-size-1 txt-color-gray3 font-regular">Followers</span>
+                    <div class="pt-3 pb-3">
+                        <span></span>
+                        <h4 class="txt-color-blue-soft font-medium">2334</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="horizontal-line"></div>
+            <div class="row">
+                <div class="col d-flex flex-column align-items-center">
+                    <div class="">
+                        <div class="card-body pb-2">
+                            <span class="txt-size-12rem txt-color-gray4 font-regular">Actual Sales</span>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="card-body pb-2">
+                            <span class="txt-size-12rem txt-color-gray4 font-regular">Actual Budget</span>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
