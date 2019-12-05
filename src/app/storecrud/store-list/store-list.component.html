@@ -1,16 +1,8 @@
 <div class="panel panel-primary">
-  <!--<div class="panel-heading">-->
-    <!--<h2>Store List</h2>-->
-  <!--</div>-->
   <div class="panel panel-primary mb-5">
     <div class="panel-body">
         <div class="generic-card">
           <h5 class="card-header">Stores</h5>
-<!--          <ul class="nav nav-pills ml-auto p-2">-->
-<!--            <li class="nav-item">-->
-<!--              <a class="nav-link active" href="/storecreate" data-toggle="tab" >Add Store</a>-->
-<!--            </li>-->
-<!--          </ul>-->
             <p-table class="generic-table" #dt [columns]="cols" [value]="stores" [paginator]="true" [rows]="10">
               <ng-template pTemplate="caption">
                 <div style="text-align: right">

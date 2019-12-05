@@ -1,27 +1,27 @@
-<div class="panel panel-primary">
-  <!--<div class="panel-heading">-->
-    <!--<h2>Store List</h2>-->
-  <!--</div>-->
-  <div class="panel-body">
-    <div class="card m-4">
-      <h5 class="card-header">Projection list</h5>
-      <ul class="nav nav-pills ml-auto p-2">
-        <li class="nav-item">
-          <!--<a class="nav-link active" href="/storecreate" data-toggle="tab" >Add Store</a>-->
-          <select class="" id="select-years-general" [(ngModel)]="yearIndexSelected" (change)="onYearSelected(yearIndexSelected)">
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-          </select>
-        </li>
-      </ul>
-      <p-table #dt [columns]="cols" [value]="proyections" [paginator]="true" [rows]="10" dataKey="id" editMode="row" [lazy]="true" [loading]="loading">
+<div class="d-flex justify-content-between align-items-center">
+    <app-year-quarter (yearQuarterOutput) = "receiveYearQuarter($event)" [showQuarter] = false></app-year-quarter>
+</div>
+
+<div class="panel panel-primary mb-5">
+    <div class="panel-body">
+        <div class="generic-card">
+            <h5 class="card-header">Projections</h5>
+<!--      <ul class="nav nav-pills ml-auto p-2">-->
+<!--        <li class="nav-item">-->
+<!--          &lt;!&ndash;<a class="nav-link active" href="/storecreate" data-toggle="tab" >Add Store</a>&ndash;&gt;-->
+<!--          <select class="" id="select-years-general" [(ngModel)]="yearIndexSelected" (change)="onYearSelected(yearIndexSelected)">-->
+<!--            <option value="2016">2016</option>-->
+<!--            <option value="2017">2017</option>-->
+<!--            <option value="2018">2018</option>-->
+<!--            <option value="2019">2019</option>-->
+<!--            <option value="2020">2020</option>-->
+<!--          </select>-->
+<!--        </li>-->
+<!--      </ul>-->
+      <p-table class="generic-table" #dt [columns]="cols" [value]="proyections" [paginator]="true" [rows]="15" dataKey="id" editMode="row" [lazy]="true" [loading]="loading">
         <ng-template pTemplate="caption">
-          <div style="text-align: right">        
-              <i class="icon-14 setting-icon" style="margin:4px 4px 0 0"></i>
-              <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+          <div style="text-align: right">
+              <input type="text" class="imput-gray1" pInputText size="25" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
           </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
@@ -29,7 +29,7 @@
               <th class="{{col.header}}" *ngFor="let col of columns">
                   {{col.header}}
               </th>
-              <th style="width:8em"></th>
+<!--              <th style="width:8em"></th>-->
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-projection let-rowData let-editing="editing" let-ri="rowIndex">
@@ -40,7 +40,7 @@
               <td>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="rowData.adjust" required>
+                        <input class="input-gray2" pInputText type="text" [(ngModel)]="rowData.adjust" required>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{projection.adjust}}
@@ -50,53 +50,26 @@
               <td>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="rowData.amt_total" required>
+                        <input class="input-gray2" pInputText type="text" [(ngModel)]="rowData.amt_total" required>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{projection.amt_total}}
                     </ng-template>
                 </p-cellEditor>
               </td>
-              <td></td>
-              <td style="text-align:center">
-                  <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info" (click)="onRowEditInit(rowData)" >Edit</button>
-                  <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData, ri)">Save</button>
-                  <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)">Cancel</button>
+<!--              <td></td>-->
+              <td>
+                  <a *ngIf="!editing" pInitEditableRow class="itemaction edititem" (click)="onRowEditInit(rowData)">Edit</a>
+<!--                  <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info" (click)="onRowEditInit(rowData)" >Edit</button>-->
+<!--                  <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData, ri)">Save</button>-->
+<!--                  <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)">Cancel</button>-->
+                  <a *ngIf="editing" pSaveEditableRow class="itemaction saveitem" (click)="onRowEditSave(rowData, ri)">Save</a>
+                  <a *ngIf="editing" pCancelEditableRow class="itemaction cancelitem" (click)="onRowEditCancel(rowData, ri)">Cancel</a>
               </td>
             </tr>
         </ng-template>
-        <!--<ng-template pTemplate="body" let-rowData let-columns="columns">
-          <tr>
-              <td *ngFor="let col of columns">
-                  {{rowData[col.field]}}
-              </td>
-          </tr>
-        </ng-template>-->
     </p-table>
-      <!--<table class="table table-striped">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Contact phone</th>
-          <th>Email</th>
-          <th>ZipCode</th>
-          <th>Address</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let store of stores">
-          <td>{{store.store_name}}</td>
-          <td>{{store.contact_phone}}</td>
-          <td>{{store.contact_email}}</td>
-          <td>{{store.zip_code}}</td>
-          <td>{{store.address}}</td>
-          <td>
-            <button [routerLink]="['/storeedit', store.id]" class="btn btn-success">Edit</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>-->
+    <div class="generic-card-footer"></div>
       </div>
     </div>
 </div>

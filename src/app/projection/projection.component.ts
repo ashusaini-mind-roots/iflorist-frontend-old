@@ -3,6 +3,7 @@ import { StoreSubscriberService } from "../_services/storeSubscriber.service";
 import {TableModule} from 'primeng/table';
 import {ProjectionService} from "../_services/projection.service";
 import { MessageToastService } from "../_services/messageToast.service";
+import { UtilsService } from "../_services/utils.service";
 
 
 @Component({
@@ -21,15 +22,20 @@ export class ProjectionComponent implements OnInit {
 
   clonedProjections: { [s: string]: any; } = {};
 
+  yearQuarter: any;
+
   constructor(
     private storeSubscriberService: StoreSubscriberService,
     private projectionService: ProjectionService,
-    private messageToastService: MessageToastService
+    private messageToastService: MessageToastService,
+    private utilService: UtilsService,
   ) 
   {
     storeSubscriberService.subscribe(this,function (ref,store) {
       ref.receiveStorage(store);
     });
+    let currentYear = this.utilService.GetCurrentYear();
+    this.yearQuarter = {year : currentYear, quarter: 1};
   }
 
   ngOnInit() {
@@ -38,7 +44,6 @@ export class ProjectionComponent implements OnInit {
     this.selectedStorage = 1;
     this.loadHeaders();
     this.loadProjection();
-    
   }
 
   loadHeaders(){
@@ -48,19 +53,28 @@ export class ProjectionComponent implements OnInit {
       { field: this.yearIndexSelected - 1, header: this.yearIndexSelected - 1 },
       { field: 'adjust', header: 'Adjust' },
       { field: 'year_proyection', header: this.yearIndexSelected },
-      { field: 'event_override', header: 'Event Override' },
+      // { field: 'event_override', header: 'Event Override' },
+      { field: 'actions', header: 'Actions' }
     ];
   }
 
-  
-
-  onYearSelected(yearIndexSelected:number)
-  {
-      console.log(yearIndexSelected);
-      this.yearIndexSelected = yearIndexSelected;
-      this.loadHeaders();
-      this.loadProjection();
+  receiveYearQuarter($event){
+    this.yearQuarter = $event;
+    this.yearIndexSelected = this.yearQuarter.year;
+    console.log(this.yearIndexSelected);
+    // this.yearIndexSelected = yearIndexSelected;
+    this.loadHeaders();
+    this.loadProjection();
+    // this.getWeekDataFromServer();
   }
+
+  // onYearSelected(yearIndexSelected:number)
+  // {
+  //     console.log(yearIndexSelected);
+  //     this.yearIndexSelected = yearIndexSelected;
+  //     this.loadHeaders();
+  //     this.loadProjection();
+  // }
 
   receiveStorage(storage){
     this.selectedStorage = storage.id;
