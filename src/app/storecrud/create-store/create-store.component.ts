@@ -6,6 +6,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 
+class ImageSnippet {
+  pending: boolean = false;
+  status: string = 'init';
+
+  constructor(public src: string, public file: File) { }
+}
+
 @Component({
   selector: 'app-create-store',
   templateUrl: './create-store.component.html',
@@ -18,13 +25,18 @@ export class CreateStoreComponent implements OnInit {
   // returnUrl: string;
   error = '';
   success = '';
+  selectedStorage: any;
+  selectedFile: ImageSnippet;
 
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
-      private storeService: StoreService
-  ) { }
+      private storeService: StoreService,
+      
+  ) {
+      this.selectedFile = new ImageSnippet('', null);
+  }
 
   ngOnInit() {
     this.storeform = this.formBuilder.group({
@@ -37,6 +49,16 @@ export class CreateStoreComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      console.log(this.selectedFile.file);
+    });
+    reader.readAsDataURL(file);
   }
 
   // convenience getter for easy access to form fields
@@ -54,7 +76,7 @@ export class CreateStoreComponent implements OnInit {
     this.success = '';
     this.loading = true;
     // store_name,contact_email,contact_phone,zip_code,address
-    this.storeService.createStore(this.f.store_name.value, this.f.contact_email.value, this.f.contact_phone.value,
+    this.storeService.createStore(this.selectedFile.file,this.f.store_name.value, this.f.contact_email.value, this.f.contact_phone.value,
         this.f.zip_code.value,this.f.address.value)
         .pipe(first())
         .subscribe(
@@ -78,6 +100,8 @@ export class CreateStoreComponent implements OnInit {
      this.f.contact_phone.setValue('');
      this.f.zip_code.setValue('');
      this.f.address.setValue('');
+     this.selectedFile = new ImageSnippet('', null);
+     this.submitted = false;
   }
 
 }

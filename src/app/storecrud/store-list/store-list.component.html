@@ -28,10 +28,10 @@
               <ng-template pTemplate="body" let-store>
                   <tr>
                     <td>{{store.store_name}}</td>
-                    <td>{{store.contact_phone}}</td>
                     <td>{{store.contact_email}}</td>
-                    <td>{{store.zip_code}}</td>
+                    <td>{{store.contact_phone}}</td>
                     <td>{{store.address}}</td>
+                    <td>{{store.zip_code}}</td>
                     <td>
                       <a [routerLink]="['/storeedit', store.id]" class="itemaction edititem">Edit</a>
     <!--                  <button [routerLink]="['/storeedit', store.id]" class="btn btn-success">Edit</button>-->
@@ -40,7 +40,7 @@
               </ng-template>
             </p-table>
           <div class="generic-card-footer">
-            <a href="/storecreate" class="addbig">Add New Store</a>
+            <a [routerLink]="['/storecreate']" class="addbig">Add New Store</a>
           </div>
         </div>
 

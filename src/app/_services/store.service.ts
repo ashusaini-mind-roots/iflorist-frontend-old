@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {retry, catchError} from 'rxjs/operators';
@@ -22,11 +22,23 @@ export class StoreService {
          // );
   }
 
-  createStore(store_name,contact_email,contact_phone,zip_code,address) {
-      /// store_name: $scope.store.store_name, contact_email: $scope.store.contact_email,
-      // contact_phone: $scope.store.contact_phone, zip_code: $scope.store.zip_code,
-      // address: $scope.store.address},
-      return this.http.post(`${environment.apiUrl}/store/create`, {store_name, contact_email, contact_phone, zip_code, address} );
+  createStore(image,store_name,contact_email,contact_phone,zip_code,address) {
+      //return this.http.post(`${environment.apiUrl}/store/create`, {store_name, contact_email, contact_phone, zip_code, address} );
+      const formData = new FormData();
+      //formData.append('image', image);
+      //formData.append('id', id);
+      formData.append('store_name', store_name);
+      formData.append('image', image);
+      formData.append('contact_email', contact_email);
+      formData.append('contact_phone', contact_phone);
+      formData.append('zip_code', zip_code);
+      formData.append('address', address);
+      
+      let header = new HttpHeaders();
+
+      header.set('Content-Type','multipart/form-data');
+      
+      return this.http.post(`${environment.apiUrl}/store/create`, formData,{headers: header});
   }
 
   updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address){

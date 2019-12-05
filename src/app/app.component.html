@@ -22,7 +22,7 @@
         </a>
 
         <a routerLink="{{module.action}}" *ngFor = "let module of modules" class="d-inline-flex py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular">
-          <div class="icon-14 sales-icon ml-4 mr-4"></div>{{module.name}}
+          <div class="icon-14 ml-4 mr-4" [ngClass]="module.icono"></div>{{module.name}}
         </a>
         <!--<div class="dropdown-container">
           <a class="py-3 pl-6 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="#" *ngFor = "let module of modules">{{module.name}}</a>
