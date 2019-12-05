@@ -181,21 +181,7 @@
                             </p-table>
                         </div>
                         <div class="card-footer text-right">
-                            <form class="form-inline">
-                                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Number"
-                                       [(ngModel)]="invoiceNumber_add"
-                                       [ngModelOptions]="{standalone: true}">
-                                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Name"
-                                       [(ngModel)]="invoiceName_add"
-                                       [ngModelOptions]="{standalone: true}">
-                                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0"
-                                       placeholder="Value"
-                                       [(ngModel)]="invoiceTotal_add" data-type="currency"
-                                       [ngModelOptions]="{standalone: true}">
-
-                                <button type="submit" class="btn btn-primary" (click)="createInvoice()">Add
-                                </button>
-                            </form>
+                            <button style="margin-right: 10px" pButton type="button" icon="pi pi-plus" class="ui-button-info" (click)="visibleVendor = true;" ></button>
                         </div>
                     </div>
                 </div>
@@ -370,3 +356,51 @@
         </p-footer>
     </form>
 </p-dialog>
+
+<p-dialog header="Create Vendor" [(visible)]="visibleVendor" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
+    <form [formGroup]="vendorform" (ngSubmit)="createInvoice()">
+        <div class="form-group">
+            <label for="number">Invoice Number</label>
+            <input type="text" formControlName="number" class="form-control" [ngClass]="{ 'is-invalid': submittedVendor && v.number.errors }" />
+            <div *ngIf="submittedVendor && v.number.errors" class="invalid-feedback">
+                <div *ngIf="v.number.errors.required">Number is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Invoice Name</label>
+            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submittedVendor && v.name.errors }" />
+            <div *ngIf="submittedVendor && v.name.errors" class="invalid-feedback">
+                <div *ngIf="v.name.errors.required">Name is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="value">Invoice Value</label>
+            <input type="text" formControlName="value"  class="form-control" [ngClass]="{ 'is-invalid': submittedVendor && v.value.errors }" />
+            <div *ngIf="submittedVendor && v.value.errors" class="invalid-feedback">
+                <div *ngIf="v.value.errors.required">Value is required</div>
+            </div>
+        </div>
+        <p-footer>
+            <button type="button" pButton icon="pi pi-close" (click)="visibleVendor=false;submittedVendor=false" label="No" class="ui-button-secondary">Cancel</button>
+            <button pButton icon="pi pi-check" label="Yes">Create</button>
+        </p-footer>
+    </form>
+</p-dialog>
+
+
+
+<!--<form class="form-inline">
+    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Number"
+           [(ngModel)]="invoiceNumber_add"
+           [ngModelOptions]="{standalone: true}">
+    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Name"
+           [(ngModel)]="invoiceName_add"
+           [ngModelOptions]="{standalone: true}">
+    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0"
+           placeholder="Value"
+           [(ngModel)]="invoiceTotal_add" data-type="currency"
+           [ngModelOptions]="{standalone: true}">
+
+    <button type="submit" class="btn btn-primary" (click)="createInvoice()">Add
+    </button>
+</form>-->
