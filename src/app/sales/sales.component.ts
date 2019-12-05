@@ -17,6 +17,8 @@ export class SalesComponent implements OnInit {
   colsSubtable:any;
   loading: boolean;
   clonedDays: { [s: string]: any; } = {};
+  lineChartData : any;
+  pieChartData : any;
 
   constructor(
       private storeSubscriberService: StoreSubscriberService,//service used to receive store from top bar stores combobox
@@ -46,6 +48,37 @@ export class SalesComponent implements OnInit {
     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
     this.getSales();
     this.loadHeaders();
+
+    this.lineChartData = {
+      labels:['1','2','3','4', '5', '6', '7', '8','9', '10', '11', '12', '13'],
+      datasets:[
+        {
+          label:'Actual Sales',
+          backgroundColor: '#1cab70',
+          borderColor: '#1cab70',
+          data: [65,59,80,81,56,55,40,65,59,80,81,56,55]
+
+        },
+        {
+          label:'Projected Sales',
+          backgroundColor: '#da4054',
+          borderColor: '#da4054',
+          data: [28, 48, 40, 19, 86, 27, 90,28, 48, 40, 19, 86, 27]
+
+        }
+      ]
+    };
+
+    this.pieChartData = {
+      labels:['Actual Sales','Projected Sales'],
+      datasets:[
+        {
+          backgroundColor: ['#1cab70','#da4054'],
+          data: [100,30],
+          hoverBackgroundColor: ['#1cab70','#da4054'],
+        }
+      ]
+    };
   }
 
   getSales()
