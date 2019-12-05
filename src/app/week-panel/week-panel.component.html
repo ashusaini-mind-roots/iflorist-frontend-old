@@ -258,9 +258,9 @@
     </div>
     <p-dialog header="Create Note" [(visible)]="visibleDialogNote" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
         <form [formGroup]="noteform" (ngSubmit)="createNote()">
-          <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
+          <!--<input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>-->
           <div class="form-group">
-              <label for="merchandise">Text</label>
+              <label for="text">Text</label>
               <textarea  formControlName="text" class="form-control" [ngClass]="{ 'is-invalid': submittedFormNote && n.text.errors }" ></textarea>
               <div *ngIf="submittedFormNote && n.text.errors" class="invalid-feedback">
                   <div *ngIf="n.text.errors.required">Text is required</div>
