@@ -1,21 +1,26 @@
-<div class="col-md-12 mt-5">
-  <!--<div class="alert alert-info">
-      email: test<br />
-      Password: test
-  </div>-->
-  <div class="card m-4">
-    <h4 class="card-header">Create Store</h4>
-    <div class="card-body">
+<div class="col-lg-8 col-xl-8 mt-5">
+  <div class="generic-card">
+    <h3 class="card-header">Add New Store</h3>
+    <div class="card-body ml-lg-5 ml-xl-5">
       <form [formGroup]="storeform" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
               <div *ngIf="selectedFile.src!=''" style="width: 100px; height: 100px; background-color: gray;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
               <div *ngIf="selectedFile.src==''" style="width: 100px; height: 100px; background: url('/assets/image/upload.svg') no-repeat"></div>
+<!--                <input #imageInput-->
+<!--                type="file"-->
+<!--                accept="image/*"-->
+<!--                (change)="processFile(imageInput)">-->
+
+              <div class="upload-btn-wrapper">
+                <button class="upload-file-text">Upload Profile photo </button>
                 <input #imageInput
-                type="file"
-                accept="image/*"
-                (change)="processFile(imageInput)">
+                       type="file"
+                       accept="image/*"
+                       (change)="processFile(imageInput)">
+<!--                <input type="file" name="myfile" />-->
+              </div>
             </div>
           </div>
         </div>
