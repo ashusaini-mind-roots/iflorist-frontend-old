@@ -139,7 +139,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="">
-                        <h5 class="card-header">Vendors<div class="float-right"><span class="font-size-08 txt-color-gray3 font-medium pr-1">Total Costs:</span> <span class="font-size-08 txt-color-blue-soft font-bold"> {{invoiceTotal|currency}}</span></div></h5>
+                        <h5 class="card-header font-size-1">Vendors<div class="float-right"><span class="font-size-1 txt-color-gray4 font-medium pr-1">Total Costs:</span> <span class="font-size-1 txt-color-blue-soft font-bold"> {{invoiceTotal|currency}}</span></div></h5>
                         <!--            <ul class="nav nav-pills ml-auto p-2">-->
                         <!--                <li class="nav-item">-->
                         <!--                    <a class="nav-link active" href="/storecreate" data-toggle="tab" >Add Store</a>-->
@@ -192,53 +192,54 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="row">
+                <div class="col-lg-4 borderleft-lg-xl pl-lg-0 pl-xl-0">
+                    <div class="row pl-4">
                         <div class="col d-flex flex-column">
                             <div class="">
-                                <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">Projected Sales</h6>
-                                    <h5 class="card-title ng-cloak">{{projWeeklyRev | currency}}</h5>
+                                <div class="card-body pb-2">
+                                    <span class="txt-size-12rem txt-color-gray4 font-regular">Projected Sales</span>
+                                    <div class="txt-color-blue-soft txt-size-12rem font-medium">{{projWeeklyRev | currency}}</div>
                                 </div>
                             </div>
                             <div class="">
                                 <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">Projected Budget</h6>
-                                    <h5 class="card-title ng-cloak">{{projWeeklyRev * (target/100) | currency}}</h5>
+                                    <span class="txt-size-12rem txt-color-gray4 font-regular">Projected Budget</span>
+                                    <div class="txt-color-blue-soft txt-size-12rem font-medium">{{projWeeklyRev * (target/100) | currency}}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="horizontal-line"></div>
+                    <div class="row pl-4">
                         <div class="col d-flex flex-column">
                             <div class="">
-                                <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">Actual Sales</h6>
-                                    <h5 class="card-title ng-cloak">{{calcDailyTotal()|currency}}</h5>
+                                <div class="card-body pb-2">
+                                    <span class="txt-size-12rem txt-color-gray4 font-regular">Actual Sales</span>
+                                    <div class="txt-color-blue-soft txt-size-12rem font-medium">{{calcDailyTotal()|currency}}</div>
                                 </div>
                             </div>
                             <div class="">
-                                <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">Actual Budget</h6>
-                                    <h5 class="card-title ng-cloak">
+                                <div class="card-body pb-2">
+                                    <span class="txt-size-12rem txt-color-gray4 font-regular">Actual Budget</span>
+                                    <div class="txt-color-blue-soft txt-size-12rem font-medium">
                                         {{ getTargetInMoney() | currency }}
-                                    </h5>
+                                    </div>
                                 </div>
                             </div>
                             <div class="">
-                                <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">Total Cost</h6>
-                                    <h5 class="card-title ng-cloak">
+                                <div class="card-body pb-2">
+                                    <span class="txt-size-12rem txt-color-gray4 font-regular">Total Cost</span>
+                                    <div class="txt-color-blue-soft txt-size-12rem font-medium">
                                         {{invoiceTotal|currency}}
-                                    </h5>
+                                    </div>
                                 </div>
                             </div>
                             <div class="">
                                 <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">Budget Remaining</h6>
-                                    <h5 class="card-title ng-cloak">
+                                    <span class="txt-size-12rem txt-color-gray4 font-regular">Budget Remaining</span>
+                                    <div class="txt-color-blue-soft txt-size-12rem font-medium">
                                         {{getTargetInMoney() - invoiceTotal|currency}}
-                                    </h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>

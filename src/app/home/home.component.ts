@@ -31,31 +31,31 @@ export class HomeComponent {
                 datasets:[
                     {
                         label:'My First dataset',
-                        backgroundColor: '#42A5F5',
-                        borderColor: '#1E88E5',
+                        backgroundColor: '#ff596e',
+                        borderColor: '#ff596e',
                         data: [65,59,80,81,56,55,40]
 
                     },
                     {
                         label:'My Second dataset',
-                        backgroundColor: '#9CCC65',
-                        borderColor: '#7CB342',
+                        backgroundColor: '#1caba0',
+                        borderColor: '#1caba0',
                         data: [28, 48, 40, 19, 86, 27, 90]
 
                     }
                 ]
             };
 
-            this.pieChartData = {
-                labels:['A','B','C'],
-                datasets:[
-                    {
-                        backgroundColor: ['#FF6384','#36A2EB','#FFCE56'],
-                        data: [300,50,100],
-                        hoverBackgroundColor: ['#FF6384','#36A2EB','#FFCE56'],
-                    }
-                ]
-            };
+            // this.pieChartData = {
+            //     labels:['A','B','C'],
+            //     datasets:[
+            //         {
+            //             backgroundColor: ['#FF6384','#36A2EB','#FFCE56'],
+            //             data: [300,50,100],
+            //             hoverBackgroundColor: ['#FF6384','#36A2EB','#FFCE56'],
+            //         }
+            //     ]
+            // };
 
         this.yearQuarter = {year : this.utilService.GetCurrentYear(), quarter: 1};
     }

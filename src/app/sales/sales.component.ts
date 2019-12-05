@@ -54,15 +54,15 @@ export class SalesComponent implements OnInit {
       datasets:[
         {
           label:'Actual Sales',
-          backgroundColor: '#1cab70',
-          borderColor: '#1cab70',
+          backgroundColor: '#1caba0',
+          borderColor: '#1caba0',
           data: [65,59,80,81,56,55,40,65,59,80,81,56,55]
 
         },
         {
           label:'Projected Sales',
-          backgroundColor: '#da4054',
-          borderColor: '#da4054',
+          backgroundColor: '#ff596e',
+          borderColor: '#ff596e',
           data: [28, 48, 40, 19, 86, 27, 90,28, 48, 40, 19, 86, 27]
 
         }
@@ -73,9 +73,9 @@ export class SalesComponent implements OnInit {
       labels:['Actual Sales','Projected Sales'],
       datasets:[
         {
-          backgroundColor: ['#1cab70','#da4054'],
+          backgroundColor: ['#1caba0','#ff596e'],
           data: [100,30],
-          hoverBackgroundColor: ['#1cab70','#da4054'],
+          hoverBackgroundColor: ['#1caba0','#ff596e'],
         }
       ]
     };
