@@ -274,7 +274,7 @@
                                         </a>
                                     </td>
                                     <td class="No">{{note.id}}</td>
-                                    <td>{{note.text | slice:0:5}} ...</td>
+                                    <td>{{note.text | slice:0:5}} ... {{note.updated_at | date:'MMM dd, yyyy'}}</td>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
