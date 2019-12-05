@@ -4,6 +4,7 @@ import {PlanService} from '../_services'
 
 import { User } from '@app/_models';
 import { UserService, AuthenticationService } from '@app/_services';
+import {UtilsService} from "../_services/utils.service";
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
@@ -21,7 +22,10 @@ export class HomeComponent {
 
     modules: any;
 
-    constructor(private userService: UserService, private planService:PlanService, private authenticationService: AuthenticationService) {
+    constructor(private userService: UserService,
+                private utilService: UtilsService,
+                private planService:PlanService,
+                private authenticationService: AuthenticationService) {
             this.lineChartData = {
                 labels:['January','February','March','April', 'May', 'June', 'July'],
                 datasets:[
@@ -52,7 +56,9 @@ export class HomeComponent {
                     }
                 ]
             };
-     }
+
+        this.yearQuarter = {year : this.utilService.GetCurrentYear(), quarter: 1};
+    }
 
     ngOnInit() {
         /*this.loading = true;
@@ -75,11 +81,18 @@ export class HomeComponent {
 
     receiveYearQuarter($event){
         this.yearQuarter = $event;
-        this.yearIndexSelected = this.yearQuarter.year;
-        console.log(this.yearIndexSelected);
-        // this.yearIndexSelected = yearIndexSelected;
-        //this.loadHeaders();
-        //this.loadProjection();
-        // this.getWeekDataFromServer();
-      }
+        // this.reloadData();
+        // console.log(this.yearQuarter);
+        // console.log(this.selectedStorage);
+    }
+    //
+    // receiveYearQuarter($event){
+    //     this.yearQuarter = $event;
+    //     this.yearIndexSelected = this.yearQuarter.year;
+    //     console.log(this.yearIndexSelected);
+    //     // this.yearIndexSelected = yearIndexSelected;
+    //     //this.loadHeaders();
+    //     //this.loadProjection();
+    //     // this.getWeekDataFromServer();
+    //   }
 }
