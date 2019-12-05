@@ -333,3 +333,33 @@
     
 </div>
 
+<p-dialog header="Edit {{title}}" [(visible)]="visible" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
+    <form [formGroup]="dayform" (ngSubmit)="updateDay()">
+        <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
+        <div class="form-group">
+            <label for="merchandise">Merchandise</label>
+            <input type="text" formControlName="merchandise" [(ngModel)]="dialogValues.merchandise" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
+            <div *ngIf="submitted && f.merchandise.errors" class="invalid-feedback">
+                <div *ngIf="f.merchandise.errors.required">Merchandise is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="merchandise">Wire</label>
+            <input type="text" formControlName="wire" [(ngModel)]="dialogValues.wire" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
+            <div *ngIf="submitted && f.wire.errors" class="invalid-feedback">
+                <div *ngIf="f.wire.errors.required">Wire is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="delivery">Delivery</label>
+            <input type="text" formControlName="delivery" [(ngModel)]="dialogValues.delivery" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
+            <div *ngIf="submitted && f.delivery.errors" class="invalid-feedback">
+                <div *ngIf="f.delivery.errors.required">Delivery is required</div>
+            </div>
+        </div>
+        <p-footer>
+            <button type="button" pButton icon="pi pi-close" (click)="visible=false" label="No" class="ui-button-secondary">Cancel</button>
+            <button pButton icon="pi pi-check" label="Yes">Update</button>
+        </p-footer>
+    </form>
+</p-dialog>
