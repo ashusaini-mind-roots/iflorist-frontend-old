@@ -14,6 +14,8 @@ export class HomeComponent {
     error: boolean;
     plan_cost:string = '';
     lineChartData : any;
+    pieChartData : any;
+
 
     modules: any;
 
@@ -34,6 +36,17 @@ export class HomeComponent {
                         borderColor: '#7CB342',
                         data: [28, 48, 40, 19, 86, 27, 90]
 
+                    }
+                ]
+            };
+
+            this.pieChartData = {
+                labels:['A','B','C'],
+                datasets:[
+                    {
+                        backgroundColor: ['#FF6384','#36A2EB','#FFCE56'],
+                        data: [300,50,100],
+                        hoverBackgroundColor: ['#FF6384','#36A2EB','#FFCE56'],
                     }
                 ]
             };
