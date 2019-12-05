@@ -28,6 +28,7 @@ import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-com
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import {ChartModule} from 'primeng/chart';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
@@ -52,7 +53,8 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
 ;
 import { EmployeeParentComponent } from './employees/employee-parent/employee-parent.component'
 ;
-import { CretateEmployeeComponent } from './employees/cretate-employee/cretate-employee.component';
+import { CretateEmployeeComponent } from './employees/cretate-employee/cretate-employee.component'
+;
 import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.component'
 
 @NgModule({
@@ -67,7 +69,8 @@ import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.c
         TableModule,
         DialogModule,
         ToastModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        ChartModule
     ],
     declarations: [
         AppComponent,
@@ -95,7 +98,8 @@ import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.c
         FinanceViewComponent,
         EmployeeListComponent,
         EmployeeParentComponent,
-        CretateEmployeeComponent,
+        CretateEmployeeComponent
+,
         EditEmployeeComponent
     ],
 
