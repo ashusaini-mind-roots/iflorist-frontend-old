@@ -83,7 +83,7 @@ export class CreateStoreComponent implements OnInit {
             data => {
               //console.log(data);
               this.loading = false;
-              this.success = 'Store added succefull !';
+              this.success = 'Store added succefully !';
               this.clean();
               //this.router.navigate([this.returnUrl]);
             },
