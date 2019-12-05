@@ -373,6 +373,7 @@ export class WeekPanelComponent implements OnInit {
 
   showEditDay(title:string) {
     this.title = title;
+    console.log(this.title);
     if(title=='Monday')
     {
         this.dialogValues.id = this.monday.id;

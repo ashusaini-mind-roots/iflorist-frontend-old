@@ -2,7 +2,7 @@
     <div class="col d-flex align-items-start flex-wrap">
         <div class="mr-auto previouslink">Previous</div>
         <div class="ng-cloak font-medium ">
-            <!--            Current Week Sales: {{calcDailyTotal()|currency}}-->
+            Current Week Sales: <span class="txt-color-blue-soft">{{calcDailyTotal()|currency}}</span>
             Target: <span class="txt-color-blue-soft">{{target}}%</span>
         </div>
     </div>
@@ -133,129 +133,121 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-6">
-        <div class="card">
-            <h5 class="card-header">Vendors<div class="float-right">{{invoiceTotal|currency}}</div></h5>
-<!--            <ul class="nav nav-pills ml-auto p-2">-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link active" href="/storecreate" data-toggle="tab" >Add Store</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-            <div class="card-body">
-                <p-table #dt [columns]="invoicesTableCols" [value]="invoices" [paginator]="true" [rows]="15">
-                    <ng-template pTemplate="caption">
-                        <div style="text-align: right">
-                            <i class="icon-14 setting-icon" style="margin:4px 4px 0 0"></i>
-                            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+<div class="row p-08">
+    <div class="col-lg-9">
+        <div class="generic-card-1">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="">
+                        <h5 class="card-header">Vendors<div class="float-right"><span class="font-size-08 txt-color-gray3 font-medium pr-1">Total Costs:</span> <span class="font-size-08 txt-color-blue-soft font-bold"> {{invoiceTotal|currency}}</span></div></h5>
+                        <!--            <ul class="nav nav-pills ml-auto p-2">-->
+                        <!--                <li class="nav-item">-->
+                        <!--                    <a class="nav-link active" href="/storecreate" data-toggle="tab" >Add Store</a>-->
+                        <!--                </li>-->
+                        <!--            </ul>-->
+                        <div class="card-body">
+                            <p-table class="generic-table" #dt [columns]="invoicesTableCols" [value]="invoices" [paginator]="true" [rows]="15">
+                                <ng-template pTemplate="caption">
+                                    <div style="text-align: right">
+                                        <i class="icon-14 setting-icon" style="margin:4px 4px 0 0"></i>
+                                        <input class="imput-gray1" type="text" pInputText size="25" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            {{col.header}}
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-invoice>
+                                    <tr>
+                                        <td>{{invoice.invoice_name}}</td>
+                                        <td>{{invoice.invoice_number}}</td>
+                                        <td>{{invoice.total}}</td>
+                                        <td>
+                                            <a class="itemaction cancelitem">Delete</a>
+<!--                                            <button [routerLink]="['/week-panel', invoice.invoice_id]" class="btn btn-error">Delete</button>-->
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
                         </div>
-                    </ng-template>
-                    <ng-template pTemplate="header" let-columns>
-                        <tr>
-                            <th *ngFor="let col of columns">
-                                {{col.header}}
-                            </th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-invoice>
-                        <tr>
-                            <td>{{invoice.invoice_name}}</td>
-                            <td>{{invoice.invoice_number}}</td>
-                            <td>{{invoice.total}}</td>
-                            <td>
-                                <button [routerLink]="['/week-panel', invoice.invoice_id]" class="btn btn-error">Delete</button>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-            <div class="card-footer text-right">
-                <form class="form-inline">
-                    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Number"
-                           [(ngModel)]="invoiceNumber_add"
-                           [ngModelOptions]="{standalone: true}">
-                    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Name"
-                           [(ngModel)]="invoiceName_add"
-                           [ngModelOptions]="{standalone: true}">
-                    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0"
-                           placeholder="Value"
-                           [(ngModel)]="invoiceTotal_add" data-type="currency"
-                           [ngModelOptions]="{standalone: true}">
+                        <div class="card-footer text-right">
+                            <form class="form-inline">
+                                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Number"
+                                       [(ngModel)]="invoiceNumber_add"
+                                       [ngModelOptions]="{standalone: true}">
+                                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Name"
+                                       [(ngModel)]="invoiceName_add"
+                                       [ngModelOptions]="{standalone: true}">
+                                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0"
+                                       placeholder="Value"
+                                       [(ngModel)]="invoiceTotal_add" data-type="currency"
+                                       [ngModelOptions]="{standalone: true}">
 
-                    <button type="submit" class="btn btn-primary" (click)="createInvoice()">Add
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="col-3">
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Projected Sales</h6>
-                        <h5 class="card-title ng-cloak">{{projWeeklyRev | currency}}</h5>
+                                <button type="submit" class="btn btn-primary" (click)="createInvoice()">Add
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Projected Budget</h6>
-                        <h5 class="card-title ng-cloak">{{projWeeklyRev * (target/100) | currency}}</h5>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col d-flex flex-column">
+                            <div class="">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Projected Sales</h6>
+                                    <h5 class="card-title ng-cloak">{{projWeeklyRev | currency}}</h5>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Projected Budget</h6>
+                                    <h5 class="card-title ng-cloak">{{projWeeklyRev * (target/100) | currency}}</h5>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Actual Sales</h6>
-                        <h5 class="card-title ng-cloak">{{calcDailyTotal()|currency}}</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Actual Budget</h6>
-                        <h5 class="card-title ng-cloak">
-                            {{ getTargetInMoney() | currency }}
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Total Cost</h6>
-                        <h5 class="card-title ng-cloak">
-                            {{invoiceTotal|currency}}
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Budget Remaining</h6>
-                        <h5 class="card-title ng-cloak">
-                            {{getTargetInMoney() - invoiceTotal|currency}}
-                        </h5>
+                    <div class="row">
+                        <div class="col d-flex flex-column">
+                            <div class="">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Actual Sales</h6>
+                                    <h5 class="card-title ng-cloak">{{calcDailyTotal()|currency}}</h5>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Actual Budget</h6>
+                                    <h5 class="card-title ng-cloak">
+                                        {{ getTargetInMoney() | currency }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Total Cost</h6>
+                                    <h5 class="card-title ng-cloak">
+                                        {{invoiceTotal|currency}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Budget Remaining</h6>
+                                    <h5 class="card-title ng-cloak">
+                                        {{getTargetInMoney() - invoiceTotal|currency}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <p-dialog header="Create Note" [(visible)]="visibleDialogNote" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
         <form [formGroup]="noteform" (ngSubmit)="createNote()">
           <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
@@ -273,7 +265,7 @@
       </form>
   </p-dialog>
     <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-    <div class="col-3">
+    <div class="col-lg-3">
         <div class="row">
             <div class="col">
                 <div class="card">
@@ -340,33 +332,3 @@
     
 </div>
 
-<p-dialog header="Edit {{title}}" [(visible)]="visible" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
-    <form [formGroup]="dayform" (ngSubmit)="updateDay()">
-        <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
-        <div class="form-group">
-            <label for="merchandise">Merchandise</label>
-            <input type="text" formControlName="merchandise" [(ngModel)]="dialogValues.merchandise" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
-            <div *ngIf="submitted && f.merchandise.errors" class="invalid-feedback">
-                <div *ngIf="f.merchandise.errors.required">Merchandise is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="merchandise">Wire</label>
-            <input type="text" formControlName="wire" [(ngModel)]="dialogValues.wire" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
-            <div *ngIf="submitted && f.wire.errors" class="invalid-feedback">
-                <div *ngIf="f.wire.errors.required">Wire is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="delivery">Delivery</label>
-            <input type="text" formControlName="delivery" [(ngModel)]="dialogValues.delivery" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
-            <div *ngIf="submitted && f.delivery.errors" class="invalid-feedback">
-                <div *ngIf="f.delivery.errors.required">Delivery is required</div>
-            </div>
-        </div>
-        <p-footer>
-            <button type="button" pButton icon="pi pi-close" (click)="visible=false" label="No" class="ui-button-secondary">Cancel</button>
-            <button pButton icon="pi pi-check" label="Yes">Update</button>
-        </p-footer>
-    </form>
-</p-dialog>
