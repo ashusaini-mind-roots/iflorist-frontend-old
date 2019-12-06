@@ -15,6 +15,8 @@ export class HomeComponent {
     plan_cost:string = '';
     lineChartData : any;
     pieChartData : any;
+    yearQuarter: any;
+    yearIndexSelected:number;
 
 
     modules: any;
@@ -69,5 +71,15 @@ export class HomeComponent {
             console.log(data.plans);
             this.loaded = false;
         })
+    }
+
+    receiveYearQuarter($event){
+        this.yearQuarter = $event;
+        this.yearIndexSelected = this.yearQuarter.year;
+        console.log(this.yearIndexSelected);
+        // this.yearIndexSelected = yearIndexSelected;
+        //this.loadHeaders();
+        //this.loadProjection();
+        // this.getWeekDataFromServer();
       }
 }
