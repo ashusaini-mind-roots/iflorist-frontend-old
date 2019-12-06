@@ -32,12 +32,15 @@ export class WeekPanelComponent implements OnInit {
   costOf: string;
   visible:boolean = false;
   visibleDialogNote: boolean = false;
+  visibleVendor: boolean = false;
   title:string;
   dialogValues : any;
   dayform: FormGroup;
   noteform: FormGroup;
+  vendorform: FormGroup;
   submitted = false;
   submittedFormNote: boolean = false;
+  submittedVendor: boolean = false;
   error = '';
   yearSelected: string;
   notesYearSelected : any[];
@@ -101,6 +104,12 @@ export class WeekPanelComponent implements OnInit {
 
     this.noteform = this.formBuilder.group({
       text: ['', Validators.required],
+    });
+
+    this.vendorform = this.formBuilder.group({
+      number: ['', Validators.required],
+      name: ['', Validators.required],
+      value: ['', Validators.required],
     });
 
     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
@@ -335,8 +344,17 @@ export class WeekPanelComponent implements OnInit {
   }
 
   createInvoice = function () {
-    this.weekPanelService.createInvoice(this.costOf, this.invoiceNumber_add,this.invoiceName_add,
-        this.invoiceTotal_add,this.selectedStorage.id,this.selectedWeekItem)
+
+    this.submittedVendor = true;
+
+
+    if (this.submittedVendor.invalid) {
+      //this.loading = false;
+      return;
+    }
+
+    this.weekPanelService.createInvoice(this.costOf, this.v.number.value,this.v.name.value,
+        this.v.value.value,this.selectedStorage.id,this.selectedWeekItem)
         .pipe(first())
         .subscribe(
             data => {
@@ -347,9 +365,13 @@ export class WeekPanelComponent implements OnInit {
               //this.router.navigate([this.returnUrl]);
               this.getInvoices();
               this.calcInvoiceTotal();
+              this.submittedVendor = false;
+              this.visibleVendor = false;
             },
             error => {
-              console.log(error)
+              this.submittedVendor = false;
+              this.visibleVendor = false;
+              console.log(error);
               // this.error = error;
               // this.loading = false;
             });
@@ -429,6 +451,8 @@ export class WeekPanelComponent implements OnInit {
   get f() { return this.dayform.controls; }
 
   get n() { return this.noteform.controls; }
+
+  get v() { return this.vendorform.controls; }
 
   updateDay(){
     this.submitted = true;
