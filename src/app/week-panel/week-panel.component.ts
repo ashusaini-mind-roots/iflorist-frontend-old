@@ -285,6 +285,7 @@ export class WeekPanelComponent implements OnInit {
       this.notesYearSelected = response.result.noteYearSelected;
       this.oldNotes = response.result.oldNotes;
       console.log('oldNotes '+this.oldNotes);
+      console.log(this.notesYearSelected);
     });
   }
 
