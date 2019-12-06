@@ -10,12 +10,12 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <div *ngIf="selectedFile.src!=''" style="width: 100px; height: 100px; background-color: gray;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
-              <div *ngIf="selectedFile.src==''" style="width: 100px; height: 100px; background: url('/assets/image/upload.svg') no-repeat"></div>
-                <input #imageInput
-                type="file"
-                accept="image/*"
-                (change)="processFile(imageInput)">
+              <div *ngIf="selectedFile.src!=''" style="width: 100px; height: 100px; background-color: gray;background-size: cover" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
+              <div *ngIf="selectedFile.src==''" style="width: 100px; height: 100px; background: url('/assets/image/upload.svg') no-repeat;background-size: cover"></div>
+              <input #imageInput
+                     type="file"
+                     accept="image/*"
+                     (change)="processFile(imageInput)">
             </div>
           </div>
         </div>
