@@ -22,7 +22,7 @@ export class StoreService {
          // );
   }
 
-  createStore(image,store_name,contact_email,contact_phone,zip_code,address) {
+  createStore(image,store_name,contact_email,contact_phone,zip_code,address,city,state) {
       //return this.http.post(`${environment.apiUrl}/store/create`, {store_name, contact_email, contact_phone, zip_code, address} );
       const formData = new FormData();
       //formData.append('image', image);
@@ -33,6 +33,8 @@ export class StoreService {
       formData.append('contact_phone', contact_phone);
       formData.append('zip_code', zip_code);
       formData.append('address', address);
+      formData.append('city', city);
+      formData.append('state', state);
       
       let header = new HttpHeaders();
 

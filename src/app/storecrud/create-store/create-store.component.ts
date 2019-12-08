@@ -44,7 +44,9 @@ export class CreateStoreComponent implements OnInit {
       contact_email: ['',  Validators.email],
       contact_phone: [''],
       zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
-      address: ['']
+      address: [''],
+      city: [''],
+      state: ['']
     });
 
     // get return url from route parameters or default to '/'
@@ -77,7 +79,7 @@ export class CreateStoreComponent implements OnInit {
     this.loading = true;
     // store_name,contact_email,contact_phone,zip_code,address
     this.storeService.createStore(this.selectedFile.file,this.f.store_name.value, this.f.contact_email.value, this.f.contact_phone.value,
-        this.f.zip_code.value,this.f.address.value)
+        this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value)
         .pipe(first())
         .subscribe(
             data => {
