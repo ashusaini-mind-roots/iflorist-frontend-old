@@ -163,7 +163,7 @@
                                 </ng-template>
                                 <ng-template pTemplate="header" let-columns>
                                     <tr>
-                                        <th *ngFor="let col of columns">
+                                        <th *ngFor="let col of columns" class="font-size-09">
                                             {{col.header}}
                                         </th>
                                     </tr>
@@ -183,7 +183,7 @@
                         </div>
                         <div class="horizontal-line"></div>
                         <div class="generic-card-footer text-right">
-                            <button class="btn-ligth-blue" (click)="visibleVendor = true;">Create Invoice</button>
+                            <button class="btn-ligth-blue" (click)="visibleVendor = true;">Create New Invoice</button>
 <!--                            <button style="margin-right: 10px" pButton type="button" class="btn-ligth-blue" (click)="visibleVendor = true;" ></button>-->
                         </div>
                     </div>
@@ -332,60 +332,60 @@
 <p-dialog header="Edit {{title}}" [(visible)]="visible" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
     <form [formGroup]="dayform" (ngSubmit)="updateDay()">
         <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
-        <div class="form-group">
-            <label for="merchandise">Merchandise</label>
-            <input type="text" formControlName="merchandise" [(ngModel)]="dialogValues.merchandise" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
+        <div class="form-group mt-4">
+            <label for="merchandise" class="input-label">Merchandise</label>
+            <input type="text" class="input input-gray2" formControlName="merchandise" [(ngModel)]="dialogValues.merchandise" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
             <div *ngIf="submitted && f.merchandise.errors" class="invalid-feedback">
                 <div *ngIf="f.merchandise.errors.required">Merchandise is required</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="merchandise">Wire</label>
-            <input type="text" formControlName="wire" [(ngModel)]="dialogValues.wire" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
+            <label for="merchandise" class="input-label">Wire</label>
+            <input type="text"  class="input input-gray2" formControlName="wire" [(ngModel)]="dialogValues.wire" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
             <div *ngIf="submitted && f.wire.errors" class="invalid-feedback">
                 <div *ngIf="f.wire.errors.required">Wire is required</div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="delivery">Delivery</label>
-            <input type="text" formControlName="delivery" [(ngModel)]="dialogValues.delivery" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
+        <div class="form-group mb-5 ">
+            <label for="delivery" class="input-label">Delivery</label>
+            <input type="text" class="input input-gray2" formControlName="delivery" [(ngModel)]="dialogValues.delivery" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
             <div *ngIf="submitted && f.delivery.errors" class="invalid-feedback">
                 <div *ngIf="f.delivery.errors.required">Delivery is required</div>
             </div>
         </div>
         <p-footer>
-            <button type="button" pButton icon="pi pi-close" (click)="visible=false" label="No" class="ui-button-secondary">Cancel</button>
-            <button pButton icon="pi pi-check" label="Yes">Update</button>
+            <button type="button" pButton icon="pi pi-close" (click)="visible=false" label="Cancel" class="ui-button-secondary"></button>
+            <button pButton icon="pi pi-check" label="Update"></button>
         </p-footer>
     </form>
 </p-dialog>
 
 <p-dialog header="Create Vendor" [(visible)]="visibleVendor" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
     <form [formGroup]="vendorform" (ngSubmit)="createInvoice()">
-        <div class="form-group">
-            <label for="number">Invoice Number</label>
-            <input type="text" formControlName="number" class="form-control" [ngClass]="{ 'is-invalid': submittedVendor && v.number.errors }" />
+        <div class="form-group mt-4">
+            <label for="number" class="input-label">Invoice Number</label>
+            <input type="text" formControlName="number" class="input input-gray2" [ngClass]="{ 'is-invalid': submittedVendor && v.number.errors }" />
             <div *ngIf="submittedVendor && v.number.errors" class="invalid-feedback">
                 <div *ngIf="v.number.errors.required">Number is required</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="name">Invoice Name</label>
-            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submittedVendor && v.name.errors }" />
+            <label for="name" class="input-label">Invoice Name</label>
+            <input type="text" formControlName="name" class="input input-gray2" [ngClass]="{ 'is-invalid': submittedVendor && v.name.errors }" />
             <div *ngIf="submittedVendor && v.name.errors" class="invalid-feedback">
                 <div *ngIf="v.name.errors.required">Name is required</div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="value">Invoice Value</label>
-            <input type="text" formControlName="value"  class="form-control" [ngClass]="{ 'is-invalid': submittedVendor && v.value.errors }" />
+        <div class="form-group mb-5 ">
+            <label for="value" class="input-label">Invoice Value</label>
+            <input type="text" formControlName="value"  class="input input-gray2" [ngClass]="{ 'is-invalid': submittedVendor && v.value.errors }" />
             <div *ngIf="submittedVendor && v.value.errors" class="invalid-feedback">
                 <div *ngIf="v.value.errors.required">Value is required</div>
             </div>
         </div>
         <p-footer>
-            <button type="button" pButton icon="pi pi-close" (click)="visibleVendor=false;submittedVendor=false" label="No" class="ui-button-secondary">Cancel</button>
-            <button pButton icon="pi pi-check" label="Yes">Create</button>
+            <button type="button" pButton icon="pi pi-close" (click)="visibleVendor=false;submittedVendor=false" label="Cancel" class="ui-button-secondary"></button>
+            <button pButton icon="pi pi-check" label="Create"></button>
         </p-footer>
     </form>
 </p-dialog>
