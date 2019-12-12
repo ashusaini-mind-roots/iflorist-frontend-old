@@ -152,6 +152,7 @@
                         <!--                    <a class="nav-link active" href="/storecreate" data-toggle="tab" >Add Store</a>-->
                         <!--                </li>-->
                         <!--            </ul>-->
+
                         <div class="card-body">
                             <p-table class="generic-table" #dt [columns]="invoicesTableCols" [value]="invoices" [paginator]="true" [rows]="15">
                                 <ng-template pTemplate="caption">
@@ -180,8 +181,10 @@
                                 </ng-template>
                             </p-table>
                         </div>
-                        <div class="card-footer text-right">
-                            <button style="margin-right: 10px" pButton type="button" icon="pi pi-plus" class="ui-button-info" (click)="visibleVendor = true;" ></button>
+                        <div class="horizontal-line"></div>
+                        <div class="generic-card-footer text-right">
+                            <button class="btn-ligth-blue" (click)="visibleVendor = true;">Create Invoice</button>
+<!--                            <button style="margin-right: 10px" pButton type="button" class="btn-ligth-blue" (click)="visibleVendor = true;" ></button>-->
                         </div>
                     </div>
                 </div>
