@@ -160,6 +160,7 @@ a {
   padding: 8px 20px 8px 20px;
   text-decoration: none;
   border-width: thin;
+  transition: 0.2s;
 }
 .btn-dark-blue:hover {
   background: #1cab9f;
@@ -175,10 +176,13 @@ a {
   padding: 8px 20px 8px 20px;
   text-decoration: none;
   border-width: thin;
+  transition: 0.2s;
+  border-width: inherit;
 
 }
 .btn-ligth-blue:hover {
-  background: #242e42;
+  background: #1cab9f;
+  opacity: 0.8;
   text-decoration: none;
   color: #D5DCE3;
 }
@@ -205,6 +209,9 @@ a {
 }
 .font-size-08{
   font-size: 0.8rem !important;
+}
+.font-size-09{
+  font-size: 0.9rem !important;
 }
 .font-size-1{
   font-size: 1rem !important;
@@ -295,6 +302,13 @@ a {
   margin-right: 150px;
   transition: background-color 5500s ease-in-out 0s;
   -webkit-text-fill-color: #8996A3 !important;
+}
+.input-label{
+  margin-bottom: 0.1rem !important;
+  font-size: 0.8rem !important;
+  font-family: "Roboto" !important;
+  font-weight: 300 !important;
+  color: #666666;
 }
 
 .input{
@@ -530,6 +544,10 @@ bg-state-blue-active{
   padding-left: 0.8rem !important;
 }
 
+.generic-table .ui-table .ui-table-tbody > tr.ui-state-highlight {
+  background-color: #dddddd !important;
+  color: #ffffff !important;
+}
 .generic-table .ui-table .ui-table-tbody > tr > td{
   border: 0 !important;
   padding: 0.5rem 0.8rem !important;
@@ -682,3 +700,13 @@ textarea{
   text-decoration: underline;
 }
 /*******end custom upload file****/
+
+.plus{
+  background-image: url('/assets/image/plus.svg') ;
+  background-size: 16px 16px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  content: "";
+  button: 0;
+}
