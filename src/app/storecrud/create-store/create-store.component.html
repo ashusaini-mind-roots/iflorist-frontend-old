@@ -1,22 +1,22 @@
-<div class="col-lg-9 col-xl-9 mt-5">
+<div class="col-lg-10 col-xl-10 mt-5">
   <div class="generic-card mb-5">
     <h3 class="card-header">
       <span class="ml-3 font-size-1 txt-color- font-medium">Add New Store</span>
     </h3>
-    <div class="card-body ml-lg-5 ml-xl-5 pb-lg-5 pb-xl-5">
+    <div class="card-body mx-lg-5 mx-xl-5 pb-lg-5 pb-xl-5">
       <form [formGroup]="storeform" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col-8">
             <div class="form-group d-flex align-items-center">
 
-              <div *ngIf="selectedFile.src!=''" style="width: 100px; height: 100px; background-color: gray;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
-              <div *ngIf="selectedFile.src==''" style="width: 100px; height: 100px; background: url('/assets/image/upload.svg') no-repeat"></div>
+              <div *ngIf="selectedFile.src!=''" style="width: 78px; height: 78px; background-color: gray;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
+              <div *ngIf="selectedFile.src==''" style="width: 78px; height: 78px; background: url('/assets/image/upload.svg') no-repeat"></div>
 <!--                <input #imageInput-->
 <!--                type="file"-->
 <!--                accept="image/*"-->
 <!--                (change)="processFile(imageInput)">-->
 
-              <div class="upload-btn-wrapper">
+              <div class="upload-btn-wrapper pl-3">
                 <button class="upload-file-text">Upload Profile photo </button>
                 <input #imageInput
                        type="file"
@@ -66,10 +66,15 @@
             <textarea class="mt-05" rows="4" cols="25"></textarea>
           </div>
         </div>
-        <button [disabled]="loading" class="btn-ligth-blue mt-5">
-          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-          CREATE
-        </button>
+          <div class="d-flex justify-content-end">
+              <a routerLink="/stores" class="btn-generic btn-white mt-5 px-5 mr-1">
+                  Cancel
+              </a>
+              <button [disabled]="loading" class="btn-ligth-blue mt-5 px-5">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  SAVE
+              </button>
+          </div>
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
       </form>

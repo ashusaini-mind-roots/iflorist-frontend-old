@@ -3,8 +3,23 @@
     <div class="panel-body">
         <div class="generic-card">
             <div class="row mb-5">
-                <div class="col-lg-4">
-                    <p-chart type="doughnut" [data]="pieChartData"></p-chart>
+                <div class="col-lg-3 borderright-lg-xl pr-lg-0 pr-xl-0">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-header font-size-1">Sales Volume</h5>
+                            <div class="d-flex flex-column align-items-center">
+                                <h2 class="">Drifwood</h2>
+                                <h5 class="">2019|Quarter 2</h5>
+                                <p-chart type="doughnut" [data]="pieChartData"></p-chart>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="row">
+                        <div class="col">
+<!--                            <p-chart type="doughnut" [data]="pieChartData"></p-chart>-->
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-8">
                     <p-chart type="bar" [data]="lineChartData"></p-chart>
