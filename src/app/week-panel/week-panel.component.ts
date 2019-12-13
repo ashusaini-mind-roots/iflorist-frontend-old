@@ -107,7 +107,7 @@ export class WeekPanelComponent implements OnInit {
     });
 
     this.vendorform = this.formBuilder.group({
-      number: ['', Validators.required],
+      number: ['', Validators.required,Validators.pattern('^\d*$')],
       name: ['', Validators.required],
       value: ['', Validators.required],
     });
@@ -134,6 +134,23 @@ export class WeekPanelComponent implements OnInit {
   onRowNoteUnselect(event)
   {
      this.noteDelete = '';
+  }
+
+  deleteInvoice(id)
+  {
+     this.confirmDeleteInvoice(id);
+  }
+
+  confirmDeleteInvoice(id:string) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete the invoice ?',
+      accept: () => {
+        this.weekPanelService.deleteInvoice(id).subscribe((response: any) =>{
+          this.messageToastService.sendMessage('success','Vendor Message','One invoice was deleted !');
+          this.getInvoices();
+        });
+      }
+    });
   }
 
   deleteNote()
@@ -349,7 +366,7 @@ export class WeekPanelComponent implements OnInit {
     this.submittedVendor = true;
 
 
-    if (this.submittedVendor.invalid) {
+    if (this.vendorform.invalid) {
       //this.loading = false;
       return;
     }
@@ -364,6 +381,7 @@ export class WeekPanelComponent implements OnInit {
               // this.success = 'Store added succefull !';
               // this.clean();
               //this.router.navigate([this.returnUrl]);
+              this.messageToastService.sendMessage('success','Vendor Message','One invoice was created !');
               this.getInvoices();
               this.calcInvoiceTotal();
               this.submittedVendor = false;
@@ -473,6 +491,7 @@ export class WeekPanelComponent implements OnInit {
               //console.log(data);
               this.getSevenDays();
               this.visible = false;
+              this.messageToastService.sendMessage('success','Day Message','One day was updated !');
               //this.router.navigate([this.returnUrl]);
             },
             error => {
@@ -500,6 +519,7 @@ export class WeekPanelComponent implements OnInit {
               //console.log(data);
               this.getNotes();
               this.visibleDialogNote = false;
+              this.messageToastService.sendMessage('success','Note Message','One note was created !');
               //this.router.navigate([this.returnUrl]);
             },
             error => {
