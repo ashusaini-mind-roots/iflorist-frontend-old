@@ -40,6 +40,10 @@ export class WeekPanelService{
         });
 
   }
+  deleteInvoice(id)
+  {
+      return this.http.delete(`${environment.apiUrl}/invoice/delete/${id}`);
+  }
   getProjWeeklyRev(store_id, week_id) : Observable<any> {
     return this.http.get(`${environment.apiUrl}/weekly_projection_percent_revenue/proj_weekly_revenue/${store_id}/${week_id}`);
   }

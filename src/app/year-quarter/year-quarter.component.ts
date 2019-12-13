@@ -8,7 +8,7 @@ import {UtilsService} from "@app/_services/utils.service";
 })
 export class YearQuarterComponent implements OnInit {
   years: string[] = [];
-  yearSelected: any;
+  @Input() yearSelected: any;
 
   quarters: string[] = [];
   quarterSelected: any;
@@ -24,7 +24,8 @@ export class YearQuarterComponent implements OnInit {
   ngOnInit() {
     let currentYear = this.utilService.GetCurrentYear();
     this.years = this.utilService.GetYears(currentYear - 1, currentYear  );
-    this.yearSelected = currentYear;
+    if(this.yearSelected == undefined)
+        this.yearSelected = currentYear;
 
     this.quarters = this.utilService.GetYears(1, 4);
     this.quarterSelected = 1;

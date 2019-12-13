@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ConfirmationService} from 'primeng/api';
 
 import { MessageToastService } from "../_services/messageToast.service";
+import {__param} from "tslib";
 
 @Component({
   selector: 'app-week-panel',
@@ -33,6 +34,7 @@ export class WeekPanelComponent implements OnInit {
   visible:boolean = false;
   visibleDialogNote: boolean = false;
   visibleVendor: boolean = false;
+  visibleNoWeeks: boolean = false;
   title:string;
   dialogValues : any;
   dayform: FormGroup;
@@ -47,6 +49,7 @@ export class WeekPanelComponent implements OnInit {
   oldNotes:any[];
   cols : any[];
   noteDelete : string = '';
+  oldYear: any;
 
   //------invoices
   invoices: any[];
@@ -59,6 +62,7 @@ export class WeekPanelComponent implements OnInit {
   //------week resume
   projWeeklyRev: number;
   target: number;
+  yeartoselect: any;
 
 
   constructor(
@@ -75,7 +79,8 @@ export class WeekPanelComponent implements OnInit {
         ref.receiveStorage(store);
       });
       let currentYear = this.utilService.GetCurrentYear();
-      this.yearQuarter = {year : currentYear, quarter: 1};
+      this.resetYearQuarter(currentYear);
+      // this.yearQuarter = {year : currentYear, quarter: 1};
       this.yearSelected = this.yearQuarter.year;
 
       this.monday = {'id': -1, 'amt': 0.00};
@@ -94,6 +99,10 @@ export class WeekPanelComponent implements OnInit {
       this.dialogValues = {'id':0,'merchandise': 0.00,'wire': 0.00,'delivery': 0.00};
   }
 
+  resetYearQuarter(year_)
+  {
+      this.yearQuarter = {year : year_, quarter: 1};
+  }
   ngOnInit() {
     this.dayform = this.formBuilder.group({
       id: [''],
@@ -107,7 +116,7 @@ export class WeekPanelComponent implements OnInit {
     });
 
     this.vendorform = this.formBuilder.group({
-      number: ['', Validators.required],
+      number: ['', Validators.required,Validators.pattern('^\d*$')],
       name: ['', Validators.required],
       value: ['', Validators.required],
     });
@@ -134,6 +143,23 @@ export class WeekPanelComponent implements OnInit {
   onRowNoteUnselect(event)
   {
      this.noteDelete = '';
+  }
+
+  deleteInvoice(id)
+  {
+     this.confirmDeleteInvoice(id);
+  }
+
+  confirmDeleteInvoice(id:string) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete the invoice ?',
+      accept: () => {
+        this.weekPanelService.deleteInvoice(id).subscribe((response: any) =>{
+          this.messageToastService.sendMessage('success','Vendor Message','One invoice was deleted !');
+          this.getInvoices();
+        });
+      }
+    });
   }
 
   deleteNote()
@@ -168,13 +194,17 @@ export class WeekPanelComponent implements OnInit {
   }
 
   receiveYearQuarter($event){
+    this.oldYear = this.yearQuarter.year;
     this.yearQuarter = $event;
-    this.yearSelected = this.yearQuarter.year;
-    this.getWeekDataFromServer();
+    console.log("oldyear:"+this.oldYear);
+    //this.yearSelected = "2019";
+    this.getWeeks();
+    //this.getWeekDataFromServer();
   }
   receiveStorage(storage){
     this.selectedStorage = storage;
-    this.getWeekDataFromServer();
+    this.getWeeks();
+    //this.getWeekDataFromServer();
   }
 
   calcDailyTotal = function () {
@@ -190,9 +220,12 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getSevenDays = function () {
-     console.log(this.selectedStorage)
+     console.log("getSevenDays")
+    console.log("Storage: "+ this.selectedStorage.id)
+    console.log("Week: "+ this.selectedWeekItem)
     this.weekPanelService.getSevenDays(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
         let seven_d_w = response.seven_days_week;
+        console.log(seven_d_w)
         // console.log(seven_d_w);
         if (Array.isArray(seven_d_w) && seven_d_w.length > 0) {
           this.monday = {
@@ -267,8 +300,17 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getWeeks = function () {
-      this.weekPanelService.getWeeks(this.yearQuarter.year).subscribe((response: any) =>{
-      this.weekList = response.weeks;
+    var year = (arguments.length == 0) ? this.yearQuarter.year : arguments[0];
+    this.weekPanelService.getWeeks(year).subscribe((response: any) =>{
+    this.weekList = response.weeks;
+    if(this.weekList != undefined && this.weekList.length == 0) {
+      this.yeartoselect = ""+this.oldYear;
+      console.log("yeartoselect = "+""+this.oldYear);
+      this.showDialogNoWeeks();
+      //this.getWeeks(this.oldYear);
+      //jQuery('#noweeksModal').modal();
+    }
+    else
       this.getWeekDataFromServer();
     });
   }
@@ -326,6 +368,7 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getWeekDataFromServer() {
+    console.log("dentro de la jugada")
     this.getSevenDays();
     this.getProjWeeklyRev();
     this.getInvoices();
@@ -349,7 +392,7 @@ export class WeekPanelComponent implements OnInit {
     this.submittedVendor = true;
 
 
-    if (this.submittedVendor.invalid) {
+    if (this.vendorform.invalid) {
       //this.loading = false;
       return;
     }
@@ -364,6 +407,7 @@ export class WeekPanelComponent implements OnInit {
               // this.success = 'Store added succefull !';
               // this.clean();
               //this.router.navigate([this.returnUrl]);
+              this.messageToastService.sendMessage('success','Vendor Message','An invoice was created !');
               this.getInvoices();
               this.calcInvoiceTotal();
               this.submittedVendor = false;
@@ -379,6 +423,7 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getProjWeeklyRev = function () {
+    console.log("getProjWeeklyRev");
     this.weekPanelService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.projWeeklyRev = response.proj_weekly_rev;
     });
@@ -473,6 +518,7 @@ export class WeekPanelComponent implements OnInit {
               //console.log(data);
               this.getSevenDays();
               this.visible = false;
+              this.messageToastService.sendMessage('success','Day Message','One day was updated !');
               //this.router.navigate([this.returnUrl]);
             },
             error => {
@@ -486,13 +532,11 @@ export class WeekPanelComponent implements OnInit {
   createNote(){
     this.submittedFormNote = true;
 
-    
     if (this.noteform.invalid) {
       //this.loading = false;
       return;
     }
-    
-    
+
     this.weekPanelService.createNote(this.selectedStorage.id,this.selectedWeekItem,this.yearSelected,this.n.text.value)
         .pipe(first())
         .subscribe(
@@ -500,6 +544,7 @@ export class WeekPanelComponent implements OnInit {
               //console.log(data);
               this.getNotes();
               this.visibleDialogNote = false;
+              this.messageToastService.sendMessage('success','Note Message','One note was created !');
               //this.router.navigate([this.returnUrl]);
             },
             error => {
@@ -510,4 +555,14 @@ export class WeekPanelComponent implements OnInit {
         });
   }
 
+  showDialogNoWeeks(){
+    this.visibleNoWeeks = true;
+  }
+  onNoWeeksDialogOk(){
+    this.yeartoselect = this.oldYear;
+    this.getWeeks(this.oldYear);
+    this.resetYearQuarter(this.oldYear);
+    console.log("elmojon: "+this.yearQuarter.year)
+    this.visibleNoWeeks = false;
+  }
 }

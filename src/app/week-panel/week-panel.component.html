@@ -12,7 +12,7 @@
 
     <div class="d-flex col">
         <div>
-            <app-year-quarter (yearQuarterOutput) = "receiveYearQuarter($event)" [showQuarter] = false></app-year-quarter>
+            <app-year-quarter (yearQuarterOutput) = "receiveYearQuarter($event)" [showQuarter] = false [yearSelected] = yeartoselect></app-year-quarter>
         </div>
         <div class="d-flex">
             <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectyear">Select Week:</div>
@@ -174,7 +174,7 @@
                                         <td>{{invoice.invoice_number}}</td>
                                         <td>{{invoice.total}}</td>
                                         <td>
-                                            <a class="itemaction cancelitem">Delete</a>
+                                            <a  (click)="deleteInvoice(invoice.id)" class="itemaction cancelitem">Delete</a>
 <!--                                            <button [routerLink]="['/week-panel', invoice.invoice_id]" class="btn btn-error">Delete</button>-->
                                         </td>
                                     </tr>
@@ -256,8 +256,8 @@
               </div>
           </div>
           <p-footer>
-              <button type="button" pButton icon="pi pi-close" (click)="visibleDialogNote=false" label="No" class="ui-button-secondary">Cancel</button>
-              <button pButton icon="pi pi-check" label="Yes">Create</button>
+              <button type="button"  (click)="visibleDialogNote=false" class="btn-generic btn-white mr-2">Cancel</button>
+              <button class="btn-ligth-blue">CREATE</button>
           </p-footer>
       </form>
   </p-dialog>
@@ -336,28 +336,31 @@
         <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
         <div class="form-group mt-4">
             <label for="merchandise" class="input-label">Merchandise</label>
-            <input type="text" class="input input-gray2" formControlName="merchandise" [(ngModel)]="dialogValues.merchandise" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
+            <input type="text" class="input input-gray2" formControlName="merchandise" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.merchandise" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
             <div *ngIf="submitted && f.merchandise.errors" class="invalid-feedback">
                 <div *ngIf="f.merchandise.errors.required">Merchandise is required</div>
+                <div *ngIf="f.merchandise.errors.pattern">Enter a valid value</div>
             </div>
         </div>
         <div class="form-group">
             <label for="merchandise" class="input-label">Wire</label>
-            <input type="text"  class="input input-gray2" formControlName="wire" [(ngModel)]="dialogValues.wire" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
+            <input type="text"  class="input input-gray2" formControlName="wire" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.wire" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
             <div *ngIf="submitted && f.wire.errors" class="invalid-feedback">
                 <div *ngIf="f.wire.errors.required">Wire is required</div>
+                <div *ngIf="f.wire.errors.pattern">Enter a valid value</div>
             </div>
         </div>
         <div class="form-group mb-5 ">
             <label for="delivery" class="input-label">Delivery</label>
-            <input type="text" class="input input-gray2" formControlName="delivery" [(ngModel)]="dialogValues.delivery" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
+            <input type="text" class="input input-gray2" formControlName="delivery" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.delivery" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
             <div *ngIf="submitted && f.delivery.errors" class="invalid-feedback">
                 <div *ngIf="f.delivery.errors.required">Delivery is required</div>
+                <div *ngIf="f.delivery.errors.pattern">Enter a valid value</div>
             </div>
         </div>
         <p-footer>
-            <button type="button" pButton icon="pi pi-close" (click)="visible=false" label="Cancel" class="ui-button-secondary"></button>
-            <button pButton icon="pi pi-check" label="Update"></button>
+            <button class="btn-generic btn-white mr-2"(click)="visible=false" >Cancel</button>
+            <button class="btn-ligth-blue">SAVE</button>
         </p-footer>
     </form>
 </p-dialog>
@@ -366,9 +369,10 @@
     <form [formGroup]="vendorform" (ngSubmit)="createInvoice()">
         <div class="form-group mt-4">
             <label for="number" class="input-label">Invoice Number</label>
-            <input type="text" formControlName="number" class="input input-gray2" [ngClass]="{ 'is-invalid': submittedVendor && v.number.errors }" />
+            <input type="text" formControlName="number" class="input input-gray2" pattern="^\d*$" [ngClass]="{ 'is-invalid': submittedVendor && v.number.errors }" />
             <div *ngIf="submittedVendor && v.number.errors" class="invalid-feedback">
                 <div *ngIf="v.number.errors.required">Number is required</div>
+                <div *ngIf="v.number.errors.pattern">Enter only digits</div>
             </div>
         </div>
         <div class="form-group">
@@ -380,32 +384,24 @@
         </div>
         <div class="form-group mb-5 ">
             <label for="value" class="input-label">Invoice Value</label>
-            <input type="text" formControlName="value"  class="input input-gray2" [ngClass]="{ 'is-invalid': submittedVendor && v.value.errors }" />
+            <input type="text" formControlName="value"  class="input input-gray2" pattern="^[0-9]+([.][0-9]+)?$" [ngClass]="{ 'is-invalid': submittedVendor && v.value.errors }" />
             <div *ngIf="submittedVendor && v.value.errors" class="invalid-feedback">
                 <div *ngIf="v.value.errors.required">Value is required</div>
+                <div *ngIf="v.value.errors.pattern">Enter a valid value</div>
             </div>
         </div>
         <p-footer>
-            <button type="button" pButton icon="pi pi-close" (click)="visibleVendor=false;submittedVendor=false" label="Cancel" class="ui-button-secondary"></button>
-            <button pButton icon="pi pi-check" label="Create"></button>
+            <button class="btn-generic btn-white mr-2" type="button"  icon="pi pi-close" (click)="visibleVendor=false;submittedVendor=false">Cancel</button>
+            <button class="btn-ligth-blue" label="Save">SAVE</button>
         </p-footer>
     </form>
 </p-dialog>
 
 
-
-<!--<form class="form-inline">
-    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Number"
-           [(ngModel)]="invoiceNumber_add"
-           [ngModelOptions]="{standalone: true}">
-    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Name"
-           [(ngModel)]="invoiceName_add"
-           [ngModelOptions]="{standalone: true}">
-    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0"
-           placeholder="Value"
-           [(ngModel)]="invoiceTotal_add" data-type="currency"
-           [ngModelOptions]="{standalone: true}">
-
-    <button type="submit" class="btn btn-primary" (click)="createInvoice()">Add
-    </button>
-</form>-->
+<p-dialog [closable]="false" header="Create Vendor" [(visible)]="visibleNoWeeks" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
+    <span> There are no weeks at this year. </span>
+    <p-footer>
+<!--        <button class="btn-generic btn-white mr-2" type="button"  icon="pi pi-close" (click)="visibleVendor=false;submittedVendor=false">Cancel</button>-->
+        <button class="btn-ligth-blue" label="OK" (click)="onNoWeeksDialogOk()">OK</button>
+    </p-footer>
+</p-dialog>
