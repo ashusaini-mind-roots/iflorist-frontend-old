@@ -79,7 +79,7 @@
                         <div class="form-group">
                             <label for="employees">Employees</label>
                             <div class="container-employees">
-                                <div class="employee_item" *ngFor="let employee of employees"><button>X </button>{{employee.name}}</div>
+                                <div class="employee_item" *ngFor="let employee of employees"><button (click)="deleteEmployee(employee.id)">X </button>{{employee.name}}</div>
                             </div>
                         </div>
 
@@ -93,7 +93,7 @@
         </div>
     </div>
 </div>
-
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 
 
 <!--<div class="col-md-6 offset-md-3 mt-5">

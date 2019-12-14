@@ -1,9 +1,12 @@
 import { Observable } from "rxjs";
 import { StoreService } from "../../_services/store.service";
+import { EmployeeService } from "../../_services/employee.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
+import {ConfirmationService} from "primeng/api";
+import { MessageToastService } from "../../_services/messageToast.service";
 
 class ImageSnippet {
   pending: boolean = false;
@@ -15,7 +18,8 @@ class ImageSnippet {
 @Component({
   selector: 'app-edit-store',
   templateUrl: './edit-store.component.html',
-  styleUrls: ['./edit-store.component.less']
+  styleUrls: ['./edit-store.component.less'],
+  providers: [ConfirmationService]
 })
 export class EditStoreComponent implements OnInit {
   storeEditform: FormGroup;
@@ -28,11 +32,15 @@ export class EditStoreComponent implements OnInit {
   selectedFile: ImageSnippet;
   employees: any[];
 
+
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
-      private storeService: StoreService
+      private storeService: StoreService,
+      private employeeService: EmployeeService,
+      private messageToastService: MessageToastService,
+      private confirmationService: ConfirmationService
   ) {
     this.selectedFile = new ImageSnippet('', null);
   }
@@ -64,11 +72,16 @@ export class EditStoreComponent implements OnInit {
         console.log(params['id']);
       });
 
-      this.storeService.getEmployees(params['id']).subscribe(res => {
-        this.employees = res.employees;
-        console.log(this.employees);
-      });
+      this.getEmployees(params['id']);
 
+    });
+  }
+
+  getEmployees(id:string)
+  {
+    this.storeService.getEmployees(id).subscribe(res => {
+      this.employees = res.employees;
+      console.log(this.employees);
     });
   }
 
@@ -107,6 +120,23 @@ export class EditStoreComponent implements OnInit {
                 this.loading = false;
               }
           );
+    });
+  }
+
+  deleteEmployee(id:string)
+  {
+      this.confirmDeleteEmployee(id);
+  }
+
+  confirmDeleteEmployee(id:string) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete the Employee ?',
+      accept: () => {
+        this.employeeService.deleteEmployee(id).subscribe((response: any) =>{
+          this.messageToastService.sendMessage('success','Employee Message','One employee was deleted !');
+          this.getEmployees(id);
+        });
+      }
     });
   }
 

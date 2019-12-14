@@ -55,8 +55,8 @@ export class StoreService {
   }
 
     getEmployees(store_id): Observable<any>{
-        console.log(`${environment.apiUrl}/employee/getEmployeesByStore/${store_id}`)
-        return this.http.get(`${environment.apiUrl}/employee/getEmployeesByStore/${store_id}`);
+        console.log(`${environment.apiUrl}/employee/all/${store_id}`);
+        return this.http.get(`${environment.apiUrl}/employee/all/${store_id}`);
     }
 
 
