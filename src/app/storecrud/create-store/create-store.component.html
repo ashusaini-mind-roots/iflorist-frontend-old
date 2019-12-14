@@ -1,4 +1,4 @@
-<div class="col-lg-9 col-xl-9 mt-5">
+<div class="col-lg-12 col-xl-12 mt-5">
   <div class="generic-card mb-5">
     <h3 class="card-header">
       <span class="ml-3 font-size-1 txt-color- font-medium">Add New Store</span>
@@ -22,7 +22,7 @@
               </div>
           </div>
           <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-7">
                   <div class="form-group">
                       <label for="store_name">Store Name</label>
                       <!--store_name, contact_email, contact_phone, zip_code, address-->
@@ -46,15 +46,26 @@
                       <label for="address">Address </label>
                       <input type="text" formControlName="address" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
                   </div>
-                  <div class="form-group">
-                      <label for="state">State</label>
-                      <input type="text" formControlName="state" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
-                      <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
-                          <div *ngIf="f.state.errors.required">Stateity is required</div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="city">City</label>
+                              <input type="text" formControlName="city" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                              <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                  <div *ngIf="f.city.errors.required">City is required</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="state">State</label>
+                              <input type="text" formControlName="state" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+                              <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                                  <div *ngIf="f.state.errors.required">Stateity is required</div>
+                              </div>
+                          </div>
                       </div>
                   </div>
-              </div>
-              <div class="col-md-6">
                   <div class="form-group">
                       <label for="zip_code">ZipCode</label>
                       <input type="text" formControlName="zip_code" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" />
@@ -63,13 +74,13 @@
                           <div *ngIf="f.zip_code.errors.maxlength">Zip Code max lenght is 6</div>
                       </div>
                   </div>
+              </div>
+              <div class="col-md-5">
                   <div class="form-group">
-                      <label for="city">City</label>
-                      <input type="text" formControlName="city" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
-                      <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
-                          <div *ngIf="f.city.errors.required">City is required</div>
-                      </div>
+                      <label for="employees">Employees</label>
+
                   </div>
+
               </div>
           </div>
           <button [disabled]="loading" class="btn-ligth-blue mt-5">
