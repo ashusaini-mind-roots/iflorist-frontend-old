@@ -45,6 +45,42 @@ export class EditStoreComponent implements OnInit {
     this.selectedFile = new ImageSnippet('', null);
   }
 
+  formatNumberPhone(number:string)
+  {
+     
+     let length = number.length;
+     let data = '';
+     
+     for(let i=0;i<length;i++)
+     {
+        if(!isNaN(Number(number.charAt(i))))
+        {
+           data = data + number.charAt(i);
+        }
+     }
+     
+     this.f.contact_phone.setValue(data);
+     
+  }
+
+  formatNumberZip(number:string)
+  {
+     
+     let length = number.length;
+     let data = '';
+     
+     for(let i=0;i<length;i++)
+     {
+        if(!isNaN(Number(number.charAt(i))))
+        {
+           data = data + number.charAt(i);
+        }
+     }
+     
+     this.f.zip_code.setValue(data);
+     
+  }
+
   // convenience getter for easy access to form fields
   get f() { return this.storeEditform.controls; }
 
@@ -52,7 +88,7 @@ export class EditStoreComponent implements OnInit {
     this.storeEditform = this.formBuilder.group({
       store_name: ['', Validators.required],
       contact_email: ['',  Validators.email],
-      contact_phone: [''],
+      contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],
       zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
       address: [''],
       city: [''],
