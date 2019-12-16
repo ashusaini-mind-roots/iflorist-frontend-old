@@ -55,7 +55,12 @@ import { EmployeeParentComponent } from './employees/employee-parent/employee-pa
 ;
 import { CretateEmployeeComponent } from './employees/cretate-employee/cretate-employee.component'
 ;
-import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.component'
+import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.component';
+
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+
+import { formatPhone } from './pipes/formatPhone'
+
 
 @NgModule({
     imports: [
@@ -70,9 +75,12 @@ import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.c
         DialogModule,
         ToastModule,
         ConfirmDialogModule,
-        ChartModule
+        ChartModule,
+        //BsDropdownModule.forRoot(),
+        NgxIntlTelInputModule,
     ],
     declarations: [
+        formatPhone,
         AppComponent,
         HomeComponent,
         LoginComponent,

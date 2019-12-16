@@ -1,10 +1,12 @@
 import { Observable } from "rxjs";
 import { StoreService } from "../../_services/store.service";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit, Pipe, PipeTransform } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
-
+import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
+import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
+/*import {isNumeric} from 'rxjs/util/isNumeric';*/
 
 class ImageSnippet {
   pending: boolean = false;
@@ -28,6 +30,12 @@ export class CreateStoreComponent implements OnInit {
   selectedStorage: any;
   selectedFile: ImageSnippet;
 
+  separateDialCode = true;
+	SearchCountryField = SearchCountryField;
+	TooltipLabel = TooltipLabel;
+	CountryISO = CountryISO;
+	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
+
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -42,7 +50,7 @@ export class CreateStoreComponent implements OnInit {
     this.storeform = this.formBuilder.group({
       store_name: ['', Validators.required],
       contact_email: ['',  Validators.email],
-      contact_phone: [''],
+      contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],
       zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
       address: [''],
       city: [''],
@@ -51,6 +59,42 @@ export class CreateStoreComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  formatNumberPhone(number:string)
+  {
+     
+     let length = number.length;
+     let data = '';
+     
+     for(let i=0;i<length;i++)
+     {
+        if(!isNaN(Number(number.charAt(i))))
+        {
+           data = data + number.charAt(i);
+        }
+     }
+     
+     this.f.contact_phone.setValue(data);
+     
+  }
+
+  formatNumberZip(number:string)
+  {
+     
+     let length = number.length;
+     let data = '';
+     
+     for(let i=0;i<length;i++)
+     {
+        if(!isNaN(Number(number.charAt(i))))
+        {
+           data = data + number.charAt(i);
+        }
+     }
+     
+     this.f.zip_code.setValue(data);
+     
   }
 
   processFile(imageInput: any) {

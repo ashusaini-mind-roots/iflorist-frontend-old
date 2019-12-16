@@ -40,7 +40,11 @@
                   </div>
                   <div class="form-group">
                       <label for="contact_phone">Phone Number </label>
-                      <input type="text" formControlName="contact_phone" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
+                      <input type="text" [value]="storeform.get('contact_phone').value | formatPhone" formControlName="contact_phone" (input)="formatNumberPhone($event.target.value)" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
+                      <div *ngIf="submitted && f.contact_phone.errors" class="invalid-feedback">
+                        <div *ngIf="f.contact_phone.errors.minlength">Zip Code min lenght is 8</div>
+                        <div *ngIf="f.contact_phone.errors.maxlength">Zip Code max lenght is 8</div>
+                      </div>
                   </div>
                   <div class="form-group">
                       <label for="address">Address </label>
@@ -68,7 +72,7 @@
                   </div>
                   <div class="form-group">
                       <label for="zip_code">ZipCode</label>
-                      <input type="text" formControlName="zip_code" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" />
+                      <input type="text" formControlName="zip_code" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" (input)="formatNumberZip($event.target.value)" />
                       <div *ngIf="submitted && f.zip_code.errors" class="invalid-feedback">
                           <div *ngIf="f.zip_code.errors.minlength">Zip Code min lenght is 5</div>
                           <div *ngIf="f.zip_code.errors.maxlength">Zip Code max lenght is 6</div>
