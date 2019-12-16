@@ -1,82 +1,92 @@
-<div class="col-lg-10 col-xl-10 mt-5">
+<div class="col-lg-12 col-xl-12 mt-5">
   <div class="generic-card mb-5">
     <h3 class="card-header">
       <span class="ml-3 font-size-1 txt-color- font-medium">Add New Store</span>
     </h3>
     <div class="card-body mx-lg-5 mx-xl-5 pb-lg-5 pb-xl-5">
       <form [formGroup]="storeform" (ngSubmit)="onSubmit()">
-        <div class="row">
-          <div class="col-8">
-            <div class="form-group d-flex align-items-center">
+          <div class="row">
+              <div class="col-8">
+                  <div class="form-group d-flex align-items-center">
+                      <div *ngIf="selectedFile.src!=''" style="width: 100px; height: 100px; background-color: gray;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
+                      <div *ngIf="selectedFile.src==''" style="width: 100px; height: 100px; background: url('/assets/image/upload.svg') no-repeat"></div>
+                      <div class="upload-btn-wrapper">
+                          <button class="upload-file-text">Upload Profile photo </button>
+                          <input #imageInput
+                          type="file"
+                          accept="image/*"
+                          (change)="processFile(imageInput)">
+                          <!--                <input type="file" name="myfile" />-->
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-7">
+                  <div class="form-group">
+                      <label for="store_name">Store Name</label>
+                      <!--store_name, contact_email, contact_phone, zip_code, address-->
+                      <input type="text" formControlName="store_name" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.store_name.errors }" />
+                      <div *ngIf="submitted && f.store_name.errors" class="invalid-feedback">
+                          <div *ngIf="f.store_name.errors.required">Store Name is required</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="contact_email">Email Address</label>
+                      <input type="text" formControlName="contact_email" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_email.errors}" />
+                      <div *ngIf="submitted && f.contact_email.errors" class="invalid-feedback">
+                          <div *ngIf="f.contact_email.errors.email">Contact Email should be a valid email</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="contact_phone">Phone Number </label>
+                      <input type="text" formControlName="contact_phone" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
+                  </div>
+                  <div class="form-group">
+                      <label for="address">Address </label>
+                      <input type="text" formControlName="address" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="city">City</label>
+                              <input type="text" formControlName="city" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                              <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                  <div *ngIf="f.city.errors.required">City is required</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="state">State</label>
+                              <input type="text" formControlName="state" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+                              <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                                  <div *ngIf="f.state.errors.required">Stateity is required</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="zip_code">ZipCode</label>
+                      <input type="text" formControlName="zip_code" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" />
+                      <div *ngIf="submitted && f.zip_code.errors" class="invalid-feedback">
+                          <div *ngIf="f.zip_code.errors.minlength">Zip Code min lenght is 5</div>
+                          <div *ngIf="f.zip_code.errors.maxlength">Zip Code max lenght is 6</div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-5">
+                  <div class="form-group">
+                      <label for="employees">Employees</label>
 
-              <div *ngIf="selectedFile.src!=''" style="width: 78px; height: 78px; background-color: gray;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
-              <div *ngIf="selectedFile.src==''" style="width: 78px; height: 78px; background: url('/assets/image/upload.svg') no-repeat"></div>
-<!--                <input #imageInput-->
-<!--                type="file"-->
-<!--                accept="image/*"-->
-<!--                (change)="processFile(imageInput)">-->
+                  </div>
 
-              <div class="upload-btn-wrapper pl-3">
-                <button class="upload-file-text">Upload Profile photo </button>
-                <input #imageInput
-                       type="file"
-                       accept="image/*"
-                       (change)="processFile(imageInput)">
-<!--                <input type="file" name="myfile" />-->
               </div>
-            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="store_name">Store Name</label>
-              <!--store_name, contact_email, contact_phone, zip_code, address-->
-              <input type="text" formControlName="store_name" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.store_name.errors }" />
-              <div *ngIf="submitted && f.store_name.errors" class="invalid-feedback">
-                <div *ngIf="f.store_name.errors.required">Store Name is required</div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="contact_email">Email Address</label>
-              <input type="text" formControlName="contact_email" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_email.errors}" />
-              <div *ngIf="submitted && f.contact_email.errors" class="invalid-feedback">
-                <div *ngIf="f.contact_email.errors.email">Contact Email should be a valid email</div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="contact_phone">Phone Number </label>
-              <input type="text" formControlName="contact_phone" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
-            </div>
-            <div class="form-group">
-              <label for="address">Address </label>
-              <input type="text" formControlName="address" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
-            </div>
-            <div class="form-group">
-              <label for="zip_code">ZipCode</label>
-              <input type="text" formControlName="zip_code" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" />
-              <div *ngIf="submitted && f.zip_code.errors" class="invalid-feedback">
-                <div *ngIf="f.zip_code.errors.minlength">Zip Code min lenght is 5</div>
-                <div *ngIf="f.zip_code.errors.maxlength">Zip Code max lenght is 6</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 d-flex flex-column ">
-            <span>Employees</span>
-            <textarea class="mt-05" rows="4" cols="25"></textarea>
-          </div>
-        </div>
-          <div class="d-flex justify-content-end">
-              <a routerLink="/stores" class="btn-generic btn-white mt-5 px-5 mr-1">
-                  Cancel
-              </a>
-              <button [disabled]="loading" class="btn-ligth-blue mt-5 px-5">
-                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                  SAVE
-              </button>
-          </div>
-        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-        <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+          <button [disabled]="loading" class="btn-ligth-blue mt-5">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              CREATE
+          </button>
       </form>
     </div>
   </div>

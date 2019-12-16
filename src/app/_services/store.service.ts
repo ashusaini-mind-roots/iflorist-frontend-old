@@ -43,16 +43,21 @@ export class StoreService {
       return this.http.post(`${environment.apiUrl}/store/create`, formData,{headers: header});
   }
 
-  updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address){
+  updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address,city,state){
       console.log(contact_email)
       console.log(`${environment.apiUrl}/store/update/${store_id}`)
-      return this.http.put(`${environment.apiUrl}/store/update/${store_id}`, {store_name, contact_email, contact_phone, zip_code, address} );
+      return this.http.put(`${environment.apiUrl}/store/update/${store_id}`, {store_name, contact_email, contact_phone, zip_code, address, city, state} );
   }
 
   getStore(store_id): Observable<any>{
       console.log(`${environment.apiUrl}/store/getById/${store_id}`)
       return this.http.get(`${environment.apiUrl}/store/getById/${store_id}`);
   }
+
+    getEmployees(store_id): Observable<any>{
+        console.log(`${environment.apiUrl}/employee/all/${store_id}`);
+        return this.http.get(`${environment.apiUrl}/employee/all/${store_id}`);
+    }
 
 
 }

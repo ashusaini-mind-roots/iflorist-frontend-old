@@ -70,7 +70,12 @@ export class SalesComponent implements OnInit {
     };
 
     this.pieChartData = {
-      labels:['Actual Sales','Projected Sales'],
+      legend: [
+          {
+            display: false
+          }
+      ],
+      // labels:['Actual Sales','Projected Saless'],
       datasets:[
         {
           backgroundColor: ['#1caba0','#ff596e'],

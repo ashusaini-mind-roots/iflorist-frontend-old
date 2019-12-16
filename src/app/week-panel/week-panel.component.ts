@@ -299,8 +299,8 @@ export class WeekPanelComponent implements OnInit {
     })
   }
 
-  getWeeks = function () {
-    var year = (arguments.length == 0) ? this.yearQuarter.year : arguments[0];
+  getWeeks = function (year?: any) {
+    var year = (arguments.length == 0 || year == undefined) ? this.yearQuarter.year : arguments[0];
     this.weekPanelService.getWeeks(year).subscribe((response: any) =>{
     this.weekList = response.weeks;
     if(this.weekList != undefined && this.weekList.length == 0) {

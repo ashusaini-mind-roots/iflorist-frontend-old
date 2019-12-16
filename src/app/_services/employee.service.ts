@@ -82,4 +82,9 @@ export class EmployeeService{
         return this.http.get(`${environment.apiUrl}/employee/getImageById/${employee_id}`,{responseType: 'blob'});
     }
 
+    deleteEmployee(id)
+    {
+        return this.http.delete(`${environment.apiUrl}/employee/delete/${id}`);
+    }
+
 }
