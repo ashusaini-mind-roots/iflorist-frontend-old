@@ -31,8 +31,8 @@
               "src/styles.less",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/nova-light/theme.css",
-              "node_modules/intl-tel-input/build/css/intlTelInput.css"
+              "node_modules/primeng/resources/themes/nova-light/theme.css"
+
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
