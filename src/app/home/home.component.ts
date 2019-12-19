@@ -67,6 +67,7 @@ export class HomeComponent {
             this.users = users;
         });*/
         //this.loadPlans();
+        console.log(localStorage.getItem('currentUser'));
     }
 
     loadPlans(){

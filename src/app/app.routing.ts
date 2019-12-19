@@ -21,6 +21,8 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
 import {CretateEmployeeComponent} from './employees/cretate-employee/cretate-employee.component';
 import {EditEmployeeComponent} from './employees/edit-employee/edit-employee.component';
 import {EmployeeParentComponent} from "@app/employees/employee-parent/employee-parent.component";
+import { CompanyemployeeListComponent} from './companyemployee/companyemployee-list/companyemployee-list.component';
+import { CreateCompanyemployeeComponent} from './companyemployee/create-companyemployee/create-companyemployee.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -42,6 +44,8 @@ const routes: Routes = [
     { path: 'employees-list', component: EmployeeListComponent },
     { path: 'create-employee', component: CretateEmployeeComponent },
     { path: 'edit-employee/:id', component: EditEmployeeComponent },
+    { path: 'companyemployee-list', component: CompanyemployeeListComponent },
+    { path: 'create-companyemployee', component: CreateCompanyemployeeComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }

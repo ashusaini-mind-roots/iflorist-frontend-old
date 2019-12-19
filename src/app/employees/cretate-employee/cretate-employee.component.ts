@@ -52,11 +52,9 @@ export class CretateEmployeeComponent implements OnInit {
 
   onChangeSysteAccount()
   {
-    
     this.systemUser = !this.systemUser;
     if(this.f.system_account.value=='1')
     {
-      console.log('aaaaqqqqq');
       this.f.email.setValidators([Validators.required, Validators.email]);
       this.f.email.updateValueAndValidity();
     }
@@ -165,7 +163,7 @@ export class CretateEmployeeComponent implements OnInit {
           }
           else {
             this.clean();
-            this.message.sendMessage('success', 'Employee Message', 'Employee created succefully !');
+            this.message.sendMessage('success', 'Employee Message', 'Employee created successfully successfully !');
           }
           //this.success = 'Store added succefull !';
           //this.clean();

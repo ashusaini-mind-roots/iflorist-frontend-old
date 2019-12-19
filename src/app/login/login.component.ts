@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         document.body.classList.add('bg-login-img');
-        console.log("init")
+        //console.log("init")
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],
             password: ['', Validators.required]

@@ -110,7 +110,7 @@ export class ProjectionComponent implements OnInit {
               response=> {
                 this.loading = false;
                 delete this.clonedProjections[projections.id];
-                this.messageToastService.sendMessage('success','Projection Message','Projection updated succefully !');
+                this.messageToastService.sendMessage('success','Projection Message','Projection updated successfully !');
                // console.log(response)
               },
               error => {

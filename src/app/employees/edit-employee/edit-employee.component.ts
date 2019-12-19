@@ -200,7 +200,7 @@ export class EditEmployeeComponent implements OnInit {
             this.error = data.error;
           }
           else {
-            this.message.sendMessage('success', 'Employee Message', 'Employee updated succefully !');
+            this.message.sendMessage('success', 'Employee Message', 'Employee updated successfully !');
           }
           //this.success = 'Store added succefull !';
           //this.clean();
