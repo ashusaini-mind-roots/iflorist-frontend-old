@@ -34,6 +34,7 @@
 <!--              <div class="row">-->
                   <div class="col-12" *ngFor="let schedule_days of rowData.schedule_days ; let i = index">
                     <div>{{schedule_days.day_of_week}}</div>
+
                       <div>
                           <input type="time" [(ngModel)]="schedule_days[i].time_in" placeholder="HH:mm" >
                           <input type="time" [(ngModel)]="schedule_days[i].time_out" placeholder="HH:mm" >
