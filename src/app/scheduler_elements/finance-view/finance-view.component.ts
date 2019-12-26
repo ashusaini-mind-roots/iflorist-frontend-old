@@ -54,7 +54,8 @@ export class FinanceViewComponent implements OnInit {
   }
 
   parseScheduleInformationResponse = function(categories_schedules){
-    var empScheList = new Array();
+    // var empScheList = new Array();
+    var empScheList: any[] = [];
     for(var i = 0 ; i < categories_schedules.length ; i++){
       for(var j = 0 ; j < categories_schedules[i].employees.length ; j++){
         for(var k = 0 ; k < categories_schedules[i].employees[j].schedule_days.length ; k++){
