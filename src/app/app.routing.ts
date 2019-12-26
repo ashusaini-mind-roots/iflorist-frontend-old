@@ -23,6 +23,7 @@ import {EditEmployeeComponent} from './employees/edit-employee/edit-employee.com
 import {EmployeeParentComponent} from "@app/employees/employee-parent/employee-parent.component";
 import { CompanyemployeeListComponent} from './companyemployee/companyemployee-list/companyemployee-list.component';
 import { CreateCompanyemployeeComponent} from './companyemployee/create-companyemployee/create-companyemployee.component';
+import { EditCompanyemployeeComponent} from './companyemployee/edit-companyemployee/edit-companyemployee.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -46,6 +47,7 @@ const routes: Routes = [
     { path: 'edit-employee/:id', component: EditEmployeeComponent },
     { path: 'companyemployee-list', component: CompanyemployeeListComponent },
     { path: 'create-companyemployee', component: CreateCompanyemployeeComponent },
+    { path: 'edit-companyemployee/:id', component: EditCompanyemployeeComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }

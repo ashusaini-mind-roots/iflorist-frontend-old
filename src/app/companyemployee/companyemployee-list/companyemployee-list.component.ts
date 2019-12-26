@@ -34,7 +34,11 @@ export class CompanyemployeeListComponent implements OnInit {
 
   loadHeaders(){
     this.cols = [
+      { field: 'company', header: 'Company' },
       { field: 'name', header: 'Name' },
+      { field: 'email', header: 'Email Address' },
+      { field: 'phone', header: 'Phone Number' },
+      { field: 'status_name', header: 'Position' },
       { field: 'actions', header: 'Actions' },
     ];
   }
