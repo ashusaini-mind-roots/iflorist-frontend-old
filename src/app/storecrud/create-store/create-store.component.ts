@@ -7,6 +7,8 @@ import { first } from 'rxjs/operators';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
 /*import {isNumeric} from 'rxjs/util/isNumeric';*/
+import { MessageToastService } from '../../_services/messageToast.service';
+//import { ValidatePorcentage } from '../../validator/porcentage.validator';
 
 class ImageSnippet {
   pending: boolean = false;
@@ -41,6 +43,7 @@ export class CreateStoreComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private storeService: StoreService,
+	  private message: MessageToastService,
       
   ) {
       this.selectedFile = new ImageSnippet('', null);
@@ -52,6 +55,7 @@ export class CreateStoreComponent implements OnInit {
       contact_email: ['',  Validators.email],
       contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],
       zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
+	  target_percentage: ['', Validators.required],
       address: [''],
       city: [''],
       state: ['']
@@ -123,19 +127,18 @@ export class CreateStoreComponent implements OnInit {
     this.loading = true;
     // store_name,contact_email,contact_phone,zip_code,address
     this.storeService.createStore(this.selectedFile.file,this.f.store_name.value, this.f.contact_email.value, this.f.contact_phone.value,
-        this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value)
+        this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value)
         .pipe(first())
         .subscribe(
             data => {
-              //console.log(data);
               this.loading = false;
-              this.success = 'Store added successfully !';
+              this.message.sendMessage('success', 'Store Message', 'Store created successfully successfully !');
               this.clean();
-              //this.router.navigate([this.returnUrl]);
             },
             error => {
+			  this.message.sendMessage('error', 'Employee Message', error);
               console.log(error)
-              this.error = error;
+              //this.error = error;
               this.loading = false;
             });
   }
@@ -146,6 +149,7 @@ export class CreateStoreComponent implements OnInit {
      this.f.contact_phone.setValue('');
      this.f.zip_code.setValue('');
      this.f.address.setValue('');
+	 this.f.target_percentage.setValue('');
      this.selectedFile = new ImageSnippet('', null);
      this.submitted = false;
   }

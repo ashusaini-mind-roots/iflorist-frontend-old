@@ -8,6 +8,7 @@ import { first } from 'rxjs/operators';
 import {ConfirmationService} from "primeng/api";
 import { MessageToastService } from "../../_services/messageToast.service";
 
+
 class ImageSnippet {
   pending: boolean = false;
   status: string = 'init';
@@ -40,8 +41,8 @@ export class EditStoreComponent implements OnInit {
       private storeService: StoreService,
       private employeeService: EmployeeService,
       private messageToastService: MessageToastService,
-      private confirmationService: ConfirmationService
-  ) {
+      private confirmationService: ConfirmationService,
+	) {
     this.selectedFile = new ImageSnippet('', null);
   }
 
@@ -87,6 +88,7 @@ export class EditStoreComponent implements OnInit {
   ngOnInit() {
     this.storeEditform = this.formBuilder.group({
       store_name: ['', Validators.required],
+	  target_percentage: ['', Validators.required],
       contact_email: ['',  Validators.email],
       contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],
       zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
@@ -105,6 +107,7 @@ export class EditStoreComponent implements OnInit {
         this.f.city.setValue(this.store.city);
         this.f.state.setValue(this.store.state);
         this.f.address.setValue(this.store.address);
+		this.f.target_percentage.setValue(this.store.target_percentage_default);
         console.log(params['id']);
       });
 
@@ -144,15 +147,15 @@ export class EditStoreComponent implements OnInit {
       console.log("pepe"+params['id'])
 
       this.storeService.updateStore(params['id'],this.f.store_name.value,this.f.contact_email.value,
-          this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value).subscribe(
+          this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value).subscribe(
               response=> {
                 this.loading = false;
-                this.success = 'Store updated succefull !';
+                this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully successfully !');
                // console.log(response)
               },
               error => {
                 console.log(error)
-                this.error = error;
+                this.messageToastService.sendMessage('error', 'Employee Message', error);
                 this.loading = false;
               }
           );

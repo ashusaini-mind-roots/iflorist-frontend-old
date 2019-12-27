@@ -70,14 +70,28 @@
                           </div>
                       </div>
                   </div>
-                  <div class="form-group">
-                      <label for="zip_code">ZipCode</label>
-                      <input type="text" formControlName="zip_code" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" (input)="formatNumberZip($event.target.value)" />
-                      <div *ngIf="submitted && f.zip_code.errors" class="invalid-feedback">
-                          <div *ngIf="f.zip_code.errors.minlength">Zip Code min lenght is 5</div>
-                          <div *ngIf="f.zip_code.errors.maxlength">Zip Code max lenght is 6</div>
-                      </div>
-                  </div>
+				  <div class="row">
+                      <div class="col-md-6">
+						<div class="form-group">
+						  <label for="zip_code">ZipCode</label>
+						  <input type="text" formControlName="zip_code" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" (input)="formatNumberZip($event.target.value)" />
+						  <div *ngIf="submitted && f.zip_code.errors" class="invalid-feedback">
+							  <div *ngIf="f.zip_code.errors.minlength">Zip Code min lenght is 5</div>
+							  <div *ngIf="f.zip_code.errors.maxlength">Zip Code max lenght is 6</div>
+						  </div>
+						</div>
+				      </div>
+					  <div class="col-md-6">
+						<div class="form-group">
+						  <label for="target_percentage">Target Percentage</label>
+						  <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,2}\.[0-9]{1,2}$" formControlName="target_percentage" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.target_percentage.errors }"/>
+						  <div *ngIf="submitted && f.target_percentage.errors" class="invalid-feedback">
+							  <div *ngIf="f.target_percentage.errors.required">Target Percentage is required</div>
+							  <div *ngIf="f.target_percentage.errors.pattern">Enter a valid Target Percentage</div>
+						  </div>
+						</div>
+				      </div>
+				  </div>
               </div>
               <div class="col-md-5">
                   <div class="form-group">
