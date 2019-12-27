@@ -65,8 +65,11 @@ export class SchedulerComponent implements OnInit {
   }
 
   getProjWeeklyRev = function () {
+    console.log("storage: " + this.selectedStorage.id)
+    console.log("week: " + this.selectedWeekItem )
     this.schedulerService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.projWeeklyRev = response.proj_weekly_rev;
+      console.log("error:" + this.error)
     });
   }
   calcProjectedPayRol = function () {
