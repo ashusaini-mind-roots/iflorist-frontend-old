@@ -72,13 +72,13 @@ export class EditEmployeeComponent implements OnInit {
 
       });
     });
-
-    this.employeeform = this.formBuilder.group({
+	
+	this.employeeform = this.formBuilder.group({
       name: ['', Validators.required],
       status: ['', Validators.required],
       category: ['', Validators.required],
-      phone_number: ['', Validators.required],
-      hourlypayrate: ['', Validators.required/*,Validators.pattern('^[0-9]+([.][0-9]+)?$')*/],
+      phone_number: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]],
+      hourlypayrate: ['', Validators.required],
       overtimeelegible: ['', Validators.required],
       workmancomb: ['', Validators.required],
       email: [''],
@@ -89,6 +89,24 @@ export class EditEmployeeComponent implements OnInit {
     this.getStatuList();
     this.getCategoryList();
     this.getWorkmancombList();
+  }
+  
+  formatNumberPhone(number:string)
+  {
+	 
+	  let length = number.length;
+	  let data = '';
+	 
+	  for(let i=0;i<length;i++)
+	  {
+		if(!isNaN(Number(number.charAt(i))))
+		{
+		   data = data + number.charAt(i);
+		}
+	  }
+	 
+	  this.f.phone_number.setValue(data);
+	 
   }
 
   initFormValue(object: any)

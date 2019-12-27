@@ -66,12 +66,30 @@ export class EditCompanyemployeeComponent implements OnInit {
     this.companyemployeeform = this.formBuilder.group({
       name: ['', Validators.required],
       status: ['', Validators.required],
-      phone_number: ['', Validators.required],
+      phone_number: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]],//
       email: [''],
       active: ['1'],
       system_account: ['0'],
     });
     this.getStatuList();
+  }
+  
+  formatNumberPhone(number:string)
+  {
+     
+     let length = number.length;
+     let data = '';
+     
+     for(let i=0;i<length;i++)
+     {
+        if(!isNaN(Number(number.charAt(i))))
+        {
+           data = data + number.charAt(i);
+        }
+     }
+     
+     this.f.phone_number.setValue(data);
+     
   }
 
   initFormValue(object: any)
