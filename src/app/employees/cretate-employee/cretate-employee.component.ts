@@ -74,7 +74,7 @@ export class CretateEmployeeComponent implements OnInit {
       status: ['', Validators.required],
       category: ['', Validators.required],
       store: ['', Validators.required],
-      phone_number: ['', Validators.required],
+      phone_number: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]],
       hourlypayrate: ['', Validators.required,Validators.pattern('^[0-9]+([.][0-9]+)?$')],
       overtimeelegible: ['1', Validators.required],
       workmancomb: ['', Validators.required],
@@ -87,6 +87,24 @@ export class CretateEmployeeComponent implements OnInit {
     this.getStoreList();
     this.getCategoryList();
     this.getWorkmancombList();
+  }
+  
+  formatNumberPhone(number:string)
+  {
+     
+     let length = number.length;
+     let data = '';
+     
+     for(let i=0;i<length;i++)
+     {
+        if(!isNaN(Number(number.charAt(i))))
+        {
+           data = data + number.charAt(i);
+        }
+     }
+     
+     this.f.phone_number.setValue(data);
+     
   }
 
   receiveStorage(storage){
