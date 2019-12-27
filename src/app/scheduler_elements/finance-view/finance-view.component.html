@@ -8,11 +8,12 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-employeesScheduleList let-expanded="expanded" let-columns="columns">
-    <tr *ngFor="let employee of employeesScheduleList.employees">
-      <td>{{employee.name}}</td>
-      <td>{{employee.category_name}}</td>
-      <td>{{employee.total_minutes_at_week}}</td>
-      <td>{{employee.hourly_pay_rate}}</td>
+<!--    <tr *ngFor="let employee of employeesScheduleList">-->
+    <tr>
+      <td>{{employeesScheduleList.name}}</td>
+      <td>{{employeesScheduleList.category_name}}</td>
+      <td>{{employeesScheduleList.total_minutes_at_week}}</td>
+      <td>{{employeesScheduleList.hourly_pay_rate}}</td>
       <td>{{25}}</td>
 
       <!--<td>{{week.totalMerchandise | number: '1.2-2'}}</td>-->
@@ -27,30 +28,30 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
-    <tr>
-      <td class="sub-table" [attr.colspan]="columns.length + 1">
+
         <div class="row">
-           <div class="col-12" *ngFor="let employee of rowData.employees">
-              <div class="row">
-                  <div class="col" *ngFor="let schedule_day of employee.schedule_days ; let i = index">
-                    <div>{{schedule_day.day_of_week}}</div>
+<!--           <div class="col-12" *ngFor="let employee of rowData.employees">-->
+<!--              <div class="row">-->
+                  <div class="col-12" *ngFor="let schedule_days of rowData.schedule_days ; let i = index">
+                    <div>{{schedule_days.day_of_week}}</div>
+
                       <div>
-                          <input type="time" [(ngModel)]="employee.schedule_days[i].time_in" placeholder="HH:mm" >
-                          <input type="time" [(ngModel)]="employee.schedule_days[i].time_out" placeholder="HH:mm" >
+                          <input type="time" [(ngModel)]="schedule_days[i].time_in" placeholder="HH:mm" >
+                          <input type="time" [(ngModel)]="schedule_days[i].time_out" placeholder="HH:mm" >
                       </div>
-                      Brake<input type="number" style="max-width:60px;" [(ngModel)]="employee.schedule_days[i].break_time" placeholder="min" >min
+                      Brake<input type="number" style="max-width:60px;" [(ngModel)]="schedule_days[i].break_time" placeholder="min" >min
 <!--                      {{calcTimesDifference(employee.schedule_days[i].time_in | date: "HH:mm:ss",employee.schedule_days[i].time_out|date:"HH:mm:ss",employee.schedule_days[i].break_time)}}-->
-                    {{calcTimesDifference(employee.schedule_days[i].time_in,employee.schedule_days[i].time_out,employee.schedule_days[i].break_time)}}
+                    {{calcTimesDifference(schedule_days[i].time_in,schedule_days[i].time_out,schedule_days[i].break_time)}}
 <!--                    <div *ngIf="schedule_day.id == -1 && showToEdit != employee.id+schedule_day.day_of_week">Off</div>-->
 <!--                    <div *ngIf="showToEdit == employee.id+schedule_day.day_of_week"><input type="text"></div>-->
 <!--                    <div *ngIf="showToEdit != employee.id+schedule_day.day_of_week"><button type="button" pButton (click)="showToEdit=employee.id+schedule_day.day_of_week">Edit</button></div>-->
 <!--                    <div *ngIf="showToEdit == employee.id+schedule_day.day_of_week"><button type="button" pButton (click)="saveEmployee(employee.id,schedule_day.day_of_week)">Save</button></div>-->
 <!--                    <div *ngIf="showToEdit == employee.id+schedule_day.day_of_week"><button type="button" pButton (click)="showToEdit=''">Cancel</button></div>-->
                   </div>
-               </div>  
-           </div>
-        </div>
-    </tr>
+               </div>
+<!--           </div>-->
+<!--        </div>-->
+
   </ng-template>
 
 </p-table>
