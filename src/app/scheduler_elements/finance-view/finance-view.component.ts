@@ -27,6 +27,7 @@ export class FinanceViewComponent implements OnInit {
   }
 
   ngOnChanges(changes){
+      console.log("week:" + this.selectedWeekItem)
     if(this.selectedStorage && this.selectedWeekItem ){
       console.log(this.selectedStorage);
       console.log(this.yearQuarter);
@@ -36,6 +37,7 @@ export class FinanceViewComponent implements OnInit {
   }
 
   getScheduleInformation = function () {
+
     this.schedulerService.getScheduleInformation(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.employeeStoreWeekId = response.employee_store_week_id;
       this.parseScheduleInformationResponse(response.categories_schedules);
@@ -62,9 +64,9 @@ export class FinanceViewComponent implements OnInit {
           categories_schedules[i].employees[j].total_hours = this.utilService.ParseMinutesToHoursFormat(categories_schedules[i].employees[j].total_minutes_at_week);
           var schedul = categories_schedules[i].employees[j].schedule_days[k];
           if(schedul.time_in != undefined)
-            schedul.time_in = new Date(schedul.time_in);
+            schedul.time_in = this.utilService.getStringTimeFormat(new Date(schedul.time_in));
           if(schedul.time_out != undefined)
-            schedul.time_out = new Date(schedul.time_out);
+            schedul.time_out = this.utilService.getStringTimeFormat(new Date(schedul.time_out));
         }
         //esta linea esta adicionada ahora, no estaba en el codigo viejo
         categories_schedules[i].total_time = 0.0/*this.calcEmployeesTotalHours(this.categories_schedules[i].employees)*/;
@@ -138,6 +140,71 @@ export class FinanceViewComponent implements OnInit {
     }
     return '00' + ':' + '00';
   }
+
+  updateSchedulesByCategory = function(/*employees*/schedule_days,category_name){
+        // Spinner.toggle();
+        var esw_array = new Array();
+
+        // for(var i = 0 ; i < employees.length ; i++){
+        //     esw_array = esw_array.concat(employees[i].schedule_days);
+        // }
+        // var asw_toSend = angular.copy(esw_array, asw_toSend);
+        // var asw_toSend = Object.assign(asw_toSend, schedule_days);
+        var asw_toSend = JSON.parse(JSON.stringify( schedule_days ));
+        for(var j = 0 ; j < asw_toSend.length ; j++){
+            if(asw_toSend[j].time_in != undefined) {
+                asw_toSend[j].time_in = asw_toSend[j].time_in.toLocaleString("en-US", { hour12: false });
+            }
+            if(asw_toSend[j].time_out != undefined)
+                asw_toSend[j].time_out = asw_toSend[j].time_out.toLocaleString("en-US", { hour12: false });
+            asw_toSend[j].category_name = category_name;
+        }
+
+        var schedule_to_send = JSON.stringify(asw_toSend);
+        this.schedulerService.updateOrAdd(this.yearQuarter.year,this.selectedWeekItem,schedule_to_send)
+          .subscribe(
+                  response=> {
+                      // this.loading = false;
+                      // this.success = 'Store updated succefull !';
+                       console.log(response)
+                  },
+                  error => {
+                      console.log(error)
+                      // this.error = error;
+                      // this.loading = false;
+                  }
+              );
+
+
+
+        // console.log(schedule_to_send);
+        // $http({
+        //     method: 'POST',
+        //     url: API_URL + 'schedule/update_or_add/',
+        //     params: {
+        //         year: $scope.selectedYearsItem,
+        //         week_id: $scope.selectedWeekItem
+        //     },
+        //     data: {
+        //         schedule_days: schedule_to_send,
+        //     }
+        // }).then(function successCallback(response) {
+        //         $scope.updateSchedulesAfterSaveNewones(response.data.scheduleds_added);
+        //         console.log(response.data.scheduleds_added);
+        //         console.log($scope.employeesScheduleList);
+        //         Spinner.hide_Loader();
+        //
+        //     },
+        //     function errorCallback(response) {
+        //         console.log(response)
+        //     }
+        // );
+  }
+
+
+
+
+
 }
 
 

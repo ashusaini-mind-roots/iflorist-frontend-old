@@ -31,12 +31,15 @@
 	<tr>
 	   <td class="sub-table" [attr.colspan]="columns.length + 1">
 			<div class="row">
-				<div class="col-2" *ngFor="let schedule_days of rowData.schedule_days ; let i = index">
+				<div class="col" *ngFor="let schedule_days of rowData.schedule_days ; let i = index">
 					<div>{{schedule_days.day_of_week}}</div>
 					<div>
-					  <input type="time"  placeholder="HH:mm" >
-                          <input type="time"  placeholder="HH:mm" >
-					</div>
+                        <input type="time" [(ngModel)]="schedule_days.time_in" placeholder="HH:mm" value = "03:03">
+                        <input type="time" [(ngModel)]="schedule_days.time_out" placeholder="HH:mm" >
+                        <input type="number"  [(ngModel)]="schedule_days.break_time" placeholder="min" >min
+                        <label>{{calcTimesDifference(schedule_days.time_in,schedule_days.time_out,schedule_days.break_time)}}</label>
+                    </div>
+
 					<!--<div>
 					  <input type="time" [(ngModel)]="schedule_days[i].time_in" placeholder="HH:mm" >
 					  <input type="time" [(ngModel)]="schedule_days[i].time_out" placeholder="HH:mm" >
@@ -50,6 +53,7 @@
 <!--                    <div *ngIf="showToEdit == employee.id+schedule_day.day_of_week"><button type="button" pButton (click)="saveEmployee(employee.id,schedule_day.day_of_week)">Save</button></div>-->
 <!--                    <div *ngIf="showToEdit == employee.id+schedule_day.day_of_week"><button type="button" pButton (click)="showToEdit=''">Cancel</button></div>-->
 				</div>
+                <button type="button" pButton (click)="updateSchedulesByCategory(rowData.schedule_days,'Driver')">Save</button>
 			</div>
 	   </td>
 	</tr>
