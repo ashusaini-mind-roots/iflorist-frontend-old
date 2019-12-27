@@ -65,8 +65,6 @@ export class SchedulerComponent implements OnInit {
   }
 
   getProjWeeklyRev = function () {
-    console.log("storage: " + this.selectedStorage.id)
-    console.log("week: " + this.selectedWeekItem )
     this.schedulerService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.projWeeklyRev = response.proj_weekly_rev;
       console.log("error:" + this.error)
@@ -83,6 +81,7 @@ export class SchedulerComponent implements OnInit {
   getScheduledPayroll = function () {
     this.schedulerService.getScheduledPayroll(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.scheduledPayroll= response.scheduled_payroll;
+      console.log(response.employees_general_data)
       this.calcDifferendeCOL();
     });
   }
