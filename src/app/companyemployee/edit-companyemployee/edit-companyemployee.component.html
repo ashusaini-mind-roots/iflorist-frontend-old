@@ -1,7 +1,7 @@
 <div class="col-lg-12 col-xl-12 mt-5">
   <div class="generic-card mb-5">
       <h3 class="card-header">
-          <span class="ml-3 font-size-1 txt-color- font-medium">Add New Company Employee</span>
+          <span class="ml-3 font-size-1 txt-color- font-medium">Edit Company Employee</span>
       </h3>
     <div class="card-body mx-lg-5 mx-xl-5 pb-lg-5 pb-xl-5">
     <form [formGroup]="companyemployeeform" (ngSubmit)="onSubmit()">
@@ -76,7 +76,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="overtimeelegible">Active</label>
+                <label for="active">Active</label>
                 <select formControlName="active" class="input input-gray2" id="select-active">
                   <option value='0'>
                     No
@@ -103,7 +103,7 @@
             </a>
             <button [disabled]="loading" class="btn-ligth-blue mt-5 px-5">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                SAVE
+                UPDATE
             </button>
         </div>
     </form>

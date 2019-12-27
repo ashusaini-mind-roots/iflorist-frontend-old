@@ -59,10 +59,13 @@ import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.c
 
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
-import { formatPhone } from './pipes/formatPhone';
+import { formatPhone } from './pipes/formatPhone'
+;
 import { CompanyemployeeListComponent } from './companyemployee/companyemployee-list/companyemployee-list.component'
 ;
 import { CreateCompanyemployeeComponent } from './companyemployee/create-companyemployee/create-companyemployee.component'
+;
+import { EditCompanyemployeeComponent } from './companyemployee/edit-companyemployee/edit-companyemployee.component'
 
 @NgModule({
     imports: [
@@ -93,11 +96,11 @@ import { CreateCompanyemployeeComponent } from './companyemployee/create-company
         RegisterPlanDataComponent ,
         RegisterCcDataComponent ,
         ActivateCompanyComponent
-,
+        ,
         RegisterCheckEmailMessageComponent
-,
+        ,
         StoresComboComponent
-,
+        ,
         CostOfFreshComponent ,
         YearQuarterComponent ,
         WeekPanelComponent ,
@@ -109,11 +112,13 @@ import { CreateCompanyemployeeComponent } from './companyemployee/create-company
         EmployeeListComponent,
         EmployeeParentComponent,
         CretateEmployeeComponent
-,
-        EditEmployeeComponent,
+        ,
+        EditEmployeeComponent
+        ,
         CompanyemployeeListComponent
-,
-        CreateCompanyemployeeComponent    ],
+        ,
+        CreateCompanyemployeeComponent ,
+        EditCompanyemployeeComponent   ],
 
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
