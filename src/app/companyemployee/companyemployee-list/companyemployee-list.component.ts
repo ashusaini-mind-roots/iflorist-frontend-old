@@ -39,6 +39,7 @@ export class CompanyemployeeListComponent implements OnInit {
       { field: 'email', header: 'Email Address' },
       { field: 'phone', header: 'Phone Number' },
       { field: 'status_name', header: 'Position' },
+	  { field: 'active', header: 'Active' },
       { field: 'actions', header: 'Actions' },
     ];
   }

@@ -24,6 +24,8 @@
             <td>{{employee.email}}</td>
             <td>{{employee.phone_number}}</td>
             <td>{{employee.status_name}}</td>
+			<td [hidden]="employee.active=='1'">No</td>
+			<td [hidden]="employee.active!='1'">Yes</td>
             <td>
               <a [routerLink]="['/edit-companyemployee', employee.id]" class="itemaction edititem">Edit</a>
 <!--              <button [routerLink]="['/edit-employee', employee.id]" class="btn btn-success">Edit</button>-->

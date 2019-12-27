@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyemployeeService } from '../../_services/companyemployee.service';
 import { MessageToastService } from '../../_services/messageToast.service';
 import {AuthenticationService} from '../../_services/authentication.service';
+import { StoreSubscriberService } from "../../_services/storeSubscriber.service";
 
 
 class ImageSnippet {
@@ -38,9 +39,13 @@ export class CreateCompanyemployeeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private companyEmployeeService: CompanyemployeeService,
     private message: MessageToastService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+	private storeSubscriberService: StoreSubscriberService
     ) {
     this.selectedFile = new ImageSnippet('', null);
+	storeSubscriberService.subscribe(this,function (ref,store) {
+      ref.receiveStorage(store);
+    });
   }
 
   onChangeSysteAccount()
@@ -64,12 +69,30 @@ export class CreateCompanyemployeeComponent implements OnInit {
     this.companyemployeeform = this.formBuilder.group({
       name: ['', Validators.required],
       status: ['', Validators.required],
-      phone_number: ['', Validators.required],
+      phone_number: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]],
       email: [''],
       active: ['1'],
       system_account: ['0'],
     });
     this.getStatuList();
+  }
+  
+  formatNumberPhone(number:string)
+  {
+     
+     let length = number.length;
+     let data = '';
+     
+     for(let i=0;i<length;i++)
+     {
+        if(!isNaN(Number(number.charAt(i))))
+        {
+           data = data + number.charAt(i);
+        }
+     }
+     
+     this.f.phone_number.setValue(data);
+     
   }
 
   processFile(imageInput: any) {

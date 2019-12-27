@@ -68,13 +68,14 @@
           </div>
           <div class="col-md-6">
               <div class="form-group">
-                <label for="phone_number">Phone Number</label>
-                <input type="text" formControlName="phone_number" pattern="^\d*$" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors}" />
-                <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
-                  <div *ngIf="f.phone_number.errors.required">Phone number is required</div>
-                  <div *ngIf="f.phone_number.errors.pattern">Set Only number in Phone number</div>
+                  <label for="phone_number">Phone Number</label>
+                  <input type="text" [value]="companyemployeeform.get('phone_number').value | formatPhone" formControlName="phone_number" (input)="formatNumberPhone($event.target.value)" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors}" />
+                  <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
+                    <div *ngIf="f.phone_number.errors.required">Phone number is required</div>
+					<div *ngIf="f.phone_number.errors.minlength">Phone Number min lenght is 8</div>
+					<div *ngIf="f.phone_number.errors.maxlength">Phone Number max lenght is 8</div>
+                  </div>
                 </div>
-              </div>
               <div class="form-group">
                 <label for="overtimeelegible">Active</label>
                 <select formControlName="active" class="input input-gray2" id="select-active">
