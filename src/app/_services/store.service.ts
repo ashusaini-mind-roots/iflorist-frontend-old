@@ -22,7 +22,7 @@ export class StoreService {
          // );
   }
 
-  createStore(image,store_name,contact_email,contact_phone,zip_code,address,city,state) {
+  createStore(image,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage) {
       //return this.http.post(`${environment.apiUrl}/store/create`, {store_name, contact_email, contact_phone, zip_code, address} );
       const formData = new FormData();
       //formData.append('image', image);
@@ -35,6 +35,7 @@ export class StoreService {
       formData.append('address', address);
       formData.append('city', city);
       formData.append('state', state);
+	  formData.append('target_percentage', target_percentage);
       
       let header = new HttpHeaders();
 
@@ -43,10 +44,10 @@ export class StoreService {
       return this.http.post(`${environment.apiUrl}/store/create`, formData,{headers: header});
   }
 
-  updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address,city,state){
+  updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage){
       console.log(contact_email)
       console.log(`${environment.apiUrl}/store/update/${store_id}`)
-      return this.http.put(`${environment.apiUrl}/store/update/${store_id}`, {store_name, contact_email, contact_phone, zip_code, address, city, state} );
+      return this.http.put(`${environment.apiUrl}/store/update/${store_id}`, {store_name, contact_email, contact_phone, zip_code, address, city, state,target_percentage} );
   }
 
   getStore(store_id): Observable<any>{
