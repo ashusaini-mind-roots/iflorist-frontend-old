@@ -34,8 +34,8 @@
           <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
 	        <tr>
 	            <td class="sub-table" [attr.colspan]="columns.length + 1">
-                <div class="row mt-2">
-				    <div class="col" *ngFor="let schedule_days of rowData.schedule_days ; let i = index">
+                <div class="row mt-2 px-3">
+				    <div class="col px-1" *ngFor="let schedule_days of rowData.schedule_days ; let i = index">
 
                         <div class="d-flex flex-column align-items-center">
                             <div>{{schedule_days.day_of_week}}</div>
