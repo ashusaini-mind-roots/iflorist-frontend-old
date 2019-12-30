@@ -1,58 +1,63 @@
-<app-year-quarter (yearQuarterOutput) = "receiveYearQuarter($event)" [showQuarter] = false></app-year-quarter>
+<div class="d-flex">
+  <app-year-quarter (yearQuarterOutput) = "receiveYearQuarter($event)" [showQuarter] = false></app-year-quarter>
+  <div class="mr-2 d-flex align-content-center ">
+    <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectyear">Select Week:</div>
+    <div class="select mr-4">
+      <select class="" id="select-weekitem" [(ngModel)]="selectedWeekItem" >
+        <option *ngFor="let week of weekList" value="{{week.id}}">
+          {{week.number+"-"+week.week_end_day}}
+        </option>
+      </select>
+      <div class="select_arrow"></div>
+    </div>
+  </div>
 
 
-<select class="" id="select-quarter" [(ngModel)]="selectedWeekItem" >
-  <option *ngFor="let week of weekList" value="{{week.id}}">
-    {{week.number+"-"+week.week_end_day}}
-  </option>
-</select>
+
+</div>
+
+
+
+
 <div class="row">
   <div class="col">
     <span class="float-right">Target {{targetCOL}}%</span>
   </div>
 </div>
 
-<div class="row mt-5">
+
+<div class="panel panel-primary ">
+  <div class="panel-body">
+    <div class="generic-card-1 mx-0 py-lg-3 py-xl-3 row mt-5">
   <div class="col-3">
-    <div class="card">
+    <div class="">
       <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">Sales Projections:</h6>
-        <h5 class="card-title ng-cloak">{{projWeeklyRev | currency}}</h5>
+        <h6 class="txt-size-12rem txt-color-gray4 mb-2 font-regular">Sales Projections:</h6>
+        <h5 class="txt-color-blue-soft txt-size-12rem card-title ng-cloak">{{projWeeklyRev | currency}}</h5>
       </div>
     </div>
   </div>
   <div class="col-3">
-    <div class="card">
+    <div class="">
       <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">Projected Budget:</h6>
-        <h5 class="card-title  ng-cloak">{{calcProjectedPayRol()|currency}}</h5>
+        <h6 class="txt-size-12rem txt-color-gray4 mb-2 font-regular">Projected Budget:</h6>
+        <h5 class="txt-color-blue-soft txt-size-12rem card-title  ng-cloak">{{calcProjectedPayRol()|currency}}</h5>
       </div>
     </div>
   </div>
   <div class="col-3">
-    <div class="card">
+    <div class="">
       <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">Scheduled Labor:</h6>
-        <h5 class="card-title ng-cloak">{{scheduledPayroll | currency}}</h5>
+        <h6 class="txt-size-12rem txt-color-gray4 mb-2 font-regular">Scheduled Labor:</h6>
+        <h5 class="txt-color-blue-soft txt-size-12rem card-title ng-cloak">{{scheduledPayroll | currency}}</h5>
       </div>
     </div>
   </div>
-<!--  <div class="col-2">-->
-<!--    <div class="card">-->
-<!--      <div class="card-body">-->
-<!--        <h6 class="card-subtitle mb-2 text-muted">Target COL's.</h6>-->
-<!--        <h5 class="card-title ng-cloak">@{{targetCOL | number:2}} %-->
-<!--          {{&#45;&#45;<hr>&#45;&#45;}}-->
-<!--          {{&#45;&#45;@{{ getTargetCOGInMoney() | currency }}&#45;&#45;}}-->
-<!--        </h5>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
   <div class="col-3">
-    <div class="card">
+    <div class="">
       <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">Remaining Budget:</h6>
-        <h5 class="card-title ng-cloak">
+        <h6 class="txt-size-12rem txt-color-gray4 mb-2 font-regular">Remaining Budget:</h6>
+        <h5 class="txt-color-blue-soft txt-size-12rem card-title ng-cloak">
           {{differenceCol | currency }}
         </h5>
       </div>
@@ -71,5 +76,6 @@
 <!--    </div>-->
 <!--  </div>-->
 </div>
-
+  </div>
+</div>
 <app-finance-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem ></app-finance-view>

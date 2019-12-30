@@ -67,7 +67,6 @@ export class SchedulerComponent implements OnInit {
   getProjWeeklyRev = function () {
     this.schedulerService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.projWeeklyRev = response.proj_weekly_rev;
-      console.log("error:" + this.error)
     });
   }
   calcProjectedPayRol = function () {
@@ -75,7 +74,7 @@ export class SchedulerComponent implements OnInit {
   }
   getTargetCOL = function () {
     this.schedulerService.getTargetCOL(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
-      this.targetCOL = response.target_percentage;
+      this.targetCOL = (response == null) ? 0 : response.target_percentage;
     });
   }
   getScheduledPayroll = function () {
