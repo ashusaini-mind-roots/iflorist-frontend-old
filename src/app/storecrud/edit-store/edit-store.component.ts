@@ -155,7 +155,7 @@ export class EditStoreComponent implements OnInit {
               },
               error => {
                 console.log(error)
-                this.messageToastService.sendMessage('error', 'Employee Message', error);
+                this.messageToastService.sendMessage('error', 'Store Message', error);
                 this.loading = false;
               }
           );

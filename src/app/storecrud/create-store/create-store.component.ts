@@ -136,7 +136,7 @@ export class CreateStoreComponent implements OnInit {
               this.clean();
             },
             error => {
-			  this.message.sendMessage('error', 'Employee Message', error);
+			  this.message.sendMessage('error', 'Store Message', error);
               console.log(error)
               //this.error = error;
               this.loading = false;
