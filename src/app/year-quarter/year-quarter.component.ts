@@ -24,9 +24,12 @@ export class YearQuarterComponent implements OnInit {
   ngOnInit() {
     let currentYear = this.utilService.GetCurrentYear();
     this.years = this.utilService.GetYears(currentYear - 1, currentYear  );
-    if(this.yearSelected == undefined)
-        this.yearSelected = currentYear;
-
+    if(this.yearSelected == undefined) {
+      var yq = JSON.parse(localStorage.getItem('yearQuarter'));
+      if (yq != undefined && yq.year != undefined)
+        this.yearSelected = yq.year;
+    }else
+      this.yearSelected = currentYear;
     this.quarters = this.utilService.GetYears(1, 4);
     this.quarterSelected = 1;
 
@@ -37,6 +40,7 @@ export class YearQuarterComponent implements OnInit {
     this.emitYearQuarter();
   }
   emitYearQuarter(){
+    localStorage.setItem('yearQuarter', JSON.stringify({year: this.yearSelected, quarter: this.quarterSelected}));
     this.yearQuarterOutput.emit({year: this.yearSelected, quarter: this.quarterSelected});
   }
 }

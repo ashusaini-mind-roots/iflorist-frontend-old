@@ -78,11 +78,13 @@ export class WeekPanelComponent implements OnInit {
       storeSubscriberService.subscribe(this,function (ref,store) {
         ref.receiveStorage(store);
       });
-      let currentYear = this.utilService.GetCurrentYear();
+
+      var yq = JSON.parse(localStorage.getItem('yearQuarter'));
+      let currentYear = (yq != undefined && yq.year != undefined) ? yq.year : this.utilService.GetCurrentYear();
+
       this.resetYearQuarter(currentYear);
       // this.yearQuarter = {year : currentYear, quarter: 1};
       this.yearSelected = this.yearQuarter.year;
-
       this.monday = {'id': -1, 'amt': 0.00};
       this.tuesday = {'id': -1, 'amt': 0.00};
       this.wednesday = {'id': -1, 'amt': 0.00};
@@ -170,8 +172,6 @@ export class WeekPanelComponent implements OnInit {
     {
        this.confirm();
     }
-     
-      
   }
 
   confirm() {

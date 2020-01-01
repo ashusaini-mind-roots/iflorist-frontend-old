@@ -40,7 +40,7 @@ export class SchedulerComponent implements OnInit {
 
   ngOnInit() {
     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
-    this.getWeeks();
+   // this.getWeeks();
   }
 
   receiveStorage(storage){
@@ -48,13 +48,17 @@ export class SchedulerComponent implements OnInit {
   }
   receiveYearQuarter($event){
     this.yearQuarter = $event;
+    this.getWeeks();
   }
 
   getWeeks = function () {
-    this.weekPanelService.getWeeks(this.yearQuarter.year).subscribe((response: any) =>{
-      this.weekList = response.weeks;
-      this.selectedWeekItem = this.weekList[0].id;
-      this.getWeekDataFromServer();
+    // console.log("year: " + this.yearQuarter.year);
+    this.weekPanelService.getWeeks(this.yearQuarter.year).subscribe((response: any) => {
+      if (response.weeks.length > 0) {
+        this.weekList = response.weeks;
+        this.selectedWeekItem = this.weekList[0].id;
+        this.getWeekDataFromServer();
+      }
     });
   }
 
