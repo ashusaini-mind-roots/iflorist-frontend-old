@@ -22,6 +22,8 @@ export class SalesComponent implements OnInit {
   lineChartData : any;
   pieChartData : any;
   projWeeklyRevQuarter: number;
+  actualSalesTotal: number;
+  actualSalesByWeek: number[];
 
   constructor(
       private storeSubscriberService: StoreSubscriberService,//service used to receive store from top bar stores combobox
@@ -34,6 +36,17 @@ export class SalesComponent implements OnInit {
     let currentYear = this.utilService.GetCurrentYear();
     this.yearQuarter = /*{year : currentYear, quarter: 1}*/JSON.parse(localStorage.getItem('yearQuarter'));
     this.projWeeklyRevQuarter = 0.00;
+    this.actualSalesTotal = 0.00;
+    this.actualSalesByWeek = new Array();
+
+  }
+  initValues(){
+    this.projWeeklyRevQuarter = 0.00;
+    this.actualSalesTotal = 0.00;
+    this.initActualSalesByWeekArray();
+  }
+  initActualSalesByWeekArray(){
+    this.actualSalesByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
   }
 
   receiveYearQuarter($event){
@@ -52,11 +65,17 @@ export class SalesComponent implements OnInit {
     this.loading = true;
     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
 
-    this.getSales();
-    this.getProjectedSales();
+    //this.getSales();
+    //this.getProjectedSales();
 
     this.loadHeaders();
 
+
+    console.log(this.projWeeklyRevQuarter)
+
+  }
+
+  showLineChart(){
     this.lineChartData = {
       labels:['1','2','3','4', '5', '6', '7', '8','9', '10', '11', '12', '13'],
       datasets:[
@@ -64,7 +83,7 @@ export class SalesComponent implements OnInit {
           label:'Actual Sales',
           backgroundColor: '#1caba0',
           borderColor: '#1caba0',
-          data: [65,59,80,81,56,55,40,65,59,80,81,56,55]
+          data: this.actualSalesByWeek
 
         },
         {
@@ -76,35 +95,48 @@ export class SalesComponent implements OnInit {
         }
       ]
     };
-
-    this.pieChartData = {
-      legend: [
+  }
+  showPieChart()
+  {
+      this.pieChartData = {
+        legend: [
           {
             display: false
           }
-      ],
-      // labels:['Actual Sales','Projected Saless'],
-      datasets:[
-        {
-          backgroundColor: ['#1caba0','#ff596e'],
-          data: [100,30],
-          hoverBackgroundColor: ['#1caba0','#ff596e'],
-        }
-      ]
-    };
+        ],
+        // labels:['Actual Sales','Projected Saless'],
+        datasets:[
+          {
+            backgroundColor: ['#1caba0','#ff596e'],
+            data: [this.actualSalesTotal,this.projWeeklyRevQuarter],
+            hoverBackgroundColor: ['#1caba0','#ff596e'],
+          }
+        ]
+      };
   }
-
   getSales()
   {
       //get sales list
     this.loading = true;
-    console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
+    // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
       this.salesService.getSales(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
         this.weeks = response.weeks;
-        console.log(this.weeks);
+        this.calcActualSalesTotal();
+        this.showLineChart();
         this.loading = false;
       });
     this.loading = false;
+  }
+
+  calcActualSalesTotal(){
+    this.actualSalesTotal = 0.00;
+    this.initActualSalesByWeekArray();
+    for (let i = 0; i < this.weeks.length; i++) {
+      let total = this.weeks[i].totalDelivery + this.weeks[i].totalWire + this.weeks[i].totalMerchandise;
+      this.actualSalesTotal += total;
+      this.actualSalesByWeek[(this.weeks[i].number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
+    }
+    console.log(this.actualSalesByWeek)
   }
 
   loadHeaders(){
@@ -161,6 +193,8 @@ export class SalesComponent implements OnInit {
       console.log(response);
 
       this.projWeeklyRevQuarter = response.proj_weekly_rev_quarter;
+      this.showPieChart();
+
     });
   }
 

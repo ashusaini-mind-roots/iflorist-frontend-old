@@ -9,7 +9,7 @@
                             <h5 class="card-header font-size-1 ml-2">Sales Volume</h5>
                             <div class="d-flex flex-column align-items-center mt-4">
                                 <h2 class="">Drifwood</h2>
-                                <h5 class="font-light font-size-1">2019 | Quarter 2</h5>
+                                <h5 class="font-light font-size-1">{{yearQuarter.year}} | Quarter {{yearQuarter.quarter}}</h5>
                                 <p-chart class="mb-5" type="doughnut" [data]="pieChartData"></p-chart>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                             <div class="ml-xl-4 ml-lg-4">
                                 <div class="card-body ">
                                     <span class="txt-size-14rem txt-color-gray4 font-bold">Actual Sales</span>
-                                    <div class="txt-color-blue-soft txt-size-14rem font-medium">$14.25</div>
+                                    <div class="txt-color-blue-soft txt-size-14rem font-medium">${{actualSalesTotal}}</div>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                       <td>{{week.totalMerchandise | number: '1.2-2'}}</td>
                       <td>{{week.totalWire | number: '1.2-2'}}</td>
                       <td>{{week.totalDelivery | number: '1.2-2'}}</td>
-                      <td>{{week.totalDelivery+week.totalWire+week.totalMerchandise | number: '1.2-2'}}</td>
+                      <td>{{week.totalDelivery + week.totalWire + week.totalMerchandise | number: '1.2-2'}}</td>
                       <td>
                           <a href="#" [pRowToggler]="week">
                               <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
