@@ -8,7 +8,7 @@
                         <div class="col">
                             <h5 class="card-header font-size-1 ml-2">Sales Volume</h5>
                             <div class="d-flex flex-column align-items-center mt-4">
-                                <h2 class="">Drifwood</h2>
+                                <h2 class="">{{selectedStorage.store_name}}</h2>
                                 <h5 class="font-light font-size-1">{{yearQuarter.year}} | Quarter {{yearQuarter.quarter}}</h5>
                                 <p-chart class="mb-5" type="doughnut" [data]="pieChartData"></p-chart>
                             </div>

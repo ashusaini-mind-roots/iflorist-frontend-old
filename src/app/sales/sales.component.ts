@@ -56,8 +56,8 @@ export class SalesComponent implements OnInit {
   }
 
   receiveStorage(storage){
-    //this.selectedStorage = storage.id;
     this.selectedStorage = storage;
+    console.log(this.selectedStorage)
     this.getSales();
   }
 
