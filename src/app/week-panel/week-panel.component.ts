@@ -423,7 +423,7 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getProjWeeklyRev = function () {
-    console.log("getProjWeeklyRev");
+    // console.log("getProjWeeklyRev");
     this.weekPanelService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.projWeeklyRev = response.proj_weekly_rev;
     });

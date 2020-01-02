@@ -20,7 +20,13 @@ export class SalesService {
   }
 
   updateDay(id,merchandise,wire,delivery){
-    return this.http.put(`${environment.apiUrl}/daily_revenue/update/${id}`, {merchandise,wire,delivery} );
+        return this.http.put(`${environment.apiUrl}/daily_revenue/update/${id}`, {merchandise,wire,delivery} );
   }
+
+  getProjWeeklyRevQuarter(store_id, year, quarter) : Observable<any> {
+       return this.http.get(`${environment.apiUrl}/weekly_projection_percent_revenue/proj_weekly_revenue_quarter/${store_id}/${year}/${quarter}`);
+  }
+
+
 
 }

@@ -3,6 +3,8 @@ import { StoreSubscriberService } from "../_services/storeSubscriber.service";
 import { SalesService } from "../_services/sales.service";
 import { UtilsService } from "../_services/utils.service";
 import {TableModule} from 'primeng/table';
+import {Observable} from "rxjs";
+import {environment} from "@environments/environment";
 
 @Component({
   selector: 'app-sales',
@@ -19,6 +21,7 @@ export class SalesComponent implements OnInit {
   clonedDays: { [s: string]: any; } = {};
   lineChartData : any;
   pieChartData : any;
+  projWeeklyRevQuarter: number;
 
   constructor(
       private storeSubscriberService: StoreSubscriberService,//service used to receive store from top bar stores combobox
@@ -29,12 +32,14 @@ export class SalesComponent implements OnInit {
       ref.receiveStorage(store);
     });
     let currentYear = this.utilService.GetCurrentYear();
-    this.yearQuarter = {year : currentYear, quarter: 1};
+    this.yearQuarter = /*{year : currentYear, quarter: 1}*/JSON.parse(localStorage.getItem('yearQuarter'));
+    this.projWeeklyRevQuarter = 0.00;
   }
 
   receiveYearQuarter($event){
     this.yearQuarter = $event;
     this.getSales();
+    this.getProjectedSales();
   }
 
   receiveStorage(storage){
@@ -46,7 +51,10 @@ export class SalesComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
+
     this.getSales();
+    this.getProjectedSales();
+
     this.loadHeaders();
 
     this.lineChartData = {
@@ -145,5 +153,15 @@ export class SalesComponent implements OnInit {
     this.getSales();
   }
 
+  /**
+   * This function is just getProjWeeklyRevQuarter
+   */
+  getProjectedSales(){
+    this.salesService.getProjWeeklyRevQuarter(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
+      console.log(response);
+
+      this.projWeeklyRevQuarter = response.proj_weekly_rev_quarter;
+    });
+  }
 
 }
