@@ -8,13 +8,13 @@
             <div class="col-lg-6">
                 <div class="generic-card-1 mb-4 p-3">
                     <span class="">Sales</span>
-                    <p-chart type="bar" [data]="lineChartData"></p-chart>
+                    <p-chart type="bar" [data]="salesChart"></p-chart>
                     <div class="p-2 pt-3 d-flex justify-content-between">
                         <div class=""><span class="txt-size-12rem txt-color-gray4 font-medium pr-08">Actual</span>
-                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">$11,500</span>
+                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">${{actualSalesTotal}}</span>
                         </div>
                         <div class=""><span class="txt-size-12rem txt-color- font-medium pr-08">Projected</span>
-                            <span class="txt-color-red txt-size-12rem font-medium ">$15,700</span>
+                            <span class="txt-color-red txt-size-12rem font-medium ">${{projWeeklyRevQuarter}}</span>
                         </div>
                     </div>
                 </div>

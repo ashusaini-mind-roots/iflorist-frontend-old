@@ -42,11 +42,7 @@ export class SalesComponent implements OnInit {
     this.projectedSalesByWeek = new Array();
 
   }
-  initValues(){
-    this.projWeeklyRevQuarter = 0.00;
-    this.actualSalesTotal = 0.00;
-    this.initActualSalesByWeekArray();
-  }
+
   initActualSalesByWeekArray(){
     this.actualSalesByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
     this.projectedSalesByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];

@@ -1,99 +1,127 @@
 ﻿import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
 import {PlanService} from '../_services'
+import { SalesService } from "../_services/sales.service";
 
 import { User } from '@app/_models';
 import { UserService, AuthenticationService } from '@app/_services';
 import {UtilsService} from "../_services/utils.service";
+import {StoreSubscriberService} from "@app/_services/storeSubscriber.service";
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
     loading = false;
-    users: User[];
     plans:any;
     loaded:boolean = true;
     error: boolean;
-    plan_cost:string = '';
-    lineChartData : any;
-    pieChartData : any;
     yearQuarter: any;
-    yearIndexSelected:number;
+    selectedStorage: any;
 
+    //sales section
+    salesChart : any;
+    projWeeklyRevQuarter: number;
+    weeks: any[];
+    actualSalesTotal: number;
+    actualSalesByWeek: number[];
+    projectedSalesByWeek: number[];
 
     modules: any;
 
-    constructor(private userService: UserService,
-                private utilService: UtilsService,
-                private planService:PlanService,
-                private authenticationService: AuthenticationService) {
-            this.lineChartData = {
-                labels:['January','February','March','April', 'May', 'June', 'July'],
-                datasets:[
-                    {
-                        label:'My First dataset',
-                        backgroundColor: '#ff596e',
-                        borderColor: '#ff596e',
-                        data: [65,59,80,81,56,55,40]
-
-                    },
-                    {
-                        label:'My Second dataset',
-                        backgroundColor: '#1caba0',
-                        borderColor: '#1caba0',
-                        data: [28, 48, 40, 19, 86, 27, 90]
-
-                    }
-                ]
-            };
-
-            // this.pieChartData = {
-            //     labels:['A','B','C'],
-            //     datasets:[
-            //         {
-            //             backgroundColor: ['#FF6384','#36A2EB','#FFCE56'],
-            //             data: [300,50,100],
-            //             hoverBackgroundColor: ['#FF6384','#36A2EB','#FFCE56'],
-            //         }
-            //     ]
-            // };
-
+    constructor(
+        private storeSubscriberService: StoreSubscriberService,//service used to receive store from top bar stores combobox
+        private userService: UserService,
+        private utilService: UtilsService,
+        private planService:PlanService,
+        private authenticationService: AuthenticationService,
+        private salesService: SalesService,
+    ) {
+        storeSubscriberService.subscribe(this,function (ref,store) {
+            ref.receiveStorage(store);
+        });
         this.yearQuarter = {year : this.utilService.GetCurrentYear(), quarter: 1};
+
+        //sales
+        this.projWeeklyRevQuarter = 0.00;
+        this.actualSalesTotal = 0.00;
+        this.actualSalesByWeek = new Array();
+        this.projectedSalesByWeek = new Array();
     }
 
     ngOnInit() {
-        /*this.loading = true;
-        this.userService.getAll().pipe(first()).subscribe(users => {
-            this.loading = false;
-            this.users = users;
-        });*/
-        //this.loadPlans();
-        console.log(localStorage.getItem('currentUser'));
+        this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
+
     }
 
-    loadPlans(){
-        const currentUser = this.authenticationService.currentUserValue;
-        console.log(currentUser.user.id);
-        return this.planService.getByUser(currentUser.user.id).subscribe((data: any) =>{
-            this.modules = data.plans;
-            console.log(data.plans);
-            this.loaded = false;
-        })
+    initActualSalesByWeekArray(){
+        this.actualSalesByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
+        this.projectedSalesByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
+    }
+
+    showSalesChart()
+    {
+        this.salesChart = {
+            labels:['1','2','3','4', '5', '6', '7', '8','9', '10', '11', '12', '13'],
+            datasets:[
+                {
+                    label:'Actual Sales',
+                    backgroundColor: '#1caba0',
+                    borderColor: '#1caba0',
+                    data: this.actualSalesByWeek
+                },
+                {
+                    label:'Projected Sales',
+                    backgroundColor: '#ff596e',
+                    borderColor: '#ff596e',
+                    data: this.projectedSalesByWeek
+                }
+            ]
+        };
     }
 
     receiveYearQuarter($event){
         this.yearQuarter = $event;
+        this.getSales();
         // this.reloadData();
-        // console.log(this.yearQuarter);
-        // console.log(this.selectedStorage);
     }
-    //
-    // receiveYearQuarter($event){
-    //     this.yearQuarter = $event;
-    //     this.yearIndexSelected = this.yearQuarter.year;
-    //     console.log(this.yearIndexSelected);
-    //     // this.yearIndexSelected = yearIndexSelected;
-    //     //this.loadHeaders();
-    //     //this.loadProjection();
-    //     // this.getWeekDataFromServer();
-    //   }
+    receiveStorage(storage){
+        this.selectedStorage = storage;
+        console.log(this.selectedStorage)
+        this.getSales();
+    }
+
+    getSales()
+    {
+        //get sales list
+        this.loading = true;
+        // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
+        this.salesService.getSales(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
+            this.weeks = response.weeks;
+            this.calcActualSalesTotal();
+            this.getProjectedSales();
+            // this.loading = false;
+        });
+        // this.loading = false;
+    }
+    /**
+     * This function is just getProjWeeklyRevQuarter
+     */
+    getProjectedSales(){
+        this.salesService.getProjWeeklyRevQuarter(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
+            console.log(response);
+
+            this.projWeeklyRevQuarter = response.proj_weekly_rev_quarter;
+            this.projectedSalesByWeek = response.all_projected_sales;
+            this.showSalesChart();
+            // this.showLineChart();
+        });
+    }
+    calcActualSalesTotal(){
+        this.actualSalesTotal = 0.00;
+        this.initActualSalesByWeekArray();
+        for (let i = 0; i < this.weeks.length; i++) {
+            let total = this.weeks[i].totalDelivery + this.weeks[i].totalWire + this.weeks[i].totalMerchandise;
+            this.actualSalesTotal += total;
+            this.actualSalesByWeek[(this.weeks[i].number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
+        }
+    }
 }
