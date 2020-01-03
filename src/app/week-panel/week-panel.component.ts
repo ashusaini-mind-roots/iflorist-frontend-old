@@ -220,9 +220,6 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getSevenDays = function () {
-     console.log("getSevenDays")
-    console.log("Storage: "+ this.selectedStorage.id)
-    console.log("Week: "+ this.selectedWeekItem)
     this.weekPanelService.getSevenDays(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
         let seven_d_w = response.seven_days_week;
         console.log(seven_d_w)

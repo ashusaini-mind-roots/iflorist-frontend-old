@@ -24,6 +24,7 @@ export class SalesComponent implements OnInit {
   projWeeklyRevQuarter: number;
   actualSalesTotal: number;
   actualSalesByWeek: number[];
+  projectedSalesByWeek: number[];
 
   constructor(
       private storeSubscriberService: StoreSubscriberService,//service used to receive store from top bar stores combobox
@@ -38,6 +39,7 @@ export class SalesComponent implements OnInit {
     this.projWeeklyRevQuarter = 0.00;
     this.actualSalesTotal = 0.00;
     this.actualSalesByWeek = new Array();
+    this.projectedSalesByWeek = new Array();
 
   }
   initValues(){
@@ -47,12 +49,13 @@ export class SalesComponent implements OnInit {
   }
   initActualSalesByWeekArray(){
     this.actualSalesByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
+    this.projectedSalesByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
   }
 
   receiveYearQuarter($event){
     this.yearQuarter = $event;
     this.getSales();
-    this.getProjectedSales();
+    // this.getProjectedSales();
   }
 
   receiveStorage(storage){
@@ -70,9 +73,7 @@ export class SalesComponent implements OnInit {
 
     this.loadHeaders();
 
-
     console.log(this.projWeeklyRevQuarter)
-
   }
 
   showLineChart(){
@@ -90,7 +91,7 @@ export class SalesComponent implements OnInit {
           label:'Projected Sales',
           backgroundColor: '#ff596e',
           borderColor: '#ff596e',
-          data: [28, 48, 40, 19, 86, 27, 90,28, 48, 40, 19, 86, 27]
+          data: this.projectedSalesByWeek
 
         }
       ]
@@ -122,7 +123,7 @@ export class SalesComponent implements OnInit {
       this.salesService.getSales(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
         this.weeks = response.weeks;
         this.calcActualSalesTotal();
-        this.showLineChart();
+        this.getProjectedSales();
         this.loading = false;
       });
     this.loading = false;
@@ -151,7 +152,7 @@ export class SalesComponent implements OnInit {
 
   onRowEditInit(days: any) {
     this.clonedDays[days.id] = {...days};
-    console.log(this.clonedDays[days.id]);
+   // console.log(this.clonedDays[days.id]);
   }
 
   onRowEditSave(days: any, index: number) {
@@ -193,8 +194,9 @@ export class SalesComponent implements OnInit {
       console.log(response);
 
       this.projWeeklyRevQuarter = response.proj_weekly_rev_quarter;
+      this.projectedSalesByWeek = response.all_projected_sales;
       this.showPieChart();
-
+      this.showLineChart();
     });
   }
 
