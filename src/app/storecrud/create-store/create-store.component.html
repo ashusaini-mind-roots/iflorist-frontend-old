@@ -1,4 +1,4 @@
-<div class="col-lg-10 col-xl-10 mt-5">
+<div class="col-lg-12 col-xl-12 mt-5">
   <div class="generic-card mb-5">
     <h3 class="card-header">
       <span class="ml-3 font-size-1 txt-color- font-medium">Add New Store</span>
@@ -6,7 +6,7 @@
     <div class="card-body mx-lg-5 mx-xl-5 pb-lg-5 pb-xl-5">
       <form [formGroup]="storeform" (ngSubmit)="onSubmit()">
           <div class="row">
-              <div class="col-6">
+              <div class="col-md-6 col-xl-12">
                   <div class="form-group d-flex align-items-center">
                       <div *ngIf="selectedFile.src!=''" style="width: 100px; height: 100px; background-color: gray;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
                       <div *ngIf="selectedFile.src==''" style="width: 100px; height: 100px; background: url('/assets/image/upload.svg') no-repeat"></div>

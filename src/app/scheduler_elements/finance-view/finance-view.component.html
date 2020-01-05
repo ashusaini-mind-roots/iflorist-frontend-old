@@ -1,8 +1,8 @@
 <div class="panel panel-primary mb-5">
     <div class="panel-body">
-        <div class="generic-card">
+        <div class="generic-card table-responsive">
             <h5 class="card-header">Finance View</h5>
-            <p-table class="generic-table" #dt [columns]="cols" dataKey="id" [value]="employeesScheduleList" [lazy]="true">
+            <p-table class="generic-table finance-view-table" #dt [columns]="cols" dataKey="id" [value]="employeesScheduleList" [lazy]="true">
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th class="{{col.header}}" *ngFor="let col of columns">

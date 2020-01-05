@@ -31,7 +31,9 @@ export class EditStoreComponent implements OnInit {
   success = '';
   loading = false;
   selectedFile: ImageSnippet;
+  selectedCsvFile: ImageSnippet;
   employees: any[];
+  storeId: string;
 
 
   constructor(
@@ -44,6 +46,7 @@ export class EditStoreComponent implements OnInit {
       private confirmationService: ConfirmationService,
 	) {
     this.selectedFile = new ImageSnippet('', null);
+	this.selectedCsvFile = new ImageSnippet('', null);
   }
 
   formatNumberPhone(number:string)
@@ -109,6 +112,7 @@ export class EditStoreComponent implements OnInit {
         this.f.address.setValue(this.store.address);
 		this.f.target_percentage.setValue(this.store.target_percentage_default);
         console.log(params['id']);
+		this.storeId = params['id'];
       });
 
       this.getEmployees(params['id']);
@@ -133,6 +137,16 @@ export class EditStoreComponent implements OnInit {
     });
     reader.readAsDataURL(file);
   }
+  
+  processCsvFile(csvInput: any) {
+    const file: File = csvInput.files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', (event: any) => {
+      this.selectedCsvFile = new ImageSnippet(event.target.result, file);
+      console.log(this.selectedCsvFile.file);
+    });
+    reader.readAsDataURL(file);
+  }
 
   editStore(){
     this.submitted = true;
@@ -150,7 +164,7 @@ export class EditStoreComponent implements OnInit {
           this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value).subscribe(
               response=> {
                 this.loading = false;
-                this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully successfully !');
+                this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');
                // console.log(response)
               },
               error => {
@@ -160,6 +174,28 @@ export class EditStoreComponent implements OnInit {
               }
           );
     });
+  }
+  
+  uploadCsv()
+  {
+	  if(this.selectedCsvFile.file==null)
+	  {
+		  this.messageToastService.sendMessage('error', 'Store Message', 'Seleccione un archivo .CVS');
+		  return;
+	  }
+	  this.loading = true;
+	  this.storeService.uploadCsv(this.storeId,this.selectedCsvFile.file).subscribe(
+              response=> {
+                this.messageToastService.sendMessage('success', 'Store Message', 'Weekly Projection Percent Revenues set successfully !');
+               // console.log(response)
+			   this.loading = false;
+              },
+              error => {
+                console.log(error)
+                this.messageToastService.sendMessage('error', 'Store Message', error);
+                this.loading = false;
+              }
+          );
   }
 
   deleteEmployee(id:string)
