@@ -24,13 +24,14 @@ import {EmployeeParentComponent} from "@app/employees/employee-parent/employee-p
 import { CompanyemployeeListComponent} from './companyemployee/companyemployee-list/companyemployee-list.component';
 import { CreateCompanyemployeeComponent} from './companyemployee/create-companyemployee/create-companyemployee.component';
 import { EditCompanyemployeeComponent} from './companyemployee/edit-companyemployee/edit-companyemployee.component';
+import { User,Role } from './_models';
 
 const routes: Routes = [
-    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard],data: { roles: [Role.Root, Role.Empleado] }},
     { path: 'login', component: LoginComponent },
-    { path: 'stores', component: StoreListComponent, canActivate: [AuthGuard]},
-    { path: 'storecreate', component: CreateStoreComponent, canActivate: [AuthGuard]},
-    { path: 'storeedit/:id', component: EditStoreComponent, canActivate: [AuthGuard] },
+    { path: 'stores', component: StoreListComponent, canActivate: [AuthGuard],data: { roles: [Role.Root] }},
+    { path: 'storecreate', component: CreateStoreComponent, canActivate: [AuthGuard],data: { roles: [Role.Root] }},
+    { path: 'storeedit/:id', component: EditStoreComponent, canActivate: [AuthGuard],data: { roles: [Role.Root] } },
     { path: 'register-general-data', component: RegisterGeneralDataComponent },
     { path: 'register-plan-data', component: RegisterPlanDataComponent },
     { path: 'register-cc-data', component: RegisterCcDataComponent },

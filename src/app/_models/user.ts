@@ -5,4 +5,5 @@
     firstName: string;
     lastName: string;
     access_token?: string;
+	roles?: any [];
 }

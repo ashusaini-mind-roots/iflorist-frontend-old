@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { UserService, AuthenticationService, PlanService, CompanyService } from './_services';
 /*import {PlanService} from '../_services'*/
-import { User } from './_models';
+import { User,Role } from './_models';
 
 declare var $: any;
 /*declare var jquery: any*/
@@ -89,6 +89,23 @@ export class AppComponent implements OnInit{
         this.authenticationService.logout();
         this.router.navigate(['/login']);
     }
+	
+	get isRoot() {
+        if(this.currentUser)
+		{
+			let roles = this.currentUser.roles;
+			let result = false;
+			roles.forEach(function(value){
+				if(value.name == Role.Root)
+				{
+					result = true;
+				}
+			});
+			
+			return result;
+		}
+		return false;
+	}
 
     /*cancelCompany()
     {
