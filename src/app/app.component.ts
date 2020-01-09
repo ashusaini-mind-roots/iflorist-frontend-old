@@ -90,13 +90,13 @@ export class AppComponent implements OnInit{
         this.router.navigate(['/login']);
     }
 	
-	get isRoot() {
+	get hasAcces() {
         if(this.currentUser)
 		{
 			let roles = this.currentUser.roles;
 			let result = false;
 			roles.forEach(function(value){
-				if(value.name == Role.Root)
+				if(value.name == Role.Empresa || value.name == Role.Root || value.name == Role.AdminStore)
 				{
 					result = true;
 				}

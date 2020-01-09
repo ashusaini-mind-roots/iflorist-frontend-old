@@ -28,10 +28,10 @@
           <a class="py-3 pl-6 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="#" *ngFor = "let module of modules">{{module.name}}</a>
         </div>-->
 
-        <a *ngIf="isRoot" class="d-inline-flex dropdown-btn py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular">
+        <a *ngIf="hasAcces" class="d-inline-flex dropdown-btn py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular">
             <div class="icon-14 setting-icon ml-4 mr-4"></div>Settings
         </a>
-        <div *ngIf="isRoot" class="dropdown-container">
+        <div *ngIf="hasAcces" class="dropdown-container">
             <a class="py-3 pl-6 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/stores">Stores</a>
             <a class="py-3 pl-6 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/employees">
               Employees
