@@ -96,7 +96,7 @@ export class AppComponent implements OnInit{
 			let roles = this.currentUser.roles;
 			let result = false;
 			roles.forEach(function(value){
-				if(value.name == Role.Empresa || value.name == Role.Root || value.name == Role.AdminStore)
+				if(value.name == Role.COMPANYADMIN || value.name == Role.ROOT || value.name == Role.STOREMANAGER)
 				{
 					result = true;
 				}

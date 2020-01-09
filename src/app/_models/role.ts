@@ -1,6 +1,6 @@
 export enum Role {
-  Root = 'Root',
-  Empleado = 'Empleado',
-  Empresa = 'Empresa',
-  AdminStore = 'AdminStore'
-}
+  ROOT = 'ROOT',
+  EMPLOYEE = 'EMPLOYEE',
+  COMPANYADMIN = 'COMPANYADMIN',
+  STOREMANAGER = 'STOREMANAGER'
+ }

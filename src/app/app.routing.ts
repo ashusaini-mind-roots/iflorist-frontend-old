@@ -27,11 +27,11 @@ import { EditCompanyemployeeComponent} from './companyemployee/edit-companyemplo
 import { User,Role } from './_models';
 
 const routes: Routes = [
-    { path: 'home', component: HomeComponent, canActivate: [AuthGuard],data: { roles: [Role.Root, Role.Empleado, Role.Empresa, Role.AdminStore] }},
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard],data: { roles: [Role.ROOT, Role.EMPLOYEE, Role.COMPANYADMIN, Role.STOREMANAGER] }},
     { path: 'login', component: LoginComponent },
-    { path: 'stores', component: StoreListComponent, canActivate: [AuthGuard],data: { roles: [Role.Root, Role.Empresa, Role.AdminStore] }},
-    { path: 'storecreate', component: CreateStoreComponent, canActivate: [AuthGuard],data: { roles: [Role.Root, Role.Empresa, Role.AdminStore] }},
-    { path: 'storeedit/:id', component: EditStoreComponent, canActivate: [AuthGuard],data: { roles: [Role.Root, Role.Empresa, Role.AdminStore] } },
+    { path: 'stores', component: StoreListComponent, canActivate: [AuthGuard],data: { roles: [Role.ROOT, Role.COMPANYADMIN, Role.STOREMANAGER] }},
+    { path: 'storecreate', component: CreateStoreComponent, canActivate: [AuthGuard],data: { roles: [Role.ROOT, Role.COMPANYADMIN, Role.STOREMANAGER] }},
+    { path: 'storeedit/:id', component: EditStoreComponent, canActivate: [AuthGuard],data: { roles: [Role.ROOT, Role.COMPANYADMIN, Role.STOREMANAGER] } },
     { path: 'register-general-data', component: RegisterGeneralDataComponent },
     { path: 'register-plan-data', component: RegisterPlanDataComponent },
     { path: 'register-cc-data', component: RegisterCcDataComponent },
