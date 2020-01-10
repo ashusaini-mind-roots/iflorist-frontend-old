@@ -17,9 +17,9 @@
     <div class="bg-dark-blue border-right" id="sidebar-wrapper">
       <div class="sidebar-heading font-medium">Company Name </div>
       <div class="list-group list-group-flush">
-        <a class="d-inline-flex py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/home">
-          <div class="icon dashboard-icon ml-4 mr-4"></div>Dashboard
-        </a>
+<!--        <a class="d-inline-flex py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/home">-->
+<!--          <div class="icon dashboard-icon ml-4 mr-4"></div>Dashboard-->
+<!--        </a>-->
 
         <a  routerLink="{{module.action}}" *ngFor = "let module of modules" class="d-inline-flex py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular">
           <div class="icon-14 ml-4 mr-4" [ngClass]="module.icono"></div>{{module.name}}

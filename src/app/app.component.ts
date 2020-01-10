@@ -44,6 +44,8 @@ export class AppComponent implements OnInit{
             //console.log(currentUser.user.id);
             return this.planService.getByUser(currentUser.user.id).subscribe((data: any) =>{
                 this.modules = data.modules;
+                console.log("modules")
+                console.log(data.test);
                 console.log(data.modules);
             });
         }
