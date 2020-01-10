@@ -118,7 +118,7 @@ export class WeekPanelComponent implements OnInit {
     });
 
     this.vendorform = this.formBuilder.group({
-      number: ['', Validators.required,Validators.pattern('^\d*$')],
+      number: ['', Validators.required/*,Validators.pattern('^\d*$')*/],
       name: ['', Validators.required],
       value: ['', Validators.required],
     });
@@ -388,7 +388,6 @@ export class WeekPanelComponent implements OnInit {
 
     this.submittedVendor = true;
 
-
     if (this.vendorform.invalid) {
       //this.loading = false;
       return;
@@ -399,11 +398,6 @@ export class WeekPanelComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-              //console.log(data);
-              // this.loading = false;
-              // this.success = 'Store added succefull !';
-              // this.clean();
-              //this.router.navigate([this.returnUrl]);
               this.messageToastService.sendMessage('success','Vendor Message','An invoice was created !');
               this.getInvoices();
               this.calcInvoiceTotal();
@@ -499,8 +493,6 @@ export class WeekPanelComponent implements OnInit {
 
   updateDay(){
     this.submitted = true;
-
-    
     if (this.dayform.invalid) {
       //this.loading = false;
       return;

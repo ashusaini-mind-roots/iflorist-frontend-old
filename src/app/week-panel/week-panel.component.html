@@ -336,15 +336,15 @@
         <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
         <div class="form-group mt-4">
             <label for="merchandise" class="input-label">Merchandise</label>
-            <input type="text" class="input input-gray2" formControlName="merchandise" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.merchandise" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
+            <input type="text" name = "merchandise" class="input input-gray2" formControlName="merchandise" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.merchandise" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
             <div *ngIf="submitted && f.merchandise.errors" class="invalid-feedback">
                 <div *ngIf="f.merchandise.errors.required">Merchandise is required</div>
                 <div *ngIf="f.merchandise.errors.pattern">Enter a valid value</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="merchandise" class="input-label">Wire</label>
-            <input type="text"  class="input input-gray2" formControlName="wire" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.wire" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
+            <label for="wire" class="input-label">Wire</label>
+            <input type="text" name="wire" class="input input-gray2" formControlName="wire" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.wire" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
             <div *ngIf="submitted && f.wire.errors" class="invalid-feedback">
                 <div *ngIf="f.wire.errors.required">Wire is required</div>
                 <div *ngIf="f.wire.errors.pattern">Enter a valid value</div>
@@ -352,7 +352,7 @@
         </div>
         <div class="form-group mb-5 ">
             <label for="delivery" class="input-label">Delivery</label>
-            <input type="text" class="input input-gray2" formControlName="delivery" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.delivery" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
+            <input type="text" name="delivery" class="input input-gray2" formControlName="delivery" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.delivery" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
             <div *ngIf="submitted && f.delivery.errors" class="invalid-feedback">
                 <div *ngIf="f.delivery.errors.required">Delivery is required</div>
                 <div *ngIf="f.delivery.errors.pattern">Enter a valid value</div>
