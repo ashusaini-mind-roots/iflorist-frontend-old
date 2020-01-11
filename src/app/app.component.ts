@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { UserService, AuthenticationService, PlanService, CompanyService } from './_services';
 /*import {PlanService} from '../_services'*/
 import { User,Role } from './_models';
+import { CheckRole } from "./_helpers/check-role";
 
 declare var $: any;
 /*declare var jquery: any*/
 
-@Component({ selector: 'app', templateUrl: 'app.component.html'})
+@Component({ selector: 'app', templateUrl: 'app.component.html',providers: [CheckRole]})
 export class AppComponent implements OnInit{
     currentUser: User;
     toggled: boolean = false;
@@ -82,7 +83,8 @@ export class AppComponent implements OnInit{
         private userService: UserService,
         private planService:PlanService,
         private companyService:CompanyService,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+		private checkRole: CheckRole,
     ) {
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     }
@@ -93,7 +95,7 @@ export class AppComponent implements OnInit{
     }
 	
 	get hasAcces() {
-        if(this.currentUser)
+        /*if(this.currentUser)
 		{
 			let roles = this.currentUser.roles;
 			let result = false;
@@ -106,7 +108,17 @@ export class AppComponent implements OnInit{
 			
 			return result;
 		}
-		return false;
+		return false;*/
+		if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin() || this.checkRole.isStoreManager())
+		  return true;
+		else return false;
+	}
+	
+	get editCompanyEmployee()
+	{
+		if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin())
+		  return true;
+		else return false;
 	}
 
     /*cancelCompany()
