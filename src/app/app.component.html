@@ -36,7 +36,7 @@
             <a class="py-3 pl-6 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/employees">
               Employees
             </a>
-            <a class="py-3 pl-6 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/companyemployee-list">
+            <a *ngIf="editCompanyEmployee" class="py-3 pl-6 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/companyemployee-list">
                 Company Employees
             </a>
         </div>

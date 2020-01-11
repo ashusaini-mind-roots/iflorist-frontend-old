@@ -111,7 +111,7 @@
         </div>
     </div>
 </div>
-<div class="col-lg-12 col-xl-12 mt-5">
+<div *ngIf="showActionUploadCSV" class="col-lg-12 col-xl-12 mt-5">
     <div class="generic-card mb-5">
         <h3 class="card-header">
             <span class="ml-3 font-size-1 txt-color- font-medium">Set Weekly Projection Percent Revenues</span>
@@ -128,12 +128,13 @@
                                        accept=".csv"
                                        (change)="processCsvFile(csvInput)">
                                 <!--                <input type="file" name="myfile" />-->
+								&nbsp;<label>{{fileName}}</label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="buttons" [disabled]="loading" class="btn-ligth-blue mt-5">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                <button type="buttons" [disabled]="loadingCsv" class="btn-ligth-blue mt-5">
+                    <span *ngIf="loadingCsv" class="spinner-border spinner-border-sm mr-1"></span>
                     Upload file
                 </button>
             </form>

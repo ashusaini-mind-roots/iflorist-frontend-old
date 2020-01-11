@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import {ConfirmationService} from "primeng/api";
 import { MessageToastService } from "../../_services/messageToast.service";
+import { CheckRole } from "../../_helpers/check-role";
 
 
 class ImageSnippet {
@@ -20,7 +21,7 @@ class ImageSnippet {
   selector: 'app-edit-store',
   templateUrl: './edit-store.component.html',
   styleUrls: ['./edit-store.component.less'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService,CheckRole]
 })
 export class EditStoreComponent implements OnInit {
   storeEditform: FormGroup;
@@ -30,10 +31,12 @@ export class EditStoreComponent implements OnInit {
   error = '';
   success = '';
   loading = false;
+  loadingCsv = false;
   selectedFile: ImageSnippet;
   selectedCsvFile: ImageSnippet;
   employees: any[];
   storeId: string;
+  fileName: string = '';
 
 
   constructor(
@@ -44,6 +47,7 @@ export class EditStoreComponent implements OnInit {
       private employeeService: EmployeeService,
       private messageToastService: MessageToastService,
       private confirmationService: ConfirmationService,
+	  private checkRole: CheckRole,
 	) {
     this.selectedFile = new ImageSnippet('', null);
 	this.selectedCsvFile = new ImageSnippet('', null);
@@ -144,6 +148,7 @@ export class EditStoreComponent implements OnInit {
     reader.addEventListener('load', (event: any) => {
       this.selectedCsvFile = new ImageSnippet(event.target.result, file);
       console.log(this.selectedCsvFile.file);
+	  this.fileName = this.selectedCsvFile.file.name;
     });
     reader.readAsDataURL(file);
   }
@@ -183,17 +188,19 @@ export class EditStoreComponent implements OnInit {
 		  this.messageToastService.sendMessage('error', 'Store Message', 'Seleccione un archivo .CVS');
 		  return;
 	  }
-	  this.loading = true;
+	  this.loadingCsv = true;
 	  this.storeService.uploadCsv(this.storeId,this.selectedCsvFile.file).subscribe(
               response=> {
                 this.messageToastService.sendMessage('success', 'Store Message', 'Weekly Projection Percent Revenues set successfully !');
-               // console.log(response)
-			   this.loading = false;
+                // console.log(response)
+			    this.loadingCsv = false;
+				this.fileName = '';
+				this.selectedCsvFile = new ImageSnippet('', null);
               },
               error => {
                 console.log(error)
                 this.messageToastService.sendMessage('error', 'Store Message', error);
-                this.loading = false;
+                this.loadingCsv = false;
               }
           );
   }
@@ -213,6 +220,13 @@ export class EditStoreComponent implements OnInit {
         });
       }
     });
+  }
+  
+  showActionUploadCSV()
+  {
+	  if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin() || this.checkRole.isStoreManager())
+		  return true;
+	  else return false;
   }
 
 }
