@@ -2,12 +2,13 @@ import { Observable } from "rxjs";
 import { StoreService } from "../../_services/store.service";
 import { EmployeeService } from "../../_services/employee.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import {ConfirmationService} from "primeng/api";
 import { MessageToastService } from "../../_services/messageToast.service";
 import { CheckRole } from "../../_helpers/check-role";
+
 
 
 class ImageSnippet {
@@ -24,6 +25,10 @@ class ImageSnippet {
   providers: [ConfirmationService,CheckRole]
 })
 export class EditStoreComponent implements OnInit {
+	
+	
+  @ViewChild('csvInput',{static: false}) inputVariable: ElementRef;
+  //@ViewChild('csvInput') inputVariable;
   storeEditform: FormGroup;
   store: any = {};
   submitted = false;
@@ -196,6 +201,7 @@ export class EditStoreComponent implements OnInit {
 			    this.loadingCsv = false;
 				this.fileName = '';
 				this.selectedCsvFile = new ImageSnippet('', null);
+				this.inputVariable.nativeElement.value = "";
               },
               error => {
                 console.log(error)
