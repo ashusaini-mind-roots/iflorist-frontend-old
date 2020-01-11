@@ -2,12 +2,13 @@ import { Observable } from "rxjs";
 import { StoreService } from "../../_services/store.service";
 import { EmployeeService } from "../../_services/employee.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import {ConfirmationService} from "primeng/api";
 import { MessageToastService } from "../../_services/messageToast.service";
 import { CheckRole } from "../../_helpers/check-role";
+
 
 
 class ImageSnippet {
@@ -24,6 +25,10 @@ class ImageSnippet {
   providers: [ConfirmationService,CheckRole]
 })
 export class EditStoreComponent implements OnInit {
+	
+	
+  @ViewChild('csvInput',{static: false}) inputVariable: ElementRef;
+  //@ViewChild('csvInput') inputVariable;
   storeEditform: FormGroup;
   store: any = {};
   submitted = false;
@@ -129,6 +134,17 @@ export class EditStoreComponent implements OnInit {
     this.storeService.getEmployees(id).subscribe(res => {
       this.employees = res.employees;
       console.log(this.employees);
+	  
+	  this.storeService.getStoreImage(id).subscribe(res => {
+          const file: File = res;
+          const reader = new FileReader();
+          reader.addEventListener('load', (event: any) => {
+            this.selectedFile = new ImageSnippet(event.target.result, file);
+            console.log(this.selectedFile.file);
+          });
+          reader.readAsDataURL(file);
+        });
+	  
     });
   }
 
@@ -166,7 +182,7 @@ export class EditStoreComponent implements OnInit {
       console.log("pepe"+params['id'])
 
       this.storeService.updateStore(params['id'],this.f.store_name.value,this.f.contact_email.value,
-          this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value).subscribe(
+          this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.selectedFile.file).subscribe(
               response=> {
                 this.loading = false;
                 this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');
@@ -196,6 +212,7 @@ export class EditStoreComponent implements OnInit {
 			    this.loadingCsv = false;
 				this.fileName = '';
 				this.selectedCsvFile = new ImageSnippet('', null);
+				this.inputVariable.nativeElement.value = "";
               },
               error => {
                 console.log(error)
