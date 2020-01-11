@@ -187,7 +187,7 @@ export class EditStoreComponent implements OnInit {
 	  this.storeService.uploadCsv(this.storeId,this.selectedCsvFile.file).subscribe(
               response=> {
                 this.messageToastService.sendMessage('success', 'Store Message', 'Weekly Projection Percent Revenues set successfully !');
-               // console.log(response)
+                console.log(response)
 			   this.loading = false;
               },
               error => {
