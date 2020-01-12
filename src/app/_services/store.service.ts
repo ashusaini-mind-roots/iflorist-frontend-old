@@ -23,10 +23,7 @@ export class StoreService {
   }
 
   createStore(image,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage) {
-      //return this.http.post(`${environment.apiUrl}/store/create`, {store_name, contact_email, contact_phone, zip_code, address} );
       const formData = new FormData();
-      //formData.append('image', image);
-      //formData.append('id', id);
       formData.append('store_name', store_name);
       formData.append('image', image);
       formData.append('contact_email', contact_email);
@@ -59,15 +56,35 @@ export class StoreService {
       return this.http.post(`${environment.apiUrl}/store/setWeeklyProjectionPercentRevenues`, formData,{headers: header});
   }
 
-  updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage){
-      console.log(contact_email)
-      console.log(`${environment.apiUrl}/store/update/${store_id}`)
-      return this.http.put(`${environment.apiUrl}/store/update/${store_id}`, {store_name, contact_email, contact_phone, zip_code, address, city, state,target_percentage} );
+  updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,image){
+	  
+	  const formData = new FormData();
+      formData.append('store_name', store_name);
+      formData.append('image', image);
+      formData.append('contact_email', contact_email);
+      formData.append('contact_phone', contact_phone);
+      formData.append('zip_code', zip_code);
+      formData.append('address', address);
+      formData.append('city', city);
+      formData.append('state', state);
+	  formData.append('target_percentage', target_percentage);
+      
+      let header = new HttpHeaders();
+
+      header.set('Content-Type','multipart/form-data');
+      
+      return this.http.post(`${environment.apiUrl}/store/update/${store_id}`, formData,{headers: header});
+	  
+      //return this.http.put(`${environment.apiUrl}/store/update/${store_id}`, {store_name, contact_email, contact_phone, zip_code, address, city, state,target_percentage} );
   }
 
   getStore(store_id): Observable<any>{
       console.log(`${environment.apiUrl}/store/getById/${store_id}`)
       return this.http.get(`${environment.apiUrl}/store/getById/${store_id}`);
+  }
+  
+  getStoreImage(store_id): Observable<any>{
+      return this.http.get(`${environment.apiUrl}/store/getImageById/${store_id}`,{responseType: 'blob'});
   }
 
     getEmployees(store_id): Observable<any>{
