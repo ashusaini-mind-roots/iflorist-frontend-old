@@ -120,6 +120,13 @@ export class AppComponent implements OnInit{
 		  return true;
 		else return false;
 	}
+	
+	get editAppUser()
+	{
+		if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin() || this.checkRole.isStoreManager() || this.checkRole.isAppUser())
+		  return true;
+		else return false;
+	}
 
     /*cancelCompany()
     {

@@ -83,6 +83,23 @@ export class CheckRole {
 		return false;
 	}
 	
+	isAppUser():boolean {
+        if(this.currentUser)
+		{
+			let roles = this.currentUser.roles;
+			let result = false;
+			roles.forEach(function(value){
+				if(value.name == Role.APPUSER)
+				{
+					result = true;
+				}
+			});
+			
+			return result;
+		}
+		return false;
+	}
+	
 	/*get isAcces() {
         if(this.currentUser)
 		{
