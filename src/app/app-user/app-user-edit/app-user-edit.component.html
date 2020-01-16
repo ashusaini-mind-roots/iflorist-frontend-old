@@ -1,0 +1,72 @@
+<div class="col-lg-10 col-xl-10 mt-5">
+    <div class="generic-card mb-5">
+        <h3 class="card-header">
+            <span class="ml-3 font-size-1 txt-color- font-medium">Edit App User</span>
+        </h3>
+      <div class="card-body mx-lg-5 mx-xl-5 pb-lg-5 pb-xl-5">
+      <form [formGroup]="appUserform" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" formControlName="name" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.name.errors}" />
+                  <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">Name is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="text" formControlName="email" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.email">Email address should be a valid email</div>
+                    <div *ngIf="f.email.errors.required">Email address is required</div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="category">Store</label>
+                  <select formControlName="store" class="input input-gray2" id="select-store" [ngClass]="{ 'is-invalid': submitted && f.store.errors}">
+                    <option *ngFor="let store of stores" value="{{store.id}}">
+                      {{store.store_name}}
+                    </option>
+                    </select>
+                  <div *ngIf="submitted && f.store.errors" class="invalid-feedback">
+                    <div *ngIf="f.store.errors.required">Store is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="overtimeelegible">Active</label>
+                  <select formControlName="active" class="input input-gray2" id="select-active">
+                    <option value='0'>
+                      No
+                    </option>
+                    <option value='1' selected>
+                      Yes
+                    </option>
+                  </select>
+                  <!--<div *ngIf="submitted && f.overtimeelegible.errors" class="invalid-feedback">
+                    <div *ngIf="f.overtimeelegible.errors.required">Over time elegible</div>
+                  </div>-->
+                </div>
+            </div>
+          </div>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <!--<div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>-->
+<!--        <button [disabled]="loading" class="btn btn-primary">-->
+<!--          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>-->
+<!--          Create-->
+<!--        </button>-->
+          <div class="d-flex justify-content-end">
+              <a routerLink="/app-users" class="btn-generic btn-white mt-5 px-5 mr-1">
+                  Cancel
+              </a>
+              <button [disabled]="loading" class="btn-ligth-blue mt-5 px-5">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  UPDATE
+              </button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

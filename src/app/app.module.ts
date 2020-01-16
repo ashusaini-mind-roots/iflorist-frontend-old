@@ -65,8 +65,11 @@ import { CompanyemployeeListComponent } from './companyemployee/companyemployee-
 ;
 import { CreateCompanyemployeeComponent } from './companyemployee/create-companyemployee/create-companyemployee.component'
 ;
-import { EditCompanyemployeeComponent } from './companyemployee/edit-companyemployee/edit-companyemployee.component'
+import { EditCompanyemployeeComponent } from './companyemployee/edit-companyemployee/edit-companyemployee.component';
 
+import { AppUserListComponent } from './app-user/app-user-list/app-user-list.component';
+import { AppUserCreateComponent } from './app-user/app-user-create/app-user-create.component';
+import { AppUserEditComponent } from './app-user/app-user-edit/app-user-edit.component'
 @NgModule({
     imports: [
         BrowserModule,
@@ -118,7 +121,11 @@ import { EditCompanyemployeeComponent } from './companyemployee/edit-companyempl
         CompanyemployeeListComponent
         ,
         CreateCompanyemployeeComponent ,
-        EditCompanyemployeeComponent   ],
+        EditCompanyemployeeComponent ,
+        AppUserListComponent ,
+        AppUserCreateComponent,
+		AppUserEditComponent],
+        
 
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

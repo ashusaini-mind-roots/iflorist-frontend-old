@@ -25,6 +25,9 @@ import { CompanyemployeeListComponent} from './companyemployee/companyemployee-l
 import { CreateCompanyemployeeComponent} from './companyemployee/create-companyemployee/create-companyemployee.component';
 import { EditCompanyemployeeComponent} from './companyemployee/edit-companyemployee/edit-companyemployee.component';
 import { User,Role } from './_models';
+import { AppUserListComponent } from './app-user/app-user-list/app-user-list.component';
+import { AppUserCreateComponent } from './app-user/app-user-create/app-user-create.component';
+import { AppUserEditComponent } from './app-user/app-user-edit/app-user-edit.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard],data: { roles: [Role.ROOT, Role.EMPLOYEE, Role.COMPANYADMIN, Role.STOREMANAGER] }},
@@ -49,6 +52,9 @@ const routes: Routes = [
     { path: 'companyemployee-list', component: CompanyemployeeListComponent },
     { path: 'create-companyemployee', component: CreateCompanyemployeeComponent },
     { path: 'edit-companyemployee/:id', component: EditCompanyemployeeComponent },
+	{ path: 'app-users', component: AppUserListComponent, canActivate: [AuthGuard],data: { roles: [Role.ROOT, Role.COMPANYADMIN, Role.STOREMANAGER, Role.APPUSER] }},
+	{ path: 'app-user-create', component: AppUserCreateComponent, canActivate: [AuthGuard],data: { roles: [Role.ROOT, Role.COMPANYADMIN, Role.STOREMANAGER, Role.APPUSER] }},
+	{ path: 'app-user-edit/:id', component: AppUserEditComponent, canActivate: [AuthGuard],data: { roles: [Role.ROOT, Role.COMPANYADMIN, Role.STOREMANAGER, Role.APPUSER] }},
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
