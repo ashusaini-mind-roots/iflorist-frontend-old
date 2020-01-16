@@ -40,6 +40,8 @@ export class FinanceViewComponent implements OnInit {
 
     this.schedulerService.getScheduleInformation(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.employeeStoreWeekId = response.employee_store_week_id;
+      console.log("pinguita");
+      console.log(response.categories_schedules);
       this.parseScheduleInformationResponse(response.categories_schedules);
       console.log(this.employeesScheduleList)
     });
