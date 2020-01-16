@@ -84,7 +84,8 @@ export class SchedulerComponent implements OnInit {
   getScheduledPayroll = function () {
     this.schedulerService.getScheduledPayroll(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.scheduledPayroll= response.scheduled_payroll;
-      console.log(response.employees_general_data)
+      console.log("payroll")
+      console.log(response)
       this.calcDifferendeCOL();
     });
   }
