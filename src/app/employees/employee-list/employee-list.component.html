@@ -1,9 +1,9 @@
 <div class="panel panel-primary">
   <div class="panel panel-primary mb-5">
     <div class="panel-body">
-      <div class="generic-card">
+      <div class="generic-card table-responsive">
         <h5 class="card-header">Employees</h5>
-      <p-table class="generic-table" #dt [columns]="cols" [value]="employees" [paginator]="true" [rows]="15">
+      <p-table class="generic-table employee-table" #dt [columns]="cols" [value]="employees" [paginator]="true" [rows]="15">
         <ng-template pTemplate="caption">
           <div style="text-align: right">
             <i class="icon-14 setting-icon" style="margin:4px 4px 0 0"></i>
