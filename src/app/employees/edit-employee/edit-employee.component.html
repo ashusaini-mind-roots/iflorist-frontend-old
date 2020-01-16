@@ -1,8 +1,174 @@
-<div class="col-md-12 mt-5">
-  <!--<div class="alert alert-info">
-      email: test<br />
-      Password: test
-  </div>-->
+<div class="col-lg-12 col-xl-12 mt-5">
+    <div class="generic-card mb-5">
+        <h3 class="card-header">
+            <span class="ml-3 font-size-1 txt-color- font-medium">Update Employee</span>
+        </h3>
+      <div class="card-body mx-lg-5 mx-xl-5 pb-lg-5 pb-xl-5">
+      <form [formGroup]="employeeform" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-12">
+              <div class="form-group d-flex align-items-center">
+                  <div *ngIf="selectedFile.src!=''" style="width: 78px; height: 78px; background-color: gray;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
+                  <div *ngIf="selectedFile.src==''" style="width: 78px; height: 78px; background: url('/assets/image/upload.svg') no-repeat"></div>
+<!--                  <div *ngIf="selectedFile.src!=''" style="width: 100px; height: 100px; background-color: gray;background-size: cover" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>-->
+<!--                  <div *ngIf="selectedFile.src==''" style="width: 100px; height: 100px; background: url('/assets/image/upload.svg') no-repeat;background-size: cover"></div>-->
+<!--                  <input #imageInput-->
+<!--                         type="file"-->
+<!--                         accept="image/*"-->
+<!--                         (change)="processFile(imageInput)">-->
+                  <div class="upload-btn-wrapper pl-3">
+                      <button class="upload-file-text">Upload Profile photo </button>
+                      <input #imageInput
+                             type="file"
+                             accept="image/*"
+                             (change)="processFile(imageInput)">
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" formControlName="name" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.name.errors}" />
+                  <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">Name is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="system_account">System User</label>
+                  <select formControlName="system_account" class="input input-gray2" id="select-system-account" (change)="onChangeSysteAccount()">
+                    <option value='0'>
+                      No
+                    </option>
+                    <option value='1'>
+                      Yes
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group" [hidden]=!systemUser>
+                  <label for="email">Email address</label>
+                  <input type="text" formControlName="email" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.email">Email address should be a valid email</div>
+                    <div *ngIf="f.email.errors.required">Email address is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status</label>
+                  <select formControlName="status" class="input input-gray2" id="select-status" [ngClass]="{ 'is-invalid': submitted && f.status.errors}">
+                    <option *ngFor="let statu of status" value="{{statu.id}}">
+                      {{statu.name}}
+                    </option>
+                    </select>
+                  <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                    <div *ngIf="f.status.errors.required">Status is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="category">Position</label>
+                  <select formControlName="category" class="input input-gray2" id="select-category" [ngClass]="{ 'is-invalid': submitted && f.category.errors}">
+                    <option *ngFor="let category of categories" value="{{category.id}}">
+                      {{category.name}}
+                    </option>
+                    </select>
+                  <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                    <div *ngIf="f.category.errors.required">Position is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="overtimeelegible">Active</label>
+                  <select formControlName="active" class="input input-gray2" id="select-active">
+                    <option value='0'>
+                      No
+                    </option>
+                    <option value='1' selected>
+                      Yes
+                    </option>
+                  </select>
+                  <!--<div *ngIf="submitted && f.overtimeelegible.errors" class="invalid-feedback">
+                    <div *ngIf="f.overtimeelegible.errors.required">Over time elegible</div>
+                  </div>-->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="year_pay">Year Payment</label>
+                  <select formControlName="year_pay" class="input input-gray2" id="select-year-pay">
+                    <option value='0'>
+                      No
+                    </option>
+                    <option value='1'>
+                      Yes
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="hourlypayrate">Compensation</label>
+                  <input type="text" formControlName="hourlypayrate" class="input input-gray2" pattern="^[0-9]+([.][0-9]+)?$" [ngClass]="{ 'is-invalid': submitted && f.hourlypayrate.errors}" />
+                  <div *ngIf="submitted && f.hourlypayrate.errors" class="invalid-feedback">
+                    <div *ngIf="f.hourlypayrate.errors.required">Compensation is required</div>
+                  </div>
+                  <div *ngIf="submitted && f.hourlypayrate.errors" class="invalid-feedback">
+                    <div *ngIf="f.hourlypayrate.errors.pattern">Enter a valid number</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="overtimeelegible">Over time elegible</label>
+                  <select formControlName="overtimeelegible" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.overtimeelegible.errors}" id="select-overtimeelegible">
+                    <option value='0'>
+                      No
+                    </option>
+                    <option value='1'>
+                      Yes
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && f.overtimeelegible.errors" class="invalid-feedback">
+                    <div *ngIf="f.overtimeelegible.errors.required">Over time elegible</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="phone_number">Phone Number</label>
+                  <input type="text" [value]="employeeform.get('phone_number').value | formatPhone" formControlName="phone_number" (input)="formatNumberPhone($event.target.value)" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors}" />
+                  <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
+                    <div *ngIf="f.phone_number.errors.required">Phone number is required</div>
+					<div *ngIf="f.phone_number.errors.minlength">Phone Number min lenght is 8</div>
+					<div *ngIf="f.phone_number.errors.maxlength">Phone Number max lenght is 8</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="workmancomb">Work man comb</label>
+                  <select formControlName="workmancomb" class="input input-gray2"  [ngClass]="{ 'is-invalid': submitted && f.workmancomb.errors}" id="select-position">
+                    <option *ngFor="let workmancomb of workmancombs" value="{{workmancomb.id}}">
+                      {{workmancomb.name}}
+                    </option>
+                    </select>
+                  <div *ngIf="submitted && f.workmancomb.errors" class="invalid-feedback">
+                    <div *ngIf="f.workmancomb.errors.required">Work man comb is required</div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <!--<div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>-->
+<!--        <button [disabled]="loading" class="btn btn-primary">-->
+<!--          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>-->
+<!--          Create-->
+<!--        </button>-->
+          <div class="d-flex justify-content-end">
+              <a routerLink="/employees" class="btn-generic btn-white mt-5 px-5 mr-1">
+                  Cancel
+              </a>
+              <button [disabled]="loading" class="btn-ligth-blue mt-5 px-5">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  Update
+              </button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--<div class="col-md-12 mt-5">
   <div class="card m-4">
     <h4 class="card-header">Edit Employee</h4>
     <div class="card-body">
@@ -78,9 +244,6 @@
                     Yes
                   </option>
                 </select>
-                <!--<div *ngIf="submitted && f.overtimeelegible.errors" class="invalid-feedback">
-                  <div *ngIf="f.overtimeelegible.errors.required">Over time elegible</div>
-                </div>-->
               </div>
           </div>
           <div class="col-md-6">
@@ -142,7 +305,6 @@
           </div>
         </div>
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-        <!--<div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>-->
         <button [disabled]="loading" class="btn btn-primary">
           <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           Update
@@ -150,4 +312,4 @@
       </form>
     </div>
   </div>
-</div>
+</div>-->
