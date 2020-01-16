@@ -12,7 +12,8 @@ export class AppUserListComponent implements OnInit {
 	
   selectedStorage: any;
   appUsers: any[];	
-  cols: any;	
+  cols: any;
+  loading:boolean = false;  
 
   constructor(
 	  private storeSubscriberService: StoreSubscriberService,//service used to receive store from top bar stores combobox
@@ -35,6 +36,7 @@ export class AppUserListComponent implements OnInit {
       { field: 'name', header: 'Name' },
       { field: 'email', header: 'Email Address' },
 	  { field: 'active', header: 'Active' },
+	  { field: 'actions', header: 'Actions' },
     ];
   }
   
@@ -46,10 +48,12 @@ export class AppUserListComponent implements OnInit {
   
   getAppUsers()
   {
+	this.loading = true;
     this.appUserService.getAppUserList(this.selectedStorage.id).subscribe((response: any) =>{
       this.appUsers = response.appUsers;
 	  console.log(this.appUsers);
     });
+	this.loading = false;
   }
 
 }
