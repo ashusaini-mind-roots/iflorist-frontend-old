@@ -45,6 +45,7 @@ export class SchedulerComponent implements OnInit {
 
   receiveStorage(storage){
     this.selectedStorage = storage;
+    this.getWeeks();
   }
   receiveYearQuarter($event){
     this.yearQuarter = $event;
