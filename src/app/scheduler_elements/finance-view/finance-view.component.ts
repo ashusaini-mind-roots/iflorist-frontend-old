@@ -33,7 +33,6 @@ export class FinanceViewComponent implements OnInit {
       console.log(this.yearQuarter);
       this.getScheduleInformation();
     }
-
   }
 
   getScheduleInformation = function () {
@@ -57,7 +56,8 @@ export class FinanceViewComponent implements OnInit {
   }
 
   parseScheduleInformationResponse = function(categories_schedules){
-    // var empScheList = new Array();
+    console.log("mojon")
+    console.log(categories_schedules)
     var empScheList: any[] = [];
     for(var i = 0 ; i < categories_schedules.length ; i++){
       for(var j = 0 ; j < categories_schedules[i].employees.length ; j++){
@@ -81,6 +81,8 @@ export class FinanceViewComponent implements OnInit {
         empScheList = empScheList.concat(categories_schedules[l].employees);
       }
     }
+
+    console.log(empScheList)
     return this.employeesScheduleList = empScheList;
   }
 
