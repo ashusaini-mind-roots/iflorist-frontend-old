@@ -71,7 +71,7 @@ import { EditCompanyemployeeComponent } from './companyemployee/edit-companyempl
 import { AppUserListComponent } from './app-user/app-user-list/app-user-list.component';
 import { AppUserCreateComponent } from './app-user/app-user-create/app-user-create.component';
 import { AppUserEditComponent } from './app-user/app-user-edit/app-user-edit.component';
-import { CalendarViewComponent } from './scheduler_elements/calendar-view/calendar-view.component';
+import { SchedulerCalendarViewComponent } from './scheduler_elements/scheduler-calendar-view/scheduler-calendar-view.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -127,7 +127,7 @@ import { CalendarViewComponent } from './scheduler_elements/calendar-view/calend
         AppUserListComponent ,
         AppUserCreateComponent,
 		AppUserEditComponent,
-		CalendarViewComponent],
+		SchedulerCalendarViewComponent],
         
 
     providers: [
