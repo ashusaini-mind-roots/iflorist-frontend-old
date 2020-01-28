@@ -54,15 +54,26 @@ export class SchedulerComponent implements OnInit {
   }
 
   getWeeks = function () {
-     console.log("year: " + this.yearQuarter.year);
     this.weekPanelService.getWeeks(this.yearQuarter.year).subscribe((response: any) => {
       this.weekList = response.weeks;
       if (response.weeks.length > 0) {
-        // this.weekList = response.weeks;
         this.selectedWeekItem = this.weekList[0].id;
+        this.settingStringFormatToWeekLisElements(this.weekList);
+        console.log("ahora si")
+        console.log(this.weekList)
         this.getWeekDataFromServer();
       }
     });
+  }
+
+  settingStringFormatToWeekLisElements = function(weekList){
+    console.log(weekList.length)
+    for (let i = 0 ; i < weekList.length ; i++){
+      var parts = weekList[i].date.split('-');
+      var dateFormatted = new Date(parts[0], parts[1] - 1, parts[2]);
+      this.weekList[i].dateObject = dateFormatted;
+      this.weekList[i].stringFormat = this.utilService.getStringMonthDay(dateFormatted);
+    }
   }
 
   getWeekDataFromServer = function () {

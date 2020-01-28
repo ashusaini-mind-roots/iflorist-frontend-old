@@ -5,7 +5,7 @@
     <div class="select mr-4">
       <select class="" id="select-weekitem" [(ngModel)]="selectedWeekItem" >
         <option *ngFor="let week of weekList" value="{{week.id}}">
-          {{week.number+"-"+week.week_end_day}}
+          {{week.number + " - " + week.stringFormat}}
         </option>
       </select>
       <div class="select_arrow"></div>

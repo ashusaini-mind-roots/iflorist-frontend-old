@@ -131,4 +131,10 @@ export class UtilsService {
         return str;
     }
 
+    getStringMonthDay(date){
+        const formatter = new Intl.DateTimeFormat('en-us', { month: 'short' });
+        const month1 = formatter.format(date);
+        return month1 + ' ' + date.getDate();
+    }
+
 }
