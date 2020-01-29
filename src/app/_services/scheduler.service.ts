@@ -31,6 +31,11 @@ export class SchedulerService{
     updateOrAdd = function (year, week_id, schedule_days) {
         return this.http.post(`${environment.apiUrl}/schedule/update_or_add/`, {year, week_id, schedule_days} );
     }
+	
+	getSevenDaysNumber(week_id)
+	{
+		return this.http.get(`${environment.apiUrl}/schedule/seven_days_number/${week_id}`);
+	}
     
     // getSevenDays(store_id, week_id): Observable<any> {
   //   // console.log(`${environment.apiUrl}/store/all`);

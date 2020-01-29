@@ -49,6 +49,8 @@ import { SchedulerComponent } from './scheduler_elements/scheduler/scheduler.com
 ;
 import { FinanceViewComponent } from './scheduler_elements/finance-view/finance-view.component'
 ;
+import { CalendarViewComponent } from './scheduler_elements/calendar-view/calendar-view.component'
+;
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component'
 ;
 import { EmployeeParentComponent } from './employees/employee-parent/employee-parent.component'
@@ -112,6 +114,7 @@ import { AppUserEditComponent } from './app-user/app-user-edit/app-user-edit.com
         MessageComponent,
         SchedulerComponent,
         FinanceViewComponent,
+		CalendarViewComponent,
         EmployeeListComponent,
         EmployeeParentComponent,
         CretateEmployeeComponent
