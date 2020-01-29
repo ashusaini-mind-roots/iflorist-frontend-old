@@ -45,17 +45,20 @@ export class SchedulerComponent implements OnInit {
 
   receiveStorage(storage){
     this.selectedStorage = storage;
+    this.getWeeks();
   }
   receiveYearQuarter($event){
     this.yearQuarter = $event;
+    console.log("ke bolaasere")
     this.getWeeks();
   }
 
   getWeeks = function () {
-    // console.log("year: " + this.yearQuarter.year);
+     console.log("year: " + this.yearQuarter.year);
     this.weekPanelService.getWeeks(this.yearQuarter.year).subscribe((response: any) => {
+      this.weekList = response.weeks;
       if (response.weeks.length > 0) {
-        this.weekList = response.weeks;
+        // this.weekList = response.weeks;
         this.selectedWeekItem = this.weekList[0].id;
         this.getWeekDataFromServer();
       }
@@ -84,7 +87,8 @@ export class SchedulerComponent implements OnInit {
   getScheduledPayroll = function () {
     this.schedulerService.getScheduledPayroll(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.scheduledPayroll= response.scheduled_payroll;
-      console.log(response.employees_general_data)
+      console.log("payroll")
+      console.log(response)
       this.calcDifferendeCOL();
     });
   }

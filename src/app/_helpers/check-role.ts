@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../_models/User';
-import { Role } from '../_models/Role';
+import { Role } from '../_models/role';
 
 import { AuthenticationService } from '@app/_services';
 

@@ -47,7 +47,7 @@ export class UtilsService {
      Returns an object with this items {days, hours, minutes, seconds, totalhours, totalmin, totalsec}
      */
     diffDateTime(startDT, endDT){
-        console.log(typeof startDT + ", " + startDT)
+//        console.log(typeof startDT + ", " + startDT)
         // JavaScript & jQuery Course - https://coursesweb.net/javascript/
         // if paramerer is string, only the time hh:mm:ss (with, or without AM/PM), create Date object for current date-time,
         // and adds hour, minutes, seconds from paramerer
@@ -92,7 +92,7 @@ export class UtilsService {
         }
         else {
             var obendDT = new Date(endDT)
-            // console.log("pepitostring5: " + obendDT.getHours())
+            // console.log("pepitostring5: " + endDT)
         };
 
         // gets the difference in number of seconds
