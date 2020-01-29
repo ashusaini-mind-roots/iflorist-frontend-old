@@ -5,10 +5,12 @@
     <div class="select mr-4">
       <select class="" id="select-weekitem" [(ngModel)]="selectedWeekItem" >
         <option *ngFor="let week of weekList" value="{{week.id}}">
-          {{week.number+"-"+week.week_end_day}}
+          {{week.number + " - " + week.stringFormat}}
         </option>
       </select>
-      <div class="select_arrow"></div>
+      <div class="select_arrow">
+
+	  </div>
     </div>
   </div>
 </div>
@@ -80,7 +82,9 @@
 	</div>
   </div>
 </div>
+<!--<app-calendar-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem ></app-calendar-view>-->
 <app-finance-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem ></app-finance-view>
 <!--<app-calendar-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem></app-calendar-view>-->
 <app-calendar-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem ></app-calendar-view>
 <!--<app-calendar-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem></app-calendar-view>-->
+<!--<app-scheduler-calendar-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem></app-scheduler-calendar-view>-->

@@ -109,7 +109,9 @@ export class CalendarViewComponent implements OnInit {
   getDaysNUmber()
   {
 	  this.schedulerService.getSevenDaysNumber(this.selectedWeekItem).subscribe((response: any) =>{
+	    console.log("la candela es aki...")
 		this.sevenDaysNumber = response.days_number;
+	    console.log(response)
 	  });
   }
 

@@ -1,0 +1,36 @@
+<div class="panel panel-primary mb-5 ">
+  <div class="panel-body">
+    <div class="generic-card table-responsive">
+      <h5 class="card-header">Calendar View</h5>
+
+      <div class="d-flex pl-3">
+        <div class="mr-2 d-flex align-content-center ">
+          <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectyear">Position:</div>
+          <div class="select mr-4">
+            <select class="" id="select-categoryonschedule" [(ngModel)]="categoriesEmployeesListSelectedItem" (change)="onCategorySelected($event)">
+              <option *ngFor="let categorie of categoriesEmployeesList" value="{{categorie.id}}">
+                {{categorie.name}}
+              </option>
+            </select>
+            <div class="select_arrow"></div>
+          </div>
+        </div>
+
+        <div class="mr-2 d-flex align-content-center ">
+          <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectyear">Name:</div>
+          <div class="select mr-4">
+            <select class="" id="select-employeeitemonschedule" [(ngModel)]="employeesListSelected" >
+              <option *ngFor="let emp of employeesList" value="{{emp.id}}">
+                {{emp.name}}
+              </option>
+            </select>
+            <div class="select_arrow"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="generic-card-footer"></div>
+    </div>
+  </div>
+</div>
+
