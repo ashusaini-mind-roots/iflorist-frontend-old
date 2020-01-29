@@ -1,0 +1,80 @@
+<div class="panel panel-primary mb-5">
+    <div class="panel-body">
+        <div class="generic-card">
+            <h5 class="card-header">Scheduler</h5>
+			<div class="row filters ml-1 mt-3 mb-3">
+				<div class="col-3 d-flex align-content-center">
+					<div class="font-size-08 txt-color-gray3 font-medium pr-1">Position:</div>
+					<div class="select mr-2">
+					  <select class="" id="select-position" [(ngModel)]="selectedPositionItem" >
+						<option value="0">
+							Seleccione
+						</option>
+						<option *ngFor="let position of categories" value="{{position.id}}">
+							{{position.name}}
+						</option>
+					  </select>
+					  <div class="select_arrow"></div>
+					</div>
+				</div>
+				<div class="col-3 d-flex align-content-center">
+					<div class="font-size-08 txt-color-gray3 font-medium pr-1">Name:</div>
+					<div class="select mr-2">
+					  <select class="" id="select-name" [(ngModel)]="selectedNameItem" >
+						<option value="0">
+							Seleccione
+						</option>
+						<option *ngFor="let name of names" value="{{name.id}}">
+							{{name.name}}
+						</option>
+					  </select>
+					  <div class="select_arrow"></div>
+					</div>
+				</div>
+				<div class="col-3 d-flex align-content-center">
+					<div class="font-size-08 txt-color-gray3 font-medium pr-1">View:</div>
+					<div class="select mr-2">
+					  <select class="" id="select-view" [(ngModel)]="selectedViewItem" >
+						<option value="0">
+							Seleccione
+						</option>
+					  </select>
+					  <div class="select_arrow"></div>
+					</div>
+				</div>
+			</div>
+            <div class="schedule-calendar-header">
+				<div class="day border-calendar-right">
+					<div class="text-day">{{sevenDaysNumber[0].day_of_week | slice:0:3}}</div>
+					<div class="text-date">{{sevenDaysNumber[0].month_day}}</div>
+				</div>
+				<div class="day border-calendar-right">
+					<div class="text-day">{{sevenDaysNumber[1].day_of_week | slice:0:3}}</div>
+					<div class="text-date">{{sevenDaysNumber[1].month_day}}</div>
+				</div>
+				<div class="day border-calendar-right">
+					<div class="text-day">{{sevenDaysNumber[2].day_of_week | slice:0:3}}</div>
+					<div class="text-date">{{sevenDaysNumber[2].month_day}}</div>
+				</div>
+				<div class="day border-calendar-right">
+					<div class="text-day">{{sevenDaysNumber[3].day_of_week | slice:0:3}}</div>
+					<div class="text-date">{{sevenDaysNumber[3].month_day}}</div>
+				</div>
+				<div class="day border-calendar-right">
+					<div class="text-day">{{sevenDaysNumber[4].day_of_week | slice:0:3}}</div>
+					<div class="text-date">{{sevenDaysNumber[4].month_day}}</div>
+				</div>
+				<div class="day border-calendar-right">
+					<div class="text-day">{{sevenDaysNumber[5].day_of_week | slice:0:3}}</div>
+					<div class="text-date">{{sevenDaysNumber[5].month_day}}</div>
+				</div>
+				<div class="day border-calendar-left">
+					<div class="text-day">{{sevenDaysNumber[6].day_of_week | slice:0:3}}</div>
+					<div class="text-date">{{sevenDaysNumber[6].month_day}}</div>
+				</div>
+			</div>
+			<div class="generic-card-footer"></div>
+        </div>
+    </div>
+</div>
+
