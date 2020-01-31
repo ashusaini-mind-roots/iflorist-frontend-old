@@ -1,3 +1,4 @@
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 <div class="panel panel-primary">
   <div class="panel panel-primary mb-5">
     <div class="panel-body">
@@ -19,6 +20,8 @@
         </ng-template>
         <ng-template pTemplate="body" let-employee>
           <tr>
+		    <td  *ngIf="employee.store_admin"><input [disabled]="!hasAcces" type="radio" checked (change)="storeAdminChange(employee.id)" name="store_admin" [value]="employee.id"></td>
+            <td  *ngIf="!employee.store_admin"><input [disabled]="!hasAcces" type="radio" (change)="storeAdminChange(employee.id)" name="store_admin" [value]="employee.id"></td>
             <td>{{employee.name}}</td>
             <td>{{employee.email}}</td>
             <td>{{employee.category}}</td>

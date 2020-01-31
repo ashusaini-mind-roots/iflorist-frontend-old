@@ -73,6 +73,21 @@ export class EmployeeService{
         
         return this.http.post(`${environment.apiUrl}/employee/update/${id}`, formData,{headers: header});
     }
+	
+	changeAdminStore(employee_id,store_id)
+	{
+		const formData = new FormData();
+        //formData.append('image', image);
+        //formData.append('id', id);
+        formData.append('employee_id', employee_id);
+        formData.append('store_id', store_id);
+        
+        let header = new HttpHeaders();
+
+        header.set('Content-Type','multipart/form-data');
+        
+        return this.http.post(`${environment.apiUrl}/employee/changeAdminStore`, formData,{headers: header});
+	}
 
     getEmployee(employee_id): Observable<any>{
         return this.http.get(`${environment.apiUrl}/employee/getById/${employee_id}`/*,{responseType: 'blob'}*/);
