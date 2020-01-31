@@ -43,7 +43,7 @@
 					</div>
 				</div>
 			</div>
-            <div class="schedule-calendar-header">
+            <div *ngIf="sevenDaysNumber" class="schedule-calendar-header">
 				<div class="day border-calendar-right">
 					<div class="text-day">{{sevenDaysNumber[0].day_of_week | slice:0:3}}</div>
 					<div class="text-date">{{sevenDaysNumber[0].month_day}}</div>
