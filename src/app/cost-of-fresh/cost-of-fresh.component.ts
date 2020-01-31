@@ -19,6 +19,7 @@ export class CostOfFreshComponent implements OnInit {
   costOf: string;
   target: any;
   cols: any[];
+  title: string
 
   constructor(
       private costOfFreshService: CostOfFreshService,
@@ -42,7 +43,11 @@ export class CostOfFreshComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.costOf = params['what'];
-      console.log("costOf:" + this.costOf);
+
+      if(this.costOf == 'fresh')
+        this.title = 'Fresh';
+      else this.title = 'Hard Goods';
+
       this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
       this.reloadData();
       this.loadHeaders();
