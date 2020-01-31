@@ -59,13 +59,17 @@ export class EditEmployeeComponent implements OnInit {
         console.log(this.employee);
 
         this.employeeService.getEmployeeImage(params['id']).subscribe(res => {
-          const file: File = res;
-          const reader = new FileReader();
-          reader.addEventListener('load', (event: any) => {
-            this.selectedFile = new ImageSnippet(event.target.result, file);
-            console.log(this.selectedFile.file);
-          });
-          reader.readAsDataURL(file);
+		  console.log('joder');
+		  console.log(res);
+		  
+		  const file: File = res;
+		  const reader = new FileReader();
+		  reader.addEventListener('load', (event: any) => {
+			this.selectedFile = new ImageSnippet(event.target.result, file);
+			console.log(this.selectedFile.file);
+		  });
+		  reader.readAsDataURL(file); 
+		    
         });
 
         this.initFormValue(this.employee);

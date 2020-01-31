@@ -74,7 +74,12 @@ export class EmployeeListComponent implements OnInit {
       message: 'Are you sure that you want to change the admin store ?',
       accept: () => {
         this.employeeService.changeAdminStore(employee_id,this.selectedStorage.id).subscribe((response: any) =>{
-          this.message.sendMessage('success','Employee Message','Store Admin was changed !');
+          if(response.error)
+			this.message.sendMessage('error', 'Employee Message', response.error);
+	      else
+		  {
+			this.message.sendMessage('success','Employee Message','Store Admin was changed !');  
+		  }
 		  this.getEmployees();
 		},
 		error => {

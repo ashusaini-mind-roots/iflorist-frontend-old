@@ -8,7 +8,7 @@
         <div class="row">
           <div class="col-12">
               <div class="form-group d-flex align-items-center">
-                  <div *ngIf="selectedFile.src!=''" style="width: 78px; height: 78px; background-color: gray;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
+                  <div *ngIf="selectedFile.src!=''" style="width: 78px; height: 78px;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
                   <div *ngIf="selectedFile.src==''" style="width: 78px; height: 78px; background: url('/assets/image/upload.svg') no-repeat"></div>
 <!--                  <div *ngIf="selectedFile.src!=''" style="width: 100px; height: 100px; background-color: gray;background-size: cover" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>-->
 <!--                  <div *ngIf="selectedFile.src==''" style="width: 100px; height: 100px; background: url('/assets/image/upload.svg') no-repeat;background-size: cover"></div>-->
