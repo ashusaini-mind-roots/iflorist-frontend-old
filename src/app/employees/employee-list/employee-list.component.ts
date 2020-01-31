@@ -80,7 +80,7 @@ export class EmployeeListComponent implements OnInit {
 		error => {
           console.log(error)
           //this.error = error;
-          this.loading = false;
+          //this.loading = false;
           this.message.sendMessage('error', 'Employee Message', 'Store Admin change failed !');
 		  this.getEmployees();
         });
