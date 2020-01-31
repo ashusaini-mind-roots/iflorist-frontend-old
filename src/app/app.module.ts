@@ -9,25 +9,19 @@ import { fakeBackendProvider } from './_helpers';
 
 import { AppComponent } from './app.component';
 import { appRoutingModule } from './app.routing';
-
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { StoreListComponent } from './storecrud/store-list/store-list.component';
 import { CreateStoreComponent } from './storecrud/create-store/create-store.component';
-import { EditStoreComponent } from './storecrud/edit-store/edit-store.component'
-
+import { EditStoreComponent } from './storecrud/edit-store/edit-store.component';
 import { RegisterGeneralDataComponent } from './register-general-data/register-general-data.component';
 import { RegisterPlanDataComponent } from './register-plan-data/register-plan-data.component';
 import { RegisterCcDataComponent } from './register-cc-data/register-cc-data.component';
-import { ActivateCompanyComponent } from './activate-company/activate-company.component'
-;
-import { RegisterCheckEmailMessageComponent } from './register-check-email-message/register-check-email-message.component'
-;
+import { ActivateCompanyComponent } from './activate-company/activate-company.component';
+import { RegisterCheckEmailMessageComponent } from './register-check-email-message/register-check-email-message.component';
 import { StoresComboComponent } from './top_bar_elements/stores-combo/stores-combo.component';
-
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
 import {ChartModule} from 'primeng/chart';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
@@ -37,39 +31,22 @@ import {ConfirmationService} from 'primeng/api';
 import { CostOfFreshComponent } from './cost-of-fresh/cost-of-fresh.component';
 import { YearQuarterComponent } from './year-quarter/year-quarter.component';
 import { MessageService } from './_services/message.service';;
-import { WeekPanelComponent } from './week-panel/week-panel.component'
-;
-import { ProjectionComponent } from './projection/projection.component'
-;
-import { SalesComponent } from './sales/sales.component'
-;
-import { MessageComponent } from './message/message.component'
-;
-import { SchedulerComponent } from './scheduler_elements/scheduler/scheduler.component'
-;
-import { FinanceViewComponent } from './scheduler_elements/finance-view/finance-view.component'
-;
-import { CalendarViewComponent } from './scheduler_elements/calendar-view/calendar-view.component'
-;
-import { EmployeeListComponent } from './employees/employee-list/employee-list.component'
-;
-import { EmployeeParentComponent } from './employees/employee-parent/employee-parent.component'
-;
-import { CretateEmployeeComponent } from './employees/cretate-employee/cretate-employee.component'
-;
+import { WeekPanelComponent } from './week-panel/week-panel.component';
+import { ProjectionComponent } from './projection/projection.component';
+import { SalesComponent } from './sales/sales.component';
+import { MessageComponent } from './message/message.component';
+import { SchedulerComponent } from './scheduler_elements/scheduler/scheduler.component';
+import { FinanceViewComponent } from './scheduler_elements/finance-view/finance-view.component';
+import { CalendarViewComponent } from './scheduler_elements/calendar-view/calendar-view.component';
+import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
+import { EmployeeParentComponent } from './employees/employee-parent/employee-parent.component';
+import { CretateEmployeeComponent } from './employees/cretate-employee/cretate-employee.component';
 import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.component';
-
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
-
-import { formatPhone } from './pipes/formatPhone'
-;
-import { CompanyemployeeListComponent } from './companyemployee/companyemployee-list/companyemployee-list.component'
-;
-import { CreateCompanyemployeeComponent } from './companyemployee/create-companyemployee/create-companyemployee.component'
-;
-import { EditCompanyemployeeComponent } from './companyemployee/edit-companyemployee/edit-companyemployee.component'
-;
-
+import { formatPhone } from './pipes/formatPhone';
+import { CompanyemployeeListComponent } from './companyemployee/companyemployee-list/companyemployee-list.component';
+import { CreateCompanyemployeeComponent } from './companyemployee/create-companyemployee/create-companyemployee.component';
+import { EditCompanyemployeeComponent } from './companyemployee/edit-companyemployee/edit-companyemployee.component';
 import { AppUserListComponent } from './app-user/app-user-list/app-user-list.component';
 import { AppUserCreateComponent } from './app-user/app-user-create/app-user-create.component';
 import { AppUserEditComponent } from './app-user/app-user-edit/app-user-edit.component';

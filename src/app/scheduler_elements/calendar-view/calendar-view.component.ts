@@ -18,7 +18,10 @@ export class CalendarViewComponent implements OnInit {
   cols:any;
   showToEdit:string = '';
   categories: any[];
+  names: any[];
   selectedPositionItem: number = 0;
+  selectedNameItem: number = 0;
+  selectedViewItem: number = 0;
   sevenDaysNumber: any[];
 
   constructor(
@@ -111,6 +114,7 @@ export class CalendarViewComponent implements OnInit {
 	  this.schedulerService.getSevenDaysNumber(this.selectedWeekItem).subscribe((response: any) =>{
 	    console.log("la candela es aki...")
 		this.sevenDaysNumber = response.days_number;
+		console.log(this.sevenDaysNumber);
 	    console.log(response)
 	  });
   }
