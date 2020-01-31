@@ -137,7 +137,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="workmancomb">Work man comb</label>
+                  <label for="workmancomb">Work man comp</label>
                   <select formControlName="workmancomb" class="input input-gray2"  [ngClass]="{ 'is-invalid': submitted && f.workmancomb.errors}" id="select-position">
                     <option *ngFor="let workmancomb of workmancombs" value="{{workmancomb.id}}">
                       {{workmancomb.name}}
