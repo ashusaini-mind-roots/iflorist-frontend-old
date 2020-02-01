@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SchedulerService } from "../../_services/scheduler.service";
 import { UtilsService } from "../../_services/utils.service";
+import { CheckRole } from "../../_helpers/check-role";
 
 @Component({
   selector: 'app-finance-view',
@@ -20,6 +21,7 @@ export class FinanceViewComponent implements OnInit {
   constructor(
       private schedulerService: SchedulerService,
       private utilService: UtilsService,
+	  private checkRole: CheckRole,
   ) { }
 
   ngOnInit() {
@@ -187,6 +189,12 @@ console.log("es aki la cosa")
                   }
               );
   }
+  
+  get hasAcces() {
+        if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin())
+		  return true;
+		else return false;
+	}
 
 
 

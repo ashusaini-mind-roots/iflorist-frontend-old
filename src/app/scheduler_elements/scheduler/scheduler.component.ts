@@ -3,6 +3,7 @@ import { StoreSubscriberService } from "../../_services/storeSubscriber.service"
 import { UtilsService } from "../../_services/utils.service";
 import { WeekPanelService } from "../../_services/weekPanel.service";
 import { SchedulerService } from "../../_services/scheduler.service";
+import { CheckRole } from "../../_helpers/check-role";
 
 
 @Component({
@@ -29,6 +30,7 @@ export class SchedulerComponent implements OnInit {
       private utilService: UtilsService,
       private weekPanelService: WeekPanelService,
       private schedulerService: SchedulerService,
+	  private checkRole: CheckRole,
   )
   {
     storeSubscriberService.subscribe(this,function (ref,store) {
@@ -106,6 +108,12 @@ export class SchedulerComponent implements OnInit {
   calcDifferendeCOL = function () {
     return this.differenceCol = this.projectedPayrol - this.scheduledPayroll;
   }
+  
+  get hasAcces() {
+        if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin())
+		  return true;
+		else return false;
+	}
 
 
   }
