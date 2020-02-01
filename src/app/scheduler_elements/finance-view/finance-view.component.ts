@@ -53,8 +53,13 @@ console.log("es aki la cosa")
       { field: 'category_name', header: 'Job Title' },
       { field: 'total_minutes_at_week', header: 'Hours Scheduled' },
       { field: 'hourly_rate', header: 'Hourly Rate' },
-      { field: 'total_cost', header: 'Total Cost' },
+      //{ field: 'total_cost', header: 'Total Cost' },
     ];
+	
+	if(this.hasAccesTs())
+	{
+		this.cols.push({ field: 'total_cost', header: 'Total Cost' });
+	}
   }
 
   parseScheduleInformationResponse = function(categories_schedules){
@@ -191,7 +196,13 @@ console.log("es aki la cosa")
   }
   
   get hasAcces() {
-        if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin())
+        if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin() || this.checkRole.isStoreManager())
+		  return true;
+		else return false;
+	}
+	
+    hasAccesTs() {
+        if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin() || this.checkRole.isStoreManager())
 		  return true;
 		else return false;
 	}

@@ -110,7 +110,7 @@ export class SchedulerComponent implements OnInit {
   }
   
   get hasAcces() {
-        if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin())
+        if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin() || this.checkRole.isStoreManager())
 		  return true;
 		else return false;
 	}
