@@ -25,6 +25,7 @@ export class RegisterPlanDataComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute, private planService:PlanService, private router: Router,  private routerService: RouterService) { }
 
   ngOnInit() {
+    document.body.classList.remove('bg-login-img');
     /*this.sub = this.activateRoute.params.subscribe(params=>{
         this.name = params.name;
         this.password = params.password;
