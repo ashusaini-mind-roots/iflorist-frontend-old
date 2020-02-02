@@ -19,7 +19,7 @@
 <!--          <td>{{employeesScheduleList.total_minutes_at_week}}</td>-->
             <td>{{calcEmployeesTotalHours(employeesScheduleList)}}</td>
           <td>{{employeesScheduleList.hourly_pay_rate}}</td>
-          <td><span *ngIf="hasAcces">{{25}}</span></td>
+          <td *ngIf="hasAcces"><span *ngIf="hasAcces">{{25}}</span></td>
 
           <!--<td>{{week.totalMerchandise | number: '1.2-2'}}</td>-->
           <!--<td>{{week.totalWire | number: '1.2-2'}}</td>-->
