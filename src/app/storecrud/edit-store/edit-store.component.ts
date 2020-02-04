@@ -101,6 +101,8 @@ export class EditStoreComponent implements OnInit {
     this.storeEditform = this.formBuilder.group({
       store_name: ['', Validators.required],
 	  target_percentage: ['', Validators.required],
+      target_costof_goods: ['', Validators.required],
+      target_costof_fresh: ['', Validators.required],
       contact_email: ['',  Validators.email],
       contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],
       zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
@@ -108,7 +110,6 @@ export class EditStoreComponent implements OnInit {
       city: [''],
       state: ['']
     });
-    //console.log("pepitotey");
     this.route.params.subscribe(params => {
       this.storeService.getStore(params['id']).subscribe(res => {
         this.store = res.store;
@@ -120,7 +121,10 @@ export class EditStoreComponent implements OnInit {
         this.f.state.setValue(this.store.state);
         this.f.address.setValue(this.store.address);
 		this.f.target_percentage.setValue(this.store.target_percentage_default);
-        console.log(params['id']);
+		this.f.target_costof_goods.setValue(this.store.target_cog);
+		this.f.target_costof_fresh.setValue(this.store.target_cof);
+
+         console.log(this.store);
 		this.storeId = params['id'];
       });
 
@@ -182,7 +186,7 @@ export class EditStoreComponent implements OnInit {
       console.log("pepe"+params['id'])
 
       this.storeService.updateStore(params['id'],this.f.store_name.value,this.f.contact_email.value,
-          this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.selectedFile.file).subscribe(
+          this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.selectedFile.file,this.f.target_costof_goods.value,this.f.target_costof_fresh.value).subscribe(
               response=> {
                 this.loading = false;
                 this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');

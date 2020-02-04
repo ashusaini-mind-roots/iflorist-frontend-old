@@ -35,11 +35,12 @@
           <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
 	        <tr>
 	            <td class="sub-table" [attr.colspan]="columns.length + 1">
-                <div class="row mt-2 px-3">
-				    <div class="col px-1" *ngFor="let schedule_days of rowData.schedule_days ; let i = index">
+                <div class="row mt-2 px-3 ">
+				    <div [ngClass]="{'borderright-lg-xl' : i!=6}" class="col" *ngFor="let schedule_days of rowData.schedule_days ; let i = index">
 
                         <div class="d-flex flex-column align-items-center">
-                            <div>{{schedule_days.day_of_week}}</div>
+                            <div class="font-size-09 txt-color-gray4 mt-1">{{schedule_days.date}}</div>
+                            <div class="mb-2">{{schedule_days.day_of_week}}</div>
                             <div class="my-1">
                                 <input class="input-number mr-1" type="time" [(ngModel)]="schedule_days.time_in" placeholder="HH:mm">
                                 <input class="input-number" type="time" [(ngModel)]="schedule_days.time_out" placeholder="HH:mm" >
@@ -52,8 +53,8 @@
 				    </div>
 			    </div>
                 <div class="row">
-                    <div class="col d-flex justify-content-end">
-                        <button class="m-2 btn-ligth-blue mt-1 px-5" type="button" (click)="updateSchedulesByCategory(rowData.schedule_days,'Driver')">SAVE</button>
+                    <div class="col d-flex justify-content-end bg-color-gray-eee mt-2">
+                        <button class="m-2 btn-ligth-blue mt-1 px-5" type="button" (click)="updateSchedulesByCategory(rowData.schedule_days,rowData.category_name, rowData.employee_id)">SAVE</button>
                     </div>
                 </div>
 	   </td>

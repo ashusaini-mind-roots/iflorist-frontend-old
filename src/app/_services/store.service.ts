@@ -56,7 +56,7 @@ export class StoreService {
       return this.http.post(`${environment.apiUrl}/store/setWeeklyProjectionPercentRevenues`, formData,{headers: header});
   }
 
-  updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,image){
+  updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,image,target_costof_goods,target_costof_fresh){
 	  
 	  const formData = new FormData();
       formData.append('store_name', store_name);
@@ -67,7 +67,9 @@ export class StoreService {
       formData.append('address', address);
       formData.append('city', city);
       formData.append('state', state);
-	  formData.append('target_percentage', target_percentage);
+      formData.append('target_percentage', target_percentage);
+	  formData.append('target_costof_goods', target_costof_goods);
+      formData.append('target_costof_fresh', target_costof_fresh);
       
       let header = new HttpHeaders();
 

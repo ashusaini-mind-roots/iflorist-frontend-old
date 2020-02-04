@@ -420,7 +420,7 @@ export class WeekPanelComponent implements OnInit {
     });
   }
   getTarget = function () {
-    this.weekPanelService.getTarget(this.costOf).subscribe((response: any) =>{
+    this.weekPanelService.getTarget(this.costOf,this.selectedStorage.id).subscribe((response: any) =>{
 
       this.target = (this.costOf == 'fresh') ? response['target_cof'] : ((this.costOf == 'goods') ? response['target_cog'] : 0.00) ;
     });

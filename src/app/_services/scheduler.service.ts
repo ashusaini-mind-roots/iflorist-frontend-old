@@ -26,8 +26,8 @@ export class SchedulerService{
     getScheduleInformation = function (store_id,week_id) {
         return this.http.get(`${environment.apiUrl}/schedule/all/${store_id}/${week_id}`);
     }
-    updateOrAdd = function (year, week_id, schedule_days) {
-        return this.http.post(`${environment.apiUrl}/schedule/update_or_add/`, {year, week_id, schedule_days} );
+    updateOrAdd = function (year, week_id, schedule_days ,employee_id) {
+        return this.http.post(`${environment.apiUrl}/schedule/update_or_add/`, {year, week_id, schedule_days, employee_id} );
     }
     getCategoriesEmployees = function (store_id) {
         return this.http.get(`${environment.apiUrl}/schedule/category_employee/${store_id}`);

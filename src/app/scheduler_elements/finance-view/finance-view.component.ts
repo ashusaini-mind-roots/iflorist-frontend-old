@@ -42,7 +42,7 @@ export class FinanceViewComponent implements OnInit {
       this.employeeStoreWeekId = response.employee_store_week_id;
 console.log("es aki la cosa")
        console.log(response.dates_of_week);
-      this.parseScheduleInformationResponse(response.categories_schedules);
+      this.parseScheduleInformationResponse(response.categories_schedules, response.dates_of_week);
       console.log(this.employeesScheduleList)
     });
   }
@@ -62,15 +62,16 @@ console.log("es aki la cosa")
 	}
   }
 
-  parseScheduleInformationResponse = function(categories_schedules){
-    console.log("mojon")
-    console.log(categories_schedules)
+  parseScheduleInformationResponse = function(categories_schedules,dates_of_week){
+
+    // console.log(categories_schedules)
     var empScheList: any[] = [];
     for(var i = 0 ; i < categories_schedules.length ; i++){
       for(var j = 0 ; j < categories_schedules[i].employees.length ; j++){
         for(var k = 0 ; k < categories_schedules[i].employees[j].schedule_days.length ; k++){
           categories_schedules[i].employees[j].total_hours = this.utilService.ParseMinutesToHoursFormat(categories_schedules[i].employees[j].total_minutes_at_week);
           var schedul = categories_schedules[i].employees[j].schedule_days[k];
+          schedul.date = dates_of_week[k];
           if(schedul.time_in != undefined)
             schedul.time_in = this.utilService.getStringTimeFormat(new Date(schedul.time_in));
           if(schedul.time_out != undefined)
@@ -88,7 +89,7 @@ console.log("es aki la cosa")
         empScheList = empScheList.concat(categories_schedules[l].employees);
       }
     }
-
+    console.log("mojon")
     console.log(empScheList)
     return this.employeesScheduleList = empScheList;
   }
@@ -157,7 +158,8 @@ console.log("es aki la cosa")
     return '00' + ':' + '00';
   }
 
-  updateSchedulesByCategory = function(/*employees*/schedule_days,category_name){
+  updateSchedulesByCategory = function(/*employees*/schedule_days,category_name,employee_id){
+    console.log(category_name)
         // Spinner.toggle();
         var esw_array = new Array();
 
@@ -178,12 +180,13 @@ console.log("es aki la cosa")
         }
 
         var schedule_to_send = JSON.stringify(asw_toSend);
-        this.schedulerService.updateOrAdd(this.yearQuarter.year,this.selectedWeekItem,schedule_to_send)
+        this.schedulerService.updateOrAdd(this.yearQuarter.year,this.selectedWeekItem,schedule_to_send,employee_id)
           .subscribe(
                   response=> {
                       // this.loading = false;
                       // this.success = 'Store updated succefull !';
                         console.log(response)
+                    this.updateIdToNewSchedulesTimesAdded(response.schedules_added, response.employee_id);
                     // console.log("mojon")
                     // console.log(this.employeesScheduleList)
                   },
@@ -194,7 +197,28 @@ console.log("es aki la cosa")
                   }
               );
   }
-  
+
+  updateIdToNewSchedulesTimesAdded(schedules_added,employee_id){
+    console.log('-------------')
+    console.log(schedules_added)
+    console.log(employee_id)
+    console.log('-------------')
+    for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
+      if(this.employeesScheduleList[i].employee_id == employee_id){
+        for(let j = 0 ; j < schedules_added.length ; j++){
+          console.log(this.employeesScheduleList[i]);
+          console.log(this.employeesScheduleList[i].schedule_days)
+          let found = this.employeesScheduleList[i].schedule_days.find(e => e.day_of_week == schedules_added[j].day_of_week)
+          console.log(found)
+          if(found){
+            found.id = schedules_added[j].id;
+          }
+        }
+      }
+    }
+    console.log(this.employeesScheduleList)
+  }
+
   get hasAcces() {
         if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin() || this.checkRole.isStoreManager())
 		  return true;
