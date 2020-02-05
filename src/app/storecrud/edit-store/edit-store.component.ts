@@ -108,7 +108,12 @@ export class EditStoreComponent implements OnInit {
       zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
       address: [''],
       city: [''],
-      state: ['']
+      state: [''],
+        sui: ['', Validators.required],
+        futa: ['', Validators.required],
+        social_security: ['', Validators.required],
+        medicare: ['', Validators.required],
+
     });
     this.route.params.subscribe(params => {
       this.storeService.getStore(params['id']).subscribe(res => {
@@ -123,6 +128,11 @@ export class EditStoreComponent implements OnInit {
 		this.f.target_percentage.setValue(this.store.target_percentage_default);
 		this.f.target_costof_goods.setValue(this.store.target_cog);
 		this.f.target_costof_fresh.setValue(this.store.target_cof);
+
+		this.f.sui.setValue(this.store.sui);
+        this.f.futa.setValue(this.store.futa);
+        this.f.social_security.setValue(this.store.social_security);
+        this.f.medicare.setValue(this.store.medicare);
 
          console.log(this.store);
 		this.storeId = params['id'];
@@ -186,7 +196,8 @@ export class EditStoreComponent implements OnInit {
       console.log("pepe"+params['id'])
 
       this.storeService.updateStore(params['id'],this.f.store_name.value,this.f.contact_email.value,
-          this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.selectedFile.file,this.f.target_costof_goods.value,this.f.target_costof_fresh.value).subscribe(
+          this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.selectedFile.file,this.f.target_costof_goods.value,this.f.target_costof_fresh.value,
+          this.f.sui.value,this.f.futa.value,this.f.social_security.value,this.f.medicare.value ).subscribe(
               response=> {
                 this.loading = false;
                 this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');
