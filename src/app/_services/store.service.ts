@@ -22,7 +22,8 @@ export class StoreService {
          // );
   }
 
-  createStore(image,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage) {
+  createStore(image,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,target_costof_goods,target_costof_fresh,
+              sui,futa,social_security,medicare) {
       const formData = new FormData();
       formData.append('store_name', store_name);
       formData.append('image', image);
@@ -33,6 +34,12 @@ export class StoreService {
       formData.append('city', city);
       formData.append('state', state);
 	  formData.append('target_percentage', target_percentage);
+	  formData.append('target_costof_goods', target_costof_goods);
+      formData.append('target_costof_fresh', target_costof_fresh);
+      formData.append('sui', sui);
+      formData.append('futa', futa);
+      formData.append('social_security', social_security);
+      formData.append('medicare', medicare);
       
       let header = new HttpHeaders();
 

@@ -109,10 +109,10 @@ export class EditStoreComponent implements OnInit {
       address: [''],
       city: [''],
       state: [''],
-        sui: ['', Validators.required],
-        futa: ['', Validators.required],
-        social_security: ['', Validators.required],
-        medicare: ['', Validators.required],
+	  sui: ['', Validators.required],
+	  futa: ['', Validators.required],
+	  social_security: ['', Validators.required],
+	  medicare: ['', Validators.required],
 
     });
     this.route.params.subscribe(params => {
@@ -199,8 +199,14 @@ export class EditStoreComponent implements OnInit {
           this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.selectedFile.file,this.f.target_costof_goods.value,this.f.target_costof_fresh.value,
           this.f.sui.value,this.f.futa.value,this.f.social_security.value,this.f.medicare.value ).subscribe(
               response=> {
-                this.loading = false;
-                this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');
+				if(response.status=='error')
+			      this.messageToastService.sendMessage('error', 'Store Message', response.errors);
+			    else
+			    {
+				  this.messageToastService.sendMessage('success', 'Store Message', 'Store created successfully !');
+				}
+			    this.loading = false;
+                //this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');
                // console.log(response)
               },
               error => {
