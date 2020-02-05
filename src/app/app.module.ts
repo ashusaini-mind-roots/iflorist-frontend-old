@@ -50,7 +50,8 @@ import { EditCompanyemployeeComponent } from './companyemployee/edit-companyempl
 import { AppUserListComponent } from './app-user/app-user-list/app-user-list.component';
 import { AppUserCreateComponent } from './app-user/app-user-create/app-user-create.component';
 import { AppUserEditComponent } from './app-user/app-user-edit/app-user-edit.component';
-import { SchedulerCalendarViewComponent } from './scheduler_elements/scheduler-calendar-view/scheduler-calendar-view.component';
+import { SchedulerCalendarViewComponent } from './scheduler_elements/scheduler-calendar-view/scheduler-calendar-view.component';;
+import { UsersettingsComponent } from './top_bar_elements/usersettings/usersettings.component'
 @NgModule({
     imports: [
         BrowserModule,
@@ -74,26 +75,26 @@ import { SchedulerCalendarViewComponent } from './scheduler_elements/scheduler-c
         HomeComponent,
         LoginComponent,
         StoreListComponent,
-        CreateStoreComponent ,
-        EditStoreComponent ,
+        CreateStoreComponent,
+        EditStoreComponent,
         RegisterGeneralDataComponent,
-        RegisterPlanDataComponent ,
-        RegisterCcDataComponent ,
+        RegisterPlanDataComponent,
+        RegisterCcDataComponent,
         ActivateCompanyComponent
         ,
         RegisterCheckEmailMessageComponent
         ,
         StoresComboComponent
         ,
-        CostOfFreshComponent ,
-        YearQuarterComponent ,
-        WeekPanelComponent ,
-        SalesComponent ,
-        ProjectionComponent ,
+        CostOfFreshComponent,
+        YearQuarterComponent,
+        WeekPanelComponent,
+        SalesComponent,
+        ProjectionComponent,
         MessageComponent,
         SchedulerComponent,
         FinanceViewComponent,
-		CalendarViewComponent,
+        CalendarViewComponent,
         EmployeeListComponent,
         EmployeeParentComponent,
         CretateEmployeeComponent
@@ -102,12 +103,15 @@ import { SchedulerCalendarViewComponent } from './scheduler_elements/scheduler-c
         ,
         CompanyemployeeListComponent
         ,
-        CreateCompanyemployeeComponent ,
-        EditCompanyemployeeComponent ,
-        AppUserListComponent ,
+        CreateCompanyemployeeComponent,
+        EditCompanyemployeeComponent,
+        AppUserListComponent,
         AppUserCreateComponent,
-		AppUserEditComponent,
-		SchedulerCalendarViewComponent],
+        AppUserEditComponent,
+        SchedulerCalendarViewComponent,
+        UsersettingsComponent
+    ],
+
         
 
     providers: [
