@@ -26,6 +26,8 @@ import {ChartModule} from 'primeng/chart';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
+import {MenubarModule} from 'primeng/menubar';
+//import {MenuItem} from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import { CostOfFreshComponent } from './cost-of-fresh/cost-of-fresh.component';
@@ -51,7 +53,7 @@ import { AppUserListComponent } from './app-user/app-user-list/app-user-list.com
 import { AppUserCreateComponent } from './app-user/app-user-create/app-user-create.component';
 import { AppUserEditComponent } from './app-user/app-user-edit/app-user-edit.component';
 import { SchedulerCalendarViewComponent } from './scheduler_elements/scheduler-calendar-view/scheduler-calendar-view.component';;
-import { UsersettingsComponent } from './top_bar_elements/usersettings/usersettings.component'
+import { UsersettingsComponent } from './top_bar_elements/usersettings/usersettings.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -68,6 +70,8 @@ import { UsersettingsComponent } from './top_bar_elements/usersettings/usersetti
         ChartModule,
         //BsDropdownModule.forRoot(),
         NgxIntlTelInputModule,
+		MenubarModule,
+		//MenuItem
     ],
     declarations: [
         formatPhone,
