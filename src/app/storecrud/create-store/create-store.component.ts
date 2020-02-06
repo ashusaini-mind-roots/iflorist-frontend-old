@@ -138,8 +138,9 @@ export class CreateStoreComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-			  if(data.status=='error')
-			      this.message.sendMessage('error', 'Store Message', data.errors);
+			  let response = data; 	
+			  if(response.status=='error')
+			      this.message.sendMessage('error', 'Store Message', response.errors);
 			  else
 			  {
 				  this.message.sendMessage('success', 'Store Message', 'Store created successfully !');

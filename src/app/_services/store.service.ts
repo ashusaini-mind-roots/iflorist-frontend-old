@@ -45,7 +45,7 @@ export class StoreService {
 
       header.set('Content-Type','multipart/form-data');
       
-      return this.http.post(`${environment.apiUrl}/store/create`, formData,{headers: header});
+      return this.http.post<any>(`${environment.apiUrl}/store/create`, formData,{headers: header});
   }
   
   uploadCsv(store_id,file) {
@@ -87,7 +87,7 @@ export class StoreService {
 
       header.set('Content-Type','multipart/form-data');
       
-      return this.http.post(`${environment.apiUrl}/store/update/${store_id}`, formData,{headers: header});
+      return this.http.post<any>(`${environment.apiUrl}/store/update/${store_id}`, formData,{headers: header});
 	  
       //return this.http.put(`${environment.apiUrl}/store/update/${store_id}`, {store_name, contact_email, contact_phone, zip_code, address, city, state,target_percentage} );
   }
