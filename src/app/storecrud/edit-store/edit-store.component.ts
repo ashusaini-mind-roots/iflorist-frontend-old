@@ -203,7 +203,7 @@ export class EditStoreComponent implements OnInit {
 			      this.messageToastService.sendMessage('error', 'Store Message', response.errors);
 			    else
 			    {
-				  this.messageToastService.sendMessage('success', 'Store Message', 'Store created successfully !');
+				  this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');
 				}
 			    this.loading = false;
                 //this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');
