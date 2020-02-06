@@ -86,6 +86,8 @@ export class SchedulerComponent implements OnInit {
 
   getProjWeeklyRev = function () {
     this.schedulerService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
+      // console.log("meresingo ento:" +response.proj_weekly_rev )
+      console.log(response)
       this.projWeeklyRev = response.proj_weekly_rev;
     });
   }
