@@ -8,4 +8,11 @@
     <a class="dropdown-item" href="#">Something else here</a>
   </div>
 </div>-->
-<p-menubar [model]="items"></p-menubar>
+<p-menubar autoZIndex="false" [model]="items"></p-menubar>
+<!--<div ng-template="aki">
+<button #btn type="button" pButton icon="pi pi-bars" label="Show" (click)="menu.toggle($event)"></button>
+<p-tieredMenu appendTo="aki" #menu [model]="items" [popup]="true"></p-tieredMenu>
+</div>-->
+<!--<h3>Popup</h3>
+<p-menu #menu [popup]="true" [model]="items"></p-menu>
+<button type="button" pButton icon="pi pi-bars" label="Show" (click)="menu.toggle($event)"></button>-->
