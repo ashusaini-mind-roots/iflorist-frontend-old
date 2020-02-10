@@ -27,6 +27,8 @@ import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
 import {MenubarModule} from 'primeng/menubar';
+import {TieredMenuModule} from 'primeng/tieredmenu';
+import {MenuModule} from 'primeng/menu';
 //import {MenuItem} from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
@@ -71,6 +73,8 @@ import { UsersettingsComponent } from './top_bar_elements/usersettings/usersetti
         //BsDropdownModule.forRoot(),
         NgxIntlTelInputModule,
 		MenubarModule,
+		TieredMenuModule,
+		MenuModule
 		//MenuItem
     ],
     declarations: [
