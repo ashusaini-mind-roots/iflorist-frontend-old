@@ -34,6 +34,14 @@ export class HomeComponent {
     projectionsCog: number;
     weeksCog: any[];
 
+    //cost of fresh section
+    cofChart: any;
+    actualCofByWeek: number[];
+    projectedCofByWeek: number[];
+    actualCofTotal: number;
+    projectionsCof: number;
+    weeksCof: any[];
+
     modules: any;
 
     constructor(
@@ -56,11 +64,17 @@ export class HomeComponent {
         this.actualSalesByWeek = new Array();
         this.projectedSalesByWeek = new Array();
 
-        //Cof
+        //Cog
         this.projectionsCog = 0.00;
         this.actualCogTotal = 0.00;
         this.actualCogByWeek = new Array();
         this.projectedCogByWeek = new Array();
+
+        //Cof
+        this.projectionsCof = 0.00;
+        this.actualCofTotal = 0.00;
+        this.actualCofByWeek = new Array();
+        this.projectedCofByWeek = new Array();
 
     }
 
@@ -77,7 +91,10 @@ export class HomeComponent {
         this.actualCogByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
         this.projectedCogByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
     }
-
+    initGofArray(){
+        this.actualCofByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
+        this.projectedCofByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
+    }
 
     showSalesChart()
     {
@@ -120,11 +137,32 @@ export class HomeComponent {
             ]
         };
     }
+    showCofChart()
+    {
+        this.cofChart = {
+            labels:['1','2','3','4', '5', '6', '7', '8','9', '10', '11', '12', '13'],
+            datasets:[
+                {
+                    label:'Actual',
+                    backgroundColor: '#1caba0',
+                    borderColor: '#1caba0',
+                    data: this.actualCofByWeek
+                },
+                {
+                    label:'Projected',
+                    backgroundColor: '#ff596e',
+                    borderColor: '#ff596e',
+                    data: this.projectedCofByWeek
+                }
+            ]
+        };
+    }
 
     receiveYearQuarter($event){
         this.yearQuarter = $event;
         this.getSales();
         this.getCog();
+        this.getCof();
         // this.reloadData();
     }
     receiveStorage(storage){
@@ -132,6 +170,7 @@ export class HomeComponent {
         console.log(this.selectedStorage)
         this.getSales();
         this.getCog();
+        this.getCof();
     }
 
     getSales()
@@ -154,7 +193,6 @@ export class HomeComponent {
             this.weeksCog = data.master_overview_weekly;
             this.calcActualCogTotal();
             this.showCogChart();
-            console.log("pepe")
             console.log(this.weeksCog);
         })
         // this.salesService.getSales(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
@@ -165,7 +203,16 @@ export class HomeComponent {
         // });
         // this.loading = false;
     }
-
+    getCof(){
+        this.loading = true;
+        // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
+        this.costOfFreshService.getMasterOverviewWeekly('fresh',this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
+            this.weeksCof = data.master_overview_weekly;
+            this.calcActualCofTotal();
+            this.showCofChart();
+            console.log(this.weeksCog);
+        })
+    }
     /**
      * This function is just getProjWeeklyRevQuarter
      */
@@ -199,7 +246,17 @@ export class HomeComponent {
             this.actualCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
             this.projectedCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = Number(this.weeksCog[i].projected_weekly_revenue);
         }
-        console.log("pinga")
-        console.log(this.projectionsCog)
     }
+    calcActualCofTotal(){
+        this.actualCofTotal = this.projectionsCof = 0.00;
+        this.initGofArray();
+        for (let i = 0; i < this.weeksCof.length; i++) {
+            let total = Number(this.weeksCof[i].weekly_cog_total);
+            this.actualCofTotal += total;
+            this.projectionsCof += Number(this.weeksCog[i].projected_weekly_revenue);
+            this.actualCofByWeek[(this.weeksCof[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
+            this.projectedCofByWeek[(this.weeksCof[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = Number(this.weeksCof[i].projected_weekly_revenue);
+        }
+    }
+
 }
