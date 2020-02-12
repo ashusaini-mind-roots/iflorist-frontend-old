@@ -5,14 +5,15 @@
     <ul class="navbar-nav">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="/assets/image/upload.svg" width="32" height="32" class="rounded-circle">
+                <img *ngIf="selectedFile.src==''" src="/assets/image/upload.svg" width="32" height="32" class="rounded-circle">
+				<img *ngIf="selectedFile.src!=''" [src]="domSanitizer.bypassSecurityTrustUrl(selectedFile.src)" width="32" height="32" class="rounded-circle">
                 <span class="font-size-08 txt-color-gray3 font-medium pr-1 px-1">Anne Smith</span>
             </a>
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Dashboard</a>
-                <a class="dropdown-item" href="#">Edit Profile</a>
-                <a class="dropdown-item" href="#">Log Out</a>
+                <a class="dropdown-item" routerLink="/home">Dashboard</a>
+                <!--<a class="dropdown-item" href="#">Edit Profile</a>-->
+                <a class="dropdown-item" href="#" (click)="logout()">Log Out</a>
             </div>
         </li>
     </ul>
