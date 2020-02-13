@@ -1,6 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem} from 'primeng/api';
+import { UserService, AuthenticationService, EmployeeService } from '../../_services';
+/*import {PlanService} from '../_services'*/
+import { User,Role } from '../../_models';
+import { CheckRole } from "../../_helpers/check-role";
+import { Router } from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser';
 
+class ImageSnippet {
+  pending: boolean = false;
+  status: string = 'init';
+
+  constructor(public src: string, public file: File) { }
+}
 
 @Component({
   selector: 'app-usersettings',
@@ -9,11 +21,22 @@ import {MenuItem} from 'primeng/api';
 })
 export class UsersettingsComponent implements OnInit {
 	
-  items: MenuItem[];	  
+  items: MenuItem[];
+  selectedFile: ImageSnippet;  
 
-  constructor() { }
+  constructor(
+    private userService: UserService,
+	private authenticationService: AuthenticationService,
+	private checkRole: CheckRole,
+	private employeeService: EmployeeService,
+	private router: Router,
+	private domSanitizer: DomSanitizer
+  ) {
+	 this.selectedFile = new ImageSnippet('', null);
+  }
 
   ngOnInit() {
+	  this.loadUserImage();
 	  this.items = [
             {
                 label: '',
@@ -91,5 +114,32 @@ export class UsersettingsComponent implements OnInit {
             }*/
         ];
   }
+  
+  loadUserImage(){
+		const currentUser = this.authenticationService.currentUserValue;
+        if(currentUser)
+        {
+            //console.log(currentUser.user.id);
+			if(this.checkRole.isStoreManager() || this.checkRole.isEmployee())
+			{
+				return this.employeeService.getImageEmployeeByUser(currentUser.user.id).subscribe((data: any) =>{
+					console.log(data);
+					
+					const file: File = data;
+				    const reader = new FileReader();
+				    reader.addEventListener('load', (event: any) => {
+					  this.selectedFile = new ImageSnippet(event.target.result, file);
+					  console.log(this.selectedFile.file);
+				    });
+				    reader.readAsDataURL(file);
+                });
+			}
+        }
+	}
+	
+	logout() {
+        this.authenticationService.logout();
+        this.router.navigate(['/login']);
+    }
 
 }

@@ -16,6 +16,7 @@ export class AppComponent implements OnInit{
 
     modules: any;
     stores:any;
+	
 
     ngOnInit() {
        /*$(document).ready(() => {
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit{
         })(jquery);*/
         this.loadModules();
         this.loadStores();
+		
 
     }
 
@@ -51,6 +53,8 @@ export class AppComponent implements OnInit{
             });
         }
     }
+	
+	
 
     loadStores(){
         const currentUser = this.authenticationService.currentUserValue;
@@ -87,11 +91,12 @@ export class AppComponent implements OnInit{
 		private checkRole: CheckRole,
     ) {
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    }
+	}
 
     logout() {
-        this.authenticationService.logout();
+        
         this.router.navigate(['/login']);
+		//this.authenticationService.logout();
     }
 	
 	get hasAcces() {

@@ -96,6 +96,10 @@ export class EmployeeService{
     getEmployeeImage(employee_id): Observable<any>{
         return this.http.get(`${environment.apiUrl}/employee/getImageById/${employee_id}`,{responseType: 'blob'});
     }
+	
+	getImageEmployeeByUser(user_id): Observable<any>{
+        return this.http.get(`${environment.apiUrl}/employee/getImageByUserId/${user_id}`,{responseType: 'blob'});
+    }
 
     deleteEmployee(id)
     {
