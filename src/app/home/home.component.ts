@@ -191,25 +191,25 @@ export class HomeComponent {
         // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
         this.costOfFreshService.getMasterOverviewWeekly('goods',this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
             this.weeksCog = data.master_overview_weekly;
-            this.calcActualCogTotal();
-            this.showCogChart();
-            console.log(this.weeksCog);
+            if(this.weeksCog.length > 0)
+            {
+                console.log("mojon")
+                console.log(this.weeksCog);
+                this.calcActualCogTotal();
+                this.showCogChart();
+            }
+
         })
-        // this.salesService.getSales(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
-        //     this.weeks = response.weeks;
-        //     this.calcActualSalesTotal();
-        //     this.getProjectedSales();
-        //     // this.loading = false;
-        // });
-        // this.loading = false;
     }
     getCof(){
         this.loading = true;
         // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
         this.costOfFreshService.getMasterOverviewWeekly('fresh',this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
             this.weeksCof = data.master_overview_weekly;
-            this.calcActualCofTotal();
-            this.showCofChart();
+            if(this.weeksCof.length > 0) {
+                this.calcActualCofTotal();
+                this.showCofChart();
+            }
             console.log(this.weeksCog);
         })
     }

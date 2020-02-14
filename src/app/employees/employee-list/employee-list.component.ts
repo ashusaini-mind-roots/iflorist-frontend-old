@@ -71,7 +71,7 @@ export class EmployeeListComponent implements OnInit {
   
   confirmChangeStoreAdmin(employee_id) {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to change the admin store ?',
+      message: 'Are you sure you want to change the Store Administrator ?',
       accept: () => {
         this.employeeService.changeAdminStore(employee_id,this.selectedStorage.id).subscribe((response: any) =>{
           if(response.error)
