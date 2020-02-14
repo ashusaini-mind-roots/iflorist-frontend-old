@@ -16,6 +16,7 @@ export class AppComponent implements OnInit{
 
     modules: any;
     stores:any;
+	companyName:string = '';
 	
 
     ngOnInit() {
@@ -58,6 +59,7 @@ export class AppComponent implements OnInit{
 
     loadStores(){
         const currentUser = this.authenticationService.currentUserValue;
+		this.companyName = currentUser.company.name;
         if(currentUser)
         {
             //console.log(currentUser.user.id);

@@ -22,7 +22,8 @@ class ImageSnippet {
 export class UsersettingsComponent implements OnInit {
 	
   items: MenuItem[];
-  selectedFile: ImageSnippet;  
+  selectedFile: ImageSnippet;
+  userName:string = '';
 
   constructor(
     private userService: UserService,
@@ -113,6 +114,10 @@ export class UsersettingsComponent implements OnInit {
                 label: 'Quit', icon: 'pi pi-fw pi-times'
             }*/
         ];
+		
+		const currentUser = this.authenticationService.currentUserValue;
+		console.log(currentUser);
+		this.userName = currentUser.user.name;
   }
   
   loadUserImage(){
