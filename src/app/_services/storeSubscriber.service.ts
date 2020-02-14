@@ -5,7 +5,7 @@ import {Subscription} from "rxjs";
 @Injectable({ providedIn: 'root' })
 export class StoreSubscriberService{
     subscription: Subscription;
-
+	
     constructor(private messageService: MessageService) { }
 
     subscribe(reference, callback_function){

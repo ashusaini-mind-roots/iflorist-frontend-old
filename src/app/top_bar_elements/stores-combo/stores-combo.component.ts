@@ -31,7 +31,23 @@ export class StoresComboComponent implements OnInit {
       }
       console.log("estoresss")
        console.log(data)
-    })
+    });
+	
+	this.messageService.getMessageReloadStore().subscribe(message => {
+	//console.log('aaaaa');
+	
+	this.storeService.getStoreList().subscribe((data: any) =>{
+	  this.stores = data.stores;
+	  if(this.stores && this.stores.length > 0){
+		this.storeIndexSelected = this.stores[0].id;
+		this.populateSelectedStorage(this.stores[0]);
+		// console.log(this.stores[0])
+	  }
+	  console.log("estoresss")
+	   console.log(data)
+	});
+		
+	});
   }
 
   onStoreSelected(value){
@@ -49,6 +65,8 @@ export class StoresComboComponent implements OnInit {
   populateSelectedStorage(storage){
     localStorage.setItem('selectedStorage', JSON.stringify(storage));
   }
+  
+  
 }
 
 

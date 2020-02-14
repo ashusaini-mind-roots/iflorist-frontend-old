@@ -330,7 +330,7 @@ export class RegisterCcDataComponent implements OnInit {
     }
     this.data = {
       card_token: formData.stripe_token,
-      name: formData.name,
+      name: this.name,
       email: this.email,
       password: this.password,
       ba_street: formData.address_line1,

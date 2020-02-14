@@ -8,6 +8,7 @@ import { first } from 'rxjs/operators';
 import {ConfirmationService} from "primeng/api";
 import { MessageToastService } from "../../_services/messageToast.service";
 import { CheckRole } from "../../_helpers/check-role";
+import { MessageService } from "../../_services/message.service";
 
 
 
@@ -53,6 +54,7 @@ export class EditStoreComponent implements OnInit {
       private messageToastService: MessageToastService,
       private confirmationService: ConfirmationService,
 	  private checkRole: CheckRole,
+	  private messageService: MessageService
 	) {
     this.selectedFile = new ImageSnippet('', null);
 	this.selectedCsvFile = new ImageSnippet('', null);
@@ -205,6 +207,7 @@ export class EditStoreComponent implements OnInit {
 			    else
 			    {
 				  this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');
+				  this.messageService.sendMessageReloadStore();	
 				}
 			    this.loading = false;
                 //this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');

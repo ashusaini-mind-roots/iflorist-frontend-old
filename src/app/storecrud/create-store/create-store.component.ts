@@ -9,6 +9,7 @@ import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input
 /*import {isNumeric} from 'rxjs/util/isNumeric';*/
 import { MessageToastService } from '../../_services/messageToast.service';
 //import { ValidatePorcentage } from '../../validator/porcentage.validator';
+import { MessageService } from "../../_services/message.service";
 
 class ImageSnippet {
   pending: boolean = false;
@@ -44,6 +45,7 @@ export class CreateStoreComponent implements OnInit {
       private router: Router,
       private storeService: StoreService,
 	  private message: MessageToastService,
+	  private messageService: MessageService
       
   ) {
       this.selectedFile = new ImageSnippet('', null);
@@ -145,6 +147,7 @@ export class CreateStoreComponent implements OnInit {
 			  {
 				  this.message.sendMessage('success', 'Store Message', 'Store created successfully !');
 				  this.clean();
+				  this.messageService.sendMessageReloadStore();
 			  }
 			  this.loading = false;
             },
