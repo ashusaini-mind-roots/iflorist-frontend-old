@@ -8,8 +8,12 @@ export class MessageService {
     sendMessage(message: string) {
         this.subject.next( message );
     }
-
-    sendMessageToast(variant:string ,message: string) {
+	
+	sendMessageReloadStore() {
+		this.subject.next();
+    }
+	
+	sendMessageToast(variant:string ,message: string) {
         let messageData = {'variant':variant,'message':message};
         this.subject.next( messageData );
     }
@@ -23,6 +27,10 @@ export class MessageService {
     }
 
     getMessageToast(): Observable<any> {
+        return this.subject.asObservable();
+    }
+	
+	getMessageReloadStore(): Observable<any> {
         return this.subject.asObservable();
     }
 }
