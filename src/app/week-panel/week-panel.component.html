@@ -172,7 +172,7 @@
                                     <tr>
                                         <td>{{invoice.invoice_name}}</td>
                                         <td>{{invoice.invoice_number}}</td>
-                                        <td>{{invoice.total}}</td>
+                                        <td>${{invoice.total}}</td>
                                         <td>
                                             <a  (click)="deleteInvoice(invoice.id)" class="itemaction cancelitem">Delete</a>
 <!--                                            <button [routerLink]="['/week-panel', invoice.invoice_id]" class="btn btn-error">Delete</button>-->
