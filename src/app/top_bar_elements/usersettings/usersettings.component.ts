@@ -143,8 +143,8 @@ export class UsersettingsComponent implements OnInit {
 	}
 	
 	logout() {
-        this.authenticationService.logout();
         this.router.navigate(['/login']);
+		this.authenticationService.logout();
     }
 
 }

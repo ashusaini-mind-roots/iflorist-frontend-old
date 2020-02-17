@@ -98,7 +98,7 @@ export class AppComponent implements OnInit{
     logout() {
         
         this.router.navigate(['/login']);
-		//this.authenticationService.logout();
+		this.authenticationService.logout();
     }
 	
 	get hasAcces() {

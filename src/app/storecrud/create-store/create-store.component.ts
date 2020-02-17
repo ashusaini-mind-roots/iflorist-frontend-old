@@ -160,7 +160,7 @@ export class CreateStoreComponent implements OnInit {
   }
 
   clean(){
-     this.f.store_name.setValue('');
+	 this.f.store_name.setValue('');
      this.f.contact_email.setValue('');
      this.f.contact_phone.setValue('');
      this.f.zip_code.setValue('');
@@ -168,6 +168,11 @@ export class CreateStoreComponent implements OnInit {
 	 this.f.target_percentage.setValue('');
      this.selectedFile = new ImageSnippet('', null);
      this.submitted = false;
+	 this.f.sui.setValue('');
+	 this.f.futa.setValue('');
+	 this.f.social_security.setValue('');
+	 this.f.medicare.setValue('');
+	 this.f.target_costof_goods.setValue('');
   }
 
 }
