@@ -323,7 +323,7 @@ export class RegisterCcDataComponent implements OnInit {
   saveCompanyData(formData) {
     this.loading = true;
      // console.log(this.routerService.getRouterData());
-    if(this.routerService.getRouterData()==undefined)
+    if(this.routerService.getRouterData() == undefined)
     {
       this.loading = false;
       return;
