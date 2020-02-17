@@ -173,6 +173,7 @@ export class CreateStoreComponent implements OnInit {
 	 this.f.social_security.setValue('');
 	 this.f.medicare.setValue('');
 	 this.f.target_costof_goods.setValue('');
+	 this.f.target_costof_fresh.setValue('');
   }
 
 }
