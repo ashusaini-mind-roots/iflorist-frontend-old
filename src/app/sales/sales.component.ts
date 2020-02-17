@@ -187,6 +187,7 @@ export class SalesComponent implements OnInit {
    */
   getProjectedSales(){
     this.salesService.getProjWeeklyRevQuarter(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
+      console.log("firu")
       console.log(response);
 
       this.projWeeklyRevQuarter = response.proj_weekly_rev_quarter;
