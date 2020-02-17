@@ -233,8 +233,8 @@
                             <div class="">
                                 <div class="card-body">
                                     <span class="txt-size-12rem txt-color-gray4 font-regular">Budget Remaining</span>
-                                    <div class="txt-color-blue-soft txt-size-12rem font-medium">
-                                        {{getTargetInMoney() - invoiceTotal|currency}}
+                                    <div [ngClass]="{'txt-color-red': calcBudgetRemaining() < 0}" class="txt-color-blue-soft txt-size-12rem font-medium">
+                                        {{calcBudgetRemaining()|currency}}
                                     </div>
                                 </div>
                             </div>

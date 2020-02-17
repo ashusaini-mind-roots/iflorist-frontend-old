@@ -554,4 +554,8 @@ export class WeekPanelComponent implements OnInit {
     console.log("elmojon: "+this.yearQuarter.year)
     this.visibleNoWeeks = false;
   }
+
+  calcBudgetRemaining(){
+    return this.getTargetInMoney() - this.invoiceTotal;
+  }
 }
