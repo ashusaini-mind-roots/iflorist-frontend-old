@@ -37,6 +37,10 @@ export class SchedulerService{
 	{
 		return this.http.get(`${environment.apiUrl}/schedule/seven_days_number/${week_id}`);
 	}
+	
+	updateTargetCOL = function (store_id,week_id,target_percentage) {
+        return this.http.post(`${environment.apiUrl}/target_percentage/update_create_target_percentage/`, {store_id,week_id,target_percentage} );
+    }
 
     // getSevenDays(store_id, week_id): Observable<any> {
   //   // console.log(`${environment.apiUrl}/store/all`);
