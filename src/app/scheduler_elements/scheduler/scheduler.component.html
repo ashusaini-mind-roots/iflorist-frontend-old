@@ -61,7 +61,7 @@
 			<div class="">
 			  <div class="card-body">
 				<h6 class="txt-size-12rem txt-color-gray4 mb-2 font-regular">Remaining Budget:</h6>
-				<h5 class="txt-color-blue-soft txt-size-12rem card-title ng-cloak">
+				<h5 [ngClass]="{'txt-color-red': differenceCol < 0}" class="txt-color-blue-soft txt-size-12rem card-title ng-cloak">
 				  {{differenceCol | currency }}
 				</h5>
 			  </div>
