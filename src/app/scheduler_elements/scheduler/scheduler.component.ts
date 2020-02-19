@@ -4,6 +4,8 @@ import { UtilsService } from "../../_services/utils.service";
 import { WeekPanelService } from "../../_services/weekPanel.service";
 import { SchedulerService } from "../../_services/scheduler.service";
 import { CheckRole } from "../../_helpers/check-role";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageToastService } from '../../_services/messageToast.service';
 
 
 @Component({
@@ -16,6 +18,9 @@ export class SchedulerComponent implements OnInit {
   selectedStorage: any;
   yearQuarter: any;
   selectedWeekItem: any;
+  visibleDialogTarget: boolean = false;
+  targetform: FormGroup;
+  submittedFormTarget: boolean = false;
 
   //------week resume
   //$scope.runningCOG = 0.00;
@@ -31,6 +36,8 @@ export class SchedulerComponent implements OnInit {
       private weekPanelService: WeekPanelService,
       private schedulerService: SchedulerService,
 	  private checkRole: CheckRole,
+	  private formBuilder: FormBuilder,
+	  private message: MessageToastService,
   )
   {
     storeSubscriberService.subscribe(this,function (ref,store) {
@@ -42,8 +49,13 @@ export class SchedulerComponent implements OnInit {
 
   ngOnInit() {
     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
+	this.targetform = this.formBuilder.group({
+      target: ['', Validators.required],
+    });
    // this.getWeeks();
   }
+  
+  get t() { return this.targetform.controls; }
 
   receiveStorage(storage){
     this.selectedStorage = storage;
@@ -97,6 +109,7 @@ export class SchedulerComponent implements OnInit {
   getTargetCOL = function () {
     this.schedulerService.getTargetCOL(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.targetCOL = (response == null) ? 0 : response.target_percentage;
+	  this.t.target.setValue(this.targetCOL);
     });
   }
   getScheduledPayroll = function () {
@@ -116,6 +129,38 @@ export class SchedulerComponent implements OnInit {
 		  return true;
 		else return false;
 	}
+	
+	updayeTarget(){
+    this.submittedFormTarget = true;
 
-
+    // stop here if form is invalid
+    if (this.targetform.invalid) {
+      return;
+    }
+	
+	this.visibleDialogTarget = false;	
+    
+    this.schedulerService.updateTargetCOL(this.selectedStorage.id,this.selectedWeekItem,this.t.target.value)
+        .subscribe(
+            data => {
+		      
+			  let response = data; 	
+			  if(response.status=='error')
+			      this.message.sendMessage('error', 'Schedule Message', response.errors);
+			  else
+			  {
+				  this.message.sendMessage('success', 'Schedule Message', 'Target updated successfully !');
+				  this.submittedFormTarget = false;
+				  this.getTargetCOL();
+			  }
+			},
+            error => {
+			  
+			  this.message.sendMessage('error', 'Schedule Message', error);
+              console.log(error);
+              //this.error = error;
+        });
   }
+
+
+}

@@ -16,13 +16,29 @@
 </div>
 
 
-
+<p-dialog header="Update Target" [(visible)]="visibleDialogTarget" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
+        <form [formGroup]="targetform" (ngSubmit)="updayeTarget()">
+          <!--<input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>-->
+          <div class="form-group">
+              <label for="target" class = "input-label">Target</label>
+              <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$"  formControlName="target" class="form-control" [ngClass]="{ 'is-invalid': submittedFormTarget && t.target.errors }" >
+              <div *ngIf="submittedFormTarget && t.target.errors" class="invalid-feedback">
+                  <div *ngIf="t.target.errors.required">Target is required</div>
+				  <div *ngIf="t.target.errors.pattern">Enter a valid Target Percentage</div>
+              </div>
+          </div>
+          <p-footer>
+              <button type="button"  (click)="visibleDialogTarget=false" class="btn-generic btn-white mr-2">Cancel</button>
+              <button class="btn-ligth-blue">UPDATE</button>
+          </p-footer>
+      </form>
+  </p-dialog>
 
 <div *ngIf="hasAcces" class="row">
   <div class="col">
     <div class="mr-3 text-right">
       <span class="font-size-08 txt-color-gray3 font-medium pr-1">Target </span>
-      <span class="font-size-08 txt-color-blue-soft font-bold">{{targetCOL}}%</span>
+      <span class="font-size-08 txt-color-blue-soft font-bold"><a (click)="visibleDialogTarget = true;">{{targetCOL}}%</a></span>
     </div>
 
 <!--    <span class="float-right">Target {{targetCOL}}%</span>-->
