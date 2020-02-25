@@ -108,6 +108,7 @@ export class SchedulerComponent implements OnInit {
   }
   getTargetCOL = function () {
     this.schedulerService.getTargetCOL(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
+      console.log("pepe tey: " + response.target_percentage)
       this.targetCOL = (response == null) ? 0 : response.target_percentage;
 	  this.t.target.setValue(this.targetCOL);
     });

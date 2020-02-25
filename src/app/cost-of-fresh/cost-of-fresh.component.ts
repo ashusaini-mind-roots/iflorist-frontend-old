@@ -32,12 +32,6 @@ export class CostOfFreshComponent implements OnInit {
         ref.receiveStorage(store);
       });
       this.yearQuarter = {year : this.utilService.GetCurrentYear(), quarter: 1};
-
-        // this.subscription = this.messageService.getMessage().subscribe(message => {
-        //   if (message) {
-        //     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
-        //     this.receiveStorage(this.selectedStorage);
-        // }});
   }
 
   ngOnInit() {
@@ -60,12 +54,12 @@ export class CostOfFreshComponent implements OnInit {
   }
 
   reloadData(){
-     console.log(this.selectedStorage.id + "-" +this.yearQuarter.quarter);
+     // console.log(this.selectedStorage.id + "-" +this.yearQuarter.quarter);
     this.costOfFreshService.getMasterOverviewWeekly(this.costOf,this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
       this.weeks = data.master_overview_weekly;
       if(this.weeks.length > 0)
         this.target = this.weeks[0].target;
-      console.log(this.weeks);
+      // console.log(this.weeks);
     })
   }
 

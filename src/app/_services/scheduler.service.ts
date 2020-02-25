@@ -23,6 +23,9 @@ export class SchedulerService{
     getScheduledPayroll = function (store_id,week_id) {
         return this.http.get(`${environment.apiUrl}/master_overview_weekly/scheduled_payroll_col/${store_id}/${week_id}`);
     }
+    getScheduledPayrollByQuarter = function (year, store_id,quarter) {
+        return this.http.get(`${environment.apiUrl}/master_overview_weekly/scheduled_payroll_by_quarter/${year}/${store_id}/${quarter}`);
+    }
     getScheduleInformation = function (store_id,week_id) {
         return this.http.get(`${environment.apiUrl}/schedule/all/${store_id}/${week_id}`);
     }

@@ -41,7 +41,8 @@ export class ProjectionComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.yearIndexSelected = 2019;
-    this.selectedStorage = 1;
+    // this.selectedStorage = 1;
+    this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
     this.loadHeaders();
     this.loadProjection();
   }
@@ -50,9 +51,9 @@ export class ProjectionComponent implements OnInit {
     this.cols = [
       { field: 'id', header: 'No' },
       { field: 'week', header: 'Week' },
-      { field: this.yearIndexSelected - 1, header: this.yearIndexSelected - 1 },
+      { field: this.yearQuarter.year - 1, header: this.yearQuarter.year - 1 },//esto esta mal, hay ke poner los datos reales del year proyection y year reference
       { field: 'adjust', header: 'Adjust' },
-      { field: 'year_proyection', header: this.yearIndexSelected },
+      { field: 'year_proyection', header: this.yearQuarter.year },
       // { field: 'event_override', header: 'Event Override' },
       { field: 'actions', header: 'Actions' }
     ];
@@ -60,8 +61,9 @@ export class ProjectionComponent implements OnInit {
 
   receiveYearQuarter($event){
     this.yearQuarter = $event;
-    this.yearIndexSelected = this.yearQuarter.year;
-    console.log(this.yearIndexSelected);
+    //this.yearIndexSelected = this.yearQuarter.year;
+console.log("juan")
+     console.log(this.yearQuarter);
     // this.yearIndexSelected = yearIndexSelected;
     this.loadHeaders();
     this.loadProjection();
@@ -77,19 +79,18 @@ export class ProjectionComponent implements OnInit {
   // }
 
   receiveStorage(storage){
-    this.selectedStorage = storage.id;
+    this.selectedStorage = storage;
     this.loadProjection();
-    //this.reloadData();
-    // console.log(this.yearQuarter);
-    //console.log('akiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
   }
 
   loadProjection()
   {
     this.proyections = [];
     this.loading = true;
-    this.projectionService.getProjectionList(this.selectedStorage,this.yearIndexSelected).subscribe((data: any) =>{
-      console.log(data.projections);
+    console.log("pepepepe")
+    console.log(this.yearQuarter.year)
+    this.projectionService.getProjectionList(this.selectedStorage.id,this.yearQuarter.year).subscribe((data: any) =>{
+     // console.log(data.projections);
       this.proyections = data.projections;
       this.loading = false;
     });
@@ -98,7 +99,7 @@ export class ProjectionComponent implements OnInit {
 
   onRowEditInit(projections: any) {
     this.clonedProjections[projections.id] = {...projections};
-    console.log(this.clonedProjections[projections.id]);
+  //  console.log(this.clonedProjections[projections.id]);
   }
 
   onRowEditSave(projections: any, index: number) {

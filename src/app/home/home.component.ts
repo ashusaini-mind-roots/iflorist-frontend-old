@@ -8,6 +8,7 @@ import { UserService, AuthenticationService } from '@app/_services';
 import {UtilsService} from "../_services/utils.service";
 import {StoreSubscriberService} from "@app/_services/storeSubscriber.service";
 import {CostOfFreshService} from "@app/_services/costOfFresh.service";
+import {SchedulerService} from "@app/_services/scheduler.service";
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
@@ -42,6 +43,14 @@ export class HomeComponent {
     projectionsCof: number;
     weeksCof: any[];
 
+    //cost of labor section
+    colChart: any;
+    actualColByWeek: number[];
+    projectedColByWeek: number[];
+    actualColTotal: number;
+    projectionsCol: number;
+    weeksCol: any[];
+
     modules: any;
 
     constructor(
@@ -52,6 +61,7 @@ export class HomeComponent {
         private authenticationService: AuthenticationService,
         private salesService: SalesService,
         private costOfFreshService: CostOfFreshService,
+        private schedulerService: SchedulerService,
     ) {
         storeSubscriberService.subscribe(this,function (ref,store) {
             ref.receiveStorage(store);
@@ -76,6 +86,12 @@ export class HomeComponent {
         this.actualCofByWeek = new Array();
         this.projectedCofByWeek = new Array();
 
+        //Col
+        this.projectionsCol = 0.00;
+        this.actualColTotal = 0.00;
+        this.actualColByWeek = new Array();
+        this.projectedColByWeek = new Array();
+
     }
 
     ngOnInit() {
@@ -95,7 +111,10 @@ export class HomeComponent {
         this.actualCofByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
         this.projectedCofByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
     }
-
+    initColArray(){
+        this.actualColByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
+        this.projectedColByWeek = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00];
+    }
     showSalesChart()
     {
         this.salesChart = {
@@ -158,12 +177,35 @@ export class HomeComponent {
         };
     }
 
+    showColChart()
+    {
+        this.colChart = {
+            labels:['1','2','3','4', '5', '6', '7', '8','9', '10', '11', '12', '13'],
+            datasets:[
+                {
+                    label:'Actual',
+                    backgroundColor: '#1caba0',
+                    borderColor: '#1caba0',
+                    data: this.actualColByWeek
+                },
+                {
+                    label:'Projected',
+                    backgroundColor: '#ff596e',
+                    borderColor: '#ff596e',
+                    data: this.projectedColByWeek
+                }
+            ]
+        };
+    }
+
     receiveYearQuarter($event){
         this.yearQuarter = $event;
         this.getSales();
         this.getCog();
         this.getCof();
+      //  this.getCol();
         // this.reloadData();
+        console.log(this.yearQuarter)
     }
     receiveStorage(storage){
         this.selectedStorage = storage;
@@ -171,6 +213,7 @@ export class HomeComponent {
         this.getSales();
         this.getCog();
         this.getCof();
+        //this.getCol();
     }
 
     getSales()
@@ -191,13 +234,12 @@ export class HomeComponent {
         // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
         this.costOfFreshService.getMasterOverviewWeekly('goods',this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
             this.weeksCog = data.master_overview_weekly;
-            if(this.weeksCog.length > 0)
-            {
-                console.log("mojon")
+            // if(this.weeksCog.length > 0)
+            // {
                 console.log(this.weeksCog);
                 this.calcActualCogTotal();
                 this.showCogChart();
-            }
+            //}
 
         })
     }
@@ -206,11 +248,20 @@ export class HomeComponent {
         // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
         this.costOfFreshService.getMasterOverviewWeekly('fresh',this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
             this.weeksCof = data.master_overview_weekly;
-            if(this.weeksCof.length > 0) {
+            //if(this.weeksCof.length > 0) {
                 this.calcActualCofTotal();
                 this.showCofChart();
-            }
-            console.log(this.weeksCog);
+                this.getCol();
+        })
+    }
+    getCol(){
+        this.loading = true;
+        // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
+        this.schedulerService.getScheduledPayrollByQuarter(this.yearQuarter.year,this.selectedStorage.id,this.yearQuarter.quarter).subscribe((data: any) =>{
+            this.weeksCol = data.scheduled_payroll_array;
+          //  if(this.weeksCol.length > 0) {
+                this.calcActualColTotal();
+                this.showColChart();
         })
     }
     /**
@@ -246,7 +297,8 @@ export class HomeComponent {
             this.actualCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
             this.projectedCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = Number(this.weeksCog[i].projected_weekly_revenue);
         }
-        console.log(this.actualCogByWeek);
+        console.log("pinga fly")
+        console.log(this.projectedCogByWeek);
     }
     calcActualCofTotal(){
         this.actualCofTotal = this.projectionsCof = 0.00;
@@ -254,10 +306,23 @@ export class HomeComponent {
         for (let i = 0; i < this.weeksCof.length; i++) {
             let total = Number(this.weeksCof[i].weekly_cog_total);
             this.actualCofTotal += total;
-            this.projectionsCof += Number(this.weeksCog[i].projected_weekly_revenue);
+            this.projectionsCof += Number(this.weeksCof[i].projected_weekly_revenue);
             this.actualCofByWeek[(this.weeksCof[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
             this.projectedCofByWeek[(this.weeksCof[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = Number(this.weeksCof[i].projected_weekly_revenue);
         }
+    }
+
+    calcActualColTotal(){
+        this.actualColTotal = this.projectionsCol = 0.00;
+        this.initColArray();
+        for (let i = 0; i < this.weeksCol.length; i++) {
+            let total = Number(this.weeksCol[i].scheduled_payroll);
+            console.log(this.weeksCol[i])
+            this.actualColTotal += total;
+            this.actualColByWeek[(this.weeksCol[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
+        }
+        this.projectionsCol = this.projectionsCof;
+        this.projectedColByWeek = this.projectedCofByWeek;
     }
 
 }
