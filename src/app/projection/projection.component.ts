@@ -40,7 +40,7 @@ export class ProjectionComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.yearIndexSelected = 2019;
+  //  this.yearIndexSelected = 2019;
     // this.selectedStorage = 1;
     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
     this.loadHeaders();
@@ -103,11 +103,11 @@ console.log("juan")
   }
 
   onRowEditSave(projections: any, index: number) {
-      if (projections.amt_total >= 0) {
+      //if (projections.amt_total >= 0) {
         
         this.loading = true;
         
-        this.projectionService.updateProyection(projections.id,projections.amt_total,projections.adjust).subscribe(
+        this.projectionService.updateProyection(projections.id,projections.adjust).subscribe(
               response=> {
                 this.loading = false;
                 delete this.clonedProjections[projections.id];
@@ -122,11 +122,11 @@ console.log("juan")
               }
         );
               
-      }
-      else {
-        this.proyections[index] = this.clonedProjections[projections.id];
-        delete this.clonedProjections[projections.id];
-      }
+      //}
+      // else {
+      //   this.proyections[index] = this.clonedProjections[projections.id];
+      //   delete this.clonedProjections[projections.id];
+      // }
   }
 
   onRowEditCancel(projections: any, index: number) {

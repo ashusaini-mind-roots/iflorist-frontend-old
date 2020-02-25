@@ -22,7 +22,7 @@ export class StoreService {
          // );
   }
 
-  createStore(image,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,target_costof_goods,target_costof_fresh,
+  createStore(image,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,projection_percentage,target_costof_goods,target_costof_fresh,
               sui,futa,social_security,medicare) {
       const formData = new FormData();
       formData.append('store_name', store_name);
@@ -34,6 +34,7 @@ export class StoreService {
       formData.append('city', city);
       formData.append('state', state);
 	  formData.append('target_percentage', target_percentage);
+      formData.append('projection_percentage', target_percentage);
 	  formData.append('target_costof_goods', target_costof_goods);
       formData.append('target_costof_fresh', target_costof_fresh);
       formData.append('sui', sui);
