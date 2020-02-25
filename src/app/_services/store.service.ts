@@ -48,12 +48,13 @@ export class StoreService {
       return this.http.post<any>(`${environment.apiUrl}/store/create`, formData,{headers: header});
   }
   
-  uploadCsv(store_id,file) {
+  uploadCsv(store_id,file,target_percentage) {
       //return this.http.post(`${environment.apiUrl}/store/create`, {store_name, contact_email, contact_phone, zip_code, address} );
       const formData = new FormData();
       //formData.append('image', image);
       //formData.append('id', id);
       formData.append('store_id', store_id);
+	  formData.append('target_percentage', target_percentage);
       formData.append('file', file);
       
 	  let header = new HttpHeaders();

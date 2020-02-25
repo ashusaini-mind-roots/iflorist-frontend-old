@@ -31,8 +31,10 @@ export class EditStoreComponent implements OnInit {
   @ViewChild('csvInput',{static: false}) inputVariable: ElementRef;
   //@ViewChild('csvInput') inputVariable;
   storeEditform: FormGroup;
+  csvForm: FormGroup;
   store: any = {};
   submitted = false;
+  submittedCsv = false;
   // returnUrl: string;
   error = '';
   success = '';
@@ -98,6 +100,8 @@ export class EditStoreComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get f() { return this.storeEditform.controls; }
+  
+  get c() { return this.csvForm.controls; }
 
   ngOnInit() {
     this.storeEditform = this.formBuilder.group({
@@ -116,6 +120,9 @@ export class EditStoreComponent implements OnInit {
 	  social_security: ['', Validators.required],
 	  medicare: ['', Validators.required],
 
+    });
+	this.csvForm = this.formBuilder.group({
+      target_percentage: ['', Validators.required],
     });
     this.route.params.subscribe(params => {
       this.storeService.getStore(params['id']).subscribe(res => {
@@ -224,13 +231,18 @@ export class EditStoreComponent implements OnInit {
   
   uploadCsv()
   {
+	  this.submittedCsv = true;
+	  if (this.csvForm.invalid) {
+	     this.loading = false;
+	     return;
+	  }
 	  if(this.selectedCsvFile.file==null)
 	  {
 		  this.messageToastService.sendMessage('error', 'Store Message', 'Seleccione un archivo .CVS');
 		  return;
 	  }
 	  this.loadingCsv = true;
-	  this.storeService.uploadCsv(this.storeId,this.selectedCsvFile.file).subscribe(
+	  this.storeService.uploadCsv(this.storeId,this.selectedCsvFile.file,this.c.target_percentage.value).subscribe(
               response=> {
                 this.messageToastService.sendMessage('success', 'Store Message', 'Weekly Projection Percent Revenues set successfully !');
                 // console.log(response)
@@ -238,6 +250,7 @@ export class EditStoreComponent implements OnInit {
 				this.fileName = '';
 				this.selectedCsvFile = new ImageSnippet('', null);
 				this.inputVariable.nativeElement.value = "";
+				this.submittedCsv = false;
               },
               error => {
                 console.log(error)
