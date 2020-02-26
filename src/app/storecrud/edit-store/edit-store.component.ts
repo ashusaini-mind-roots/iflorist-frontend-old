@@ -260,6 +260,7 @@ export class EditStoreComponent implements OnInit {
 				this.selectedCsvFile = new ImageSnippet('', null);
 				this.inputVariable.nativeElement.value = "";
 				this.submittedCsv = false;
+				console.log(response)
               },
               error => {
                 console.log(error)
