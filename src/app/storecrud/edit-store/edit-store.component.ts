@@ -107,7 +107,8 @@ export class EditStoreComponent implements OnInit {
     this.storeEditform = this.formBuilder.group({
       store_name: ['', Validators.required],
 	  target_percentage: ['', Validators.required],
-      target_costof_goods: ['', Validators.required],
+	  projection_percentage: ['', Validators.required],
+	  target_costof_goods: ['', Validators.required],
       target_costof_fresh: ['', Validators.required],
       contact_email: ['',  Validators.email],
       contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],
@@ -127,14 +128,22 @@ export class EditStoreComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.storeService.getStore(params['id']).subscribe(res => {
         this.store = res.store;
-        this.f.store_name.setValue(this.store.store_name);
-        this.f.contact_email.setValue(this.store.contact_email);
-        this.f.contact_phone.setValue(this.store.contact_phone);
-        this.f.zip_code.setValue(this.store.zip_code);
-        this.f.city.setValue(this.store.city);
-        this.f.state.setValue(this.store.state);
-        this.f.address.setValue(this.store.address);
+        if(this.store.store_name)
+			this.f.store_name.setValue(this.store.store_name);
+		if(this.store.contact_email)
+			this.f.contact_email.setValue(this.store.contact_email);
+		if(this.store.contact_phone)
+			this.f.contact_phone.setValue(this.store.contact_phone);
+		if(this.store.zip_code)
+			this.f.zip_code.setValue(this.store.zip_code);
+		if(this.store.city)
+			this.f.city.setValue(this.store.city);
+		if(this.store.state)
+			this.f.state.setValue(this.store.state);
+	    if(this.store.address)
+			this.f.address.setValue(this.store.address);
 		this.f.target_percentage.setValue(this.store.target_percentage_default);
+		this.f.projection_percentage.setValue(this.store.projection_percentage_default);
 		this.f.target_costof_goods.setValue(this.store.target_cog);
 		this.f.target_costof_fresh.setValue(this.store.target_cof);
 
@@ -205,7 +214,7 @@ export class EditStoreComponent implements OnInit {
       console.log("pepe"+params['id'])
 
       this.storeService.updateStore(params['id'],this.f.store_name.value,this.f.contact_email.value,
-          this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.selectedFile.file,this.f.target_costof_goods.value,this.f.target_costof_fresh.value,
+          this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.f.projection_percentage.value,this.selectedFile.file,this.f.target_costof_goods.value,this.f.target_costof_fresh.value,
           this.f.sui.value,this.f.futa.value,this.f.social_security.value,this.f.medicare.value ).subscribe(
               data=> {
 			    let response = data;

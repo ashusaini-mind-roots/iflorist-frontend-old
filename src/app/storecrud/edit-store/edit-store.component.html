@@ -82,17 +82,27 @@
 							</div>
 						  </div>
 						  <div class="col-md-6">
-							<div class="form-group">
-							  <label for="target_percentage">Target Percentage Default</label>
-							  <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="target_percentage" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.target_percentage.errors }"/>
-							  <div *ngIf="submitted && f.target_percentage.errors" class="invalid-feedback">
-								  <div *ngIf="f.target_percentage.errors.required">Target Percentage is required</div>
-								  <div *ngIf="f.target_percentage.errors.pattern">Enter a valid Target Percentage</div>
+							  <div class="form-group">
+								  <label for="projection_percentage">Target Percentage Projection Default</label>
+								  <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="projection_percentage" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.projection_percentage.errors }"/>
+								  <div *ngIf="submitted && f.projection_percentage.errors" class="invalid-feedback">
+									  <div *ngIf="f.projection_percentage.errors.required">Target Percentage Projection is required</div>
+									  <div *ngIf="f.projection_percentage.errors.pattern">Enter a valid Target Percentage Projection</div>
+								  </div>
 							  </div>
-							</div>
-						  </div>
+                          </div>
 						</div>
                         <div class="row">
+						    <div class="col-md-6">
+								<div class="form-group">
+								  <label for="target_percentage">Target Percentage Default</label>
+								  <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="target_percentage" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.target_percentage.errors }"/>
+								  <div *ngIf="submitted && f.target_percentage.errors" class="invalid-feedback">
+									  <div *ngIf="f.target_percentage.errors.required">Target Percentage is required</div>
+									  <div *ngIf="f.target_percentage.errors.pattern">Enter a valid Target Percentage</div>
+								  </div>
+								</div>
+							</div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="target_costof_goods">Target Cost of Goods</label>
@@ -103,7 +113,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+						<div class="row">
+						    <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="target_costof_fresh">Target Cost of Fresh</label>
                                     <input name ="target_costof_fresh" type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="target_costof_fresh" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.target_costof_fresh.errors }"/>
@@ -113,11 +125,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="sui">Sui</label>
@@ -128,7 +135,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+                        <div class="row">
+						    <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="futa">FUTA</label>
                                     <input name ="futa" type="text" pattern="^[0-9]{1,1}$|^[0-9]{1,1}\.[0-9]{1,2}$" formControlName="futa" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.futa.errors }"/>
@@ -138,8 +147,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="social_security">Social Security</label>
@@ -150,7 +157,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+						<div class="row">
+						    <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="medicare">Medicare</label>
                                     <input name ="medicare" type="text" pattern="^[0-9]{1,1}$|^[0-9]{1,1}\.[0-9]{1,2}$" formControlName="medicare" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.medicare.errors }"/>
@@ -161,7 +170,6 @@
                                 </div>
                             </div>
                         </div>
-
 
 
 

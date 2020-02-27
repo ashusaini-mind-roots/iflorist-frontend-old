@@ -34,7 +34,7 @@ export class StoreService {
       formData.append('city', city);
       formData.append('state', state);
 	  formData.append('target_percentage', target_percentage);
-      formData.append('projection_percentage', target_percentage);
+      formData.append('projection_percentage', projection_percentage);
 	  formData.append('target_costof_goods', target_costof_goods);
       formData.append('target_costof_fresh', target_costof_fresh);
       formData.append('sui', sui);
@@ -65,7 +65,7 @@ export class StoreService {
       return this.http.post(`${environment.apiUrl}/store/setWeeklyProjectionPercentRevenues`, formData,{headers: header});
   }
 
-  updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,image,target_costof_goods,target_costof_fresh,
+  updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,projection_percentage,image,target_costof_goods,target_costof_fresh,
               sui,futa,social_security,medicare){
 	  
 	  const formData = new FormData();
@@ -78,6 +78,7 @@ export class StoreService {
       formData.append('city', city);
       formData.append('state', state);
       formData.append('target_percentage', target_percentage);
+	  formData.append('projection_percentage', projection_percentage);
 	  formData.append('target_costof_goods', target_costof_goods);
       formData.append('target_costof_fresh', target_costof_fresh);
       formData.append('sui', sui);
