@@ -1,4 +1,15 @@
-<div class="col-lg-12 col-xl-12 mt-5">
+<div class="row plrb-08">
+    <div class="col d-flex align-items-start flex-wrap">
+        <div class="mr-auto previouslink">
+            <a [routerLink]="['/stores']" class="addbig d-flex align-items-center">
+                <span class="back mr-1"></span>
+                <span class="txt-color-dark-black">Previous</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 col-xl-12">
     <div class="generic-card mb-5">
         <h3 class="card-header">
             <span class="ml-3 font-size-1 txt-color- font-medium">Add New Store</span>
@@ -196,18 +207,18 @@
 <div *ngIf="showActionUploadCSV" class="col-lg-12 col-xl-12 mt-5">
     <div class="generic-card mb-5">
         <h3 class="card-header">
-            <span class="ml-3 font-size-1 txt-color- font-medium">Set Weekly Projection Percent Revenues</span>
+            <span class="ml-3 font-size-1 txt-color- font-medium">Upload Weekly Projection Percent Revenues</span>
         </h3>
         <div class="card-body ml-lg-5 ml-xl-5 pb-lg-5 pb-xl-5">
             <form [formGroup]="csvForm" (ngSubmit)="uploadCsv()">
                 <div class="row">
                     <div class="col-md-4">
 						<div class="form-group">
-						  <label for="target_percentage">Target Percentage</label>
-						  <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="target_percentage" class="input input-gray2" [ngClass]="{ 'is-invalid': submittedCsv && c.target_percentage.errors }"/>
-						  <div *ngIf="submittedCsv && c.target_percentage.errors" class="invalid-feedback">
-							  <div *ngIf="c.target_percentage.errors.required">Target Percentage is required</div>
-							  <div *ngIf="c.target_percentage.errors.pattern">Enter a valid Target Percentage</div>
+						  <label for="projection_percentage">Target Percentage Projection</label>
+						  <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="projection_percentage" class="input input-gray2" [ngClass]="{ 'is-invalid': submittedCsv && c.projection_percentage.errors }"/>
+						  <div *ngIf="submittedCsv && c.projection_percentage.errors" class="invalid-feedback">
+							  <div *ngIf="c.projection_percentage.errors.required">Target Percentage Projection is required</div>
+							  <div *ngIf="c.projection_percentage.errors.pattern">Enter a valid Target Percentage Projection</div>
 						  </div>
 						</div>
 					  </div>
@@ -225,6 +236,12 @@
 								&nbsp;<label>{{fileName}}</label>
                             </div>
                         </div>
+
+                        <div class="custom-control custom-checkbox">
+                            <input #checkProjePerc type="checkbox" [(ngModel)]="checkProjectionPercent" (change)="checkStoreProjectionPercent(checkProjePerc.checked)" class="custom-control-input" id="customCheck" name="example1">
+                            <label class="custom-control-label" for="customCheck">Use Target Percentage Projection Store Default</label>
+                        </div>
+
                     </div>
                 </div>
                 <button type="buttons" [disabled]="loadingCsv" class="btn-ligth-blue mt-5">

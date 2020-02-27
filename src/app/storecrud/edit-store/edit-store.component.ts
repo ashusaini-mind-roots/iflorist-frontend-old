@@ -46,7 +46,7 @@ export class EditStoreComponent implements OnInit {
   storeId: string;
   fileName: string = '';
   dataResut:any;
-
+  checkProjectionPercent: boolean;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -62,6 +62,12 @@ export class EditStoreComponent implements OnInit {
     this.selectedFile = new ImageSnippet('', null);
 	this.selectedCsvFile = new ImageSnippet('', null);
   }
+
+  checkStoreProjectionPercent(checked){
+      if(checked){
+          this.c.projection_percentage.setValue(this.f.projection_percentage.value);
+      }else this.c.projection_percentage.setValue(null);
+   }
 
   formatNumberPhone(number:string)
   {
@@ -124,7 +130,7 @@ export class EditStoreComponent implements OnInit {
 
     });
 	this.csvForm = this.formBuilder.group({
-      target_percentage: ['', Validators.required],
+        projection_percentage: ['', Validators.required],
     });
     this.route.params.subscribe(params => {
       this.storeService.getStore(params['id']).subscribe(res => {
@@ -253,7 +259,7 @@ export class EditStoreComponent implements OnInit {
 		  return;
 	  }
 	  this.loadingCsv = true;
-	  this.storeService.uploadCsv(this.storeId,this.selectedCsvFile.file,this.c.target_percentage.value).subscribe(
+	  this.storeService.uploadCsv(this.storeId,this.selectedCsvFile.file,this.c.projection_percentage.value).subscribe(
                 (response:any) => {
 				if(response.status=='errors')
 				{
