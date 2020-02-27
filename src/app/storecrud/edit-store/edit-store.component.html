@@ -42,13 +42,13 @@
                             <label for="contact_phone">Phone Number </label>
                             <input type="text" [value]="storeEditform.get('contact_phone').value | formatPhone" formControlName="contact_phone" (input)="formatNumberPhone($event.target.value)" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
                             <div *ngIf="submitted && f.contact_phone.errors" class="invalid-feedback">
-                              <div *ngIf="f.contact_phone.errors.minlength">Zip Code min lenght is 8</div>
-                              <div *ngIf="f.contact_phone.errors.maxlength">Zip Code max lenght is 8</div>
+                              <div *ngIf="f.contact_phone.errors.minlength">Phone Number Code min lenght is 8</div>
+                              <div *ngIf="f.contact_phone.errors.maxlength">Phone Number Code max lenght is 8</div>
                             </div>  
                         </div>
                         <div class="form-group">
                             <label for="address">Address </label>
-                            <input type="text" formControlName="address" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />
+                            <input type="text" formControlName="address" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
                         </div>
                         <div class="row">
                             <div class="col-md-6">

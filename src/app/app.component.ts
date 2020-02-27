@@ -17,6 +17,7 @@ export class AppComponent implements OnInit{
     modules: any;
     stores:any;
 	companyName:string = '';
+	varr:boolean = true;
 	
 
     ngOnInit() {
@@ -135,6 +136,12 @@ export class AppComponent implements OnInit{
 		else return false;
 	}
 
+	isSettingsActive(url:any)
+	{
+		if(this.router.isActive('stores') || this.router.isActive('employees') || this.router.isActive('companyemployee-list') || this.router.isActive('app-users'))
+			return true;
+		else return false;
+	}
     /*cancelCompany()
     {
 

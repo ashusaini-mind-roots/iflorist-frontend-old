@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.display-block{
+	display:block;
+}
+
 a {
   cursor: pointer;
   color: #1CABA0 !important;
@@ -530,7 +534,23 @@ bg-state-blue-active{
   text-align: inherit;
   line-height: 12px;
 }
-.list-group-item-action-menu:focus{
+
+.router-link-active{
+	position: relative;
+	display: block;
+    /*padding: .75rem 1rem;*/
+	margin-bottom: -1px;
+	background-color: #20293c !important;
+	border-left: 7px solid #1cab9f;
+	color: #1cab9f !important;
+	font-weight: 500;
+}
+
+.router-link-active .icon, .list-group-item-action-menu:focus .icon-14{
+  filter: invert(59%) sepia(6%) saturate(2458%) hue-rotate(128deg) brightness(90%) contrast(88%);
+}
+
+/*.list-group-item-action-menu:focus{
   position: relative;
   display: block;
   //padding: .75rem 1rem;
@@ -540,9 +560,11 @@ bg-state-blue-active{
   color: #1cab9f !important;
   font-weight: 500;
 }
+
 .list-group-item-action-menu:focus .icon, .list-group-item-action-menu:focus .icon-14{
   filter: invert(59%) sepia(6%) saturate(2458%) hue-rotate(128deg) brightness(90%) contrast(88%);
-}
+}*/
+
 .active-item{
   position: relative;
   display: block;
