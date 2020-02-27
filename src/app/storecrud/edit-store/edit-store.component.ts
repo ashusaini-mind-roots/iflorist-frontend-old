@@ -45,6 +45,7 @@ export class EditStoreComponent implements OnInit {
   employees: any[];
   storeId: string;
   fileName: string = '';
+  dataResut:any;
 
 
   constructor(
@@ -215,11 +216,12 @@ export class EditStoreComponent implements OnInit {
 
       this.storeService.updateStore(params['id'],this.f.store_name.value,this.f.contact_email.value,
           this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.f.projection_percentage.value,this.selectedFile.file,this.f.target_costof_goods.value,this.f.target_costof_fresh.value,
-          this.f.sui.value,this.f.futa.value,this.f.social_security.value,this.f.medicare.value ).subscribe(
-              data=> {
-			    let response = data;
-				if(response.status=='error')
-			      this.messageToastService.sendMessage('error', 'Store Message', response.errors);
+          this.f.sui.value,this.f.futa.value,this.f.social_security.value,this.f.medicare.value )
+		  .pipe()
+		  .subscribe(
+              (data: any) => {
+			    if(data.status=='error')
+			      this.messageToastService.sendMessage('error', 'Store Message', data.errors);
 			    else
 			    {
 				  this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');
@@ -252,7 +254,7 @@ export class EditStoreComponent implements OnInit {
 	  }
 	  this.loadingCsv = true;
 	  this.storeService.uploadCsv(this.storeId,this.selectedCsvFile.file,this.c.target_percentage.value).subscribe(
-              response=> {
+                (response:any) => {
 				if(response.status=='errors')
 				{
 					this.messageToastService.sendMessage('error', 'Store Message', response.error);
