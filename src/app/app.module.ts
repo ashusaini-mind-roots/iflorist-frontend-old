@@ -37,6 +37,7 @@ import { YearQuarterComponent } from './year-quarter/year-quarter.component';
 import { MessageService } from './_services/message.service';;
 import { WeekPanelComponent } from './week-panel/week-panel.component';
 import { ProjectionComponent } from './projection/projection.component';
+import { WeeklyProjectionComponent } from './weeklyprojection/weeklyprojection.component';
 import { SalesComponent } from './sales/sales.component';
 import { MessageComponent } from './message/message.component';
 import { SchedulerComponent } from './scheduler_elements/scheduler/scheduler.component';
@@ -99,6 +100,7 @@ import { UsersettingsComponent } from './top_bar_elements/usersettings/usersetti
         WeekPanelComponent,
         SalesComponent,
         ProjectionComponent,
+		WeeklyProjectionComponent,
         MessageComponent,
         SchedulerComponent,
         FinanceViewComponent,

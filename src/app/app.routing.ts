@@ -15,6 +15,7 @@ import {RegisterCheckEmailMessageComponent} from './register-check-email-message
 import {CostOfFreshComponent} from "@app/cost-of-fresh/cost-of-fresh.component";
 import {WeekPanelComponent} from "@app/week-panel/week-panel.component";
 import {ProjectionComponent} from './projection/projection.component'
+import {WeeklyProjectionComponent} from './weeklyprojection/weeklyprojection.component'
 import {SalesComponent} from "@app/sales/sales.component";
 import { SchedulerComponent } from './scheduler_elements/scheduler/scheduler.component';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
@@ -44,6 +45,7 @@ const routes: Routes = [
     { path: 'week-panel/:cost_of/:id', component: WeekPanelComponent },
     { path: 'sales', component: SalesComponent },
     { path: 'projections', component: ProjectionComponent },
+	{ path: 'weeklyprojections', component: WeeklyProjectionComponent },
     { path: 'scheduler', component: SchedulerComponent },
     { path: 'employees', component: EmployeeParentComponent },
     { path: 'employees-list', component: EmployeeListComponent },

@@ -136,11 +136,14 @@ export class AppComponent implements OnInit{
 		else return false;
 	}
 
-	isSettingsActive(url:any)
+	isSettingsActive()
 	{
-		if(this.router.isActive('stores') || this.router.isActive('employees') || this.router.isActive('companyemployee-list') || this.router.isActive('app-users'))
+		if(this.router.isActive('stores',true) || this.router.isActive('employees',true) || this.router.isActive('companyemployee-list',true) || this.router.isActive('app-users',true))
+		{
 			return true;
-		else return false;
+		}
+		else 
+			return false;
 	}
     /*cancelCompany()
     {

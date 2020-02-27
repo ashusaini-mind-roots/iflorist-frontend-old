@@ -31,7 +31,7 @@
         <a *ngIf="hasAcces" class="d-inline-flex dropdown-btn py-3 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular">
             <div class="icon-14 setting-icon ml-4 mr-4"></div>Settings
         </a>
-        <div *ngIf="hasAcces" [ngStyle]="{'display':isSettingsActive('stores') ? 'block' : 'none'}"  class="dropdown-container display-block">
+        <div *ngIf="hasAcces" [ngStyle]="{'display':isSettingsActive() ? 'block' : 'none'}"  class="dropdown-container display-block">
             <a routerLinkActive="router-link-active" class="py-3 pl-6 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/stores">Stores</a>
             <a routerLinkActive="router-link-active" class="py-3 pl-6 list-group-item-menu list-group-item-action-menu bg-dark-blue font-regular" routerLink="/employees">
               Employees
