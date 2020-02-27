@@ -165,6 +165,8 @@ export class CreateStoreComponent implements OnInit {
      this.f.contact_email.setValue('');
      this.f.contact_phone.setValue('');
      this.f.zip_code.setValue('');
+	 this.f.city.setValue('');
+	 this.f.state.setValue('');
      this.f.address.setValue('');
 	 this.f.target_percentage.setValue('');
      this.f.projection_percentage.setValue('');

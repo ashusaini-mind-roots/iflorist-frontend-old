@@ -253,13 +253,22 @@ export class EditStoreComponent implements OnInit {
 	  this.loadingCsv = true;
 	  this.storeService.uploadCsv(this.storeId,this.selectedCsvFile.file,this.c.target_percentage.value).subscribe(
               response=> {
-                this.messageToastService.sendMessage('success', 'Store Message', 'Weekly Projection Percent Revenues set successfully !');
-                // console.log(response)
-			    this.loadingCsv = false;
-				this.fileName = '';
-				this.selectedCsvFile = new ImageSnippet('', null);
-				this.inputVariable.nativeElement.value = "";
-				this.submittedCsv = false;
+				if(response.status=='errors')
+				{
+					this.messageToastService.sendMessage('error', 'Store Message', response.error);
+					this.loadingCsv = false;
+				}
+				else
+				{
+					this.messageToastService.sendMessage('success', 'Store Message', 'Weekly Projection Percent Revenues set successfully !');
+					// console.log(response)
+					this.loadingCsv = false;
+					this.fileName = '';
+					this.selectedCsvFile = new ImageSnippet('', null);
+					this.inputVariable.nativeElement.value = "";
+					this.submittedCsv = false;
+				}
+                
               },
               error => {
                 console.log(error)
