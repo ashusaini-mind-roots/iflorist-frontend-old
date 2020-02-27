@@ -4,13 +4,14 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class MessageService {
     private subject = new Subject<any>();
+	private subjectReloadAfterCreate = new Subject<any>();
 
     sendMessage(message: string) {
         this.subject.next( message );
     }
 	
 	sendMessageReloadStore() {
-		this.subject.next();
+		this.subjectReloadAfterCreate.next();
     }
 	
 	sendMessageToast(variant:string ,message: string) {
@@ -31,6 +32,6 @@ export class MessageService {
     }
 	
 	getMessageReloadStore(): Observable<any> {
-        return this.subject.asObservable();
+        return this.subjectReloadAfterCreate.asObservable();
     }
 }
