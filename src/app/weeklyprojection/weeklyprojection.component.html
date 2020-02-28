@@ -34,9 +34,18 @@
         </ng-template>
         <ng-template pTemplate="body" let-projection let-rowData let-editing="editing" let-ri="rowIndex">
             <tr [pEditableRow]="rowData">
-              <td class="No">{{projection.id}}</td>
-              <td>{{projection.week_number}}</td>
-              <td>{{projection.year_reference}}</td>
+              <td class="No"></td>
+              <td><span class="circle-small">{{projection.number}}</span> {{projection.week_number}}</td>
+              <td>
+			  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.year_reference"  required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+						{{projection.year_reference}}
+                    </ng-template>
+                </p-cellEditor>
+			  </td>
               <td>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
@@ -48,14 +57,7 @@
                 </p-cellEditor>
               </td>
               <td>
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.year_proyection"  required>
-                    </ng-template>
-                    <ng-template pTemplate="output">
-						{{projection.year_proyection}}
-                    </ng-template>
-                </p-cellEditor>
+                {{projection.year_proyection}}
               </td>
 <!--              <td></td>-->
               <td>

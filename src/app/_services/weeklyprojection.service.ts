@@ -18,8 +18,8 @@ export class WeeklyProjectionService {
     return this.http.get(`${environment.apiUrl}/weekly_projection_percent_revenue/projections/${store_id}/${year}`);
   }
 
-  updateProyection(proyection_id,amt_total,year_proyection){
-    return this.http.put(`${environment.apiUrl}/weekly_projection_percent_revenue/projections/update/${proyection_id}`, {amt_total,year_proyection} );
+  updateProyection(proyection_id,amt_total,year_reference){
+    return this.http.put(`${environment.apiUrl}/weekly_projection_percent_revenue/projections/update/${proyection_id}`, {amt_total,year_reference} );
   }
 
 }

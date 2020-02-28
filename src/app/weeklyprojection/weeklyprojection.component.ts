@@ -107,7 +107,7 @@ console.log("juan")
         
         this.loading = true;
         
-        this.projectionService.updateProyection(projections.id,projections.amt_total,projections.year_proyection).subscribe(
+        this.projectionService.updateProyection(projections.id,projections.amt_total,projections.year_reference).subscribe(
               response=> {
                 this.loading = false;
                 delete this.clonedProjections[projections.id];
