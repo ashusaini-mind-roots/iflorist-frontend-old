@@ -80,7 +80,7 @@ console.log("juan")
 
   receiveStorage(storage){
     this.selectedStorage = storage;
-    this.loadProjection();
+    //this.loadProjection();
   }
 
   loadProjection()

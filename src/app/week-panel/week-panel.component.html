@@ -1,6 +1,11 @@
 <div class="row plrb-08">
     <div class="col d-flex align-items-start flex-wrap">
-        <div class="mr-auto previouslink">Previous</div>
+        <div class="mr-auto previouslink">
+            <a [routerLink]="['/cost-of', costOf]" class="addbig d-flex align-items-center">
+                <span class="back mr-1"></span>
+                <span class="txt-color-dark-black">Previous</span>
+            </a>
+        </div>
         <div class="ng-cloak font-medium ">
             Current Week Sales: <span class="txt-color-blue-soft">{{calcDailyTotal()|currency}}</span>
             Target: <span class="txt-color-blue-soft">{{target}}%</span>
