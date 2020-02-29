@@ -146,6 +146,14 @@ export class RegisterCcDataComponent implements OnInit {
     //--------------------------------------
 
   }
+  
+  keyDownFunction(event)
+	{
+		if(event.keyCode == 13)
+		{
+			this.onSubmit();
+		}
+	}
 
   onSubmit() {
     this.submitted = true;
