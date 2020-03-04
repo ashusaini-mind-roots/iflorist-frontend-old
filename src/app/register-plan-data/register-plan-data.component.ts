@@ -51,6 +51,14 @@ export class RegisterPlanDataComponent implements OnInit {
     })
   }
 
+  keyDownFunction(event)
+	{
+		if(event.keyCode == 13)
+		{
+			this.next();
+		}
+	}
+  
   next(){
 
     if(this.routerService.getRouterData()==undefined)

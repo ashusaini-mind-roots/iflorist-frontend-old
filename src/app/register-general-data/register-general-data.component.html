@@ -3,7 +3,7 @@
         <div class="card-body mt-lg-4">
             <h4 class="card-title text-center mb-4">Sign up</h4>
 
-            <form [formGroup]="SignUpForm">
+            <form (keydown)="keyDownFunction($event)" (ngSubmit)="next()" [formGroup]="SignUpForm">
                 <div class="form-group">
                     <label for="name" class="font-light txt-color-gray2">Company name</label>
                     <input type="text" formControlName="name" class="imput-gray1" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
@@ -32,7 +32,7 @@
                         <div *ngIf="SignUpForm.hasError('notSame')">Password do not match</div>
                     </div>
                 </div>
-                <button [disabled]="loading" type="button" (click)="next()" class="btn-dark-blue w-100 mt-4">
+                <button [disabled]="loading" class="btn-dark-blue w-100 mt-4">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Next
                 </button>

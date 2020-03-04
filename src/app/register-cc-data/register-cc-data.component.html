@@ -2,7 +2,7 @@
   <div class="card login-loginup-card p-lg-2 align-self-center max-w-600">
     <div class="card-body mt-lg-4">
       <h4 class="card-title text-center mb-4">Sign up</h4>
-      <form method="post" id="payment-form"
+      <form (ngSubmit)="onSubmit()" (keydown)="keyDownFunction($event)" method="post" id="payment-form"
             [formGroup]="SignUpForm">
         <div class="row">
 <div class="col">
@@ -217,7 +217,7 @@
         <!--<div class="form-group row">-->
 
         <!--</div>-->
-        <button (click)="onSubmit()" [disabled]="loading" type="button" class="btn-dark-blue">
+        <button  [disabled]="loading" type="button" class="btn-dark-blue">
           <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           Next
         </button>

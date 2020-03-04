@@ -10,6 +10,7 @@ Bootstrap components and utilities with little customization.</p>
 </div>
 
 <div class="container">
+  <form (ngSubmit)="next()" (keydown)="keyDownFunction($event)" method="post">
   <div class="row">
     <div class="card-deck mb-3 text-center">
       <div *ngFor = "let plan of plans" class="card mb-4 box-shadow">
@@ -29,12 +30,13 @@ Bootstrap components and utilities with little customization.</p>
     </div>
   </div>
   <div [hidden]="loaded" class="">
-      <button type="button" (click)="next()" class="btn btn-primary">
+      <button class="btn btn-primary">
         Next
       </button>
     </div> 
   <div [hidden]="!loaded" class="text-center mb-12">
     <p>Loading ....</p> 
   </div>
+  </form>
 </div>
 

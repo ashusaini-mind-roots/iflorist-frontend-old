@@ -36,6 +36,14 @@ export class RegisterGeneralDataComponent implements OnInit {
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
+  
+  keyDownFunction(event)
+	{
+		if(event.keyCode == 13)
+		{
+			this.next();
+		}
+	}
 
   checkPassword(group: FormGroup)
   {
