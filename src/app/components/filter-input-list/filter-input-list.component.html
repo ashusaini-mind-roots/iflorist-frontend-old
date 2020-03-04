@@ -1,0 +1,14 @@
+<div class="filter-input-list">
+	<div class="input-filter">
+		<input (input)="filterByText($event.target.value)" type="text" class="input input-gray2"/>
+	</div>
+	<div class="button-style-list">
+		<button type="button" (click)="changeDisplayData(false)" [disabled]="loading" [ngClass]="{ 'active': displayList==false}">
+		  Expanded
+		</button>
+		<button type="button" (click)="changeDisplayData(true)" [disabled]="loading" [ngClass]="{ 'active': displayList==true}">
+		  List
+		</button>
+	</div>
+<div>
+

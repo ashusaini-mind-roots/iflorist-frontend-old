@@ -56,7 +56,9 @@ import { AppUserListComponent } from './app-user/app-user-list/app-user-list.com
 import { AppUserCreateComponent } from './app-user/app-user-create/app-user-create.component';
 import { AppUserEditComponent } from './app-user/app-user-edit/app-user-edit.component';
 import { SchedulerCalendarViewComponent } from './scheduler_elements/scheduler-calendar-view/scheduler-calendar-view.component';;
-import { UsersettingsComponent } from './top_bar_elements/usersettings/usersettings.component';
+import { UsersettingsComponent } from './top_bar_elements/usersettings/usersettings.component';;
+import { FilterInputListComponent } from './components/filter-input-list/filter-input-list.component';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -119,8 +121,9 @@ import { UsersettingsComponent } from './top_bar_elements/usersettings/usersetti
         AppUserCreateComponent,
         AppUserEditComponent,
         SchedulerCalendarViewComponent,
-        UsersettingsComponent
-    ],
+        UsersettingsComponent,
+        FilterInputListComponent
+            ],
 
         
 

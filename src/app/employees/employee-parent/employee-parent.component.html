@@ -1,2 +1,17 @@
-<app-employee-list></app-employee-list>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<div class="panel panel-primary">
+  <div class="panel panel-primary mb-5">
+    <div class="panel-body">
+      <div class="generic-card table-responsive">
+		  <h5 class="card-header">Employees</h5>
+		  <app-filter-input-list></app-filter-input-list>
+          <app-employee-list></app-employee-list>
+		  <div class="generic-card-footer">
+			<a [routerLink]="['/create-employee']" class="addbig d-flex align-items-center"><span class="plus mr-1"></span><span>Add Employee</span></a>
+	<!--        <a [routerLink]="['/create-employee']" class="addbig">Add Employee</a>-->
+		  </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!--<button [routerLink]="['/create-employee']" class="btn btn-success">Add Eployee</button>-->

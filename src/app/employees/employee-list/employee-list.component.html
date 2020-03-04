@@ -1,16 +1,16 @@
-<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<!--<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 <div class="panel panel-primary">
   <div class="panel panel-primary mb-5">
     <div class="panel-body">
       <div class="generic-card table-responsive">
-        <h5 class="card-header">Employees</h5>
-      <p-table class="generic-table employee-table" #dt [columns]="cols" [value]="employees" [paginator]="true" [rows]="15">
-        <ng-template pTemplate="caption">
+        <h5 class="card-header">Employees</h5>-->
+      <p-table [hidden]="!displayList" class="generic-table employee-table" #dt [columns]="cols" [value]="employees" [paginator]="true" [rows]="15">
+        <!--<ng-template pTemplate="caption">
           <div style="text-align: right">
             <i class="icon-14 setting-icon" style="margin:4px 4px 0 0"></i>
             <input class="imput-gray1" type="text" pInputText size="25" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
           </div>
-        </ng-template>
+        </ng-template>-->
         <ng-template pTemplate="header" let-columns>
           <tr>
             <th *ngFor="let col of columns">
@@ -32,16 +32,28 @@
 			<td [hidden]="employee.active!='1'">Yes</td>
             <td>
               <a [routerLink]="['/edit-employee', employee.id]" class="itemaction edititem">Edit</a>
-<!--              <button [routerLink]="['/edit-employee', employee.id]" class="btn btn-success">Edit</button>-->
+
             </td>
           </tr>
         </ng-template>
       </p-table>
-      <div class="generic-card-footer">
-        <a [routerLink]="['/create-employee']" class="addbig d-flex align-items-center"><span class="plus mr-1"></span><span>Add Employee</span></a>
-<!--        <a [routerLink]="['/create-employee']" class="addbig">Add Employee</a>-->
+	  <div [hidden]="displayList" class="row container-list-expanded">
+		  <div class="col-lg-3" *ngFor="let employee of employees">
+				<div class="container-employee">
+					<div *ngIf="employee.image!='default'" class="image"><img src="{{urlImage}}{{employee.image}}"></div>
+					<div *ngIf="employee.image=='default'" class="image"><img src="/assets/image/upload.svg"></div>
+					<div class="name">{{employee.name}}</div>
+					<div class="company-position">{{employee.store}}<span> | </span>{{employee.status_name}}</div>
+					<div class="email">{{employee.email}}</div>
+					<div class="phone">{{employee.phone_number}}</div>
+				</div>
+		  </div>
+	  </div>
+      
+        <!--<a [routerLink]="['/create-employee']" class="addbig d-flex align-items-center"><span class="plus mr-1"></span><span>Add Employee</span></a>
+
       </div>
       </div>
     </div>
   </div>
-</div>
+</div>-->
