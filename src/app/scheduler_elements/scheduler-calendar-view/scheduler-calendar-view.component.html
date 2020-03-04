@@ -30,10 +30,28 @@
       </div>
       <div class="row mx-0 px-3 my-3">
         <div class="col" *ngFor="let day of employeeToShow.schedule_days; let num = index">
-            <div class="row d-flex flex-column">
+          <div class="row ">
+            <div class="col d-flex flex-column">
               <span>{{day.day_of_week}}</span>
               <span>{{day.date}}</span>
             </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="generic-card-1 d-flex flex-column">
+                <div class="generic-card-mini-header d-flex flex-column">
+                  <span class = "scheduler-calendar-card-name"> {{employeeToShow.name}}</span>
+                  <span class = "scheduler-calendar-card-name"> {{employeeToShow.category_name}}</span>
+                </div>
+                <div class="generic-card-mini-body d-flex flex-column">
+                  <span class = "scheduler-calendar-card-time-range"> {{day.time_in}}</span>
+                </div>
+                <div class="generic-card-mini-footer d-flex justify-content-center">
+                  <span class = "scheduler-calendar-card-time-range"><a>Edit</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="generic-card-footer"></div>
