@@ -19,7 +19,7 @@
         <div class="mr-2 d-flex align-content-center ">
           <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectyear">Name:</div>
           <div class="select mr-4">
-            <select class="" id="select-employeeitemonschedule" [(ngModel)]="employeesListSelected" >
+            <select class="" id="select-employeeitemonschedule" [(ngModel)]="employeesListSelected" (change)="onEmployeeSelected($event)">
               <option *ngFor="let emp of employeesList" value="{{emp.id}}">
                 {{emp.name}}
               </option>
@@ -28,7 +28,14 @@
           </div>
         </div>
       </div>
-
+      <div class="row mx-0 px-3 my-3">
+        <div class="col" *ngFor="let day of employeeToShow.schedule_days; let num = index">
+            <div class="row d-flex flex-column">
+              <span>{{day.day_of_week}}</span>
+              <span>{{day.date}}</span>
+            </div>
+        </div>
+      </div>
       <div class="generic-card-footer"></div>
     </div>
   </div>

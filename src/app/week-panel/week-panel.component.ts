@@ -365,7 +365,7 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getWeekDataFromServer() {
-    console.log("dentro de la jugada")
+    // console.log("dentro de la jugada")
     this.getSevenDays();
     this.getProjWeeklyRev();
     this.getInvoices();
@@ -416,7 +416,7 @@ export class WeekPanelComponent implements OnInit {
   getProjWeeklyRev = function () {
     // console.log("getProjWeeklyRev");
     this.weekPanelService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
-      console.log("aki es la jugada")
+      // console.log("aki es la jugada")
       console.log(response)
       this.projWeeklyRev = response.proj_weekly_rev;
     });
@@ -554,7 +554,6 @@ export class WeekPanelComponent implements OnInit {
     this.yeartoselect = this.oldYear;
     this.getWeeks(this.oldYear);
     this.resetYearQuarter(this.oldYear);
-    console.log("elmojon: "+this.yearQuarter.year)
     this.visibleNoWeeks = false;
   }
 
