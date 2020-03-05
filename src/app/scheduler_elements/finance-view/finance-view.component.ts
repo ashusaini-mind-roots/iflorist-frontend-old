@@ -180,15 +180,14 @@ console.log("es aki la cosa")
         }
 
         var schedule_to_send = JSON.stringify(asw_toSend);
+        console.log("salvando")
+    console.log(schedule_to_send);
         this.schedulerService.updateOrAdd(this.yearQuarter.year,this.selectedWeekItem,schedule_to_send,employee_id)
           .subscribe(
                   response=> {
                       // this.loading = false;
-                      // this.success = 'Store updated succefull !';
                         console.log(response)
                     this.updateIdToNewSchedulesTimesAdded(response.schedules_added, response.employee_id);
-                    // console.log("mojon")
-                    // console.log(this.employeesScheduleList)
                   },
                   error => {
                       console.log(error)
@@ -199,10 +198,10 @@ console.log("es aki la cosa")
   }
 
   updateIdToNewSchedulesTimesAdded(schedules_added,employee_id){
-    console.log('-------------')
-    console.log(schedules_added)
-    console.log(employee_id)
-    console.log('-------------')
+    // console.log('-------------')
+    // console.log(schedules_added)
+    // console.log(employee_id)
+    // console.log('-------------')
     for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
       if(this.employeesScheduleList[i].employee_id == employee_id){
         for(let j = 0 ; j < schedules_added.length ; j++){

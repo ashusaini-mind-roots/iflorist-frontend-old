@@ -16,10 +16,16 @@ export class SchedulerCalendarViewComponent implements OnInit {
   @Input() selectedWeekItem: any;
   categoriesEmployeesList: any[];
   categoriesEmployeesListSelectedItem: any;
-  employeesList: any[];
   employeesListSelected: any;
+  employeesList: any[];
   employeesScheduleList: any[];
   employeeToShow: any;
+  employee_scheduler_day_to_edit: any;
+  visible_edit_day_modal: boolean = false;
+
+  time_in: any;
+  time_out: any;
+  break_time: any;
 
   constructor(
       private schedulerService: SchedulerService,
@@ -30,6 +36,7 @@ export class SchedulerCalendarViewComponent implements OnInit {
       ref.receiveStorage(store);
     });
     this.employeeToShow = {};
+    this.employee_scheduler_day_to_edit = {};
   }
 
   ngOnInit() {
@@ -151,5 +158,89 @@ export class SchedulerCalendarViewComponent implements OnInit {
    // }
    console.log("Employee to show");
    console.log(this.employeeToShow);
+  }
+
+  showEdit_day_modal = function(day, time_in, time_out, break_time){
+    this.time_in = time_in;
+    this.time_out = time_out;
+    this.break_time = break_time;
+
+    this.employee_scheduler_day_to_edit = day;
+    this.visible_edit_day_modal = true;
+  }
+
+  getSchedule_days = function(category_id, employee_id){
+    for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
+      let employee = this.employeesScheduleList[i];
+      if(employee.employee_id == employee_id && employee.category_id ==  category_id){
+        return employee.schedule_days;
+      }
+    }
+    return undefined;
+  }
+
+  editSchedule = function(){
+    if(this.employee_scheduler_day_to_edit){
+      this.employee_scheduler_day_to_edit.time_in = this.time_in;
+      this.employee_scheduler_day_to_edit.time_out = this.time_out;
+      this.employee_scheduler_day_to_edit.break_time = this.break_time;
+      let schedule_days = this.getSchedule_days(this.categoriesEmployeesListSelectedItem,this.employeesListSelected);
+      if(schedule_days != undefined && this.employeeToShow){
+        this.updateSchedulesByCategory(schedule_days,this.employeeToShow.category_name, this.employeeToShow.employee_id);
+      }
+    }
+    this.visible_edit_day_modal = false;
+  }
+
+  updateSchedulesByCategory = function(schedule_days,category_name,employee_id){
+    var esw_array = new Array();
+
+    var asw_toSend = JSON.parse(JSON.stringify( schedule_days ));
+    //   console.log(asw_toSend)
+    for(var j = 0 ; j < asw_toSend.length ; j++){
+      if(asw_toSend[j].time_in != undefined) {
+        asw_toSend[j].time_in = asw_toSend[j].time_in.toLocaleString("en-US", { hour12: false });
+      }
+      if(asw_toSend[j].time_out != undefined)
+        asw_toSend[j].time_out = asw_toSend[j].time_out.toLocaleString("en-US", { hour12: false });
+      asw_toSend[j].category_name = category_name;
+    }
+
+    var schedule_to_send = JSON.stringify(asw_toSend);
+    console.log("salvando")
+    console.log(schedule_to_send);
+    this.schedulerService.updateOrAdd(this.yearQuarter.year,this.selectedWeekItem,schedule_to_send,employee_id)
+        .subscribe(
+            response=> {
+              // this.loading = false;
+              console.log(response)
+              this.updateIdToNewSchedulesTimesAdded(response.schedules_added, response.employee_id);
+            },
+            error => {
+              console.log(error)
+              // this.error = error;
+              // this.loading = false;
+            }
+        );
+  }
+  updateIdToNewSchedulesTimesAdded(schedules_added,employee_id){
+    // console.log('-------------')
+    // console.log(schedules_added)
+    // console.log(employee_id)
+    // console.log('-------------')
+    for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
+      if(this.employeesScheduleList[i].employee_id == employee_id){
+        for(let j = 0 ; j < schedules_added.length ; j++){
+          console.log(this.employeesScheduleList[i]);
+          console.log(this.employeesScheduleList[i].schedule_days)
+          let found = this.employeesScheduleList[i].schedule_days.find(e => e.day_of_week == schedules_added[j].day_of_week)
+          console.log(found)
+          if(found){
+            found.id = schedules_added[j].id;
+          }
+        }
+      }
+    }
+    console.log(this.employeesScheduleList)
   }
 }
