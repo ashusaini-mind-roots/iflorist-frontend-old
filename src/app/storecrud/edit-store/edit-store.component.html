@@ -237,9 +237,9 @@
                             </div>
                         </div>
 
-                        <div class="custom-control custom-checkbox">
-                            <input #checkProjePerc type="checkbox" [(ngModel)]="checkProjectionPercent" (change)="checkStoreProjectionPercent(checkProjePerc.checked)" class="custom-control-input" id="customCheck" name="example1">
-                            <label class="custom-control-label" for="customCheck">Use Target Percentage Projection Store Default</label>
+                        <div  class="form-group custom-control custom-checkbox">
+                            <input #checkProjePerc  type="checkbox" [(ngModel)]="checkProjectionPercent" [ngModelOptions]="{standalone: true}" (change)="checkStoreProjectionPercent(checkProjePerc.checked)" class="custom-control-input" id="checkProjePerc" name="checkProjePerc">
+                            <label class="custom-control-label" for="checkProjePerc">Use Target Percentage Projection Store Default</label>
                         </div>
 
                     </div>

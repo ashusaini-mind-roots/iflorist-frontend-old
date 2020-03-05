@@ -19,7 +19,7 @@
         <div class="mr-2 d-flex align-content-center ">
           <div class="font-size-08 txt-color-gray3 font-medium pr-1 selectyear">Name:</div>
           <div class="select mr-4">
-            <select class="" id="select-employeeitemonschedule" [(ngModel)]="employeesListSelected" >
+            <select class="" id="select-employeeitemonschedule" [(ngModel)]="employeesListSelected" (change)="onEmployeeSelected($event)">
               <option *ngFor="let emp of employeesList" value="{{emp.id}}">
                 {{emp.name}}
               </option>
@@ -28,9 +28,58 @@
           </div>
         </div>
       </div>
-
+      <div class="row mx-0 px-3 my-3">
+        <div class="col" *ngFor="let day of employeeToShow.schedule_days; let num = index">
+          <div class="row ">
+            <div class="col d-flex flex-column">
+              <span>{{day.day_of_week}}</span>
+              <span>{{day.date}}</span>
+            </div>
+          </div>
+          <div class="row" *ngIf="day.time_in">
+            <div class="col">
+              <div class="generic-card-1 d-flex flex-column">
+                <div class="generic-card-mini-header d-flex flex-column">
+                  <span class = "scheduler-calendar-card-name"> {{employeeToShow.name}}</span>
+                  <span class = "scheduler-calendar-card-name"> {{employeeToShow.category_name}}</span>
+                </div>
+                <div class="generic-card-mini-body d-flex flex-column">
+                  <span class = "scheduler-calendar-card-time-range"> {{day.time_in}} - {{day.time_out}} h</span>
+                  <span class = "scheduler-calendar-card-break-time"> {{day.break_time}} min</span>
+                </div>
+                <div class="generic-card-mini-footer d-flex justify-content-center">
+                  <span class = "scheduler-calendar-card-time-range"><a (click)="showEdit_day_modal(day,day.time_in, day.time_out, day.break_time)">Edit</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="!day.time_in">
+            <div class="col">
+              <a class="addbig d-flex align-items-center"><span class="plus mr-1"></span><span>Add</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="generic-card-footer"></div>
     </div>
   </div>
 </div>
+
+<p-dialog header="Editar" [(visible)]="visible_edit_day_modal" [minY]="70" [modal]="true" [contentStyle]="{'overflow':'visible'}" [style]="{width: '300px'}" appendTo="body">
+  <div class="d-flex flex-column">
+    <span>Shift times</span>
+    <div>
+      <input class="input-number mr-1" type="time" [(ngModel)]="time_in" placeholder="HH:mm">To
+      <input class="input-number" type="time" [(ngModel)]="time_out" placeholder="HH:mm" >
+    </div>
+    <div class="d-flex flex-column">
+      <span>Break time</span>
+      <input class="width-50px input-number" type="number"  [(ngModel)]="break_time" placeholder="min" >min
+    </div>
+    <div class="d-flex flex-column">
+      <button class="btn-ligth-blue w-100" label="Save" (click)= "editSchedule()">SAVE</button>
+      <button class="btn-generic btn-white w-100" type="button"  icon="pi pi-close" (click)="visible_edit_day_modal=false;">Cancel</button>
+    </div>
+  </div>
+</p-dialog>
 

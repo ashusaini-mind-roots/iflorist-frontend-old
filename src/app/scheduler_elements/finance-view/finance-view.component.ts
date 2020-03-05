@@ -41,7 +41,7 @@ export class FinanceViewComponent implements OnInit {
     this.schedulerService.getScheduleInformation(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.employeeStoreWeekId = response.employee_store_week_id;
 console.log("es aki la cosa")
-       console.log(response.dates_of_week);
+       console.log(response);
       this.parseScheduleInformationResponse(response.categories_schedules, response.dates_of_week);
       console.log(this.employeesScheduleList)
     });
@@ -63,7 +63,6 @@ console.log("es aki la cosa")
   }
 
   parseScheduleInformationResponse = function(categories_schedules,dates_of_week){
-
     // console.log(categories_schedules)
     var empScheList: any[] = [];
     for(var i = 0 ; i < categories_schedules.length ; i++){
@@ -72,6 +71,7 @@ console.log("es aki la cosa")
           categories_schedules[i].employees[j].total_hours = this.utilService.ParseMinutesToHoursFormat(categories_schedules[i].employees[j].total_minutes_at_week);
           var schedul = categories_schedules[i].employees[j].schedule_days[k];
           schedul.date = dates_of_week[k];
+          schedul.array_position = k;
           if(schedul.time_in != undefined)
             schedul.time_in = this.utilService.getStringTimeFormat(new Date(schedul.time_in));
           if(schedul.time_out != undefined)
@@ -180,15 +180,14 @@ console.log("es aki la cosa")
         }
 
         var schedule_to_send = JSON.stringify(asw_toSend);
+        console.log("salvando")
+    console.log(schedule_to_send);
         this.schedulerService.updateOrAdd(this.yearQuarter.year,this.selectedWeekItem,schedule_to_send,employee_id)
           .subscribe(
                   response=> {
                       // this.loading = false;
-                      // this.success = 'Store updated succefull !';
                         console.log(response)
                     this.updateIdToNewSchedulesTimesAdded(response.schedules_added, response.employee_id);
-                    // console.log("mojon")
-                    // console.log(this.employeesScheduleList)
                   },
                   error => {
                       console.log(error)
@@ -199,10 +198,10 @@ console.log("es aki la cosa")
   }
 
   updateIdToNewSchedulesTimesAdded(schedules_added,employee_id){
-    console.log('-------------')
-    console.log(schedules_added)
-    console.log(employee_id)
-    console.log('-------------')
+    // console.log('-------------')
+    // console.log(schedules_added)
+    // console.log(employee_id)
+    // console.log('-------------')
     for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
       if(this.employeesScheduleList[i].employee_id == employee_id){
         for(let j = 0 ; j < schedules_added.length ; j++){
