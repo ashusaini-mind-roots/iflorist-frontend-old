@@ -22,6 +22,7 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
 import {CretateEmployeeComponent} from './employees/cretate-employee/cretate-employee.component';
 import {EditEmployeeComponent} from './employees/edit-employee/edit-employee.component';
 import {EmployeeParentComponent} from "@app/employees/employee-parent/employee-parent.component";
+import { CompanyemployeeParentComponent} from './companyemployee/companyemployee-parent/companyemployee-parent.component';
 import { CompanyemployeeListComponent} from './companyemployee/companyemployee-list/companyemployee-list.component';
 import { CreateCompanyemployeeComponent} from './companyemployee/create-companyemployee/create-companyemployee.component';
 import { EditCompanyemployeeComponent} from './companyemployee/edit-companyemployee/edit-companyemployee.component';
@@ -51,7 +52,7 @@ const routes: Routes = [
     { path: 'employees-list', component: EmployeeListComponent },
     { path: 'create-employee', component: CretateEmployeeComponent },
     { path: 'edit-employee/:id', component: EditEmployeeComponent },
-    { path: 'companyemployee-list', component: CompanyemployeeListComponent },
+    { path: 'companyemployee-list', component: CompanyemployeeParentComponent },
     { path: 'create-companyemployee', component: CreateCompanyemployeeComponent },
     { path: 'edit-companyemployee/:id', component: EditCompanyemployeeComponent },
 	{ path: 'app-users', component: AppUserListComponent, canActivate: [AuthGuard],data: { roles: [Role.ROOT, Role.COMPANYADMIN, Role.STOREMANAGER, Role.APPUSER] }},

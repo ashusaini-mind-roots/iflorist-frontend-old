@@ -49,6 +49,7 @@ import { CretateEmployeeComponent } from './employees/cretate-employee/cretate-e
 import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { formatPhone } from './pipes/formatPhone';
+import { CompanyemployeeParentComponent } from './companyemployee/companyemployee-parent/companyemployee-parent.component';
 import { CompanyemployeeListComponent } from './companyemployee/companyemployee-list/companyemployee-list.component';
 import { CreateCompanyemployeeComponent } from './companyemployee/create-companyemployee/create-companyemployee.component';
 import { EditCompanyemployeeComponent } from './companyemployee/edit-companyemployee/edit-companyemployee.component';
@@ -113,7 +114,8 @@ import { FilterInputListComponent } from './components/filter-input-list/filter-
         ,
         EditEmployeeComponent
         ,
-        CompanyemployeeListComponent
+        CompanyemployeeListComponent,
+		CompanyemployeeParentComponent
         ,
         CreateCompanyemployeeComponent,
         EditCompanyemployeeComponent,

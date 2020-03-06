@@ -1,6 +1,6 @@
 <div class="filter-input-list">
 	<div class="input-filter">
-		<input (input)="filterByText($event.target.value)" type="text" class="input input-gray2"/>
+		<div class="icon-search"><input placeholder="Search by Name, Job title, Store" (input)="filterByText($event.target.value)" type="text" class="pl-4 input input-gray2"/></div>
 	</div>
 	<div class="button-style-list">
 		<button type="button" (click)="changeDisplayData(false)" [disabled]="loading" [ngClass]="{ 'active': displayList==false}">
