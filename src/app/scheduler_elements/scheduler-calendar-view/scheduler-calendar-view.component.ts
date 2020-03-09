@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import { SchedulerService } from "../../_services/scheduler.service";
 import { UtilsService } from "../../_services/utils.service";
 import { StoreSubscriberService } from "../../_services/storeSubscriber.service";
-// import {forEachComment} from "tslint";
 
 @Component({
   selector: 'app-scheduler-calendar-view',
@@ -21,7 +20,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
   employeesList_add_modal: any[];
   employeesListSelected_add_modal: any;
   employeesScheduleList: any[];//parse data from the server, the core of all the information here
-  // employeeToShow: any;
 
   employeesToShow: any[];
   seven_days_dates: any[];
@@ -49,7 +47,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
     storeSubscriberService.subscribe(this,function (ref,store) {
       ref.receiveStorage(store);
     });
-    // this.employeeToShow = {};
     this.employeesToShow = [];
     this.seven_days_dates = [];
     this.employee_scheduler_day_to_edit = {};
@@ -57,6 +54,7 @@ export class SchedulerCalendarViewComponent implements OnInit {
 
   ngOnInit() {
     this.getCategoriesEmployees();
+    this.employeesListSelected = -1; //select -All- as default on employees combo
   }
 
   ngOnChanges(changes){
@@ -75,6 +73,7 @@ export class SchedulerCalendarViewComponent implements OnInit {
       //console.log(response);
       this.parseScheduleInformationResponse(response.categories_schedules, response.dates_of_week);
       console.log(this.employeesScheduleList)
+      this.populateEmployeeToShow(this.categoriesEmployeesListSelectedItem, this.employeesListSelected);
     });
   }
 
@@ -101,56 +100,43 @@ export class SchedulerCalendarViewComponent implements OnInit {
         categories_schedules[i].total_time = 0.0/*this.calcEmployeesTotalHours(this.categories_schedules[i].employees)*/;
       }
     }
-    // return this.employeesScheduleList = categories_schedules;
-
-    // console.log(categories_schedules)
     for(var l = 0 ; l < categories_schedules.length ; l++){
       if(categories_schedules[l].employees.length > 0){
         empScheList = empScheList.concat(categories_schedules[l].employees);
       }
     }
-    console.log("mojon")
     console.log(empScheList)
     return this.employeesScheduleList = empScheList;
   }
 
   onCategorySelected(event: any){
-    console.log("pingaaaaaaaa: ")
     console.log(event.target.value);
-   // this.employeesListSelected  = [];
-    // var foundStore = this.stores.filter(obj=>obj.id == value);
     this.populateEmployeesCombo(event.target.value);
+    this.populateEmployeeToShow(this.categoriesEmployeesListSelectedItem, this.employeesListSelected);
   }
   onEmployeeSelected(event:any){
     console.log("employee selected")
     console.log(event.target.value);
     console.log(this.employeesListSelected)
     console.log(this.categoriesEmployeesListSelectedItem)
-    this.populateEmployeeToShow(this.categoriesEmployeesListSelectedItem, event.target.value);
+    this.populateEmployeeToShow(this.categoriesEmployeesListSelectedItem, this.employeesListSelected);
   }
 
   receiveStorage(storage){
-    // console.log("pepetey::::")
     console.log(this.selectedStorage)
 
-    // console.log("pepetey::::")
     this.selectedStorage = storage;
     this.getCategoriesEmployees();
   }
 
   getCategoriesEmployees = function () {
-     // console.log("estorage--" + this.selectedStorage.id)
     this.schedulerService.getCategoriesEmployees(this.selectedStorage.id).subscribe((response: any) =>{
       this.categoriesEmployeesList = response.categories_employees;
       if(this.categoriesEmployeesList && this.categoriesEmployeesList.length > 0) {
-        // console.log("categoriesEmployeesList");
-        // console.log(this.categoriesEmployeesList)
         this.categoriesEmployeesListSelectedItem = this.categoriesEmployeesList[0].id;
         this.populateEmployeesCombo(this.categoriesEmployeesListSelectedItem);
-        if(this.categoriesEmployeesList[0].employees.length > 0)
-          this.employeesListSelected = this.categoriesEmployeesList[0].employees[0].id;
-        // console.log("categoriesEmployeesListSelectedItem")
-        // console.log(this.categoriesEmployeesListSelectedItem)
+        //if(this.categoriesEmployeesList[0].employees.length > 0)
+          //this.employeesListSelected = this.categoriesEmployeesList[0].employees[0].id;
       }
     });
   }
@@ -159,15 +145,11 @@ export class SchedulerCalendarViewComponent implements OnInit {
     for(let i=0 ; i<this.categoriesEmployeesList.length ; i++){
         if(this.categoriesEmployeesList[i].id == category_id ) {
           this.employeesList = this.categoriesEmployeesList[i].employees;
-          console.log("la pinga pa tol mundo")
           console.log(this.employeesList);
           this.employeesList_add_modal = this.employeesList.map(x => Object.assign([], x));
-         // this.employeesListSelected = this.categoriesEmployeesList[i].employees[0].id;
           break;
         }
     }
-    console.log("employeesList_add_modal")
-    console.log(this.employeesList_add_modal)
   }
 
   populateEmployeeToShow = function(category_id, employee_id){
@@ -175,14 +157,20 @@ export class SchedulerCalendarViewComponent implements OnInit {
    //  console.log(this.employeesScheduleList)
   //  employee_id = -1;//esto es probando, en realidad se pasa por parametro, ver como poner en el combo de los employees la primera option en -1 el value
     if(employee_id == -1){//show all employees
-      this.employeesToShow = this.employeesScheduleList;
+      this.employeesToShow = []/*this.employeesScheduleList*/;
+      for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
+        let employee = this.employeesScheduleList[i];
+        if(employee.category_id ==  category_id){
+            this.employeesToShow.push(employee);
+        }
+      }
     }
     else {
        this.employeesToShow = [];
        for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
           let employee = this.employeesScheduleList[i];
           if(employee.employee_id == employee_id && employee.category_id ==  category_id){
-              this.employeeToShow = employee;
+              // this.employeeToShow = employee;
               this.employeesToShow.push(employee);
               break;
           }
@@ -190,10 +178,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
     }
     if(this.employeesToShow.length > 0)
       this.seven_days_dates = this.employeesToShow[0].schedule_days;
-
-   // console.log("Employee to show");
-   // console.log(this.employeeToShow);
-   //  console.log(this.employeesToShow);
   }
 
   showEdit_day_modal = function(day, time_in, time_out, break_time){
@@ -266,10 +250,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
         );
   }
   updateIdToNewSchedulesTimesAdded(schedules_added,employee_id){
-    // console.log('-------------')
-    // console.log(schedules_added)
-    // console.log(employee_id)
-    // console.log('-------------')
     for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
       if(this.employeesScheduleList[i].employee_id == employee_id){
         for(let j = 0 ; j < schedules_added.length ; j++){
@@ -293,9 +273,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
           days.push(this.employeesToShow[i].schedule_days[weekDay]);
         }
     }
-    // console.log("days")
-    // console.log(days)
-    // console.log(this.seven_days_dates.length)
     return days;
   }
 
@@ -318,23 +295,20 @@ export class SchedulerCalendarViewComponent implements OnInit {
   }
 
   saveSchedule = function(){
-    let employee_scheduler_day_to_save = undefined;
-    // employeesListSelected_add_modal
+      let employee_scheduler_day_to_save = undefined;
 
-    this.setShiftToDayToSaveSchedule(this.add_time_in, this.add_time_out, this.add_break_time);
+      this.setShiftToDayToSaveSchedule(this.add_time_in, this.add_time_out, this.add_break_time);
 
-
-      // console.log(this.employee_scheduler_day_to_edit);
       let schedule_days = this.getSchedule_days(this.categoriesEmployeesListSelectedItem,this.employeesListSelected_add_modal);
       console.log("mojon divino")
       console.log(schedule_days)
-    console.log("scheduler day to save")
-    console.log(this.employee_scheduler_day_to_save)
+      console.log("scheduler day to save")
+      console.log(this.employee_scheduler_day_to_save)
       if(schedule_days != undefined && this.employee_scheduler_day_to_save){
         this.updateSchedulesByCategory(schedule_days,this.employee_scheduler_day_to_save.category_name, this.employee_scheduler_day_to_save.employee_id);
       }
 
-    this.visible_edit_day_modal = false;
+      this.visible_edit_day_modal = false;
   }
 
   setShiftToDayToSaveSchedule(add_time_in,add_time_out,add_break_time){
