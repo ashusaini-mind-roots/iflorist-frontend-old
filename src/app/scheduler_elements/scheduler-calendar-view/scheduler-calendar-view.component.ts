@@ -38,6 +38,7 @@ export class SchedulerCalendarViewComponent implements OnInit {
 
   add_week_day_number: any;
   employee_scheduler_day_to_save: any;
+  date_toshow: any;
 
   constructor(
       private schedulerService: SchedulerService,
@@ -181,6 +182,7 @@ export class SchedulerCalendarViewComponent implements OnInit {
   }
 
   showEdit_day_modal = function(day, time_in, time_out, break_time){
+    this.date_toshow = day.date;
     this.time_in = time_in;
     this.time_out = time_out;
     this.break_time = break_time;
@@ -273,6 +275,8 @@ export class SchedulerCalendarViewComponent implements OnInit {
           days.push(this.employeesToShow[i].schedule_days[weekDay]);
         }
     }
+    // console.log("deyyy")
+    // console.log(days);
     return days;
   }
 
@@ -289,9 +293,18 @@ export class SchedulerCalendarViewComponent implements OnInit {
   showAdd_day_modal(week_day_number){
     this.visible_add_day_modal = true;
     this.add_week_day_number = week_day_number;
+    console.log("pingamierda")
+    console.log(this.employeesList_add_modal);
+
     this.add_time_in = undefined;
     this.add_time_out = undefined;
     this.add_break_time = undefined;
+
+    this.employeesListSelected_add_modal = this.employeesList_add_modal[0].id;
+    this.setDataTo_add(this.employeesListSelected_add_modal);;
+
+    console.log(this.employeesListSelected_add_modal);
+
   }
 
   saveSchedule = function(){
@@ -343,13 +356,29 @@ export class SchedulerCalendarViewComponent implements OnInit {
   }
 
   employeesListSelected_add_modal_change(event: any){
-    let day = this.getDayByEmployeeId_weekDay_number(event.target.value,this.add_week_day_number);
+    this.setDataTo_add(event.target.value);
+    // let day = this.getDayByEmployeeId_weekDay_number(event.target.value,this.add_week_day_number);
+    // if(day){
+    //   this.add_time_in = day.time_in;
+    //   this.add_time_out = day.time_out;
+    //   this.add_break_time = day.break_time;
+    // }
+    // console.log(day);
+
+  }
+  setDataTo_add(employee_id){
+    let day = this.getDayByEmployeeId_weekDay_number(employee_id,this.add_week_day_number);
+    if(day)
+      this.date_toshow = day.date;
     if(day){
       this.add_time_in = day.time_in;
       this.add_time_out = day.time_out;
       this.add_break_time = day.break_time;
     }
-    console.log(day);
-
+    else {
+      this.add_time_in = undefined;
+      this.add_time_out = undefined;
+      this.add_break_time = undefined;
+    }
   }
 }

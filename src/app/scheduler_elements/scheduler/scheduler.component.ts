@@ -6,6 +6,7 @@ import { SchedulerService } from "../../_services/scheduler.service";
 import { CheckRole } from "../../_helpers/check-role";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageToastService } from '../../_services/messageToast.service';
+import { MessageService } from "../../_services/message.service";
 
 
 @Component({
@@ -30,6 +31,9 @@ export class SchedulerComponent implements OnInit {
   differenceCol: number = 0.00;
   projectedPayrol: number = 0.00;
 
+  title: string = "Finance View";
+  displayList: boolean = true;
+
   constructor(
       private storeSubscriberService: StoreSubscriberService,//service used to receive store from top bar stores combobox
       private utilService: UtilsService,
@@ -38,6 +42,7 @@ export class SchedulerComponent implements OnInit {
 	  private checkRole: CheckRole,
 	  private formBuilder: FormBuilder,
 	  private message: MessageToastService,
+      private messageService: MessageService,
   )
   {
     storeSubscriberService.subscribe(this,function (ref,store) {
@@ -53,9 +58,19 @@ export class SchedulerComponent implements OnInit {
       target: ['', Validators.required],
     });
    // this.getWeeks();
+
+    this.messageService.getChangeDisplayModeData().subscribe(message => {
+      // console.log(message);
+      this.displayList = message;
+      if(this.displayList == true)
+        this.title = "Finance View";
+      else this.title = "Scheduler";
+    });
   }
   
   get t() { return this.targetform.controls; }
+
+
 
   receiveStorage(storage){
     this.selectedStorage = storage;
