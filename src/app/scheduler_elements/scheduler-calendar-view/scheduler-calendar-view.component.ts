@@ -293,15 +293,15 @@ export class SchedulerCalendarViewComponent implements OnInit {
   showAdd_day_modal(week_day_number){
     this.visible_add_day_modal = true;
     this.add_week_day_number = week_day_number;
-    console.log("pingamierda")
-    console.log(this.employeesList_add_modal);
+
+    // console.log(this.employeesList_add_modal);
 
     this.add_time_in = undefined;
     this.add_time_out = undefined;
     this.add_break_time = undefined;
 
     this.employeesListSelected_add_modal = this.employeesList_add_modal[0].id;
-    this.setDataTo_add(this.employeesListSelected_add_modal);;
+    this.setDataTo_add(this.employeesListSelected_add_modal);
 
     console.log(this.employeesListSelected_add_modal);
 
