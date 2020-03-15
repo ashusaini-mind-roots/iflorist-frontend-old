@@ -41,14 +41,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" formControlName="name" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.name.errors}" />
+                  <input type="text" formControlName="name" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.name.errors}" />
                   <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                     <div *ngIf="f.name.errors.required">Name is required</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="system_account">System User</label>
-                  <select formControlName="system_account" class="input input-gray2" id="select-system-account" (change)="onChangeSysteAccount()">
+                  <select formControlName="system_account" class="line-input" id="select-system-account" (change)="onChangeSysteAccount()">
                     <option value='0'>
                       No
                     </option>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group" [hidden]=!systemUser>
                   <label for="email">Email address</label>
-                  <input type="text" formControlName="email" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
+                  <input type="text" formControlName="email" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
                   <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                     <div *ngIf="f.email.errors.email">Email address should be a valid email</div>
                     <div *ngIf="f.email.errors.required">Email address is required</div>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="form-group">
                   <label for="status">Status</label>
-                  <select formControlName="status" class="input input-gray2" id="select-status" [ngClass]="{ 'is-invalid': submitted && f.status.errors}">
+                  <select formControlName="status" class="line-input" id="select-status" [ngClass]="{ 'is-invalid': submitted && f.status.errors}">
                     <option *ngFor="let statu of status" value="{{statu.id}}">
                       {{statu.name}}
                     </option>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="form-group">
                   <label for="category">Position</label>
-                  <select formControlName="category" class="input input-gray2" id="select-category" [ngClass]="{ 'is-invalid': submitted && f.category.errors}">
+                  <select formControlName="category" class="line-input" id="select-category" [ngClass]="{ 'is-invalid': submitted && f.category.errors}">
                     <option *ngFor="let category of categories" value="{{category.id}}">
                       {{category.name}}
                     </option>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="form-group">
                   <label for="overtimeelegible">Active</label>
-                  <select formControlName="active" class="input input-gray2" id="select-active">
+                  <select formControlName="active" class="line-input" id="select-active">
                     <option value='0'>
                       No
                     </option>
@@ -105,7 +105,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                   <label for="year_pay">Year Payment</label>
-                  <select formControlName="year_pay" class="input input-gray2" id="select-year-pay">
+                  <select formControlName="year_pay" class="line-input" id="select-year-pay">
                     <option value='0'>
                       No
                     </option>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="form-group">
                   <label for="hourlypayrate">Compensation</label>
-                  <input type="text" formControlName="hourlypayrate" class="input input-gray2" pattern="^[0-9]+([.][0-9]+)?$" [ngClass]="{ 'is-invalid': submitted && f.hourlypayrate.errors}" />
+                  <input type="text" formControlName="hourlypayrate" class="line-input" pattern="^[0-9]+([.][0-9]+)?$" [ngClass]="{ 'is-invalid': submitted && f.hourlypayrate.errors}" />
                   <div *ngIf="submitted && f.hourlypayrate.errors" class="invalid-feedback">
                     <div *ngIf="f.hourlypayrate.errors.required">Compensation is required</div>
                   </div>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="form-group">
                   <label for="overtimeelegible">Over time elegible</label>
-                  <select formControlName="overtimeelegible" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.overtimeelegible.errors}" id="select-overtimeelegible">
+                  <select formControlName="overtimeelegible" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.overtimeelegible.errors}" id="select-overtimeelegible">
                     <option value='0'>
                       No
                     </option>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="form-group">
                   <label for="phone_number">Phone Number</label>
-                  <input type="text" [value]="employeeform.get('phone_number').value | formatPhone" formControlName="phone_number" (input)="formatNumberPhone($event.target.value)" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors}" />
+                  <input type="text" [value]="employeeform.get('phone_number').value | formatPhone" formControlName="phone_number" (input)="formatNumberPhone($event.target.value)" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors}" />
                   <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
                     <div *ngIf="f.phone_number.errors.required">Phone number is required</div>
 					<div *ngIf="f.phone_number.errors.minlength">Phone Number min lenght is 8</div>
@@ -149,7 +149,7 @@
                 </div>
                 <div class="form-group">
                   <label for="workmancomb">Work man comp</label>
-                  <select formControlName="workmancomb" class="input input-gray2"  [ngClass]="{ 'is-invalid': submitted && f.workmancomb.errors}" id="select-position">
+                  <select formControlName="workmancomb" class="line-input"  [ngClass]="{ 'is-invalid': submitted && f.workmancomb.errors}" id="select-position">
                     <option *ngFor="let workmancomb of workmancombs" value="{{workmancomb.id}}">
                       {{workmancomb.name}}
                     </option>

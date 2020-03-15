@@ -9,14 +9,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" formControlName="name" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.name.errors}" />
+                  <input type="text" formControlName="name" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.name.errors}" />
                   <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                     <div *ngIf="f.name.errors.required">Name is required</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="email">Email address</label>
-                  <input type="text" formControlName="email" class="input input-gray2" [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
+                  <input type="text" formControlName="email" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
                   <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                     <div *ngIf="f.email.errors.email">Email address should be a valid email</div>
                     <div *ngIf="f.email.errors.required">Email address is required</div>
@@ -26,7 +26,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                   <label for="category">Store</label>
-                  <select formControlName="store" class="input input-gray2" id="select-store" [ngClass]="{ 'is-invalid': submitted && f.store.errors}">
+                  <select formControlName="store" class="line-input" id="select-store" [ngClass]="{ 'is-invalid': submitted && f.store.errors}">
                     <option *ngFor="let store of stores" value="{{store.id}}">
                       {{store.store_name}}
                     </option>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                   <label for="overtimeelegible">Active</label>
-                  <select formControlName="active" class="input input-gray2" id="select-active">
+                  <select formControlName="active" class="line-input" id="select-active">
                     <option value='0'>
                       No
                     </option>

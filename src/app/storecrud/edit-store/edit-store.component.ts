@@ -255,7 +255,7 @@ export class EditStoreComponent implements OnInit {
 	  }
 	  if(this.selectedCsvFile.file==null)
 	  {
-		  this.messageToastService.sendMessage('error', 'Store Message', 'Seleccione un archivo .CVS');
+		  this.messageToastService.sendMessage('error', 'Store Message', 'Select a CSV file');
 		  return;
 	  }
 	  this.loadingCsv = true;
