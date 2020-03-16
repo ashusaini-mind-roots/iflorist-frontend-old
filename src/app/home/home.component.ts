@@ -297,8 +297,7 @@ export class HomeComponent {
             this.actualCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
             this.projectedCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = Number(this.weeksCog[i].projected_weekly_revenue);
         }
-        console.log("pinga fly")
-        console.log(this.projectedCogByWeek);
+        // console.log(this.projectedCogByWeek);
     }
     calcActualCofTotal(){
         this.actualCofTotal = this.projectionsCof = 0.00;

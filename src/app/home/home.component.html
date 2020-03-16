@@ -11,10 +11,10 @@
                     <p-chart type="bar" [data]="salesChart"></p-chart>
                     <div class="p-2 pt-3 d-flex justify-content-between">
                         <div class=""><span class="txt-size-12rem txt-color-gray4 font-medium pr-08">Actual</span>
-                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">${{actualSalesTotal}}</span>
+                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">{{actualSalesTotal| currency : 'USD'}}</span>
                         </div>
                         <div class=""><span class="txt-size-12rem txt-color- font-medium pr-08">Projected</span>
-                            <span class="txt-color-red txt-size-12rem font-medium ">${{projWeeklyRevQuarter}}</span>
+                            <span class="txt-color-red txt-size-12rem font-medium ">{{projWeeklyRevQuarter| currency : 'USD'}}</span>
                         </div>
                     </div>
                 </div>
@@ -26,10 +26,10 @@
 <!--                    <p-chart type="bar"></p-chart>-->
                     <div class="p-2 pt-3 d-flex justify-content-between">
                         <div class=""><span class="txt-size-12rem txt-color-gray4 font-medium pr-08">Actual</span>
-                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">${{actualCogTotal}}</span>
+                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">{{actualCogTotal| currency : 'USD'}}</span>
                         </div>
                         <div class=""><span class="txt-size-12rem txt-color- font-medium pr-08">Projected</span>
-                            <span class="txt-color-red txt-size-12rem font-medium ">${{projectionsCog}}</span>
+                            <span class="txt-color-red txt-size-12rem font-medium ">{{projectionsCog| currency : 'USD'}}</span>
                         </div>
                     </div>
                 </div>
@@ -43,10 +43,10 @@
 <!--                    <p-chart type="bar"></p-chart>-->
                     <div class="p-2 pt-3 d-flex justify-content-between">
                         <div class=""><span class="txt-size-12rem txt-color-gray4 font-medium pr-08">Actual</span>
-                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">${{actualCofTotal}}</span>
+                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">{{actualCofTotal | currency : 'USD'}}</span>
                         </div>
                         <div class=""><span class="txt-size-12rem txt-color- font-medium pr-08">Projected</span>
-                            <span class="txt-color-red txt-size-12rem font-medium ">${{projectionsCof}}</span>
+                            <span class="txt-color-red txt-size-12rem font-medium ">{{projectionsCof| currency : 'USD'}}</span>
                         </div>
                     </div>
                 </div>
@@ -58,10 +58,10 @@
 <!--                    <p-chart type="bar"></p-chart>-->
                     <div class="p-2 pt-3 d-flex justify-content-between">
                         <div class=""><span class="txt-size-12rem txt-color-gray4 font-medium pr-08">Actual</span>
-                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">${{actualColTotal}}</span>
+                            <span class="txt-color-blue-soft txt-size-12rem font-medium ">{{actualColTotal | currency : 'USD'}}</span>
                         </div>
                         <div class=""><span class="txt-size-12rem txt-color- font-medium pr-08">Projected</span>
-                            <span class="txt-color-red txt-size-12rem font-medium ">${{projectionsCof}}</span>
+                            <span class="txt-color-red txt-size-12rem font-medium ">{{projectionsCof| currency : 'USD'}}</span>
                         </div>
                     </div>
                 </div>

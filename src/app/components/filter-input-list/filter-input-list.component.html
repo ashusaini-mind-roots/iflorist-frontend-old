@@ -1,5 +1,5 @@
 <div class="filter-input-list">
-	<div class="input-filter">
+	<div [hidden]="hideFilter"  class="input-filter">
 		<div class="icon-search"><input placeholder="Search by Name, email, phone number" (input)="filterByText($event.target.value)" type="text" class="pl-4 input input-gray2"/></div>
 	</div>
 	<div class="button-style-list">
@@ -10,5 +10,5 @@
 		  List
 		</button>
 	</div>
-<div>
+</div>
 

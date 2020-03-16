@@ -1,7 +1,8 @@
-<div class="panel panel-primary mb-5">
-    <div class="panel-body">
-        <div class="generic-card table-responsive">
-            <h5 class="card-header">Finance View</h5>
+<!--<div class="panel panel-primary mb-5">-->
+<!--    <div class="panel-body">-->
+<!--        <div class="generic-card table-responsive">-->
+<!--            <h5 class="card-header">Finance View</h5>-->
+
             <p-table class="generic-table finance-view-table" #dt [columns]="cols" dataKey="id" [value]="employeesScheduleList" [lazy]="true">
           <ng-template pTemplate="header" let-columns>
             <tr>
@@ -14,7 +15,7 @@
           <ng-template pTemplate="body" let-employeesScheduleList let-expanded="expanded" let-columns="columns">
 <!--    <tr *ngFor="let employee of employeesScheduleList">-->
         <tr>
-          <td>{{employeesScheduleList.name}}</td>
+          <td class="pl-5">{{employeesScheduleList.name}}</td>
           <td>{{employeesScheduleList.category_name}}</td>
 <!--          <td>{{employeesScheduleList.total_minutes_at_week}}</td>-->
             <td>{{calcEmployeesTotalHours(employeesScheduleList)}}</td>
@@ -64,7 +65,7 @@
 
 </p-table>
             <div class="generic-card-footer"></div>
-        </div>
-    </div>
-</div>
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 

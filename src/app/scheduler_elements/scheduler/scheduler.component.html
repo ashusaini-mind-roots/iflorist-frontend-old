@@ -99,5 +99,16 @@
   </div>
 </div>
 <!--<app-calendar-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem ></app-calendar-view>-->
-<app-finance-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem ></app-finance-view>
-<app-scheduler-calendar-view [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem></app-scheduler-calendar-view>
+
+<div class="panel panel-primary mb-5">
+	<div class="panel-body">
+		<div class="generic-card table-responsive">
+			<div class="d-flex justify-content-between align-items-center mb-xl-5 mb-lg-5">
+				<h5 class="card-header">{{title}}</h5>
+				<app-filter-input-list [hideFilter]=true class="pt-3 pr-3"></app-filter-input-list>
+			</div>
+			<app-finance-view  [hidden]="!displayList" [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem ></app-finance-view>
+			<app-scheduler-calendar-view [hidden]="displayList" [selectedStorage]=selectedStorage [yearQuarter]=yearQuarter [selectedWeekItem]=selectedWeekItem></app-scheduler-calendar-view>
+		</div>
+	</div>
+</div>

@@ -1,3 +1,4 @@
+<div class="separator-line my-3"></div>
 <!--<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 <div class="panel panel-primary">
   <div class="panel panel-primary mb-5">
@@ -37,9 +38,9 @@
           </tr>
         </ng-template>
       </p-table>
-	  <div [hidden]="displayList" class="row container-list-expanded">
-		  <div class="col-lg-3" *ngFor="let employee of employees">
-				<div class="container-employee">
+	  <div [hidden]="displayList" class="row container-list-expanded m-0">
+		  <div class="col-lg-3 mb-xl-4 mb-lg-4" *ngFor="let employee of employees">
+				<div class="container-employee generic-card-2">
 					<div *ngIf="employee.image!='default'" class="image"><img src="{{urlImage}}{{employee.image}}"></div>
 					<div *ngIf="employee.image=='default'" class="image"><img src="/assets/image/missing_avatar.svg"></div>
 					<div class="name">{{employee.name}}</div>

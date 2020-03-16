@@ -268,7 +268,6 @@ export class CalendarViewComponent implements OnInit {
 //     if(this.selectedStorage && this.selectedWeekItem ){
 //       console.log(this.selectedStorage);
 //       console.log(this.yearQuarter);
-//       console.log("pinga: " + this.selectedWeekItem);
 //       this.getScheduleInformation();
 //     }
 //

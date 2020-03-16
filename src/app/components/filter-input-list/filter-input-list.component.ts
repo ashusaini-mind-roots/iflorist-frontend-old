@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { MessageService } from "../../_services/message.service";
 
 @Component({
@@ -8,7 +8,8 @@ import { MessageService } from "../../_services/message.service";
 })
 export class FilterInputListComponent implements OnInit {
 	
-  displayList: boolean = true;	
+  displayList: boolean = true;
+  @Input() hideFilter: boolean = false;
 
   constructor(private messageService: MessageService) { }
 

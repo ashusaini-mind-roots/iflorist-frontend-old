@@ -23,11 +23,14 @@ export class YearQuarterComponent implements OnInit {
 
   ngOnInit() {
     let currentYear = this.utilService.GetCurrentYear();
-    this.years = this.utilService.GetYears(currentYear - 1, currentYear  );
+    this.years = this.utilService.GetYears(currentYear - 4, currentYear  );
+    console.log("yearselected");
+    console.log(this.yearSelected)
     if(this.yearSelected == undefined) {
       var yq = JSON.parse(localStorage.getItem('yearQuarter'));
       if (yq != undefined && yq.year != undefined)
         this.yearSelected = yq.year;
+      else this.yearSelected = currentYear;
     }else
       this.yearSelected = currentYear;
     this.quarters = this.utilService.GetYears(1, 4);
