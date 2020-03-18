@@ -56,20 +56,13 @@ export class SalesComponent implements OnInit {
 
   receiveStorage(storage){
     this.selectedStorage = storage;
-    console.log(this.selectedStorage)
     this.getSales();
   }
 
   ngOnInit() {
     this.loading = true;
     this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
-
-    //this.getSales();
-    //this.getProjectedSales();
-
     this.loadHeaders();
-
-    console.log(this.projWeeklyRevQuarter)
   }
 
   showLineChart(){
@@ -113,9 +106,7 @@ export class SalesComponent implements OnInit {
   }
   getSales()
   {
-      //get sales list
     this.loading = true;
-    // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
       this.salesService.getSales(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
         this.weeks = response.weeks;
         this.calcActualSalesTotal();
@@ -133,7 +124,6 @@ export class SalesComponent implements OnInit {
       this.actualSalesTotal += total;
       this.actualSalesByWeek[(this.weeks[i].number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
     }
-    console.log(this.actualSalesByWeek)
   }
 
   loadHeaders(){
@@ -148,7 +138,6 @@ export class SalesComponent implements OnInit {
 
   onRowEditInit(days: any) {
     this.clonedDays[days.id] = {...days};
-   // console.log(this.clonedDays[days.id]);
   }
 
   onRowEditSave(days: any, index: number) {
@@ -161,10 +150,8 @@ export class SalesComponent implements OnInit {
                 this.loading = false;
                 delete this.clonedDays[days.id];
                 this.getSales();
-               // console.log(response)
               },
               error => {
-                //this.proyections[index] = this.clonedProjections[projections.id];
                 delete this.clonedDays[days.id];
                 console.log(error)
                 this.loading = false;
@@ -187,9 +174,6 @@ export class SalesComponent implements OnInit {
    */
   getProjectedSales(){
     this.salesService.getProjWeeklyRevQuarter(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
-      console.log("firu")
-      console.log(response);
-
       this.projWeeklyRevQuarter = response.proj_weekly_rev_quarter;
       this.projectedSalesByWeek = response.all_projected_sales;
       this.showPieChart();

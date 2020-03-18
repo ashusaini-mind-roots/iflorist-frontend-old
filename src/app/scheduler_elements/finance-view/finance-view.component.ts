@@ -29,10 +29,7 @@ export class FinanceViewComponent implements OnInit {
   }
 
   ngOnChanges(changes){
-      console.log("week:" + this.selectedWeekItem)
     if(this.selectedStorage && this.selectedWeekItem ){
-      console.log(this.selectedStorage);
-      console.log(this.yearQuarter);
       this.getScheduleInformation();
     }
   }
@@ -40,10 +37,7 @@ export class FinanceViewComponent implements OnInit {
   getScheduleInformation = function () {
     this.schedulerService.getScheduleInformation(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.employeeStoreWeekId = response.employee_store_week_id;
-console.log("es aki la cosa")
-       console.log(response);
       this.parseScheduleInformationResponse(response.categories_schedules, response.dates_of_week);
-      console.log(this.employeesScheduleList)
     });
   }
 
@@ -63,7 +57,6 @@ console.log("es aki la cosa")
   }
 
   parseScheduleInformationResponse = function(categories_schedules,dates_of_week){
-    // console.log(categories_schedules)
     var empScheList: any[] = [];
     for(var i = 0 ; i < categories_schedules.length ; i++){
       for(var j = 0 ; j < categories_schedules[i].employees.length ; j++){
@@ -77,20 +70,14 @@ console.log("es aki la cosa")
           if(schedul.time_out != undefined)
             schedul.time_out = this.utilService.getStringTimeFormat(new Date(schedul.time_out));
         }
-        //esta linea esta adicionada ahora, no estaba en el codigo viejo
         categories_schedules[i].total_time = 0.0/*this.calcEmployeesTotalHours(this.categories_schedules[i].employees)*/;
       }
     }
-    // return this.employeesScheduleList = categories_schedules;
-
-    // console.log(categories_schedules)
     for(var l = 0 ; l < categories_schedules.length ; l++){
       if(categories_schedules[l].employees.length > 0){
         empScheList = empScheList.concat(categories_schedules[l].employees);
       }
     }
-    console.log("mojon")
-    console.log(empScheList)
     return this.employeesScheduleList = empScheList;
   }
 
@@ -98,12 +85,10 @@ console.log("es aki la cosa")
   {
     var minutesTotal = 0;
     if(time_in != undefined && time_out != undefined){
-      // console.log("timein:" + time_in + ' , ' + "timeout:" + time_out)
       if(break_time == undefined) break_time = 0;
       var time_inn = "2020-10-10:" + time_in;
       var time_outt = "2020-10-10:" + time_out;
       minutesTotal = (this.utilService.diffDateTime(time_inn,time_outt).totalmin - break_time);
-      //console.log("minutestotal:" + minutesTotal)
     }
     return minutesTotal;
   }
@@ -113,23 +98,19 @@ console.log("es aki la cosa")
     var totalhours = 0;
     var totalTotal = 0;
 
-   // for(var i = 0 ; i < employees.length ; i++){
+    totalhours = 0;
+    for(var j = 0 ; j < employee.schedule_days.length ; j++){
+      var schedule = employee.schedule_days[j];
+      totalhours += this.calcTimesDifferenceMinutes_Util(schedule.time_in, schedule.time_out, schedule.break_time);
 
-      totalhours = 0;
-      for(var j = 0 ; j < employee.schedule_days.length ; j++){
-        var schedule = employee.schedule_days[j];
-        totalhours += this.calcTimesDifferenceMinutes_Util(schedule.time_in, schedule.time_out, schedule.break_time);
-       // console.log(totalhours)
-      }
-      totalTotal += totalhours;
-      employee.total_minutes_at_week = totalhours;
-      employee.total_hours = this.utilService.ParseMinutesToHoursFormat(employee.total_minutes_at_week);
-    //}
+    }
+    // totalTotal += totalhours;
+    employee.total_minutes_at_week = totalhours;
+    employee.total_hours = this.utilService.ParseMinutesToHoursFormat(employee.total_minutes_at_week);
     return employee.total_hours;
   }
 
   calcTimesDifference = function (time_in, time_out, break_time) {
-//console.log(time_in + "," + time_out + "," + break_time)
     if(time_in != undefined && time_out != undefined && time_in != time_out){
       if(break_time == undefined)
         break_time = 0;
@@ -148,7 +129,6 @@ console.log("es aki la cosa")
 
 
       var minutesTotal = (this.utilService.diffDateTime(obstartDT,obendDT).totalmin - break_time);
-     // console.log("totalmin:" + this.utilService.diffDateTime(obstartDT,obendDT).totalmin)
       var h = Math.floor(minutesTotal / 60);
       var m = minutesTotal % 60;
       var hh = h < 10 ? '0' + h : h;
@@ -159,17 +139,9 @@ console.log("es aki la cosa")
   }
 
   updateSchedulesByCategory = function(/*employees*/schedule_days,category_name,employee_id){
-    console.log(category_name)
-        // Spinner.toggle();
         var esw_array = new Array();
 
-        // for(var i = 0 ; i < employees.length ; i++){
-        //     esw_array = esw_array.concat(employees[i].schedule_days);
-        // }
-        // var asw_toSend = angular.copy(esw_array, asw_toSend);
-        // var asw_toSend = Object.assign(asw_toSend, schedule_days);
         var asw_toSend = JSON.parse(JSON.stringify( schedule_days ));
-     //   console.log(asw_toSend)
         for(var j = 0 ; j < asw_toSend.length ; j++){
             if(asw_toSend[j].time_in != undefined) {
                 asw_toSend[j].time_in = asw_toSend[j].time_in.toLocaleString("en-US", { hour12: false });
@@ -180,13 +152,9 @@ console.log("es aki la cosa")
         }
 
         var schedule_to_send = JSON.stringify(asw_toSend);
-        console.log("salvando")
-    console.log(schedule_to_send);
         this.schedulerService.updateOrAdd(this.yearQuarter.year,this.selectedWeekItem,schedule_to_send,employee_id)
           .subscribe(
                   response=> {
-                      // this.loading = false;
-                        console.log(response)
                     this.updateIdToNewSchedulesTimesAdded(response.schedules_added, response.employee_id);
                   },
                   error => {
@@ -198,24 +166,16 @@ console.log("es aki la cosa")
   }
 
   updateIdToNewSchedulesTimesAdded(schedules_added,employee_id){
-    // console.log('-------------')
-    // console.log(schedules_added)
-    // console.log(employee_id)
-    // console.log('-------------')
     for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
       if(this.employeesScheduleList[i].employee_id == employee_id){
         for(let j = 0 ; j < schedules_added.length ; j++){
-          console.log(this.employeesScheduleList[i]);
-          console.log(this.employeesScheduleList[i].schedule_days)
           let found = this.employeesScheduleList[i].schedule_days.find(e => e.day_of_week == schedules_added[j].day_of_week)
-          console.log(found)
           if(found){
             found.id = schedules_added[j].id;
           }
         }
       }
     }
-    console.log(this.employeesScheduleList)
   }
 
   get hasAcces() {

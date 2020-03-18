@@ -115,7 +115,6 @@ export class CreateStoreComponent implements OnInit {
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
-      console.log(this.selectedFile.file);
     });
     reader.readAsDataURL(file);
   }

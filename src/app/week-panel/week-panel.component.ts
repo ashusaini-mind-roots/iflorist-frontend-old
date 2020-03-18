@@ -129,7 +129,6 @@ export class WeekPanelComponent implements OnInit {
     });
     this.route.params.subscribe(params => {
       this.costOf = params['cost_of'];
-      console.log("costOf:" + this.costOf);
     });
 
     this.getWeeks();
@@ -196,15 +195,11 @@ export class WeekPanelComponent implements OnInit {
   receiveYearQuarter($event){
     this.oldYear = this.yearQuarter.year;
     this.yearQuarter = $event;
-    console.log("oldyear:"+this.oldYear);
-    //this.yearSelected = "2019";
     this.getWeeks();
-    //this.getWeekDataFromServer();
   }
   receiveStorage(storage){
     this.selectedStorage = storage;
     this.getWeeks();
-    //this.getWeekDataFromServer();
   }
 
   calcDailyTotal = function () {
@@ -302,10 +297,7 @@ export class WeekPanelComponent implements OnInit {
     this.weekList = response.weeks;
     if(this.weekList != undefined && this.weekList.length == 0) {
       this.yeartoselect = ""+this.oldYear;
-      console.log("yeartoselect = "+""+this.oldYear);
       this.showDialogNoWeeks();
-      //this.getWeeks(this.oldYear);
-      //jQuery('#noweeksModal').modal();
     }
     else
       this.getWeekDataFromServer();
@@ -323,8 +315,6 @@ export class WeekPanelComponent implements OnInit {
     this.weekPanelService.getNotes(this.selectedStorage.id,this.selectedWeekItem,this.yearSelected).subscribe((response: any) =>{
       this.notesYearSelected = response.result.noteYearSelected;
       this.oldNotes = response.result.oldNotes;
-      console.log('oldNotes '+this.oldNotes);
-      console.log(this.notesYearSelected);
     });
   }
 
@@ -365,14 +355,11 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getWeekDataFromServer() {
-    // console.log("dentro de la jugada")
     this.getSevenDays();
     this.getProjWeeklyRev();
     this.getInvoices();
     this.getTarget();
     this.getNotes();
-    // this.calcCostDifference();
-    // this.getNotes();
   }
 
   loadInvoicesTableHeaders(){
@@ -414,10 +401,7 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getProjWeeklyRev = function () {
-    // console.log("getProjWeeklyRev");
     this.weekPanelService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
-      // console.log("aki es la jugada")
-      console.log(response)
       this.projWeeklyRev = response.proj_weekly_rev;
     });
   }
@@ -425,7 +409,6 @@ export class WeekPanelComponent implements OnInit {
     this.weekPanelService.getTarget(this.costOf,this.selectedStorage.id).subscribe((response: any) =>{
 
       this.target = (this.costOf == 'fresh') ? response['target_cof'] : ((this.costOf == 'goods') ? response['target_cog'] : 0.00) ;
-	  //this.t.target.setValue(this.target);
 	});
   }
 
@@ -435,7 +418,6 @@ export class WeekPanelComponent implements OnInit {
 
   showEditDay(title:string) {
     this.title = title;
-    console.log(this.title);
     if(title=='Monday')
     {
         this.dialogValues.id = this.monday.id;
@@ -507,7 +489,6 @@ export class WeekPanelComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-              //console.log(data);
               this.getSevenDays();
               this.visible = false;
               this.messageToastService.sendMessage('success','Day Message','One day was updated !');
@@ -533,11 +514,9 @@ export class WeekPanelComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-              //console.log(data);
               this.getNotes();
               this.visibleDialogNote = false;
               this.messageToastService.sendMessage('success','Note Message','One note was created !');
-              //this.router.navigate([this.returnUrl]);
             },
             error => {
               this.visibleDialogNote = false;

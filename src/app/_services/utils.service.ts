@@ -61,7 +61,7 @@ export class UtilsService {
             obstartDT.setHours(startDT[0]);
             obstartDT.setMinutes(startDT[1]);
             obstartDT.setSeconds(startDT[2]);
-            // console.log("pepitostring1: " + obstartDT.getHours())
+
         }
         else if(typeof startDT == 'string' && startDT.match(/^now$/i)) var obstartDT = new Date();
         else if(typeof startDT == 'string' && startDT.match(/^tomorrow$/i)){
@@ -69,7 +69,6 @@ export class UtilsService {
             obstartDT.setHours(24);
             obstartDT.setMinutes(0);
             obstartDT.setSeconds(1);
-            // console.log("pepitostring2: " + obstartDT.getHours())
         }
         else var obstartDT = new Date(startDT);
 
@@ -80,7 +79,6 @@ export class UtilsService {
             obendDT.setHours(endDT[0]);
             obendDT.setMinutes(endDT[1]);
             obendDT.setSeconds(endDT[2]);
-            // console.log("pepitostring3: " + obstartDT.getHours())
         }
         else if(typeof endDT == 'string' && endDT.match(/^now$/i)) var obendDT = new Date();
         else if(typeof endDT == 'string' && endDT.match(/^tomorrow$/i)){
@@ -88,11 +86,9 @@ export class UtilsService {
             obendDT.setHours(24);
             obendDT.setMinutes(0);
             obendDT.setSeconds(1);
-            // console.log("pepitostring4: " + obstartDT.getHours())
         }
         else {
             var obendDT = new Date(endDT)
-            // console.log("pepitostring5: " + endDT)
         };
 
         // gets the difference in number of seconds

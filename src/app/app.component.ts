@@ -21,21 +21,6 @@ export class AppComponent implements OnInit{
 	
 
     ngOnInit() {
-       /*$(document).ready(() => {
-            $("#menu-toggle").click(function(e) {
-                console.log('akiiii');
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
-        });*/
-
-        /*(function ($){
-            $(document).ready(function(e){
-                console.log('akiiii');
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
-        })(jquery);*/
 		this.loadModules();
         this.loadStores();
 	}
@@ -44,27 +29,19 @@ export class AppComponent implements OnInit{
         const currentUser = this.authenticationService.currentUserValue;
         if(currentUser)
         {
-            //console.log(currentUser.user.id);
             return this.planService.getByUser(currentUser.user.id).subscribe((data: any) =>{
                 this.modules = data.modules;
-                console.log("modules")
-                console.log(data.test);
-                console.log(data.modules);
             });
         }
     }
-	
-	
 
     loadStores(){
         const currentUser = this.authenticationService.currentUserValue;
 		if(currentUser)
         {
 			this.companyName = currentUser.company.name;
-            //console.log(currentUser.user.id);
             return this.companyService.storesByCompany().subscribe((data: any) =>{
                 this.stores = data.stores;
-                console.log(this.stores);
             });
         }
     }
@@ -101,21 +78,7 @@ export class AppComponent implements OnInit{
     }
 	
 	get hasAcces() {
-        /*if(this.currentUser)
-		{
-			let roles = this.currentUser.roles;
-			let result = false;
-			roles.forEach(function(value){
-				if(value.name == Role.COMPANYADMIN || value.name == Role.ROOT || value.name == Role.STOREMANAGER)
-				{
-					result = true;
-				}
-			});
-			
-			return result;
-		}
-		return false;*/
-		if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin() || this.checkRole.isStoreManager())
+    	if(this.checkRole.isRoot() || this.checkRole.isCompanyAdmin() || this.checkRole.isStoreManager())
 		  return true;
 		else return false;
 	}
@@ -143,10 +106,5 @@ export class AppComponent implements OnInit{
 		else 
 			return false;
 	}
-    /*cancelCompany()
-    {
-
-    }*/
-
 
 }

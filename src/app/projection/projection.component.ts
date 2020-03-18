@@ -54,79 +54,48 @@ export class ProjectionComponent implements OnInit {
       { field: this.yearQuarter.year - 1, header: this.yearQuarter.year - 1 },//esto esta mal, hay ke poner los datos reales del year proyection y year reference
       { field: 'adjust', header: 'Adjust' },
       { field: 'year_proyection', header: this.yearQuarter.year },
-      // { field: 'event_override', header: 'Event Override' },
       { field: 'actions', header: 'Actions' }
     ];
   }
 
   receiveYearQuarter($event){
     this.yearQuarter = $event;
-    //this.yearIndexSelected = this.yearQuarter.year;
-console.log("juan")
-     console.log(this.yearQuarter);
-    // this.yearIndexSelected = yearIndexSelected;
     this.loadHeaders();
     this.loadProjection();
-    // this.getWeekDataFromServer();
   }
-
-  // onYearSelected(yearIndexSelected:number)
-  // {
-  //     console.log(yearIndexSelected);
-  //     this.yearIndexSelected = yearIndexSelected;
-  //     this.loadHeaders();
-  //     this.loadProjection();
-  // }
 
   receiveStorage(storage){
     this.selectedStorage = storage;
-    //this.loadProjection();
   }
 
   loadProjection()
   {
     this.proyections = [];
     this.loading = true;
-    console.log("pepepepe")
-    console.log(this.yearQuarter.year)
     this.projectionService.getProjectionList(this.selectedStorage.id,this.yearQuarter.year).subscribe((data: any) =>{
-     // console.log(data.projections);
       this.proyections = data.projections;
       this.loading = false;
     });
   }
 
-
   onRowEditInit(projections: any) {
     this.clonedProjections[projections.id] = {...projections};
-  //  console.log(this.clonedProjections[projections.id]);
   }
 
   onRowEditSave(projections: any, index: number) {
-      //if (projections.amt_total >= 0) {
-        
-        this.loading = true;
-        
-        this.projectionService.updateProyection(projections.id,projections.adjust).subscribe(
-              response=> {
-                this.loading = false;
-                delete this.clonedProjections[projections.id];
-                this.messageToastService.sendMessage('success','Projection Message','Projection updated successfully !');
-               // console.log(response)
-              },
-              error => {
-                this.proyections[index] = this.clonedProjections[projections.id];
-                delete this.clonedProjections[projections.id];
-                console.log(error)
-                this.loading = false;
-              }
-        );
-              
-      //}
-      // else {
-      //   this.proyections[index] = this.clonedProjections[projections.id];
-      //   delete this.clonedProjections[projections.id];
-      // }
+      this.loading = true;
+      this.projectionService.updateProyection(projections.id,projections.adjust).subscribe(
+            response=> {
+              this.loading = false;
+              delete this.clonedProjections[projections.id];
+              this.messageToastService.sendMessage('success','Projection Message','Projection updated successfully !');
+            },
+            error => {
+              this.proyections[index] = this.clonedProjections[projections.id];
+              delete this.clonedProjections[projections.id];
+              this.loading = false;
+            }
+      );
   }
 
   onRowEditCancel(projections: any, index: number) {

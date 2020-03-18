@@ -28,7 +28,6 @@ export class CompanyemployeeListComponent implements OnInit {
     this.getEmployees();
 	
 	this.messageService.getChangeDisplayModeData().subscribe(message => {
-		console.log(message);
 		this.displayList = message;
 	});
 	
@@ -50,12 +49,9 @@ export class CompanyemployeeListComponent implements OnInit {
 
   getEmployees()
   {
-    console.log(this.authenticationService.currentUserValue.company.id);
     this.companyEmployeeService.getCompanyEmployees(this.authenticationService.currentUserValue.company.id).subscribe((response: any) =>{
       this.employees = response.employees;
 	  this.employeesDefault = this.employees;
-      console.log("companyEmployees: ");
-      console.log(this.employees);
     });
   }
 

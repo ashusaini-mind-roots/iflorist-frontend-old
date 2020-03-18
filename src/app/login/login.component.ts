@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         document.body.classList.add('bg-login-img');
-        //console.log("init")
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],
             password: ['', Validators.required]
@@ -72,7 +71,6 @@ export class LoginComponent implements OnInit {
                     }
                     else
                     {
-                        console.log(data.error);
                         this.error = data.error;
                         this.loading = false;
                     }

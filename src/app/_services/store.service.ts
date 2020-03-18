@@ -15,11 +15,7 @@ export class StoreService {
   ) { }
 
   getStoreList(): Observable<any> {
-    // console.log(`${environment.apiUrl}/store/all`);
      return this.http.get(`${environment.apiUrl}/store/all`);
-         // .pipe(
-         //     retry(1),
-         // );
   }
 
   createStore(image,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,projection_percentage,target_costof_goods,target_costof_fresh,
@@ -91,12 +87,9 @@ export class StoreService {
       header.set('Content-Type','multipart/form-data');
       
       return this.http.post<any>(`${environment.apiUrl}/store/update/${store_id}`, formData,{headers: header});
-	  
-      //return this.http.put(`${environment.apiUrl}/store/update/${store_id}`, {store_name, contact_email, contact_phone, zip_code, address, city, state,target_percentage} );
   }
 
   getStore(store_id): Observable<any>{
-      console.log(`${environment.apiUrl}/store/getById/${store_id}`)
       return this.http.get(`${environment.apiUrl}/store/getById/${store_id}`);
   }
   
@@ -105,7 +98,6 @@ export class StoreService {
   }
 
     getEmployees(store_id): Observable<any>{
-        console.log(`${environment.apiUrl}/employee/all/${store_id}`);
         return this.http.get(`${environment.apiUrl}/employee/all/${store_id}`);
     }
 

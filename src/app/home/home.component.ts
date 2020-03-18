@@ -203,65 +203,46 @@ export class HomeComponent {
         this.getSales();
         this.getCog();
         this.getCof();
-      //  this.getCol();
-        // this.reloadData();
-        console.log(this.yearQuarter)
     }
     receiveStorage(storage){
         this.selectedStorage = storage;
-        console.log(this.selectedStorage)
         this.getSales();
         this.getCog();
         this.getCof();
-        //this.getCol();
     }
 
     getSales()
     {
-        //get sales list
         this.loading = true;
-        // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
         this.salesService.getSales(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
             this.weeks = response.weeks;
             this.calcActualSalesTotal();
             this.getProjectedSales();
-            // this.loading = false;
         });
-        // this.loading = false;
     }
     getCog(){
         this.loading = true;
-        // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
         this.costOfFreshService.getMasterOverviewWeekly('goods',this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
             this.weeksCog = data.master_overview_weekly;
-            // if(this.weeksCog.length > 0)
-            // {
-                console.log(this.weeksCog);
                 this.calcActualCogTotal();
                 this.showCogChart();
-            //}
-
         })
     }
     getCof(){
         this.loading = true;
-        // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
         this.costOfFreshService.getMasterOverviewWeekly('fresh',this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
             this.weeksCof = data.master_overview_weekly;
-            //if(this.weeksCof.length > 0) {
-                this.calcActualCofTotal();
-                this.showCofChart();
-                this.getCol();
+            this.calcActualCofTotal();
+            this.showCofChart();
+            this.getCol();
         })
     }
     getCol(){
         this.loading = true;
-        // console.log(this.selectedStorage.id + " -- " + this.yearQuarter.quarter)
         this.schedulerService.getScheduledPayrollByQuarter(this.yearQuarter.year,this.selectedStorage.id,this.yearQuarter.quarter).subscribe((data: any) =>{
             this.weeksCol = data.scheduled_payroll_array;
-          //  if(this.weeksCol.length > 0) {
-                this.calcActualColTotal();
-                this.showColChart();
+            this.calcActualColTotal();
+            this.showColChart();
         })
     }
     /**
@@ -269,12 +250,9 @@ export class HomeComponent {
      */
     getProjectedSales(){
         this.salesService.getProjWeeklyRevQuarter(this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((response: any) =>{
-            console.log(response);
-
             this.projWeeklyRevQuarter = response.proj_weekly_rev_quarter;
             this.projectedSalesByWeek = response.all_projected_sales;
             this.showSalesChart();
-            // this.showLineChart();
         });
     }
     calcActualSalesTotal(){
@@ -297,7 +275,6 @@ export class HomeComponent {
             this.actualCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
             this.projectedCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = Number(this.weeksCog[i].projected_weekly_revenue);
         }
-        // console.log(this.projectedCogByWeek);
     }
     calcActualCofTotal(){
         this.actualCofTotal = this.projectionsCof = 0.00;
@@ -316,7 +293,6 @@ export class HomeComponent {
         this.initColArray();
         for (let i = 0; i < this.weeksCol.length; i++) {
             let total = Number(this.weeksCol[i].scheduled_payroll);
-            console.log(this.weeksCol[i])
             this.actualColTotal += total;
             this.actualColByWeek[(this.weeksCol[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
         }

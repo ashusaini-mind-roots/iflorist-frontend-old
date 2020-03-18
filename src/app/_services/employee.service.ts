@@ -14,13 +14,11 @@ export class EmployeeService{
     ) { }
 
     getEmployees(store_id){
-        //console.log(`${environment.apiUrl}/employee/all/${store_id}`)
-        //console.log('okaaaaaaaaaaaaaaaaaaaa');
         return this.http.get(`${environment.apiUrl}/employee/allActiveAndInactive/${store_id}`);
     }
 
     createEmployee(name,email,category_id,status_id,work_man_comb_id,phone_number,image,overtimeelegible,hourlypayrate,active,store_id,year_pay,system_account) {
-        console.log(image); 
+
         
         const formData = new FormData();
         //formData.append('image', image);
@@ -47,7 +45,7 @@ export class EmployeeService{
     }
 
     updateEmployee(id,name,email,category_id,status_id,work_man_comb_id,phone_number,image,overtimeelegible,hourlypayrate,active/*,store_id*/,year_pay,system_account) {
-        console.log(image); 
+
         
         const formData = new FormData();
         //formData.append('image', image);

@@ -109,7 +109,6 @@ export class CretateEmployeeComponent implements OnInit {
 
   receiveStorage(storage){
     this.selectedStorage = storage;
-    console.log(storage)
   }
 
   processFile(imageInput: any) {
@@ -117,7 +116,6 @@ export class CretateEmployeeComponent implements OnInit {
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
-      console.log(this.selectedFile.file);
     });
     reader.readAsDataURL(file);
   }
@@ -125,28 +123,24 @@ export class CretateEmployeeComponent implements OnInit {
   getStatuList() {
     this.statuService.getStatuList().subscribe((data: any) => {
       this.status = data.status;
-      //console.log(this.stores)
     });
   }
 
   getStoreList() {
     this.storeService.getStoreList().subscribe((data: any) => {
       this.stores = data.stores;
-      console.log(this.stores)
     });
   }
 
   getCategoryList() {
     this.categoryService.getCategoryList().subscribe((data: any) => {
       this.categories = data.categories;
-      //console.log(this.stores)
     });
   }
 
   getWorkmancombList() {
     this.workmancombService.getWorkmancombList().subscribe((data: any) => {
       this.workmancombs = data.work_mans_comp;
-      //console.log(this.stores)
     });
   }
 
@@ -158,21 +152,15 @@ export class CretateEmployeeComponent implements OnInit {
     this.error = '';
     // stop here if form is invalid
     if (this.employeeform.invalid) {
-      //this.loading = false;
       return;
     }
-    /*this.error = '';
-    this.success = '';*/
     this.loading = true;
-    // store_name,contact_email,contact_phone,zip_code,address
-    console.log('status' + ' ' + this.f.status.value);
     if(this.f.system_account.value=='1')
       this.email = this.f.email.value;
     this.employeeService.createEmployee(this.f.name.value, this.email , this.f.category.value, this.f.status.value, this.f.workmancomb.value, this.f.phone_number.value, this.selectedFile.file, this.f.overtimeelegible.value, this.f.hourlypayrate.value, this.f.active.value, this.f.store.value, this.f.year_pay.value,this.f.system_account.value)
       .pipe()
       .subscribe(
         (data: any) => {
-          console.log(data);
           this.loading = false;
 
           if (data.error) {
@@ -183,9 +171,6 @@ export class CretateEmployeeComponent implements OnInit {
             this.clean();
             this.message.sendMessage('success', 'Employee Message', 'Employee created successfully successfully !');
           }
-          //this.success = 'Store added succefull !';
-          //this.clean();
-          //this.router.navigate([this.returnUrl]);
         },
         error => {
           console.log(error)
@@ -213,8 +198,7 @@ export class CretateEmployeeComponent implements OnInit {
     this.f.year_pay.setValue('0');
     this.submitted = false;
     this.error = '';
-    
-    //this.onChangeSysteAccount();
+
 
   }
 

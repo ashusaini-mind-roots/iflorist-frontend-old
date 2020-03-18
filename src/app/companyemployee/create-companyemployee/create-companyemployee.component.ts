@@ -100,7 +100,6 @@ export class CreateCompanyemployeeComponent implements OnInit {
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
-      console.log(this.selectedFile.file);
     });
     reader.readAsDataURL(file);
   }
@@ -108,7 +107,6 @@ export class CreateCompanyemployeeComponent implements OnInit {
   getStatuList() {
     this.statuService.getStatuList().subscribe((data: any) => {
       this.status = data.status;
-      //console.log(this.stores)
     });
   }
 
@@ -127,14 +125,12 @@ export class CreateCompanyemployeeComponent implements OnInit {
     this.success = '';*/
     this.loading = true;
     // store_name,contact_email,contact_phone,zip_code,address
-    console.log('status' + ' ' + this.f.status.value);
     if(this.f.system_account.value=='1')
       this.email = this.f.email.value;
     this.companyEmployeeService.createCompanyEmployee(this.authenticationService.currentUserValue.company.id,this.f.name.value, this.email , this.f.status.value, this.f.phone_number.value, this.selectedFile.file, this.f.active.value,this.f.system_account.value)
       .pipe()
       .subscribe(
         (data: any) => {
-          console.log(data);
           this.loading = false;
 
           if (data.error) {
@@ -145,13 +141,9 @@ export class CreateCompanyemployeeComponent implements OnInit {
             this.clean();
             this.message.sendMessage('success', 'Company Employee Message', 'Company Employee created successfully successfully !');
           }
-          //this.success = 'Store added succefull !';
-          //this.clean();
-          //this.router.navigate([this.returnUrl]);
         },
         error => {
           console.log(error)
-          //this.error = error;
           this.loading = false;
           this.message.sendMessage('error', 'Company Employee Message', error);
         });
@@ -170,8 +162,5 @@ export class CreateCompanyemployeeComponent implements OnInit {
     this.f.email.updateValueAndValidity();
     this.submitted = false;
     this.error = '';
-    
-    //this.onChangeSysteAccount();
-
   }
 }

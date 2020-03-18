@@ -61,22 +61,9 @@ export class WeeklyProjectionComponent implements OnInit {
 
   receiveYearQuarter($event){
     this.yearQuarter = $event;
-    //this.yearIndexSelected = this.yearQuarter.year;
-console.log("juan")
-     console.log(this.yearQuarter);
-    // this.yearIndexSelected = yearIndexSelected;
     this.loadHeaders();
     this.loadProjection();
-    // this.getWeekDataFromServer();
   }
-
-  // onYearSelected(yearIndexSelected:number)
-  // {
-  //     console.log(yearIndexSelected);
-  //     this.yearIndexSelected = yearIndexSelected;
-  //     this.loadHeaders();
-  //     this.loadProjection();
-  // }
 
   receiveStorage(storage){
     this.selectedStorage = storage;
@@ -87,10 +74,7 @@ console.log("juan")
   {
     this.proyections = [];
     this.loading = true;
-    console.log("pepepepe")
-    console.log(this.yearQuarter.year)
     this.projectionService.getProjectionList(this.selectedStorage.id,this.yearQuarter.year).subscribe((data: any) =>{
-     // console.log(data.projections);
       this.proyections = data.projections;
       this.loading = false;
     });
@@ -99,7 +83,6 @@ console.log("juan")
 
   onRowEditInit(projections: any) {
     this.clonedProjections[projections.id] = {...projections};
-  //  console.log(this.clonedProjections[projections.id]);
   }
 
   onRowEditSave(projections: any, index: number) {
@@ -112,7 +95,7 @@ console.log("juan")
                 this.loading = false;
                 delete this.clonedProjections[projections.id];
                 this.messageToastService.sendMessage('success','Projection Message','Projection updated successfully !');
-               // console.log(response)
+
 			   this.loadProjection();
               },
               error => {
@@ -122,12 +105,7 @@ console.log("juan")
                 this.loading = false;
               }
         );
-              
-      //}
-      // else {
-      //   this.proyections[index] = this.clonedProjections[projections.id];
-      //   delete this.clonedProjections[projections.id];
-      // }
+
   }
 
   onRowEditCancel(projections: any, index: number) {

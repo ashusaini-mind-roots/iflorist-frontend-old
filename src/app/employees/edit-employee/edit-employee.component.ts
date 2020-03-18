@@ -56,24 +56,16 @@ export class EditEmployeeComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.employeeService.getEmployee(params['id']).subscribe(res => {
         this.employee = res.employee;
-        console.log(this.employee);
-
         this.employeeService.getEmployeeImage(params['id']).subscribe(res => {
-		  console.log('joder');
-		  console.log(res);
-		  
 		  const file: File = res;
 		  const reader = new FileReader();
 		  reader.addEventListener('load', (event: any) => {
 			this.selectedFile = new ImageSnippet(event.target.result, file);
-			console.log(this.selectedFile.file);
 		  });
 		  reader.readAsDataURL(file); 
 		    
         });
-
         this.initFormValue(this.employee);
-
       });
     });
 	
@@ -97,7 +89,6 @@ export class EditEmployeeComponent implements OnInit {
   
   formatNumberPhone(number:string)
   {
-	 
 	  let length = number.length;
 	  let data = '';
 	 
@@ -110,7 +101,6 @@ export class EditEmployeeComponent implements OnInit {
 	  }
 	 
 	  this.f.phone_number.setValue(data);
-	 
   }
 
   initFormValue(object: any)
@@ -147,11 +137,9 @@ export class EditEmployeeComponent implements OnInit {
 
   onChangeSysteAccount()
   {
-    
     this.systemUser = !this.systemUser;
     if(this.f.system_account.value=='1')
     {
-      console.log('aaaaqqqqq');
       this.f.email.setValidators([Validators.required, Validators.email]);
       this.f.email.updateValueAndValidity();
     }
@@ -160,7 +148,6 @@ export class EditEmployeeComponent implements OnInit {
       this.f.email.setValidators(null);
       this.f.email.updateValueAndValidity();
     }
-      
   }
 
   processFile(imageInput: any) {
@@ -175,21 +162,18 @@ export class EditEmployeeComponent implements OnInit {
   getStatuList() {
     this.statuService.getStatuList().subscribe((data: any) => {
       this.status = data.status;
-      //console.log(this.stores)
     });
   }
 
   getCategoryList() {
     this.categoryService.getCategoryList().subscribe((data: any) => {
       this.categories = data.categories;
-      //console.log(this.stores)
     });
   }
 
   getWorkmancombList() {
     this.workmancombService.getWorkmancombList().subscribe((data: any) => {
       this.workmancombs = data.work_mans_comp;
-      //console.log(this.stores)
     });
   }
 
@@ -207,14 +191,12 @@ export class EditEmployeeComponent implements OnInit {
     /*this.error = '';
     this.success = '';*/
     this.loading = true;
-    // store_name,contact_email,contact_phone,zip_code,address
     if(this.f.system_account.value=='1')
       this.email = this.f.email.value;
     this.employeeService.updateEmployee(this.employee.employee.id,this.f.name.value, this.email , this.f.category.value, this.f.status.value, this.f.workmancomb.value, this.f.phone_number.value, this.selectedFile.file, this.f.overtimeelegible.value, this.f.hourlypayrate.value, this.f.active.value/*, this.selectedStorage.id*/, this.f.year_pay.value,this.f.system_account.value)
       .pipe()
       .subscribe(
         (data: any) => {
-          console.log(data);
           this.loading = false;
 
           if (data.error) {
@@ -224,9 +206,6 @@ export class EditEmployeeComponent implements OnInit {
           else {
             this.message.sendMessage('success', 'Employee Message', 'Employee updated successfully !');
           }
-          //this.success = 'Store added succefull !';
-          //this.clean();
-          //this.router.navigate([this.returnUrl]);
         },
         error => {
           console.log(error)

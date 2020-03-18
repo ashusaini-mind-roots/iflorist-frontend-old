@@ -84,7 +84,6 @@ export class AppUserEditComponent implements OnInit {
       .pipe()
       .subscribe(
         (data: any) => {
-          console.log(data);
           this.loading = false;
 
           if (data.error) {

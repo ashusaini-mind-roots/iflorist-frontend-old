@@ -31,7 +31,6 @@ export class AuthenticationService {
                 {
                     //if(isset)
                     localStorage.setItem('currentUser', JSON.stringify(data));
-                    console.log(localStorage.getItem('currentUser'));
                     this.currentUserSubject.next(data);
                     return data;
                 }

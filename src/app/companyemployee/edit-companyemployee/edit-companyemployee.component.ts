@@ -118,11 +118,9 @@ export class EditCompanyemployeeComponent implements OnInit {
 
   onChangeSysteAccount()
   {
-    
     this.systemUser = !this.systemUser;
     if(this.f.system_account.value=='1')
     {
-      console.log('aaaaqqqqq');
       this.f.email.setValidators([Validators.required, Validators.email]);
       this.f.email.updateValueAndValidity();
     }
@@ -146,10 +144,8 @@ export class EditCompanyemployeeComponent implements OnInit {
   getStatuList() {
     this.statuService.getStatuList().subscribe((data: any) => {
       this.status = data.status;
-      //console.log(this.stores)
     });
   }
-
   // convenience getter for easy access to form fields
   get f() { return this.companyemployeeform.controls; }
 
@@ -158,20 +154,17 @@ export class EditCompanyemployeeComponent implements OnInit {
     this.error = '';
     // stop here if form is invalid
     if (this.companyemployeeform.invalid) {
-      //this.loading = false;
       return;
     }
     /*this.error = '';
     this.success = '';*/
     this.loading = true;
-    // store_name,contact_email,contact_phone,zip_code,address
     if(this.f.system_account.value=='1')
       this.email = this.f.email.value;
     this.companyEmployeeService.updateEmployee(this.employee.employee.id,this.f.name.value, this.email , this.f.status.value, this.f.phone_number.value, this.selectedFile.file, this.f.active.value/*, this.selectedStorage.id*/,this.f.system_account.value)
       .pipe()
       .subscribe(
         (data: any) => {
-          console.log(data);
           this.loading = false;
 
           if (data.error) {
@@ -181,9 +174,6 @@ export class EditCompanyemployeeComponent implements OnInit {
           else {
             this.message.sendMessage('success', 'Company Employee Message', 'Company Employee updated successfully !');
           }
-          //this.success = 'Store added succefull !';
-          //this.clean();
-          //this.router.navigate([this.returnUrl]);
         },
         error => {
           console.log(error)

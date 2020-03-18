@@ -46,34 +46,23 @@ export class CostOfFreshComponent implements OnInit {
       this.reloadData();
       this.loadHeaders();
     });
-
-    // this.selectedStorage = JSON.parse(localStorage.getItem('selectedStorage'));
-    // // console.log(this.selectedStorage)
-    // this.reloadData();
-    // this.loadHeaders();
   }
 
   reloadData(){
-     // console.log(this.selectedStorage.id + "-" +this.yearQuarter.quarter);
     this.costOfFreshService.getMasterOverviewWeekly(this.costOf,this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
       this.weeks = data.master_overview_weekly;
       if(this.weeks.length > 0)
         this.target = this.weeks[0].target;
-      // console.log(this.weeks);
     })
   }
 
   receiveYearQuarter($event){
     this.yearQuarter = $event;
     this.reloadData();
-    // console.log(this.yearQuarter);
-    // console.log(this.selectedStorage);
   }
   receiveStorage(storage){
     this.selectedStorage = storage;
     this.reloadData();
-    // console.log(this.yearQuarter);
-    // console.log(this.selectedStorage);
   }
 
   loadHeaders(){

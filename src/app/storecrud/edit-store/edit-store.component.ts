@@ -172,14 +172,12 @@ export class EditStoreComponent implements OnInit {
   {
     this.storeService.getEmployees(id).subscribe(res => {
       this.employees = res.employees;
-      console.log(this.employees);
 	  
 	  this.storeService.getStoreImage(id).subscribe(res => {
           const file: File = res;
           const reader = new FileReader();
           reader.addEventListener('load', (event: any) => {
             this.selectedFile = new ImageSnippet(event.target.result, file);
-            console.log(this.selectedFile.file);
           });
           reader.readAsDataURL(file);
         });
@@ -192,7 +190,6 @@ export class EditStoreComponent implements OnInit {
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
-      console.log(this.selectedFile.file);
     });
     reader.readAsDataURL(file);
   }
@@ -218,7 +215,6 @@ export class EditStoreComponent implements OnInit {
     this.success = '';
     this.loading = true;
     this.route.params.subscribe(params => {
-      console.log("pepe"+params['id'])
 
       this.storeService.updateStore(params['id'],this.f.store_name.value,this.f.contact_email.value,
           this.f.contact_phone.value,this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.f.projection_percentage.value,this.selectedFile.file,this.f.target_costof_goods.value,this.f.target_costof_fresh.value,
@@ -234,8 +230,6 @@ export class EditStoreComponent implements OnInit {
 				  this.messageService.sendMessageReloadStore();	
 				}
 			    this.loading = false;
-                //this.messageToastService.sendMessage('success', 'Store Message', 'Store updated successfully !');
-               // console.log(response)
               },
               error => {
                 console.log(error)
@@ -269,7 +263,6 @@ export class EditStoreComponent implements OnInit {
 				else
 				{
 					this.messageToastService.sendMessage('success', 'Store Message', 'Weekly Projection Percent Revenues set successfully !');
-					// console.log(response)
 					this.loadingCsv = false;
 					this.fileName = '';
 					this.selectedCsvFile = new ImageSnippet('', null);

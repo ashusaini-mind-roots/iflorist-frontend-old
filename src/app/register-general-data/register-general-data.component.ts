@@ -65,15 +65,12 @@ export class RegisterGeneralDataComponent implements OnInit {
       return;
     }
 
-    //this.loading = true;
-
     this.data = {
       'email':this.formField.email.value,
     };
     
     this.companyService.existUser(this.data)
     .subscribe((data: any) =>{
-      console.log(data);
       if(data.error)
       {
         this.error_bool = true
@@ -86,7 +83,6 @@ export class RegisterGeneralDataComponent implements OnInit {
             {name:this.formField.name.value,password:this.formField.password.value,email:this.formField.email.value}
         ];
         this.routerService.setRouterData(data);
-        //this.router.navigate(['register-plan-data', { name: this.formField.name.value, password: this.formField.password.value, email: this.formField.email.value }  ]);
         this.router.navigate(['register-plan-data']);
       }
     },

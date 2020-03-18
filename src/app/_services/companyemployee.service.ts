@@ -18,8 +18,7 @@ export class CompanyemployeeService{
     }
 
     createCompanyEmployee(company_id,name,email,status_id,phone_number,image,active,system_account) {
-        //console.log(image); 
-        
+
         const formData = new FormData();
         //formData.append('image', image);
         formData.append('name', name);
@@ -40,8 +39,7 @@ export class CompanyemployeeService{
     }
 
     updateEmployee(id,name,email,status_id,phone_number,image,active/*,store_id*/,system_account) {
-        console.log(image); 
-        
+
         const formData = new FormData();
         //formData.append('image', image);
         //formData.append('id', id);

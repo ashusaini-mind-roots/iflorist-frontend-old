@@ -43,7 +43,6 @@ export class EmployeeListComponent implements OnInit {
     this.getEmployees();//
 	
 	this.messageService.getChangeDisplayModeData().subscribe(message => {
-		console.log(message);
 		this.displayList = message;
 	});
 	
@@ -63,28 +62,6 @@ export class EmployeeListComponent implements OnInit {
 	});
   }
   
-  /*confirmDeleteProducto(id) {
-    this.confirmationService.confirm({
-      message: '¿ Está seguro que desea eliminar el producto ?',
-      accept: () => {
-		 this.listadoProductos.forEach(obj=>{
-			  obj.productos.forEach(pro => {
-				  if(pro.producto.id==id)
-				  {
-					 let indexProducto = obj.productos.findIndex(x=>x.producto.id===id);
-					 obj.productos.splice(indexProducto,1);
-				  }
-				  
-			  })
-			  
-			  //console.log(proveedor);
-			  
-		  });
-		 
-      }
-    });
-  }*/
-  
   filter(element, index, array)
   {
 	  return (element.name == this.dataFilter);
@@ -92,7 +69,6 @@ export class EmployeeListComponent implements OnInit {
   
   receiveStorage(storage){
     this.selectedStorage = storage;
-    console.log(storage.id)
     this.getEmployees();
   }
   getEmployees()
@@ -100,7 +76,6 @@ export class EmployeeListComponent implements OnInit {
     this.employeeService.getEmployees(this.selectedStorage.id).subscribe((response: any) =>{
       this.employees = response.employees;
 	  this.employeesDefault = this.employees;
-      console.log(this.employees);
     });
   }
 
@@ -120,7 +95,6 @@ export class EmployeeListComponent implements OnInit {
   
   storeAdminChange(employee_id)
   {
-	  console.log(employee_id);
 	  this.confirmChangeStoreAdmin(employee_id);
   }
   
@@ -138,7 +112,6 @@ export class EmployeeListComponent implements OnInit {
 		  this.getEmployees();
 		},
 		error => {
-          console.log(error)
           //this.error = error;
           //this.loading = false;
           this.message.sendMessage('error', 'Employee Message', 'Store Admin change failed !');

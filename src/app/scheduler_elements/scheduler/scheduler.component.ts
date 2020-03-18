@@ -57,10 +57,8 @@ export class SchedulerComponent implements OnInit {
 	this.targetform = this.formBuilder.group({
       target: ['', Validators.required],
     });
-   // this.getWeeks();
 
     this.messageService.getChangeDisplayModeData().subscribe(message => {
-      // console.log(message);
       this.displayList = message;
       if(this.displayList == true)
         this.title = "Finance View";
@@ -70,15 +68,12 @@ export class SchedulerComponent implements OnInit {
   
   get t() { return this.targetform.controls; }
 
-
-
   receiveStorage(storage){
     this.selectedStorage = storage;
     this.getWeeks();
   }
   receiveYearQuarter($event){
     this.yearQuarter = $event;
-    console.log("ke bolaasere")
     this.getWeeks();
   }
 
@@ -88,15 +83,12 @@ export class SchedulerComponent implements OnInit {
       if (response.weeks.length > 0) {
         this.selectedWeekItem = this.weekList[0].id;
         this.settingStringFormatToWeekLisElements(this.weekList);
-        console.log("ahora si")
-        console.log(this.weekList)
         this.getWeekDataFromServer();
       }
     });
   }
 
   settingStringFormatToWeekLisElements = function(weekList){
-    console.log(weekList.length)
     for (let i = 0 ; i < weekList.length ; i++){
       var parts = weekList[i].date.split('-');
       var dateFormatted = new Date(parts[0], parts[1] - 1, parts[2]);
@@ -113,8 +105,6 @@ export class SchedulerComponent implements OnInit {
 
   getProjWeeklyRev = function () {
     this.schedulerService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
-      // console.log("meresingo ento:" +response.proj_weekly_rev )
-      console.log(response)
       this.projWeeklyRev = response.proj_weekly_rev;
     });
   }
@@ -123,7 +113,6 @@ export class SchedulerComponent implements OnInit {
   }
   getTargetCOL = function () {
     this.schedulerService.getTargetCOL(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
-      console.log("pepe tey: " + response.target_percentage)
       this.targetCOL = (response == null) ? 0 : response.target_percentage;
 	  this.t.target.setValue(this.targetCOL);
     });
@@ -131,8 +120,6 @@ export class SchedulerComponent implements OnInit {
   getScheduledPayroll = function () {
     this.schedulerService.getScheduledPayroll(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.scheduledPayroll= response.scheduled_payroll;
-      console.log("payroll")
-      console.log(response)
       this.calcDifferendeCOL();
     });
   }
@@ -159,7 +146,6 @@ export class SchedulerComponent implements OnInit {
     this.schedulerService.updateTargetCOL(this.selectedStorage.id,this.selectedWeekItem,this.t.target.value)
         .subscribe(
             data => {
-		      
 			  let response = data; 	
 			  if(response.status=='error')
 			      this.message.sendMessage('error', 'Schedule Message', response.errors);
@@ -173,10 +159,8 @@ export class SchedulerComponent implements OnInit {
             error => {
 			  
 			  this.message.sendMessage('error', 'Schedule Message', error);
-              console.log(error);
               //this.error = error;
         });
   }
-
 
 }

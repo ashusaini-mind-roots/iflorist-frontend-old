@@ -49,7 +49,6 @@ export class RegisterPlanDataComponent implements OnInit {
   loadPlans(){
     return this.planService.getAll().subscribe((data: any) =>{
         this.plans = data.plans;
-        console.log(data.plans);
         this.loaded = false;
     })
   }

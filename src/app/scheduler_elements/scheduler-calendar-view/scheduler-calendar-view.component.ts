@@ -59,28 +59,19 @@ export class SchedulerCalendarViewComponent implements OnInit {
   }
 
   ngOnChanges(changes){
-    console.log("week on calendar view:" + this.selectedWeekItem)
     if(this.selectedStorage && this.selectedWeekItem ){
-      console.log(this.selectedStorage);
-      console.log(this.yearQuarter);
       this.getScheduleInformation();
     }
   }
 
   getScheduleInformation = function () {
     this.schedulerService.getScheduleInformation(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
-      // this.employeeStoreWeekId = response.employee_store_week_id;
-      console.log("es aki la cosa on scheduler calendar view")
-      //console.log(response);
       this.parseScheduleInformationResponse(response.categories_schedules, response.dates_of_week);
-      console.log(this.employeesScheduleList)
       this.populateEmployeeToShow(this.categoriesEmployeesListSelectedItem, this.employeesListSelected);
     });
   }
 
   parseScheduleInformationResponse = function(categories_schedules,dates_of_week){
-    console.log("categories schedules")
-     console.log(categories_schedules)
     var empScheList: any[] = [];
     for(var i = 0 ; i < categories_schedules.length ; i++){
       for(var j = 0 ; j < categories_schedules[i].employees.length ; j++){
@@ -97,7 +88,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
           if(schedul.time_out != undefined)
             schedul.time_out = this.utilService.getStringTimeFormat(new Date(schedul.time_out));
         }
-        //esta linea esta adicionada ahora, no estaba en el codigo viejo
         categories_schedules[i].total_time = 0.0/*this.calcEmployeesTotalHours(this.categories_schedules[i].employees)*/;
       }
     }
@@ -106,26 +96,18 @@ export class SchedulerCalendarViewComponent implements OnInit {
         empScheList = empScheList.concat(categories_schedules[l].employees);
       }
     }
-    console.log(empScheList)
     return this.employeesScheduleList = empScheList;
   }
 
   onCategorySelected(event: any){
-    console.log(event.target.value);
     this.populateEmployeesCombo(event.target.value);
     this.populateEmployeeToShow(this.categoriesEmployeesListSelectedItem, this.employeesListSelected);
   }
   onEmployeeSelected(event:any){
-    console.log("employee selected")
-    console.log(event.target.value);
-    console.log(this.employeesListSelected)
-    console.log(this.categoriesEmployeesListSelectedItem)
     this.populateEmployeeToShow(this.categoriesEmployeesListSelectedItem, this.employeesListSelected);
   }
 
   receiveStorage(storage){
-    console.log(this.selectedStorage)
-
     this.selectedStorage = storage;
     this.getCategoriesEmployees();
   }
@@ -136,8 +118,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
       if(this.categoriesEmployeesList && this.categoriesEmployeesList.length > 0) {
         this.categoriesEmployeesListSelectedItem = this.categoriesEmployeesList[0].id;
         this.populateEmployeesCombo(this.categoriesEmployeesListSelectedItem);
-        //if(this.categoriesEmployeesList[0].employees.length > 0)
-          //this.employeesListSelected = this.categoriesEmployeesList[0].employees[0].id;
       }
     });
   }
@@ -146,7 +126,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
     for(let i=0 ; i<this.categoriesEmployeesList.length ; i++){
         if(this.categoriesEmployeesList[i].id == category_id ) {
           this.employeesList = this.categoriesEmployeesList[i].employees;
-          console.log(this.employeesList);
           this.employeesList_add_modal = this.employeesList.map(x => Object.assign([], x));
           break;
         }
@@ -154,9 +133,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
   }
 
   populateEmployeeToShow = function(category_id, employee_id){
-   // if(this.employeesScheduleList.length > 0){
-   //  console.log(this.employeesScheduleList)
-  //  employee_id = -1;//esto es probando, en realidad se pasa por parametro, ver como poner en el combo de los employees la primera option en -1 el value
     if(employee_id == -1){//show all employees
       this.employeesToShow = []/*this.employeesScheduleList*/;
       for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
@@ -202,15 +178,12 @@ export class SchedulerCalendarViewComponent implements OnInit {
   }
 
   editSchedule = function(){
-    console.log("empl to ed")
-    console.log(this.employee_scheduler_day_to_edit);
     if(this.employee_scheduler_day_to_edit){
       this.employee_scheduler_day_to_edit.time_in = this.time_in;
       this.employee_scheduler_day_to_edit.time_out = this.time_out;
       this.employee_scheduler_day_to_edit.break_time = this.break_time;
-      console.log(this.employee_scheduler_day_to_edit);
       let schedule_days = this.getSchedule_days(this.categoriesEmployeesListSelectedItem,this.employee_scheduler_day_to_edit.employee_id);
-      console.log(schedule_days)
+
       if(schedule_days != undefined && this.employee_scheduler_day_to_edit){
         this.updateSchedulesByCategory(schedule_days,this.employee_scheduler_day_to_edit.category_name, this.employee_scheduler_day_to_edit.employee_id);
       }
@@ -224,7 +197,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
     var esw_array = new Array();
 
     var asw_toSend = JSON.parse(JSON.stringify( schedule_days ));
-    //   console.log(asw_toSend)
     for(var j = 0 ; j < asw_toSend.length ; j++){
       if(asw_toSend[j].time_in != undefined) {
         asw_toSend[j].time_in = asw_toSend[j].time_in.toLocaleString("en-US", { hour12: false });
@@ -235,13 +207,10 @@ export class SchedulerCalendarViewComponent implements OnInit {
     }
 
     var schedule_to_send = JSON.stringify(asw_toSend);
-    console.log("salvando")
-    console.log(schedule_to_send);
     this.schedulerService.updateOrAdd(this.yearQuarter.year,this.selectedWeekItem,schedule_to_send,employee_id)
         .subscribe(
             response=> {
               // this.loading = false;
-              console.log(response)
               this.updateIdToNewSchedulesTimesAdded(response.schedules_added, response.employee_id);
             },
             error => {
@@ -255,17 +224,13 @@ export class SchedulerCalendarViewComponent implements OnInit {
     for (let i = 0 ; i < this.employeesScheduleList.length ; i++){
       if(this.employeesScheduleList[i].employee_id == employee_id){
         for(let j = 0 ; j < schedules_added.length ; j++){
-          console.log(this.employeesScheduleList[i]);
-          console.log(this.employeesScheduleList[i].schedule_days)
           let found = this.employeesScheduleList[i].schedule_days.find(e => e.day_of_week == schedules_added[j].day_of_week)
-          console.log(found)
           if(found){
             found.id = schedules_added[j].id;
           }
         }
       }
     }
-    console.log(this.employeesScheduleList)
   }
 
   getDays(weekDay){
@@ -275,8 +240,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
           days.push(this.employeesToShow[i].schedule_days[weekDay]);
         }
     }
-    // console.log("deyyy")
-    // console.log(days);
     return days;
   }
 
@@ -293,18 +256,11 @@ export class SchedulerCalendarViewComponent implements OnInit {
   showAdd_day_modal(week_day_number){
     this.visible_add_day_modal = true;
     this.add_week_day_number = week_day_number;
-
-    // console.log(this.employeesList_add_modal);
-
     this.add_time_in = undefined;
     this.add_time_out = undefined;
     this.add_break_time = undefined;
-
     this.employeesListSelected_add_modal = this.employeesList_add_modal[0].id;
     this.setDataTo_add(this.employeesListSelected_add_modal);
-
-    console.log(this.employeesListSelected_add_modal);
-
   }
 
   saveSchedule = function(){
@@ -313,10 +269,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
       this.setShiftToDayToSaveSchedule(this.add_time_in, this.add_time_out, this.add_break_time);
 
       let schedule_days = this.getSchedule_days(this.categoriesEmployeesListSelectedItem,this.employeesListSelected_add_modal);
-      console.log("mojon divino")
-      console.log(schedule_days)
-      console.log("scheduler day to save")
-      console.log(this.employee_scheduler_day_to_save)
       if(schedule_days != undefined && this.employee_scheduler_day_to_save){
         this.updateSchedulesByCategory(schedule_days,this.employee_scheduler_day_to_save.category_name, this.employee_scheduler_day_to_save.employee_id);
       }
@@ -357,13 +309,6 @@ export class SchedulerCalendarViewComponent implements OnInit {
 
   employeesListSelected_add_modal_change(event: any){
     this.setDataTo_add(event.target.value);
-    // let day = this.getDayByEmployeeId_weekDay_number(event.target.value,this.add_week_day_number);
-    // if(day){
-    //   this.add_time_in = day.time_in;
-    //   this.add_time_out = day.time_out;
-    //   this.add_break_time = day.break_time;
-    // }
-    // console.log(day);
 
   }
   setDataTo_add(employee_id){
