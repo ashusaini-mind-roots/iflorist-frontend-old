@@ -13,12 +13,17 @@ export class RouterService {
 
     public getRouterData()
     {
-        return this.router_data;
+		this.router_data = localStorage.getItem('registerData');
+		//console.log(this.router_data);
+		return this.router_data;
     }
 
     public setRouterData(data:any)
     {
-        return this.router_data = data;
+		localStorage.setItem('registerData', JSON.stringify(data));
+		this.router_data = localStorage.getItem('registerData');
+		//console.log()
+        return this.router_data;
     }
 
     

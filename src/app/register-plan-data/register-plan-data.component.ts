@@ -33,11 +33,14 @@ export class RegisterPlanDataComponent implements OnInit {
     });*/
     if(this.routerService.getRouterData()!=undefined)
     {
-        this.name = this.routerService.getRouterData()[0]['name'];
-        this.password = this.routerService.getRouterData()[0]['password'];
-        this.email = this.routerService.getRouterData()[0]['email'];
+        this.name = JSON.parse(this.routerService.getRouterData())[0].name;
+        this.password = JSON.parse(this.routerService.getRouterData())[0].password;
+        this.email = JSON.parse(this.routerService.getRouterData())[0].email;
         //this.routerService.setRouterData(undefined);
-    }
+	}else
+	{
+		this.router.navigate(['register-general-data']);
+	}
     console.log(this.password);
     this.loaded = true;
     this.loadPlans();

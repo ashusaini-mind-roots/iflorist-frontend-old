@@ -284,11 +284,10 @@ export class RegisterCcDataComponent implements OnInit {
     });*/
     if(this.routerService.getRouterData()!=undefined)
     {
-        console.log(this.routerService.getRouterData());
-        this.name = this.routerService.getRouterData()[0]['name'];
-        this.password = this.routerService.getRouterData()[0]['password'];
-        this.email = this.routerService.getRouterData()[0]['email'];
-        this.id_plans = this.routerService.getRouterData()[0]['id_plans'];
+        this.name = JSON.parse(this.routerService.getRouterData())[0].name;
+        this.password = JSON.parse(this.routerService.getRouterData())[0].password;
+        this.email = JSON.parse(this.routerService.getRouterData())[0].email;
+        this.id_plans = JSON.parse(this.routerService.getRouterData())[0].id_plans;
     }
   }
 
