@@ -36,11 +36,9 @@ export class AppComponent implements OnInit{
                 $("#wrapper").toggleClass("toggled");
             });
         })(jquery);*/
-        this.loadModules();
+		this.loadModules();
         this.loadStores();
-		
-
-    }
+	}
 
     loadModules(){
         const currentUser = this.authenticationService.currentUserValue;
@@ -60,9 +58,9 @@ export class AppComponent implements OnInit{
 
     loadStores(){
         const currentUser = this.authenticationService.currentUserValue;
-		this.companyName = currentUser.company.name;
-        if(currentUser)
+		if(currentUser)
         {
+			this.companyName = currentUser.company.name;
             //console.log(currentUser.user.id);
             return this.companyService.storesByCompany().subscribe((data: any) =>{
                 this.stores = data.stores;

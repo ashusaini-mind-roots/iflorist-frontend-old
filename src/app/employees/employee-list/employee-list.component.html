@@ -42,7 +42,7 @@
 		  <div class="col-lg-3 mb-xl-4 mb-lg-4" *ngFor="let employee of employees">
 				<div class="container-employee generic-card-2">
 					<div *ngIf="employee.image!='default'" class="image"><img src="{{urlImage}}{{employee.image}}"></div>
-					<div *ngIf="employee.image=='default'" class="image"><img src="/assets/image/upload.svg"></div>
+					<div *ngIf="employee.image=='default'" class="image"><img src="/assets/image/missing_avatar.svg"></div>
 					<div class="name">{{employee.name}}</div>
 					<div class="company-position">{{employee.store}}<span> | </span>{{employee.status_name}}</div>
 					<div class="email">{{employee.email}}</div>
