@@ -3,10 +3,10 @@
 		<div class="icon-search"><input placeholder="Search by Name, email, phone number" (input)="filterByText($event.target.value)" type="text" class="pl-4 input input-gray2"/></div>
 	</div>
 	<div class="button-style-list">
-		<button type="button" class="button-left" (click)="changeDisplayData(false)" [disabled]="loading" [ngClass]="{ 'active': displayList==false}">
+		<button type="button" class="button-left" (click)="changeDisplayData(false)"  [ngClass]="{ 'active': displayList==false}">
 		  Expanded
 		</button>
-		<button type="button" class="button-right" (click)="changeDisplayData(true)" [disabled]="loading" [ngClass]="{ 'active': displayList==true}">
+		<button type="button" class="button-right" (click)="changeDisplayData(true)"  [ngClass]="{ 'active': displayList==true}">
 		  List
 		</button>
 	</div>
