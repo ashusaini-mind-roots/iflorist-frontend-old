@@ -19,6 +19,7 @@ export class WeeklyProjectionComponent implements OnInit {
   selectedStorage: any;
   proyections:any[];
   loading: boolean;
+  adjustOptions: any[] = [] ;
 
   clonedProjections: { [s: string]: any; } = {};
 
@@ -36,6 +37,11 @@ export class WeeklyProjectionComponent implements OnInit {
     });
     let currentYear = this.utilService.GetCurrentYear();
     this.yearQuarter = {year : currentYear, quarter: 1};
+
+    for (let i = 0 ; i <= 100 ; i+=5){
+      this.adjustOptions.push({'option':i, 'value': '+' + i + '%'});
+    }
+    this.adjustOptions
   }
 
   ngOnInit() {
@@ -51,12 +57,22 @@ export class WeeklyProjectionComponent implements OnInit {
     this.cols = [
       { field: 'id', header: 'No' },
       { field: 'week', header: 'Week' },
-      { field: 'year-reference', header:'Year Reference' },//esto esta mal, hay ke poner los datos reales del year proyection y year reference
-      { field: 'amt_total', header: 'Amt Total' },
-      { field: 'year_proyection', header: 'Year Proyection' },
-      // { field: 'event_override', header: 'Event Override' },
+      { field: 'year_reference' , header: this.yearQuarter.year  },//esto esta mal, hay ke poner los datos reales del year proyection y year reference
+      { field: 'adjust', header: 'Adjust' },
+      { field: 'year_proyection', header: Number(this.yearQuarter.year) + 1 },
       { field: 'actions', header: 'Actions' }
     ];
+
+    // this.cols = [
+    //   { field: 'id', header: 'No' },
+    //   { field: 'week', header: 'Week' },
+    //   { field: 'year-reference', header:'Year Reference' },//esto esta mal, hay ke poner los datos reales del year proyection y year reference
+    //   { field: 'amt_total', header: 'Amt Total' },
+    //   { field: 'year_proyection', header: 'Year Proyection' },
+    //   // { field: 'event_override', header: 'Event Override' },
+    //   { field: 'actions', header: 'Actions' }
+    // ];
+
   }
 
   receiveYearQuarter($event){
@@ -76,10 +92,18 @@ export class WeeklyProjectionComponent implements OnInit {
     this.loading = true;
     this.projectionService.getProjectionList(this.selectedStorage.id,this.yearQuarter.year).subscribe((data: any) =>{
       this.proyections = data.projections;
+      this.parseData(this.proyections);
+      console.log(this.proyections)
       this.loading = false;
     });
   }
 
+  parseData(projections){
+    for (let i = 0 ; i < projections.length ; i++){
+      let p = projections[i];
+      p.adjust = Math.round((p.projected_value - p.amt_total) * 100 / p.amt_total);
+    }
+  }
 
   onRowEditInit(projections: any) {
     this.clonedProjections[projections.id] = {...projections};
