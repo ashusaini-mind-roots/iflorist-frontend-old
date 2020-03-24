@@ -403,6 +403,7 @@ export class WeekPanelComponent implements OnInit {
   getProjWeeklyRev = function () {
     this.weekPanelService.getProjWeeklyRev(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
       this.projWeeklyRev = response.proj_weekly_rev;
+      console.log(response)
     });
   }
   getTarget = function () {
@@ -491,8 +492,9 @@ export class WeekPanelComponent implements OnInit {
             data => {
               this.getSevenDays();
               this.visible = false;
-              this.messageToastService.sendMessage('success','Day Message','One day was updated !');
+              this.messageToastService.sendMessage('success','Day Message','A day was updated !');
               //this.router.navigate([this.returnUrl]);
+              this.getProjWeeklyRev();
             },
             error => {
               this.visible = false;
