@@ -39,25 +39,39 @@
               <td>
 			  <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.year_reference"  required>
+                        <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.amt_total"  required>
                     </ng-template>
                     <ng-template pTemplate="output">
-						{{projection.year_reference}}
+						{{projection.amt_total}}
                     </ng-template>
                 </p-cellEditor>
 			  </td>
               <td>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.amt_total" required>
+<!--                        <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.adjust" required>-->
+
+
+                        <div class="select ">
+                            <select class="" id="select-stores-general" [(ngModel)]="rowData.adjust" required>
+                                <option *ngFor="let adj of this.adjustOptions" value="{{adj.option}}">
+                                    {{adj.value}}
+                                </option>
+                            </select>
+                            <div class="select_arrow"></div>
+                        </div>
+
+
+
+
                     </ng-template>
                     <ng-template pTemplate="output">
-                        {{projection.amt_total}}
+                        {{projection.adjust}}
                     </ng-template>
                 </p-cellEditor>
               </td>
               <td>
-                {{projection.year_proyection}}
+                {{projection.projected_value}}
               </td>
 <!--              <td></td>-->
               <td>
