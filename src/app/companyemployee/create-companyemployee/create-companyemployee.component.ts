@@ -69,7 +69,7 @@ export class CreateCompanyemployeeComponent implements OnInit {
     this.companyemployeeform = this.formBuilder.group({
       name: ['', Validators.required],
       status: ['', Validators.required],
-      phone_number: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]],
+      phone_number: ['',[Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/),Validators.minLength(14),Validators.maxLength(14),Validators.required]],
       email: [''],
       active: ['1'],
       system_account: ['0'],

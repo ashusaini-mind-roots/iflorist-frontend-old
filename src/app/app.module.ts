@@ -6,6 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
+import { PhoneMaskDirective } from './_helpers'; 
 
 import { AppComponent } from './app.component';
 import { appRoutingModule } from './app.routing';
@@ -124,7 +125,8 @@ import { FilterInputListComponent } from './components/filter-input-list/filter-
         AppUserEditComponent,
         SchedulerCalendarViewComponent,
         UsersettingsComponent,
-        FilterInputListComponent
+        FilterInputListComponent,
+		PhoneMaskDirective
             ],
 
         

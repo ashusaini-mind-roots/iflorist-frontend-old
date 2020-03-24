@@ -73,7 +73,7 @@ export class EditEmployeeComponent implements OnInit {
       name: ['', Validators.required],
       status: ['', Validators.required],
       category: ['', Validators.required],
-      phone_number: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]],
+      phone_number: ['',[Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/),Validators.minLength(14),Validators.maxLength(14),Validators.required]],
       hourlypayrate: ['', Validators.required],
       overtimeelegible: ['', Validators.required],
       workmancomb: ['', Validators.required],

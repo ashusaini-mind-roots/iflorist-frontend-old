@@ -80,11 +80,11 @@
           <div class="col-md-6">
               <div class="form-group">
                   <label for="phone_number">Phone Number</label>
-                  <input type="text" [value]="companyemployeeform.get('phone_number').value | formatPhone" formControlName="phone_number" (input)="formatNumberPhone($event.target.value)" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors}" />
+                  <input id="tel" formControlName="phone_number" class="line-input" phoneMask [preValue]="companyemployeeform.value.phone_number"  [phoneControl]="companyemployeeform.controls['phone_number']"  maxlength="14" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"/>
                   <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
                     <div *ngIf="f.phone_number.errors.required">Phone number is required</div>
-					<div *ngIf="f.phone_number.errors.minlength">Phone Number min lenght is 8</div>
-					<div *ngIf="f.phone_number.errors.maxlength">Phone Number max lenght is 8</div>
+					<div *ngIf="f.phone_number.errors.minlength">Phone Number min lenght is 12</div>
+					<div *ngIf="f.phone_number.errors.maxlength">Phone Number max lenght is 12</div>
                   </div>
                 </div>
               <div class="form-group">
@@ -110,7 +110,7 @@
 <!--          Create-->
 <!--        </button>-->
         <div class="d-flex justify-content-end">
-            <a routerLink="/employees" class="btn-generic btn-white mt-5 px-5 mr-1">
+            <a routerLink="/companyemployee-list" class="btn-generic btn-white mt-5 px-5 mr-1">
                 Cancel
             </a>
             <button [disabled]="loading" class="btn-ligth-blue mt-5 px-5">

@@ -118,7 +118,7 @@ export class EditStoreComponent implements OnInit {
 	  target_costof_goods: ['', Validators.required],
       target_costof_fresh: ['', Validators.required],
       contact_email: ['',  Validators.email],
-      contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],
+      contact_phone: ['',[Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/),Validators.minLength(14),Validators.maxLength(14)]],
       zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
       address: [''],
       city: [''],
