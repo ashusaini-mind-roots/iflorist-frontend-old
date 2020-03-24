@@ -53,8 +53,8 @@
                             <label for="contact_phone">Phone Number </label>
                             <input id="tel" formControlName="contact_phone" class="line-input" phoneMask [preValue]="storeEditform.value.contact_phone"  [phoneControl]="storeEditform.controls['contact_phone']"  maxlength="14" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }"/>
                       <div *ngIf="submitted && f.contact_phone.errors" class="invalid-feedback">
-                        <div *ngIf="f.contact_phone.errors.minlength">Phone Number min lenght is 12</div>
-                        <div *ngIf="f.contact_phone.errors.maxlength">Phone Number max lenght is 12</div>
+                        <div *ngIf="f.contact_phone.errors.minlength">Phone Number min lenght is 10</div>
+                        <div *ngIf="f.contact_phone.errors.maxlength">Phone Number max lenght is 10</div>
 					  </div> 
                         </div>
                         <div class="form-group">
