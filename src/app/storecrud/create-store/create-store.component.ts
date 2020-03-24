@@ -55,7 +55,8 @@ export class CreateStoreComponent implements OnInit {
     this.storeform = this.formBuilder.group({
       store_name: ['', Validators.required],
       contact_email: ['',  Validators.email],
-      contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],
+      /*contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],*/
+	  contact_phone: ['',[Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/),Validators.minLength(14),Validators.maxLength(14)]],
       zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
 	  target_costof_fresh: ['', Validators.required],
       address: [''],
