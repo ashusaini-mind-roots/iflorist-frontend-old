@@ -21,7 +21,8 @@
                   <tr>
                     <td>{{store.store_name}}</td>
                     <td>{{store.contact_email}}</td>
-                    <td>{{store.contact_phone}}</td>
+                    <td [hidden]="store.contact_phone==null">({{store.contact_phone | slice:0:3}}) {{store.contact_phone | slice:3:6}}-{{store.contact_phone | slice:6:10}}</td>
+					<td [hidden]="store.contact_phone!=null">{{store.contact_phone}}</td>
                     <td>{{store.address}}</td>
                     <td>{{store.zip_code}}</td>
                     <td>
