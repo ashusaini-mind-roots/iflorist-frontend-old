@@ -26,7 +26,7 @@
             <td>{{employee.name}}</td>
             <td>{{employee.email}}</td>
             <td>{{employee.category}}</td>
-            <td>{{employee.phone_number}}</td>
+            <td>({{employee.phone_number | slice:0:3}}) {{employee.phone_number | slice:3:6}}-{{employee.phone_number | slice:6:10}}</td>
             <td>{{employee.status_name}}</td>
             <td>{{employee.store}}</td>
 			<td [hidden]="employee.active=='1'">No</td>

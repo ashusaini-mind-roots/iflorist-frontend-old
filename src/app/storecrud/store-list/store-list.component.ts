@@ -31,6 +31,7 @@ export class StoreListComponent implements OnInit {
   reloadData(){
    this.storeService.getStoreList().subscribe((data: any) =>{
       this.stores = data.stores;
+	  console.log(this.stores);
     })
   }
 
