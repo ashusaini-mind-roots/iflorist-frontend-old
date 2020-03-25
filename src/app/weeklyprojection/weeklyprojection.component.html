@@ -37,29 +37,23 @@
               <td class="No"></td>
               <td><span class="circle-small">{{projection.number}}</span> {{projection.week_number}}</td>
               <td>
-			  <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.amt_total"  required>
-                    </ng-template>
-                    <ng-template pTemplate="output">
 						{{projection.amt_total}}
-                    </ng-template>
-                </p-cellEditor>
-			  </td>
-              <td>
+              </td>
+              <td >
                 <p-cellEditor>
                     <ng-template pTemplate="input">
 <!--                        <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.adjust" required>-->
 
 
-                        <div class="select ">
-                            <select class="" id="select-stores-general" [(ngModel)]="rowData.adjust" required>
-                                <option *ngFor="let adj of this.adjustOptions" value="{{adj.option}}">
-                                    {{adj.value}}
-                                </option>
-                            </select>
-                            <div class="select_arrow"></div>
-                        </div>
+                        <input class="w-lg-xl-50 input input-gray2" type="number"  min="0" max="100" [(ngModel)]="rowData.adjust" placeholder="%" >
+<!--                        <div class="select w-lg-xl-50">-->
+<!--                            <select class="" id="select-stores-general" [(ngModel)]="rowData.adjust" required>-->
+<!--                                <option *ngFor="let adj of this.adjustOptions" value="{{adj.option}}">-->
+<!--                                    {{adj.value}}-->
+<!--                                </option>-->
+<!--                            </select>-->
+<!--                            <div class="select_arrow"></div>-->
+<!--                        </div>-->
 
 
 
@@ -71,7 +65,18 @@
                 </p-cellEditor>
               </td>
               <td>
-                {{projection.projected_value}}
+                  <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.projected_value"  required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                          {{projection.projected_value}}
+                      </ng-template>
+                  </p-cellEditor>
+
+
+
+<!--                {{projection.projected_value}}-->
               </td>
 <!--              <td></td>-->
               <td>

@@ -93,7 +93,7 @@ export class WeeklyProjectionComponent implements OnInit {
     this.projectionService.getProjectionList(this.selectedStorage.id,this.yearQuarter.year).subscribe((data: any) =>{
       this.proyections = data.projections;
       this.parseData(this.proyections);
-      console.log(this.proyections)
+      console.log(data)
       this.loading = false;
     });
   }
@@ -101,7 +101,9 @@ export class WeeklyProjectionComponent implements OnInit {
   parseData(projections){
     for (let i = 0 ; i < projections.length ; i++){
       let p = projections[i];
-      p.adjust = Math.round((p.projected_value - p.amt_total) * 100 / p.amt_total);
+      if(p.adjust == undefined)
+        p.adjust = Math.round((p.projected_value - p.amt_total) * 100 / p.amt_total);
+      else p.adjust = parseInt(p.adjust)
     }
   }
 
