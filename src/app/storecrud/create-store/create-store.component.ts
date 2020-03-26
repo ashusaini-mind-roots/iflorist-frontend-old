@@ -67,7 +67,7 @@ export class CreateStoreComponent implements OnInit {
 	  social_security: ['', Validators.required],
 	  medicare: ['', Validators.required],
 	  target_percentage: ['', Validators.required],
-      projection_percentage: ['', Validators.required],
+      // projection_percentage: ['', Validators.required],
 	  target_costof_goods: ['', Validators.required],
     });
 
@@ -136,7 +136,7 @@ export class CreateStoreComponent implements OnInit {
     this.loading = true;
     // store_name,contact_email,contact_phone,zip_code,address
     this.storeService.createStore(this.selectedFile.file,this.f.store_name.value, this.f.contact_email.value, this.f.contact_phone.value,
-        this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,this.f.projection_percentage.value,this.f.target_costof_goods.value,this.f.target_costof_fresh.value,
+        this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,0,this.f.target_costof_goods.value,this.f.target_costof_fresh.value,
           this.f.sui.value,this.f.futa.value,this.f.social_security.value,this.f.medicare.value)
         .pipe(first())
         .subscribe(
@@ -169,7 +169,7 @@ export class CreateStoreComponent implements OnInit {
 	 this.f.state.setValue('');
      this.f.address.setValue('');
 	 this.f.target_percentage.setValue('');
-     this.f.projection_percentage.setValue('');
+     // this.f.projection_percentage.setValue('');
      this.selectedFile = new ImageSnippet('', null);
      this.submitted = false;
 	 this.f.sui.setValue('');
