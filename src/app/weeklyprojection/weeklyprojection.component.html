@@ -19,11 +19,11 @@
 <!--        </li>-->
 <!--      </ul>-->
       <p-table class="generic-table" #dt [columns]="cols" [value]="proyections" [paginator]="true" [rows]="15" dataKey="id" editMode="row" [lazy]="true" [loading]="loading">
-        <ng-template pTemplate="caption">
-          <div style="text-align: right">
-              <input type="text" class="imput-gray1" pInputText size="25" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-          </div>
-        </ng-template>
+<!--        <ng-template pTemplate="caption">-->
+<!--          <div style="text-align: right">-->
+<!--              <input type="text" class="imput-gray1" pInputText size="25" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">-->
+<!--          </div>-->
+<!--        </ng-template>-->
         <ng-template pTemplate="header" let-columns>
           <tr>
               <th class="{{col.header}}" *ngFor="let col of columns">
@@ -45,7 +45,7 @@
 <!--                        <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.adjust" required>-->
 
 
-                        <input class="w-lg-xl-50 input input-gray2" type="number"  min="0" max="100" [(ngModel)]="rowData.adjust" placeholder="%" >
+                        <input (change)="adjustOnChange($event.target.value,rowData.arraypos)" class="w-lg-xl-50 input input-gray2" type="number"  min="0" max="100" [(ngModel)]="rowData.adjust" placeholder="%" >
 <!--                        <div class="select w-lg-xl-50">-->
 <!--                            <select class="" id="select-stores-general" [(ngModel)]="rowData.adjust" required>-->
 <!--                                <option *ngFor="let adj of this.adjustOptions" value="{{adj.option}}">-->

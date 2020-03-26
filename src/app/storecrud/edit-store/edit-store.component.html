@@ -62,7 +62,7 @@
                             <input type="text" formControlName="address" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">City</label>
                                     <input type="text" formControlName="city" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">State</label>
                                     <input type="text" formControlName="state" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
@@ -80,29 +80,30 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="zip_code">ZipCode</label>
+                                    <input type="text" formControlName="zip_code" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" (input)="formatNumberZip($event.target.value)" />
+                                    <div *ngIf="submitted && f.zip_code.errors" class="invalid-feedback">
+                                        <div *ngIf="f.zip_code.errors.minlength">Zip Code min lenght is 5</div>
+                                        <div *ngIf="f.zip_code.errors.maxlength">Zip Code max lenght is 6</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-						  <div class="col-md-6">
-							<div class="form-group">
-							  <label for="zip_code">ZipCode</label>
-							  <input type="text" formControlName="zip_code" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" (input)="formatNumberZip($event.target.value)" />
-							  <div *ngIf="submitted && f.zip_code.errors" class="invalid-feedback">
-								  <div *ngIf="f.zip_code.errors.minlength">Zip Code min lenght is 5</div>
-								  <div *ngIf="f.zip_code.errors.maxlength">Zip Code max lenght is 6</div>
-							  </div>
-							</div>
-						  </div>
-						  <div class="col-md-6">
-							  <div class="form-group">
-								  <label for="projection_percentage">Target Percentage Projection Default</label>
-								  <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="projection_percentage" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.projection_percentage.errors }"/>
-								  <div *ngIf="submitted && f.projection_percentage.errors" class="invalid-feedback">
-									  <div *ngIf="f.projection_percentage.errors.required">Target Percentage Projection is required</div>
-									  <div *ngIf="f.projection_percentage.errors.pattern">Enter a valid Target Percentage Projection</div>
-								  </div>
-							  </div>
-                          </div>
-						</div>
+<!--                        <div class="row">-->
+<!--						  -->
+<!--&lt;!&ndash;						  <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;							  <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;								  <label for="projection_percentage">Target Percentage Projection Default</label>&ndash;&gt;-->
+<!--&lt;!&ndash;								  <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="projection_percentage" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.projection_percentage.errors }"/>&ndash;&gt;-->
+<!--&lt;!&ndash;								  <div *ngIf="submitted && f.projection_percentage.errors" class="invalid-feedback">&ndash;&gt;-->
+<!--&lt;!&ndash;									  <div *ngIf="f.projection_percentage.errors.required">Target Percentage Projection is required</div>&ndash;&gt;-->
+<!--&lt;!&ndash;									  <div *ngIf="f.projection_percentage.errors.pattern">Enter a valid Target Percentage Projection</div>&ndash;&gt;-->
+<!--&lt;!&ndash;								  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;							  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                          </div>&ndash;&gt;-->
+<!--						</div>-->
                         <div class="row">
 						    <div class="col-md-6">
 								<div class="form-group">
@@ -214,11 +215,11 @@
                 <div class="row">
                     <div class="col-md-4">
 						<div class="form-group">
-						  <label for="projection_percentage">Target Percentage Projection</label>
+						  <label for="projection_percentage">Target Projection %</label>
 						  <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="projection_percentage" class="line-input" [ngClass]="{ 'is-invalid': submittedCsv && c.projection_percentage.errors }"/>
 						  <div *ngIf="submittedCsv && c.projection_percentage.errors" class="invalid-feedback">
-							  <div *ngIf="c.projection_percentage.errors.required">Target Percentage Projection is required</div>
-							  <div *ngIf="c.projection_percentage.errors.pattern">Enter a valid Target Percentage Projection</div>
+							  <div *ngIf="c.projection_percentage.errors.required">Target Projection Percentage is required</div>
+							  <div *ngIf="c.projection_percentage.errors.pattern">Enter a valid Target Projection Percentage</div>
 						  </div>
 						</div>
 					  </div>
@@ -237,10 +238,10 @@
                             </div>
                         </div>
 
-                        <div  class="form-group custom-control custom-checkbox">
-                            <input #checkProjePerc  type="checkbox" [(ngModel)]="checkProjectionPercent" [ngModelOptions]="{standalone: true}" (change)="checkStoreProjectionPercent(checkProjePerc.checked)" class="custom-control-input" id="checkProjePerc" name="checkProjePerc">
-                            <label class="custom-control-label" for="checkProjePerc">Use Target Percentage Projection Store Default</label>
-                        </div>
+<!--                        <div  class="form-group custom-control custom-checkbox">-->
+<!--                            <input #checkProjePerc  type="checkbox" [(ngModel)]="checkProjectionPercent" [ngModelOptions]="{standalone: true}" (change)="checkStoreProjectionPercent(checkProjePerc.checked)" class="custom-control-input" id="checkProjePerc" name="checkProjePerc">-->
+<!--                            <label class="custom-control-label" for="checkProjePerc">Use Target Percentage Projection Store Default</label>-->
+<!--                        </div>-->
 
                     </div>
                 </div>

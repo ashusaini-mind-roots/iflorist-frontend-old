@@ -101,6 +101,9 @@ export class WeeklyProjectionComponent implements OnInit {
   parseData(projections){
     for (let i = 0 ; i < projections.length ; i++){
       let p = projections[i];
+      p.arraypos = i;
+      p.week_id = p.id;
+      p.id = i;
       if(p.adjust == undefined)
         p.adjust = Math.round((p.projected_value - p.amt_total) * 100 / p.amt_total);
       else p.adjust = parseInt(p.adjust)
@@ -139,4 +142,9 @@ export class WeeklyProjectionComponent implements OnInit {
       delete this.clonedProjections[projections.id];
   }
 
+  adjustOnChange(value,pos){
+    console.log("duro")
+    console.log(value,pos);
+    this.proyections[pos].projected_value = 34;
+  }
 }
