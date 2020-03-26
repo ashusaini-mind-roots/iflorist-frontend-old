@@ -106,7 +106,7 @@
                         <div class="row">
 						    <div class="col-md-6">
 								<div class="form-group">
-								  <label for="target_percentage">Target Percentage Default</label>
+								  <label for="target_percentage">Target COL Percentage Default</label>
 								  <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="target_percentage" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.target_percentage.errors }"/>
 								  <div *ngIf="submitted && f.target_percentage.errors" class="invalid-feedback">
 									  <div *ngIf="f.target_percentage.errors.required">Target Percentage is required</div>
@@ -116,11 +116,11 @@
 							</div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="target_costof_goods">Target Cost of Goods</label>
+                                    <label for="target_costof_goods">Target Cost of Hard Goods</label>
                                     <input name ="target_costof_goods" type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="target_costof_goods" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.target_costof_goods.errors }"/>
                                     <div *ngIf="submitted && f.target_costof_goods.errors" class="invalid-feedback">
-                                        <div *ngIf="f.target_costof_goods.errors.required">Target Cost of Goods is required</div>
-                                        <div *ngIf="f.target_costof_goods.errors.pattern">Enter a valid Target Cost of Goods</div>
+                                        <div *ngIf="f.target_costof_goods.errors.required">Target Cost of Hard Goods is required</div>
+                                        <div *ngIf="f.target_costof_goods.errors.pattern">Enter a valid Target Cost of Hard Goods</div>
                                     </div>
                                 </div>
                             </div>
