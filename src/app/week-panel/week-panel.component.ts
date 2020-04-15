@@ -131,7 +131,7 @@ export class WeekPanelComponent implements OnInit {
       this.costOf = params['cost_of'];
     });
 
-    this.getWeeks();
+   // this.getWeeks(); //commented on April 4, 2020
     this.loadInvoicesTableHeaders();
     this.loadHeaders();
   }
@@ -165,7 +165,7 @@ export class WeekPanelComponent implements OnInit {
 
   deleteNote()
   {
-    if(this.noteDelete=='')
+    if(this.noteDelete == '')
       this.messageToastService.sendMessage('error','Note Message','Select a note to delete !');
     else
     {
