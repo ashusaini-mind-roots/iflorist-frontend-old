@@ -15,11 +15,7 @@ export class AppUserService {
   ) { }
 
   getAppUserList(store_id): Observable<any> {
-    // console.log(`${environment.apiUrl}/store/all`);
      return this.http.get(`${environment.apiUrl}/app_user/all/${store_id}`);
-         // .pipe(
-         //     retry(1),
-         // );
   }
 
   createAppUser(name,email,store_id,active) {
@@ -49,15 +45,9 @@ export class AppUserService {
       header.set('Content-Type','multipart/form-data');
       
       return this.http.post(`${environment.apiUrl}/app_user/update/${id}`, formData,{headers: header});
-	  
-      //return this.http.put(`${environment.apiUrl}/store/update/${store_id}`, {store_name, contact_email, contact_phone, zip_code, address, city, state,target_percentage} );
   }
   
   getAppUser(id): Observable<any> {
-    // console.log(`${environment.apiUrl}/store/all`);
      return this.http.get(`${environment.apiUrl}/app_user/getAppUser/${id}`);
-         // .pipe(
-         //     retry(1),
-         // );
   }
 }

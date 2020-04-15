@@ -47,7 +47,6 @@ export class UtilsService {
      Returns an object with this items {days, hours, minutes, seconds, totalhours, totalmin, totalsec}
      */
     diffDateTime(startDT, endDT){
-//        console.log(typeof startDT + ", " + startDT)
         // JavaScript & jQuery Course - https://coursesweb.net/javascript/
         // if paramerer is string, only the time hh:mm:ss (with, or without AM/PM), create Date object for current date-time,
         // and adds hour, minutes, seconds from paramerer

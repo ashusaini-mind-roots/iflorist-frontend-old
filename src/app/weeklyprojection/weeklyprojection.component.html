@@ -37,15 +37,15 @@
               <td class="No"></td>
               <td><span class="circle-small">{{projection.number}}</span> {{projection.week_number}}</td>
               <td>
-						{{projection.amt_total}}
+						{{projection.amt_total | currency : 'USD'}}
               </td>
               <td >
                 <p-cellEditor>
                     <ng-template pTemplate="input">
 <!--                        <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.adjust" required>-->
 
-
-                        <input (change)="adjustOnChange($event.target.value,rowData.arraypos)" class="w-lg-xl-50 input input-gray2" type="number"  min="0" max="100" [(ngModel)]="rowData.adjust" placeholder="%" >
+                        <input *ngIf="rowData.amt_total > 0" (change)="adjustOnChange($event.target.value,rowData.arraypos)" class="w-lg-xl-50 input input-gray2" type="number"  min="0" max="100" [(ngModel)]="rowData.adjust" placeholder="%" >
+                        <span *ngIf="rowData.amt_total <= 0">{{projection.adjust}}%</span>
 <!--                        <div class="select w-lg-xl-50">-->
 <!--                            <select class="" id="select-stores-general" [(ngModel)]="rowData.adjust" required>-->
 <!--                                <option *ngFor="let adj of this.adjustOptions" value="{{adj.option}}">-->
@@ -60,17 +60,17 @@
 
                     </ng-template>
                     <ng-template pTemplate="output">
-                        {{projection.adjust}}
+                        {{projection.adjust}}%
                     </ng-template>
                 </p-cellEditor>
               </td>
               <td>
                   <p-cellEditor>
                       <ng-template pTemplate="input">
-                          <input class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.projected_value"  required>
+                          <input mask="0*.00" prefix="$" [dropSpecialCharacters]="false" (change)="projectedValueOnChange($event.target.value,rowData.arraypos)" class="input input-gray2" pInputText type="text" [(ngModel)]="rowData.projected_value"  required>
                       </ng-template>
                       <ng-template pTemplate="output">
-                          {{projection.projected_value}}
+                          {{projection.projected_value | currency: 'USD'}}
                       </ng-template>
                   </p-cellEditor>
 

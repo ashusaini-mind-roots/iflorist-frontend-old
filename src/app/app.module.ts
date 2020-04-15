@@ -60,6 +60,9 @@ import { AppUserEditComponent } from './app-user/app-user-edit/app-user-edit.com
 import { SchedulerCalendarViewComponent } from './scheduler_elements/scheduler-calendar-view/scheduler-calendar-view.component';;
 import { UsersettingsComponent } from './top_bar_elements/usersettings/usersettings.component';;
 import { FilterInputListComponent } from './components/filter-input-list/filter-input-list.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
     imports: [
@@ -79,7 +82,8 @@ import { FilterInputListComponent } from './components/filter-input-list/filter-
         NgxIntlTelInputModule,
 		MenubarModule,
 		TieredMenuModule,
-		MenuModule
+		MenuModule,
+		NgxMaskModule.forRoot(options)
 		//MenuItem
     ],
     declarations: [

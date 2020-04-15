@@ -24,7 +24,7 @@
             <div class="select">
                 <select class="" id="select-quarter" [(ngModel)]="selectedWeekItem" (change)="getWeekDataFromServer()">
                     <option *ngFor="let week of weekList" value="{{week.id}}">
-                        {{week.number+"-"+week.week_end_day}}
+                        {{week.number+" - "+week.week_end_day}}
                     </option>
                 </select>
                 <div class="select_arrow"></div>
@@ -41,9 +41,9 @@
             <div class="card-body">
 <!--                <h5 class="card-title">Actual daily revenue</h5>-->
                 <div class="row">
-                    <div class="col">
+                    <div class="col borderright-lg-xl">
                         <div class="d-flex flex-column align-items-center">
-                            <span class="ng-cloak">{{monday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
+                            <span class="ng-cloak min-height-1_4">{{monday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
                             <label for="inputMonday" class="font-medium txt-small txt-color-gray3">Monday</label>
                             <input type="text"
                                    class="w-75 input input-small-white"
@@ -51,13 +51,13 @@
                                    data-type="currency"
                                    readonly
                             >
-                            <a class="itemaction edititem mt-3" (click)="showEditDay('Monday')">Edit</a>
+                            <a *ngIf="monday.id > 0" class="itemaction edititem mt-3 " (click)="showEditDay('Monday')">Edit</a>
 <!--                            <button type="button" (click)="showEditDay('Monday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>-->
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col borderright-lg-xl">
                         <div class="d-flex flex-column align-items-center">
-                            <span class="ng-cloak">{{tuesday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
+                            <span class="ng-cloak min-height-1_4">{{tuesday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
                             <label for="inputTuesday" class="txt-small txt-color-gray3">Tuesday</label>
                             <input type="text"
                                    class="w-75 input input-small-white"
@@ -65,13 +65,13 @@
                                    data-type="currency"
                                    readonly
                             >
-                            <a class="itemaction edititem mt-3" (click)="showEditDay('Tuesday')">Edit</a>
+                            <a *ngIf="tuesday.id > 0" class="itemaction edititem mt-3" (click)="showEditDay('Tuesday')">Edit</a>
 <!--                            <button type="button" (click)="showEditDay('Tuesday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>-->
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col borderright-lg-xl">
                         <div class="d-flex flex-column align-items-center">
-                            <span class="ng-cloak">{{wednesday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
+                            <span class="ng-cloak min-height-1_4">{{wednesday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
                             <label for="inputWednesday" class="txt-small txt-color-gray3">Wednesday </label>
                             <input type="text"
                                    class="w-75 input input-small-white"
@@ -79,13 +79,13 @@
                                    data-type="currency"
                                    readonly
                             >
-                            <a class="itemaction edititem mt-3" (click)="showEditDay('Wednesday')">Edit</a>
+                            <a *ngIf="wednesday.id > 0" class="itemaction edititem mt-3" (click)="showEditDay('Wednesday')">Edit</a>
 <!--                            <button type="button" (click)="showEditDay('Wednesday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>-->
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col borderright-lg-xl">
                         <div class="d-flex flex-column align-items-center">
-                            <span class="ng-cloak">{{thursday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
+                            <span class="ng-cloak min-height-1_4">{{thursday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
                             <label for="inputThursday" class="txt-small txt-color-gray3">Thursday </label>
                             <input type="text"
                                    class="w-75 input input-small-white"
@@ -93,13 +93,13 @@
                                    data-type="currency"
                                    readonly
                             >
-                            <a class="itemaction edititem mt-3" (click)="showEditDay('Thursday')">Edit</a>
+                            <a *ngIf="thursday.id > 0" class="itemaction edititem mt-3" (click)="showEditDay('Thursday')">Edit</a>
 <!--                            <button type="button" (click)="showEditDay('Thursday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>-->
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col borderright-lg-xl">
                         <div class="d-flex flex-column align-items-center">
-                            <span class="ng-cloak">{{friday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
+                            <span class="ng-cloak min-height-1_4">{{friday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
                             <label for="inputFriday" class="txt-small txt-color-gray3">Friday </label>
                             <input type="text"
                                    class="w-75 input input-small-white"
@@ -107,13 +107,13 @@
                                    data-type="currency"
                                    readonly
                             >
-                            <a class="itemaction edititem mt-3" (click)="showEditDay('Friday')">Edit</a>
+                            <a *ngIf="friday.id > 0" class="itemaction edititem mt-3" (click)="showEditDay('Friday')">Edit</a>
 <!--                            <button type="button" (click)="showEditDay('Friday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>-->
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col borderright-lg-xl">
                         <div class="d-flex flex-column align-items-center">
-                            <span class="ng-cloak">{{saturday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
+                            <span class="ng-cloak min-height-1_4">{{saturday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
                             <label for="inputSaturday" class="txt-small txt-color-gray3">Saturday </label>
                             <input type="text"
                                    class="w-75 input input-small-white"
@@ -121,13 +121,13 @@
                                    data-type="currency"
                                    readonly
                             >
-                            <a class="itemaction edititem mt-3" (click)="showEditDay('Saturday')">Edit</a>
+                            <a *ngIf="saturday.id > 0" class="itemaction edititem mt-3" (click)="showEditDay('Saturday')">Edit</a>
 <!--                            <button type="button" (click)="showEditDay('Saturday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>-->
                         </div>
                     </div>
                     <div class="col">
                         <div class="d-flex flex-column align-items-center">
-                            <span class="ng-cloak">{{sunday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
+                            <span class="ng-cloak min-height-1_4">{{sunday.dates_dim_date | date:'MM/dd/yyyy'}}</span>
                             <label for="inputSunday" class="txt-small txt-color-gray3">Sunday</label>
                             <input type="text"
                                    class="w-75 input input-small-white"
@@ -135,7 +135,7 @@
                                    data-type="currency"
                                    readonly
                             >
-                            <a class="itemaction edititem mt-3" (click)="showEditDay('Sunday')">Edit</a>
+                            <a *ngIf="sunday.id > 0" class="itemaction edititem mt-3" (click)="showEditDay('Sunday')">Edit</a>
 <!--                            <button type="button" (click)="showEditDay('Sunday')" pButton icon="pi pi-info-circle" label="Edit">Edit</button>-->
                         </div>
                     </div>
@@ -272,7 +272,7 @@
             <div class="col">
                 <div class="generic-card">
                     <div class=" p-0">
-                        <h5 class="card-header pb-lg-4 pb-xl-4">{{yearSelected}} Notes</h5>
+                        <h5 class="card-header pb-lg-4 pb-xl-4">{{this.yearQuarter.year}} Notes</h5>
                         <p-table class="generic-table" #dt [columns]="cols" selectionMode="single" (onRowSelect)="onRowNoteSelect($event)" (onRowUnselect)="onRowNoteUnselect($event)" [value]="notesYearSelected" dataKey="id" [paginator]="true" [rows]="5">
                             <ng-template pTemplate="body" let-note let-expanded="expanded" let-columns="columns">
                                 <tr [pSelectableRow]="note">
@@ -305,10 +305,10 @@
         </div>
         <div class="row mt-2" *ngFor="let oldNote of oldNotes">
             <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title ng-cloak">{{oldNote.year}} Notes</h5>
-                        <p-table #dt [columns]="cols"  [value]="oldNote.yearOldNotes" dataKey="id" [paginator]="true" [rows]="5">
+                <div class="generic-card">
+                    <div class="p-0">
+                        <h5 class="card-header pb-lg-4 pb-xl-4">{{oldNote.year}} Notes</h5>
+                        <p-table class = "generic-table" #dt [columns]="cols"  [value]="oldNote.yearOldNotes" dataKey="id" [paginator]="true" [rows]="5">
                         <ng-template pTemplate="body" let-note let-expanded="expanded" let-columns="columns">
                             <tr [pSelectableRow]="note">
                                 <td class="toggle">
@@ -323,12 +323,13 @@
                         <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
                             <tr>
                                 <td class="sub-table" [attr.colspan]="2">
-                                    {{rowData.text}}
+                                    <div class="p-3">{{rowData.text}}</div>
                                 </td>
                             </tr>
                         </ng-template>
                     </p-table>
                     </div>
+                    <div class="p-3 generic-card-footer d-flex justify-content-between align-items-center"></div>
                 </div>
             </div>
         </div>
@@ -341,7 +342,7 @@
         <input type="hidden" formControlName="id" [(ngModel)]="dialogValues.id"/>
         <div class="form-group mt-4">
             <label for="merchandise" class="input-label">Merchandise</label>
-            <input type="text" name = "merchandise" class="input input-gray2" formControlName="merchandise" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.merchandise" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
+            <input type="text" mask="0*.00" prefix="$" [dropSpecialCharacters]="false" name = "merchandise" class="input input-gray2" formControlName="merchandise" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.merchandise" [ngClass]="{ 'is-invalid': submitted && f.merchandise.errors }" />
             <div *ngIf="submitted && f.merchandise.errors" class="invalid-feedback">
                 <div *ngIf="f.merchandise.errors.required">Merchandise is required</div>
                 <div *ngIf="f.merchandise.errors.pattern">Enter a valid value</div>
@@ -349,7 +350,7 @@
         </div>
         <div class="form-group">
             <label for="wire" class="input-label">Wire</label>
-            <input type="text" name="wire" class="input input-gray2" formControlName="wire" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.wire" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
+            <input type="text" mask="0*.00" prefix="$" [dropSpecialCharacters]="false" name="wire" class="input input-gray2" formControlName="wire" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.wire" [ngClass]="{ 'is-invalid': submitted && f.wire.errors }" />
             <div *ngIf="submitted && f.wire.errors" class="invalid-feedback">
                 <div *ngIf="f.wire.errors.required">Wire is required</div>
                 <div *ngIf="f.wire.errors.pattern">Enter a valid value</div>
@@ -357,7 +358,7 @@
         </div>
         <div class="form-group mb-5 ">
             <label for="delivery" class="input-label">Delivery</label>
-            <input type="text" name="delivery" class="input input-gray2" formControlName="delivery" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.delivery" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
+            <input type="text" mask="0*.00" prefix="$" [dropSpecialCharacters]="false" name="delivery" class="input input-gray2" formControlName="delivery" pattern="^[0-9]+([.][0-9]+)?$" [(ngModel)]="dialogValues.delivery" [ngClass]="{ 'is-invalid': submitted && f.delivery.errors }" />
             <div *ngIf="submitted && f.delivery.errors" class="invalid-feedback">
                 <div *ngIf="f.delivery.errors.required">Delivery is required</div>
                 <div *ngIf="f.delivery.errors.pattern">Enter a valid value</div>
@@ -389,7 +390,7 @@
         </div>
         <div class="form-group mb-5 ">
             <label for="value" class="input-label">Invoice Value</label>
-            <input type="text" formControlName="value"  class="input input-gray2" pattern="^[0-9]+([.][0-9]+)?$" [ngClass]="{ 'is-invalid': submittedVendor && v.value.errors }" />
+            <input type="text" mask="0*.00" prefix="$" [dropSpecialCharacters]="false" formControlName="value"  class="input input-gray2" pattern="^[0-9]+([.][0-9]+)?$" [ngClass]="{ 'is-invalid': submittedVendor && v.value.errors }" />
             <div *ngIf="submittedVendor && v.value.errors" class="invalid-feedback">
                 <div *ngIf="v.value.errors.required">Value is required</div>
                 <div *ngIf="v.value.errors.pattern">Enter a valid value</div>

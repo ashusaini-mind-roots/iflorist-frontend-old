@@ -5,6 +5,7 @@
             <div class="row mb-5">
                 <div class="col-lg-3 col-xl-3 borderright-lg-xl pr-lg-0 pr-xl-0 pb-lg-5 pb-xl-5">
                     <div class="row">
+
                         <div class="col">
                             <h5 class="card-header font-size-1 ml-2">Sales Volume</h5>
                             <div class="d-flex flex-column align-items-center mt-4">
@@ -20,13 +21,13 @@
                             <div class="ml-xl-4 ml-lg-4">
                                 <div class="card-body pb-2">
                                     <span class="txt-size-14rem txt-color-gray4 font-bold">Projected Sales</span>
-                                    <div class="txt-color-red txt-size-14rem font-medium">${{projWeeklyRevQuarter}}</div>
+                                    <div class="txt-color-red txt-size-14rem font-medium">{{projWeeklyRevQuarter | currency : "USD"}}</div>
                                 </div>
                             </div>
                             <div class="ml-xl-4 ml-lg-4">
                                 <div class="card-body ">
                                     <span class="txt-size-14rem txt-color-gray4 font-bold">Actual Sales</span>
-                                    <div class="txt-color-blue-soft txt-size-14rem font-medium">${{actualSalesTotal}}</div>
+                                    <div class="txt-color-blue-soft txt-size-14rem font-medium">{{actualSalesTotal | currency : "USD"}}</div>
                                 </div>
                             </div>
                         </div>
@@ -54,10 +55,10 @@
                 <ng-template pTemplate="body" let-week let-expanded="expanded" let-columns="columns">
                     <tr>
                       <td><span class="circle-small mr-2">{{week.number}}</span>{{week.week}}</td>
-                      <td>{{week.totalMerchandise | number: '1.2-2'}}</td>
-                      <td>{{week.totalWire | number: '1.2-2'}}</td>
-                      <td>{{week.totalDelivery | number: '1.2-2'}}</td>
-                      <td>{{week.totalDelivery + week.totalWire + week.totalMerchandise | number: '1.2-2'}}</td>
+                      <td>${{week.totalMerchandise | number: '1.2-2'}}</td>
+                      <td>${{week.totalWire | number: '1.2-2'}}</td>
+                      <td>${{week.totalDelivery | number: '1.2-2'}}</td>
+                      <td>${{week.totalDelivery + week.totalWire + week.totalMerchandise | number: '1.2-2'}}</td>
                       <td>
                           <a href="#" [pRowToggler]="week">
                               <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
@@ -76,35 +77,36 @@
                                   <td>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input pInputText type="text" class="input input-gray2" [(ngModel)]="rowData.merchandise" required>
+                                            <input mask="0*.00" prefix="$" [dropSpecialCharacters]="false" pInputText type="text" class="input input-gray2" [(ngModel)]="rowData.merchandise" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{day.merchandise}}
+                                            {{day.merchandise | currency : "USD"}}
                                         </ng-template>
                                     </p-cellEditor>
                                   </td>
                                   <td>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input pInputText type="text" class="input input-gray2" [(ngModel)]="rowData.wire" required>
+                                            <input mask="0*.00" prefix="$" [dropSpecialCharacters]="false" pInputText type="text" class="input input-gray2" [(ngModel)]="rowData.wire" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{day.wire}}
+                                            {{day.wire | currency : "USD"}}
                                         </ng-template>
                                     </p-cellEditor>
+
                                   </td>
                                   <td>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input pInputText type="text" class="input input-gray2" [(ngModel)]="rowData.delivery" required>
+                                            <input mask="0*.00" prefix="$" [dropSpecialCharacters]="false" pInputText type="text" class="input input-gray2" [(ngModel)]="rowData.delivery" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{day.delivery}}
+                                            {{day.delivery | currency : "USD"}}
                                         </ng-template>
                                     </p-cellEditor>
                                   </td>
                                   <td>
-                                      {{day.total}}
+                                      {{day.total | currency : "USD"}}
                                   </td>
                                   <td class="toggle" style="text-align:center">
                                       <a *ngIf="!editing" pInitEditableRow class="itemaction edititem" (click)="onRowEditInit(rowData)">Edit</a>

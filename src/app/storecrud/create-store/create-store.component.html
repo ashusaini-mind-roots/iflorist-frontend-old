@@ -50,6 +50,13 @@
                       </div>
                   </div>
                   <div class="form-group">
+                      <label for="website">Website</label>
+                      <input type="text" formControlName="website" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.website.errors}" />
+                      <div *ngIf="submitted && f.website.errors" class="invalid-feedback">
+							<div *ngIf="f.website.errors.pattern">Enter a valid Website</div>
+						</div>
+                  </div>
+                  <div class="form-group">
                       <label for="contact_phone">Phone Number </label>
                       <!--<input type="text" [value]="storeform.get('contact_phone').value | formatPhone" formControlName="contact_phone" (input)="formatNumberPhone($event.target.value)" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" />-->
 					  <input id="tel" formControlName="contact_phone" class="line-input" phoneMask [preValue]="storeform.value.contact_phone"  [phoneControl]="storeform.controls['contact_phone']"  maxlength="14" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }"/>
@@ -84,7 +91,7 @@
                       <div class="col-md-4">
                           <div class="form-group">
                               <label for="zip_code">ZipCode</label>
-                              <input type="text" formControlName="zip_code" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" (input)="formatNumberZip($event.target.value)" />
+                              <input type="text" formControlName="zip_code" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.zip_code.errors }" mask="00000" />
                               <div *ngIf="submitted && f.zip_code.errors" class="invalid-feedback">
                                   <div *ngIf="f.zip_code.errors.minlength">Zip Code min lenght is 5</div>
                                   <div *ngIf="f.zip_code.errors.maxlength">Zip Code max lenght is 6</div>
@@ -108,10 +115,12 @@
                       <div class="col-md-6">
                           <div class="form-group">
                               <label for="target_percentage">Target COL Percentage Default</label>
-                              <input type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="target_percentage" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.target_percentage.errors }"/>
-                              <div *ngIf="submitted && f.target_percentage.errors" class="invalid-feedback">
+                              <!--<input type="text" pattern="^[1-9][0-9][%]?$|100%$|0%$" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="target_percentage" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.target_percentage.errors }"/>-->
+
+                              <input type="text" [validation]="false"  mask="000" suffix="%"   formControlName="target_percentage" (input)="addSuffix($event.target.value)" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.target_percentage.errors }"/>
+							  <div *ngIf="submitted && f.target_percentage.errors" class="invalid-feedback">
                                   <div *ngIf="f.target_percentage.errors.required">Target Percentage is required</div>
-                                  <div *ngIf="f.target_percentage.errors.pattern">Enter a valid Target Percentage</div>
+                                  <div *ngIf="f.target_percentage.errors.pattern">Enter a valid Target Percentage in range 0% to 100%</div>
                               </div>
                           </div>
                       </div>
@@ -120,20 +129,28 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="target_costof_goods">Target Cost of Hard Goods</label>
-								<input name ="target_costof_goods" type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="target_costof_goods" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.target_costof_goods.errors }"/>
+
+								<input name ="target_costof_goods" type="text" [validation]="false"  mask="000" suffix="%" formControlName="target_costof_goods" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.target_costof_goods.errors }"/>
+
+								
+
 								<div *ngIf="submitted && f.target_costof_goods.errors" class="invalid-feedback">
 									<div *ngIf="f.target_costof_goods.errors.required">Target Cost of Hard Goods is required</div>
-									<div *ngIf="f.target_costof_goods.errors.pattern">Enter a valid Target Cost of Hard Goods</div>
+									<div *ngIf="f.target_costof_goods.errors.pattern">Enter a valid Target Cost of Hard Goods in range 0% to 100%</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="target_costof_fresh">Target Cost of Fresh</label>
-								<input name ="target_costof_fresh" type="text" pattern="^[0-9]{1,3}$|^[0-9]{1,3}\.[0-9]{1,2}$" formControlName="target_costof_fresh" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.target_costof_fresh.errors }"/>
+
+								<input name ="target_costof_fresh" type="text" [validation]="false"  mask="000" suffix="%" formControlName="target_costof_fresh" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.target_costof_fresh.errors }"/>
+
+								
+
 								<div *ngIf="submitted && f.target_costof_fresh.errors" class="invalid-feedback">
 									<div *ngIf="f.target_costof_fresh.errors.required">Target Cost of Fresh is required</div>
-									<div *ngIf="f.target_costof_fresh.errors.pattern">Enter a valid Target Cost of Fresh</div>
+									<div *ngIf="f.target_costof_fresh.errors.pattern">Enter a valid Target Cost of Fresh in range 0% to 100%</div>
 								</div>
 							</div>
 						</div>
@@ -145,7 +162,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="sui">Sui</label>
-								<input name ="sui" type="text" pattern="^[0-9]{1,1}$|^[0-9]{1,1}\.[0-9]{1,2}$" formControlName="sui" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.sui.errors }"/>
+								<input name ="sui" type="text" [validation]="false" mask="0.00" suffix="%" [validation]="true" [dropSpecialCharacters]="false" formControlName="sui" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.sui.errors }"/>
 								<div *ngIf="submitted && f.sui.errors" class="invalid-feedback">
 									<div *ngIf="f.sui.errors.required">Sui is required</div>
 									<div *ngIf="f.sui.errors.pattern">Enter a valid Sui</div>
@@ -155,7 +172,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="futa">FUTA</label>
-								<input name ="futa" type="text" pattern="^[0-9]{1,1}$|^[0-9]{1,1}\.[0-9]{1,2}$" formControlName="futa" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.futa.errors }"/>
+								<input name ="futa" type="text" [validation]="false" mask="0.00" suffix="%" [dropSpecialCharacters]="false" formControlName="futa" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.futa.errors }"/>
 								<div *ngIf="submitted && f.futa.errors" class="invalid-feedback">
 									<div *ngIf="f.futa.errors.required">FUTA is required</div>
 									<div *ngIf="f.futa.errors.pattern">Enter a valid FUTA</div>
@@ -167,7 +184,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="social_security">Social Security</label>
-								<input name ="social_security" type="text" pattern="^[0-9]{1,1}$|^[0-9]{1,1}\.[0-9]{1,2}$" formControlName="social_security" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.social_security.errors }"/>
+								<input name ="social_security" [validation]="false" type="text" mask="0.00" suffix="%" [dropSpecialCharacters]="false" formControlName="social_security" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.social_security.errors }"/>
 								<div *ngIf="submitted && f.social_security.errors" class="invalid-feedback">
 									<div *ngIf="f.social_security.errors.required">Social Security is required</div>
 									<div *ngIf="f.social_security.errors.pattern">Enter a valid Social Security</div>
@@ -177,7 +194,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="medicare">Medicare</label>
-								<input name ="medicare" type="text" pattern="^[0-9]{1,1}$|^[0-9]{1,1}\.[0-9]{1,2}$" formControlName="medicare" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.medicare.errors }"/>
+								<input name ="medicare" type="text" [validation]="false" mask="0.00" suffix="%" [dropSpecialCharacters]="false" formControlName="medicare" class="line-input" [ngClass]="{ 'is-invalid': submitted && f.medicare.errors }"/>
 								<div *ngIf="submitted && f.medicare.errors" class="invalid-feedback">
 									<div *ngIf="f.medicare.errors.required">Medicare is required</div>
 									<div *ngIf="f.medicare.errors.pattern">Enter a valid Medicare</div>

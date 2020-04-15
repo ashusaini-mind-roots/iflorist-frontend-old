@@ -15,11 +15,9 @@ export class WeekPanelService{
   ) { }
 
   getSevenDays(store_id, week_id): Observable<any> {
-    // console.log(`${environment.apiUrl}/store/all`);
      return this.http.get(`${environment.apiUrl}/daily_revenue/seven_days_week/${store_id}/${week_id}`);
   }
   getWeeks(year): Observable<any> {
-    // console.log(`${environment.apiUrl}/store/all`);
     return this.http.get(`${environment.apiUrl}/week/week_by_year/${year}`);
   }
   getInvoices(cost_of,store_id, week_id): Observable<any> {

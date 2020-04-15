@@ -19,7 +19,7 @@ export class StoreService {
   }
 
   createStore(image,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,projection_percentage,target_costof_goods,target_costof_fresh,
-              sui,futa,social_security,medicare) {
+              sui,futa,social_security,medicare,website) {
       const formData = new FormData();
       formData.append('store_name', store_name);
       formData.append('image', image);
@@ -37,6 +37,7 @@ export class StoreService {
       formData.append('futa', futa);
       formData.append('social_security', social_security);
       formData.append('medicare', medicare);
+      formData.append('website', website);
       
       let header = new HttpHeaders();
 
@@ -45,24 +46,22 @@ export class StoreService {
       return this.http.post<any>(`${environment.apiUrl}/store/create`, formData,{headers: header});
   }
   
-  uploadCsv(store_id,file,target_percentage) {
-      //return this.http.post(`${environment.apiUrl}/store/create`, {store_name, contact_email, contact_phone, zip_code, address} );
-      const formData = new FormData();
-      //formData.append('image', image);
-      //formData.append('id', id);
-      formData.append('store_id', store_id);
-	  formData.append('target_percentage', target_percentage);
-      formData.append('file', file);
+  uploadCsv(store_id,target_percentage,revenues_to_send) {
+      // const formData = new FormData();
+      // formData.append('store_id', store_id);
+	  // formData.append('target_percentage', target_percentage);
+	  // formData.append('revenues',revenues_to_send);
+     // formData.append('file', file);
       
-	  let header = new HttpHeaders();
-
-      header.set('Content-Type','multipart/form-data');
+	  // let header = new HttpHeaders();
+      //
+      // header.set('Content-Type','multipart/form-data');
       
-      return this.http.post(`${environment.apiUrl}/store/setWeeklyProjectionPercentRevenues`, formData,{headers: header});
+      return this.http.post(`${environment.apiUrl}/store/setWeeklyProjectionPercentRevenues`, {store_id: store_id,target_percentage:target_percentage ,revenues: revenues_to_send},/*{headers: header}*/);
   }
 
   updateStore(store_id,store_name,contact_email,contact_phone,zip_code,address,city,state,target_percentage,projection_percentage,image,target_costof_goods,target_costof_fresh,
-              sui,futa,social_security,medicare){
+              sui,futa,social_security,medicare,website){
 	  
 	  const formData = new FormData();
       formData.append('store_name', store_name);
@@ -81,6 +80,7 @@ export class StoreService {
       formData.append('futa', futa);
       formData.append('social_security', social_security);
       formData.append('medicare', medicare);
+      formData.append('website', website);
       
       let header = new HttpHeaders();
 

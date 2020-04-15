@@ -193,11 +193,14 @@ export class WeekPanelComponent implements OnInit {
   }
 
   receiveYearQuarter($event){
+    console.log("receive yearquarter")
     this.oldYear = this.yearQuarter.year;
     this.yearQuarter = $event;
+    console.log(this.yearQuarter);
     this.getWeeks();
   }
   receiveStorage(storage){
+    console.log("receive store")
     this.selectedStorage = storage;
     this.getWeeks();
   }
@@ -215,74 +218,174 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getSevenDays = function () {
+    console.log("wk",this.selectedWeekItem)
     this.weekPanelService.getSevenDays(this.selectedStorage.id,this.selectedWeekItem).subscribe((response: any) =>{
         let seven_d_w = response.seven_days_week;
-        console.log(seven_d_w)
+        console.log("pepe",seven_d_w)
+        // console.log(seven_d_w)
         // console.log(seven_d_w);
         if (Array.isArray(seven_d_w) && seven_d_w.length > 0) {
-          this.monday = {
-            'id': seven_d_w[0].id,
-            'amt_formatted': '$' + this.formatMoney(seven_d_w[0].total),
-            'amt': parseFloat(seven_d_w[0].total),
-            'dates_dim_date': seven_d_w[0].dates_dim_date,
-            'merchandise':seven_d_w[0].merchandise,
-            'wire':seven_d_w[0].wire,
-            'delivery':seven_d_w[0].delivery,
-          };
-          this.tuesday = {
-            'id': seven_d_w[1].id,
-            'amt_formatted': '$' + this.formatMoney(seven_d_w[1].total),
-            'amt': parseFloat(seven_d_w[1].total),
-            'dates_dim_date': seven_d_w[1].dates_dim_date,
-            'merchandise':seven_d_w[1].merchandise,
-            'wire':seven_d_w[1].wire,
-            'delivery':seven_d_w[1].delivery,
-          };
-          this.wednesday = {
-            'id': seven_d_w[2].id,
-            'amt_formatted': '$' + this.formatMoney(seven_d_w[2].total),
-            'amt': parseFloat(seven_d_w[2].total),
-            'dates_dim_date': seven_d_w[2].dates_dim_date,
-            'merchandise':seven_d_w[2].merchandise,
-            'wire':seven_d_w[2].wire,
-            'delivery':seven_d_w[2].delivery,
-          };
-          this.thursday = {
-            'id': seven_d_w[3].id,
-            'amt_formatted': '$' + this.formatMoney(seven_d_w[3].total),
-            'amt': parseFloat(seven_d_w[3].total),
-            'dates_dim_date': seven_d_w[3].dates_dim_date,
-            'merchandise':seven_d_w[3].merchandise,
-            'wire':seven_d_w[3].wire,
-            'delivery':seven_d_w[3].delivery,
-          };
-          this.friday = {
-            'id': seven_d_w[4].id,
-            'amt_formatted': '$' + this.formatMoney(seven_d_w[4].total),
-            'amt': parseFloat(seven_d_w[4].total),
-            'dates_dim_date': seven_d_w[4].dates_dim_date,
-            'merchandise':seven_d_w[4].merchandise,
-            'wire':seven_d_w[4].wire,
-            'delivery':seven_d_w[4].delivery,
-          };
-          this.saturday = {
-            'id': seven_d_w[5].id,
-            'amt_formatted': '$' + this.formatMoney(seven_d_w[5].total),
-            'amt': parseFloat(seven_d_w[5].total),
-            'dates_dim_date': seven_d_w[5].dates_dim_date,
-            'merchandise':seven_d_w[5].merchandise,
-            'wire':seven_d_w[5].wire,
-            'delivery':seven_d_w[5].delivery,
-          };
-          this.sunday = {
-            'id': seven_d_w[6].id,
-            'amt_formatted': '$' + this.formatMoney(seven_d_w[6].total),
-            'amt': parseFloat(seven_d_w[6].total),
-            'dates_dim_date': seven_d_w[6].dates_dim_date,
-            'merchandise':seven_d_w[6].merchandise,
-            'wire':seven_d_w[6].wire,
-            'delivery':seven_d_w[6].delivery,
-          };
+          let mond = this.getDay(seven_d_w,"Monday");
+          if(mond != undefined){
+            this.monday = {
+              'id': mond.id,
+              'amt_formatted': '$' + this.formatMoney(mond.total),
+              'amt': parseFloat(mond.total),
+              'dates_dim_date': mond.dates_dim_date,
+              'merchandise':mond.merchandise,
+              'wire':mond.wire,
+              'delivery':mond.delivery,
+            };
+          }
+          else{
+            this.monday = {
+              'id': -1,
+              'amt_formatted': '$' + this.formatMoney('0.00'),
+              'amt': 0.00,
+              'dates_dim_date': /*monday.dates_dim_date*/'',
+              'merchandise':'0.00',
+              'wire':'0.00',
+              'delivery':'0.00',
+            };
+          }
+          let tues = this.getDay(seven_d_w,"Tuesday");
+          if(tues != undefined){
+            this.tuesday = {
+              'id': mond.id,
+              'amt_formatted': '$' + this.formatMoney(tues.total),
+              'amt': parseFloat(tues.total),
+              'dates_dim_date': tues.dates_dim_date,
+              'merchandise':tues.merchandise,
+              'wire':tues.wire,
+              'delivery':tues.delivery,
+            };
+          }
+          else {
+            this.tuesday = {
+              'id': -1,
+              'amt_formatted': '$' + this.formatMoney('0.00'),
+              'amt': 0.00,
+              'dates_dim_date': /*monday.dates_dim_date*/'',
+              'merchandise': '0.00',
+              'wire': '0.00',
+              'delivery': '0.00',
+            };
+          }
+          let wed = this.getDay(seven_d_w,"Wednesday");
+          if(wed != undefined){
+            this.wednesday = {
+              'id': wed.id,
+              'amt_formatted': '$' + this.formatMoney(wed.total),
+              'amt': parseFloat(wed.total),
+              'dates_dim_date': wed.dates_dim_date,
+              'merchandise':wed.merchandise,
+              'wire':wed.wire,
+              'delivery':wed.delivery,
+            };
+          }
+          else {
+            this.wednesday = {
+              'id': -1,
+              'amt_formatted': '$' + this.formatMoney('0.00'),
+              'amt': 0.00,
+              'dates_dim_date': /*monday.dates_dim_date*/'',
+              'merchandise': '0.00',
+              'wire': '0.00',
+              'delivery': '0.00',
+            };
+          }
+          let thur = this.getDay(seven_d_w,"Thursday");
+          if(thur != undefined){
+            this.thursday = {
+              'id': thur.id,
+              'amt_formatted': '$' + this.formatMoney(thur.total),
+              'amt': parseFloat(thur.total),
+              'dates_dim_date': thur.dates_dim_date,
+              'merchandise':thur.merchandise,
+              'wire':thur.wire,
+              'delivery':thur.delivery,
+            };
+          }
+          else {
+            this.thursday = {
+              'id': -1,
+              'amt_formatted': '$' + this.formatMoney('0.00'),
+              'amt': 0.00,
+              'dates_dim_date': /*monday.dates_dim_date*/'',
+              'merchandise': '0.00',
+              'wire': '0.00',
+              'delivery': '0.00',
+            };
+          }
+          let fri = this.getDay(seven_d_w,"Friday");
+          if(fri != undefined){
+            this.friday = {
+              'id': fri.id,
+              'amt_formatted': '$' + this.formatMoney(fri.total),
+              'amt': parseFloat(fri.total),
+              'dates_dim_date': fri.dates_dim_date,
+              'merchandise':fri.merchandise,
+              'wire':fri.wire,
+              'delivery':fri.delivery,
+            };
+          }
+          else {
+            this.friday = {
+              'id': -1,
+              'amt_formatted': '$' + this.formatMoney('0.00'),
+              'amt': 0.00,
+              'dates_dim_date': /*monday.dates_dim_date*/'',
+              'merchandise': '0.00',
+              'wire': '0.00',
+              'delivery': '0.00',
+            };
+          }
+          let sat = this.getDay(seven_d_w,"Saturday");
+          if(sat != undefined){
+            this.saturday = {
+              'id': sat.id,
+              'amt_formatted': '$' + this.formatMoney(sat.total),
+              'amt': parseFloat(sat.total),
+              'dates_dim_date': sat.dates_dim_date,
+              'merchandise':sat.merchandise,
+              'wire':sat.wire,
+              'delivery':sat.delivery,
+            };
+          }
+          else {
+            this.saturday = {
+              'id': -1,
+              'amt_formatted': '$' + this.formatMoney('0.00'),
+              'amt': 0.00,
+              'dates_dim_date': /*monday.dates_dim_date*/'',
+              'merchandise': '0.00',
+              'wire': '0.00',
+              'delivery': '0.00',
+            };
+          }
+          let sun = this.getDay(seven_d_w,"Sunday");
+          if(sun != undefined){
+            this.sunday = {
+              'id': sun.id,
+              'amt_formatted': '$' + this.formatMoney(sun.total),
+              'amt': parseFloat(sun.total),
+              'dates_dim_date': sun.dates_dim_date,
+              'merchandise':sun.merchandise,
+              'wire':sun.wire,
+              'delivery':sun.delivery,
+            };
+          }
+          else {
+            this.sunday = {
+              'id': -1,
+              'amt_formatted': '$' + this.formatMoney('0.00'),
+              'amt': 0.00,
+              'dates_dim_date': /*monday.dates_dim_date*/'',
+              'merchandise': '0.00',
+              'wire': '0.00',
+              'delivery': '0.00',
+            };
+          }
           this.calcDailyTotal();
          // this.saveDays_btnDisable = false;
         } else {
@@ -291,17 +394,27 @@ export class WeekPanelComponent implements OnInit {
     })
   }
 
+  getDay(seven_d_w, stringday){
+    let day = seven_d_w.find(element => element.day_of_week == stringday);
+    return day;
+  }
+
   getWeeks = function (year?: any) {
     var year = (arguments.length == 0 || year == undefined) ? this.yearQuarter.year : arguments[0];
+
     this.weekPanelService.getWeeks(year).subscribe((response: any) =>{
     this.weekList = response.weeks;
+
     if(this.weekList != undefined && this.weekList.length == 0) {
       this.yeartoselect = ""+this.oldYear;
       this.showDialogNoWeeks();
     }
     else
+      this.selectedWeekItem = this.weekList[0].id;
+      console.log("selected",this.selectedWeekItem)
       this.getWeekDataFromServer();
     });
+
   }
 
   getInvoices = function(){
@@ -312,7 +425,7 @@ export class WeekPanelComponent implements OnInit {
   }
 
   getNotes = function(){
-    this.weekPanelService.getNotes(this.selectedStorage.id,this.selectedWeekItem,this.yearSelected).subscribe((response: any) =>{
+    this.weekPanelService.getNotes(this.selectedStorage.id,this.selectedWeekItem,this.yearQuarter.year).subscribe((response: any) =>{
       this.notesYearSelected = response.result.noteYearSelected;
       this.oldNotes = response.result.oldNotes;
     });
@@ -512,7 +625,7 @@ export class WeekPanelComponent implements OnInit {
       return;
     }
 
-    this.weekPanelService.createNote(this.selectedStorage.id,this.selectedWeekItem,this.yearSelected,this.n.text.value)
+    this.weekPanelService.createNote(this.selectedStorage.id,this.selectedWeekItem,this.yearQuarter.year,this.n.text.value)
         .pipe(first())
         .subscribe(
             data => {

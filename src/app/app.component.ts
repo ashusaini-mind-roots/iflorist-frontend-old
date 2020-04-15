@@ -96,10 +96,57 @@ export class AppComponent implements OnInit{
 		  return true;
 		else return false;
 	}
-
+	
+	isStoreSubmenu()
+	{
+		let url = this.router.url;
+		if(url.includes('store') || url.includes('storeedit') || url.includes('storecreate'))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	isEmployeeSubmenu()
+	{
+		let url = this.router.url;
+		if(url.includes('employees') || url.includes('edit-employee') || url.includes('create-employee'))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	isCompanyEmployeeSubmenu()
+	{
+		let url = this.router.url;
+		if(url.includes('companyemployee-list') || url.includes('create-companyemployee') || url.includes('edit-companyemployee'))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	isAppUserSubmenu()
+	{
+		let url = this.router.url;
+		if(url.includes('app-users') || url.includes('app-user-create') || url.includes('app-user-edit'))
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	isSettingsActive()
 	{
-		if(this.router.isActive('stores',true) || this.router.isActive('employees',true) || this.router.isActive('companyemployee-list',true) || this.router.isActive('app-users',true))
+		let url = this.router.url;
+		if(this.router.isActive('stores',true)  || this.router.isActive('employees',true) || this.router.isActive('companyemployee-list',true) || this.router.isActive('app-users',true))
+		{
+			
+			return true;
+		}
+		else if(url.includes('storeedit') || url.includes('store') || url.includes('storecreate') || url.includes('employees')|| url.includes('create-employee') || url.includes('edit-employee')
+			|| url.includes('companyemployee-list') || url.includes('create-companyemployee') || url.includes('edit-companyemployee') || url.includes('app-users') || url.includes('app-user-create') || url.includes('app-user-edit'))
 		{
 			return true;
 		}

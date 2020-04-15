@@ -17,7 +17,7 @@
       <div class="card-body mx-lg-5 mx-xl-5 pb-lg-5 pb-xl-5">
       <form [formGroup]="employeeform" (ngSubmit)="onSubmit()">
         <div class="row">
-          <div class="col-12">
+          <div class="col-12 py-4">
               <div class="form-group d-flex align-items-center">
                   <div *ngIf="selectedFile.src!=''" style="width: 78px; height: 78px;" [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}"></div>
                   <div *ngIf="selectedFile.src==''" style="width: 78px; height: 78px; background: url('/assets/image/upload.svg') no-repeat"></div>
@@ -27,12 +27,15 @@
 <!--                         type="file"-->
 <!--                         accept="image/*"-->
 <!--                         (change)="processFile(imageInput)">-->
-                  <div class="upload-btn-wrapper pl-3">
-                      <button class="upload-file-text">Upload Profile photo </button>
-                      <input #imageInput
-                             type="file"
-                             accept="image/*"
-                             (change)="processFile(imageInput)">
+                  <div class="d-flex flex-column pl-4 pl-4">
+                      <div class="gray-big-title ">{{f.name.value}}</div>
+                      <div class="upload-btn-wrapper pl-0">
+                          <button class="upload-file-text pl-0 txt-size-09rem">Upload Profile photo </button>
+                          <input #imageInput
+                                 type="file"
+                                 accept="image/*"
+                                 (change)="processFile(imageInput)">
+                      </div>
                   </div>
               </div>
           </div>
@@ -116,7 +119,7 @@
                 </div>
                 <div class="form-group">
                   <label for="hourlypayrate">Compensation</label>
-                  <input type="text" formControlName="hourlypayrate" class="line-input" pattern="^[0-9]+([.][0-9]+)?$" [ngClass]="{ 'is-invalid': submitted && f.hourlypayrate.errors}" />
+                  <input type="text" formControlName="hourlypayrate" class="line-input" mask="0*.00" prefix="$" [dropSpecialCharacters]="false" [ngClass]="{ 'is-invalid': submitted && f.hourlypayrate.errors}" />
                   <div *ngIf="submitted && f.hourlypayrate.errors" class="invalid-feedback">
                     <div *ngIf="f.hourlypayrate.errors.required">Compensation is required</div>
                   </div>

@@ -99,6 +99,17 @@ a {
   -o-background-size: cover;
   background-size: cover;
 }
+.round-borders-10{
+  border-radius: 10px 10px 10px 10px !important;
+  -moz-border-radius: 10px 10px 10px 10px !important;
+  -webkit-border-radius: 10px 10px 10px 10px !important;
+}
+
+.gray-big-title{
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #8996A3;
+}
 
 /*!
  * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
@@ -279,7 +290,7 @@ a {
   color: #1cab9f;
 }
 .txt-color-red{
-  color: #ff596e;
+  color: #ff596e !important;
 }
 .txt-color-dark-black{
   color: #212529;
@@ -639,6 +650,17 @@ bg-state-blue-active{
 	font-weight: 500;
 }
 
+.router-link-active-child{
+	position: relative;
+	display: block;
+    /*padding: .75rem 1rem;*/
+	margin-bottom: -1px;
+	background-color: #20293c !important;
+	border-left: 7px solid #1cab9f;
+	color: #1cab9f !important;
+	font-weight: 500;
+}
+
 .router-link-active .icon, .list-group-item-action-menu:focus .icon-14{
   filter: invert(59%) sepia(6%) saturate(2458%) hue-rotate(128deg) brightness(90%) contrast(88%);
 }
@@ -765,6 +787,10 @@ bg-state-blue-active{
   background-color: #1cab9f;
   font-size: 10px;
   padding: 3px;
+  margin-right: 5px;
+}
+.min-height-1_4{
+  min-height: 1.4rem;
 }
 
 /***Select style***/
@@ -860,6 +886,7 @@ textarea{
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 
 /*****custom upload file****/
 .upload-btn-wrapper {

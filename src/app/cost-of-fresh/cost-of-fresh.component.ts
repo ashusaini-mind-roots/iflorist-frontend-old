@@ -51,6 +51,7 @@ export class CostOfFreshComponent implements OnInit {
   reloadData(){
     this.costOfFreshService.getMasterOverviewWeekly(this.costOf,this.selectedStorage.id,this.yearQuarter.year,this.yearQuarter.quarter).subscribe((data: any) =>{
       this.weeks = data.master_overview_weekly;
+      console.log(this.weeks)
       if(this.weeks.length > 0)
         this.target = this.weeks[0].target;
     })
@@ -68,11 +69,11 @@ export class CostOfFreshComponent implements OnInit {
   loadHeaders(){
     this.cols = [
       { field: 'week_number', header: 'Week' },
-      { field: 'week_ending', header: 'Week Ending' },
-      { field: 'week_ending_date', header: 'Ending Date' },
+      // { field: 'week_ending', header: 'Week Ending' },
+      // { field: 'week_ending_date', header: 'Ending Date' },
       { field: 'projected_weekly_revenue', header: 'Projected Revenue' },
       { field: 'actual_weekly_revenue', header: 'Actual Sales' },
-      { field: 'weekly_cog_total', header: 'Costs' },
+      { field: 'weekly_cog_total', header: 'Costs of ' + this.title },
       { field: 'difference', header: 'Difference' },
       { field: 'actions', header: 'Actions' }
     ];

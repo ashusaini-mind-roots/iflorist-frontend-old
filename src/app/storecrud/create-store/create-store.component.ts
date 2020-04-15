@@ -32,6 +32,9 @@ export class CreateStoreComponent implements OnInit {
   success = '';
   selectedStorage: any;
   selectedFile: ImageSnippet;
+  
+  // public customPatterns = { '0': { pattern: new RegExp('^[0-9]{1,3}$')} };
+    public  customPatterns = { '0': { pattern: new RegExp('\\d+')},'9': { pattern: new RegExp('\\d*')} };
 
   separateDialCode = true;
 	SearchCountryField = SearchCountryField;
@@ -53,22 +56,23 @@ export class CreateStoreComponent implements OnInit {
 
   ngOnInit() {
     this.storeform = this.formBuilder.group({
-      store_name: ['', Validators.required],
-      contact_email: ['',  Validators.email],
-      /*contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],*/
-	  contact_phone: ['',[Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/),Validators.minLength(14),Validators.maxLength(14)]],
-      zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
-	  target_costof_fresh: ['', Validators.required],
-      address: [''],
-      city: [''],
-      state: [''],
-	  sui: ['', Validators.required],
-	  futa: ['', Validators.required],
-	  social_security: ['', Validators.required],
-	  medicare: ['', Validators.required],
-	  target_percentage: ['', Validators.required],
-      // projection_percentage: ['', Validators.required],
-	  target_costof_goods: ['', Validators.required],
+        store_name: ['', Validators.required],
+        contact_email: ['',  Validators.email],
+        /*contact_phone: ['', [Validators.minLength(8),Validators.maxLength(8)]],*/
+        contact_phone: ['',[Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/),Validators.minLength(14),Validators.maxLength(14)]],
+        zip_code: ['', [Validators.minLength(5),Validators.maxLength(6)]],
+        target_costof_fresh: ['', [Validators.required,Validators.pattern(/^0$|^[1-9][0-9]?$|^100$/)]],
+        address: [''],
+        city: [''],
+        state: [''],
+        sui: ['', Validators.required],
+        futa: ['', Validators.required],
+        social_security: ['', Validators.required],
+        medicare: ['', Validators.required],
+        target_percentage: ['', [Validators.required,Validators.pattern(/^0$|^[1-9][0-9]?$|^100$/)]],
+        // projection_percentage: ['', Validators.required],
+        target_costof_goods: ['', [Validators.required,Validators.pattern(/^0$|^[1-9][0-9]?$|^100$/)]],
+        website: ['', [Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)]],
     });
 
     // get return url from route parameters or default to '/'
@@ -137,7 +141,7 @@ export class CreateStoreComponent implements OnInit {
     // store_name,contact_email,contact_phone,zip_code,address
     this.storeService.createStore(this.selectedFile.file,this.f.store_name.value, this.f.contact_email.value, this.f.contact_phone.value,
         this.f.zip_code.value,this.f.address.value,this.f.city.value,this.f.state.value,this.f.target_percentage.value,0,this.f.target_costof_goods.value,this.f.target_costof_fresh.value,
-          this.f.sui.value,this.f.futa.value,this.f.social_security.value,this.f.medicare.value)
+          this.f.sui.value,this.f.futa.value,this.f.social_security.value,this.f.medicare.value,this.f.website.value)
         .pipe(first())
         .subscribe(
             data => {
@@ -178,6 +182,14 @@ export class CreateStoreComponent implements OnInit {
 	 this.f.medicare.setValue('');
 	 this.f.target_costof_goods.setValue('');
 	 this.f.target_costof_fresh.setValue('');
+	 this.f.website.setValue('');
+  }
+  
+  addSuffix(value:string)
+  {
+	  console.log(value);
+	  let valueTemp = value.replace('%','');
+	  this.f.target_percentage.setValue(valueTemp+'%');
   }
 
 }

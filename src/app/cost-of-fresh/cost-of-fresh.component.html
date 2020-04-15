@@ -27,13 +27,13 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-week>
                     <tr>
-                        <td><span class="circle-small">{{week.week_number}}</span></td>
-                        <td>{{week.week_ending}}</td>
-                        <td>{{week.week_ending_date}}</td>
-                        <td>{{week.projected_weekly_revenue}}</td>
-                        <td>{{week.actual_weekly_revenue}}</td>
-                        <td>{{week.weekly_cog_total}}</td>
-                        <td>{{week.difference}}</td>
+                        <td><span class="circle-small">{{week.week_number}}</span>{{week.week_ending}}</td>
+<!--                        <td>{{week.week_ending}}</td>-->
+<!--                        <td>{{week.week_ending_date}}</td>-->
+                        <td>${{week.projected_weekly_revenue}}</td>
+                        <td>${{week.actual_weekly_revenue}}</td>
+                        <td>${{week.weekly_cog_total}}</td>
+                        <td><span [ngClass]="{'txt-color-red': week.difference < 0}">${{week.difference}}</span></td>
                         <td>
                             <a [routerLink]="['/week-panel', costOf ,week.week_id]" class="txt-color-dark-blue font-regular">View</a>
 <!--                            <button [routerLink]="['/week-panel', costOf ,week.week_id]" class="btn btn-success">View</button>-->

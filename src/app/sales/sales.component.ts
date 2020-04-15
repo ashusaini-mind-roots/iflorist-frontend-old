@@ -81,7 +81,6 @@ export class SalesComponent implements OnInit {
           backgroundColor: '#ff596e',
           borderColor: '#ff596e',
           data: this.projectedSalesByWeek
-
         }
       ]
     };
@@ -91,12 +90,12 @@ export class SalesComponent implements OnInit {
       this.pieChartData = {
         legend: [
           {
-            display: false
+             display: false,
           }
         ],
-        // labels:['Actual Sales','Projected Saless'],
         datasets:[
           {
+            label:['Actual Sales','Projected Sales'],
             backgroundColor: ['#1caba0','#ff596e'],
             data: [this.actualSalesTotal,this.projWeeklyRevQuarter],
             hoverBackgroundColor: ['#1caba0','#ff596e'],
@@ -111,6 +110,7 @@ export class SalesComponent implements OnInit {
         this.weeks = response.weeks;
         this.calcActualSalesTotal();
         this.getProjectedSales();
+        console.log(this.weeks)
         this.loading = false;
       });
     this.loading = false;
@@ -142,9 +142,7 @@ export class SalesComponent implements OnInit {
 
   onRowEditSave(days: any, index: number) {
       if (days.merchandise >= 0 && days.wire >= 0 && days.delivery >= 0) {
-        
         this.loading = true;
-        
         this.salesService.updateDay(days.id,days.merchandise,days.wire,days.delivery).subscribe(
               response=> {
                 this.loading = false;

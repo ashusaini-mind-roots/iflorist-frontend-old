@@ -18,8 +18,9 @@ export class WeeklyProjectionService {
     return this.http.get(`${environment.apiUrl}/weekly_projection_percent_revenue/projections/${store_id}/${year}`);
   }
 
-  updateProyection(proyection_id,amt_total,year_reference){
-    return this.http.put(`${environment.apiUrl}/weekly_projection_percent_revenue/projections/update/${proyection_id}`, {amt_total,year_reference} );
+  updateProyection(proyection_id,adjust,projected_value, week_number, store_id, year_projection, year_reference, amt_total){
+    return this.http.put(`${environment.apiUrl}/weekly_projection_percent_revenue/projections/update/${proyection_id}`,
+        {adjust, projected_value, week_number, store_id, year_projection, year_reference, amt_total} /*{amt_total,year_reference}*/ );
   }
 
 }

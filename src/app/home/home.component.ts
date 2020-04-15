@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
-import {PlanService} from '../_services'
+import {PlanService} from '../_services';
 import { SalesService } from "../_services/sales.service";
 
 import { User } from '@app/_models';
@@ -13,14 +13,14 @@ import {SchedulerService} from "@app/_services/scheduler.service";
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
     loading = false;
-    plans:any;
-    loaded:boolean = true;
+    plans: any;
+    loaded: boolean = true;
     error: boolean;
     yearQuarter: any;
     selectedStorage: any;
 
     //sales section
-    salesChart : any;
+    salesChart: any;
     projWeeklyRevQuarter: number;
     weeks: any[];
     actualSalesTotal: number;
@@ -180,10 +180,10 @@ export class HomeComponent {
     showColChart()
     {
         this.colChart = {
-            labels:['1','2','3','4', '5', '6', '7', '8','9', '10', '11', '12', '13'],
+            labels:['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'],
             datasets:[
                 {
-                    label:'Actual',
+                    label: 'Actual',
                     backgroundColor: '#1caba0',
                     borderColor: '#1caba0',
                     data: this.actualColByWeek
@@ -271,9 +271,9 @@ export class HomeComponent {
         for (let i = 0; i < this.weeksCog.length; i++) {
             let total = Number(this.weeksCog[i].weekly_cog_total);
             this.actualCogTotal += total;
-            this.projectionsCog += Number(this.weeksCog[i].projected_weekly_revenue);
+            this.projectionsCog += Number(this.weeksCog[i].actual_weekly_revenue * this.weeksCog[i].target / 100 );
             this.actualCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
-            this.projectedCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = Number(this.weeksCog[i].projected_weekly_revenue);
+            this.projectedCogByWeek[(this.weeksCog[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = Number(this.weeksCog[i].actual_weekly_revenue * this.weeksCog[i].target / 100 );
         }
     }
     calcActualCofTotal(){
@@ -282,15 +282,16 @@ export class HomeComponent {
         for (let i = 0; i < this.weeksCof.length; i++) {
             let total = Number(this.weeksCof[i].weekly_cog_total);
             this.actualCofTotal += total;
-            this.projectionsCof += Number(this.weeksCof[i].projected_weekly_revenue);
+            this.projectionsCof += Number(this.weeksCof[i].actual_weekly_revenue * this.weeksCof[i].target / 100 );
             this.actualCofByWeek[(this.weeksCof[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = total;
-            this.projectedCofByWeek[(this.weeksCof[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = Number(this.weeksCof[i].projected_weekly_revenue);
+            this.projectedCofByWeek[(this.weeksCof[i].week_number - (13 * (this.yearQuarter.quarter - 1)))-1] = Number(this.weeksCof[i].actual_weekly_revenue * this.weeksCof[i].target / 100 );
         }
     }
 
     calcActualColTotal(){
         this.actualColTotal = this.projectionsCol = 0.00;
         this.initColArray();
+        console.log(this.weeksCol)
         for (let i = 0; i < this.weeksCol.length; i++) {
             let total = Number(this.weeksCol[i].scheduled_payroll);
             this.actualColTotal += total;
