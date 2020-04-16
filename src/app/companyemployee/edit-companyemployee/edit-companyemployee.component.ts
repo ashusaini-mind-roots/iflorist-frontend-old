@@ -47,8 +47,9 @@ export class EditCompanyemployeeComponent implements OnInit {
       this.companyEmployeeService.getEmployee(params['id']).subscribe(res => {
         this.employee = res.employee;
         console.log(this.employee);
-
-        this.companyEmployeeService.getEmployeeImage(params['id']).subscribe(res => {
+		this.initFormValue(this.employee);
+	  });
+	  this.companyEmployeeService.getEmployeeImage(params['id']).subscribe(res => {
           const file: File = res;
           const reader = new FileReader();
           reader.addEventListener('load', (event: any) => {
@@ -57,10 +58,6 @@ export class EditCompanyemployeeComponent implements OnInit {
           });
           reader.readAsDataURL(file);
         });
-
-        this.initFormValue(this.employee);
-
-      });
     });
 
     this.companyemployeeform = this.formBuilder.group({

@@ -182,10 +182,10 @@ export class EditStoreComponent implements OnInit {
 
     getEmployees(id:string)
     {
-        this.storeService.getEmployees(id).subscribe(res => {
+		this.storeService.getEmployees(id).subscribe(res => {
             this.employees = res.employees;
-
-            this.storeService.getStoreImage(id).subscribe(res => {
+		});
+		this.storeService.getStoreImage(id).subscribe(res => {
                 const file: File = res;
                 const reader = new FileReader();
                 reader.addEventListener('load', (event: any) => {
@@ -193,8 +193,6 @@ export class EditStoreComponent implements OnInit {
                 });
                 reader.readAsDataURL(file);
             });
-
-        });
     }
 
     processFile(imageInput: any) {
